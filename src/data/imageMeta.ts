@@ -1,0 +1,17 @@
+export const imageMeta: Record<string, { width: number; height: number }> = {
+  "/assets/faisal-town-ii/faisal-town-phase-2-master-plan-preview.webp": { width: 1800, height: 1643 },
+  "/assets/faisal-town-ii/hero-masterplan-preview.webp": { width: 1440, height: 810 },
+  "/assets/faisal-town-ii/lake-district-view.webp": { width: 1600, height: 900 },
+  "/assets/faisal-town-ii/phase2-lake-aerial.jpeg": { width: 1600, height: 900 },
+  "/assets/faisal-town-ii/phase2-work-progress.jpeg": { width: 1024, height: 1280 },
+  "/assets/faisal-town-phase-1.jpg": { width: 1000, height: 800 },
+  "/assets/sector-p/caladan-sector-p.jpeg": { width: 1280, height: 1600 },
+  "/assets/sector-p/perfect-plot-uploaded.jpeg": { width: 1080, height: 1350 },
+  "/assets/faisal-town-ii/aerial-view-daytime.webp": { width: 1600, height: 900 },
+  "/assets/faisal-town-ii/lake-district-golf-view.webp": { width: 1600, height: 900 },
+  "/assets/portfolio/faisal-hills-birdview.webp": { width: 1600, height: 1126 },
+  "/assets/portfolio/faisal-jewels-preview.webp": { width: 1034, height: 581 },
+  "/assets/sector-p/fast-development.jpeg": { width: 1080, height: 1350 },
+  "/assets/sector-p/rendered/sector-p-masterplan-preview.webp": { width: 1600, height: 1816 },
+  "/assets/sector-p/sector-p-prices.jpeg": { width: 1280, height: 904 }
+};

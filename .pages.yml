@@ -1,0 +1,134 @@
+media:
+  - name: images
+    label: Website Images
+    input: public/assets
+    output: /assets
+    categories: [image]
+    extensions: [jpg, jpeg, png, webp, svg]
+    rename: safe
+  - name: plans
+    label: Master Plans & PDFs
+    input: public/assets/plans
+    output: /assets/plans
+    categories: [document]
+    extensions: [pdf]
+    rename: safe
+
+content:
+  - name: main_content
+    label: Main Website Content
+    type: group
+    items:
+      - name: homepage
+        label: Homepage
+        type: file
+        path: src/pages/index.astro
+        format: code
+        operations:
+          delete: false
+          rename: false
+
+      - name: project_pages_data
+        label: Project, Block & Sector Pages Data
+        type: file
+        path: src/data/landingPages.ts
+        format: code
+        operations:
+          delete: false
+          rename: false
+
+      - name: site_settings
+        label: Site Settings & WhatsApp
+        type: file
+        path: src/data/site.ts
+        format: code
+        operations:
+          delete: false
+          rename: false
+
+  - name: articles_group
+    label: Articles & Buyer Guides
+    type: group
+    items:
+      - name: article_content
+        label: Article Content Files
+        type: collection
+        path: src/data/articles
+        format: code
+        subfolders: false
+        operations:
+          create: false
+          rename: false
+          delete: false
+        view:
+          layout: list
+
+      - name: articles_archive
+        label: Articles Archive Page
+        type: file
+        path: src/pages/articles/index.astro
+        format: code
+        operations:
+          delete: false
+          rename: false
+
+  - name: legal_pages
+    label: Legal Pages
+    type: group
+    items:
+      - name: privacy_policy
+        label: Privacy Policy
+        type: file
+        path: src/pages/privacy-policy.astro
+        format: code
+        operations:
+          delete: false
+          rename: false
+
+      - name: disclaimer
+        label: Disclaimer
+        type: file
+        path: src/pages/disclaimer.astro
+        format: code
+        operations:
+          delete: false
+          rename: false
+
+      - name: terms
+        label: Terms and Conditions
+        type: file
+        path: src/pages/terms-and-conditions.astro
+        format: code
+        operations:
+          delete: false
+          rename: false
+
+  - name: technical_files
+    label: Technical Files
+    type: group
+    items:
+      - name: all_pages
+        label: All Pages Directory
+        type: file
+        path: src/pages/all-pages.astro
+        format: code
+        operations:
+          delete: false
+          rename: false
+
+      - name: sitemap
+        label: Sitemap
+        type: file
+        path: src/pages/sitemap.xml.ts
+        format: code
+        operations:
+          delete: false
+          rename: false
+
+settings:
+  commit:
+    templates:
+      create: "content: add {name}"
+      update: "content: update {name}"
+      delete: "content: remove {name}"
+      uploadMedia: "media: upload {path}"

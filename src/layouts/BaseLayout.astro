@@ -1,0 +1,92 @@
+---
+import "../styles/global.css";
+import "../styles/refinements.css";
+import { site } from "../data/site";
+
+const {
+  title = "Faisal Town Islamabad - Plots, Blocks, Map & Availability",
+  description = "FaisalTown Groups provides Faisal Town Islamabad guidance with separate Phase 1/F-18 and Phase 2/FT-II project pages, maps, plots and buyer support.",
+  image = site.defaultImage,
+  ogType = "website",
+  additionalSchema = [],
+  noindex = false
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, site.domain).toString();
+const socialImage = new URL(image, site.domain).toString();
+const baseGraph = [
+  {
+    "@type": "WebSite",
+    "@id": `${site.domain}#website`,
+    url: site.domain,
+    name: site.name,
+    description: "Independent property information, map guidance and buyer assistance for selected Faisal Town projects in Pakistan.",
+    inLanguage: "en"
+  },
+  {
+    "@type": "Organization",
+    "@id": `${site.domain}#organization`,
+    name: site.name,
+    url: site.domain,
+    description: site.disclosure,
+    contactPoint: {
+      "@type": "ContactPoint",
+      url: `https://wa.me/${site.phoneWhatsApp}`,
+      contactType: "property information and buyer assistance via WhatsApp",
+      areaServed: "PK",
+      availableLanguage: ["en", "ur"]
+    }
+  }
+];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#641323" />
+    <meta name="color-scheme" content="light" />
+    {noindex && <meta name="robots" content="noindex,follow" />}
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:alt" content={title} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>{title}</title>
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [...baseGraph, ...additionalSchema]
+    })}></script>
+  </head>
+  <body>
+    <slot />
+    <script is:inline>
+      (() => {
+        const page = window.location.pathname;
+        document.addEventListener("click", (event) => {
+          const target = event.target instanceof Element ? event.target.closest('a[href^="https://wa.me/"]') : null;
+          if (!target) return;
+          const detail = {
+            event: "whatsapp_click",
+            page,
+            cta_location: target.getAttribute("data-cta-location") || target.closest("section")?.id || "content",
+            cta_text: (target.textContent || "WhatsApp").trim().replace(/\s+/g, " ").slice(0, 100)
+          };
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push(detail);
+          if (typeof window.gtag === "function") window.gtag("event", "whatsapp_click", detail);
+          window.dispatchEvent(new CustomEvent("faisaltown:whatsapp_click", { detail }));
+        });
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,160 @@
+---
+import ContentLayout from "../layouts/ContentLayout.astro";
+import { articles, type Article } from "../data/articles";
+import { site, whatsappLink } from "../data/site";
+import { imageMeta } from "../data/imageMeta";
+
+interface Props {
+  article: Article;
+}
+
+const { article } = Astro.props;
+const relatedFromSlugs = (article.relatedSlugs || [])
+  .map((slug) => articles.find((item) => item.slug === slug))
+  .filter(Boolean);
+const relatedFromCluster = articles.filter((item) => item.slug !== article.slug && item.cluster === article.cluster);
+const related = [...relatedFromSlugs, ...relatedFromCluster]
+  .filter((item, index, list) => item && list.findIndex((other) => other?.slug === item.slug) === index)
+  .slice(0, 3);
+const fallbackRelated = articles.filter((item) => item.slug !== article.slug).slice(0, 3);
+const visibleRelated = related.length > 0 ? related : fallbackRelated;
+const pageTitle = article.seoTitle || `${article.title} | FaisalTown Groups`;
+const pageDescription = article.metaDescription || article.description;
+const intro = article.intro || article.description;
+const publishedDate = article.date;
+const modifiedDate = article.updated || article.date;
+const domain = site.domain.replace(/\/$/, "");
+const img = imageMeta[article.image];
+const cta = article.cta || {
+  label: "Buyer Support",
+  heading: "Ask for current availability, prices, and booking guidance.",
+  message: `Inquiry after reading: ${article.title}`,
+  button: "Check Availability"
+};
+
+const escapeHtml = (value: string) =>
+  value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+const renderInline = (value: string) =>
+  escapeHtml(value).replace(/\[([^\]]+)\]\((\/[^)]+)\)/g, '<a href="$2">$1</a>');
+
+const articleSchema = {
+  "@type": "Article",
+  "@id": `${domain}/articles/${article.slug}/#article`,
+  headline: article.title,
+  description: pageDescription,
+  image: `${domain}${article.image}`,
+  datePublished: publishedDate,
+  dateModified: modifiedDate,
+  author: {
+    "@type": "Organization",
+    name: "FaisalTown Groups"
+  },
+  publisher: {
+    "@id": `${domain}/#organization`
+  },
+  mainEntityOfPage: `${domain}/articles/${article.slug}/`
+};
+
+const breadcrumbSchema = {
+  "@type": "BreadcrumbList",
+  "@id": `${domain}/articles/${article.slug}/#breadcrumb`,
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: `${domain}/` },
+    { "@type": "ListItem", position: 2, name: "Articles", item: `${domain}/articles/` },
+    { "@type": "ListItem", position: 3, name: article.title, item: `${domain}/articles/${article.slug}/` }
+  ]
+};
+---
+
+<ContentLayout
+  title={pageTitle}
+  description={pageDescription}
+  eyebrow={article.category}
+  heading={article.title}
+  subheading={intro}
+  image={article.image}
+  ogType="article"
+  additionalSchema={[articleSchema, breadcrumbSchema]}
+>
+  <article class="content-section article-detail">
+    <div class="article-meta">
+      <span>Published: {article.date}</span>
+      {article.updated && <span>Updated: {article.updated}</span>}
+      {article.reviewed && <span>Reviewed: {article.reviewed}</span>}
+      <span>{article.readTime}</span>
+      <span>{article.category}</span>
+    </div>
+    <img class="article-hero-image" src={article.image} alt={article.title} width={img?.width} height={img?.height} loading="eager" fetchpriority="high" decoding="async" />
+    {article.sections.map((section) => (
+      <section>
+        <h2>{section.heading}</h2>
+        {section.paragraphs.map((paragraph) => <p set:html={renderInline(paragraph)} />)}
+        {section.bullets && (
+          <ul class="article-list">
+            {section.bullets.map((item) => <li>{item}</li>)}
+          </ul>
+        )}
+        {section.callout && <aside class="article-callout">{section.callout}</aside>}
+        {section.links && (
+          <div class="article-context-links" aria-label={`Useful links for ${section.heading}`}>
+            {section.links.map((link) => <a href={link.href}>{link.label}</a>)}
+          </div>
+        )}
+      </section>
+    ))}
+    {article.faqs && (
+      <section>
+        <h2>Quick Questions</h2>
+        <div class="faq-list">
+          {article.faqs.map(([question, answer]) => (
+            <details>
+              <summary>{question}</summary>
+              <p>{answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+    )}
+    <section class="article-source-note" aria-labelledby="article-verification-heading">
+      <p class="section-label">Verification</p>
+      <h2 id="article-verification-heading">Verify current project and regulatory information</h2>
+      <p>Property details, prices, development status and booking procedures can change. Compare time-sensitive claims with the official project source and verify regulatory or approval questions directly with the relevant authority before making a payment decision.</p>
+      <div class="article-context-links">
+        <a href="https://faisaltowngroup.com/" target="_blank" rel="noreferrer">Official Faisal Town Group website</a>
+        <a href="https://rda.gop.pk/private-housing-schemes" target="_blank" rel="noreferrer">RDA private housing schemes</a>
+      </div>
+    </section>
+    <div class="article-cta">
+      <div>
+        <span>{cta.label}</span>
+        <strong>{cta.heading}</strong>
+      </div>
+      <a data-cta-location="article-bottom" href={whatsappLink(cta.message)}>{cta.button}</a>
+    </div>
+  </article>
+
+  <section class="content-section related-section">
+    <div class="section-intro">
+      <p class="section-label">{article.cluster || "More Guides"}</p>
+      <h2>Related Faisal Town guides</h2>
+    </div>
+    <div class="article-grid compact">
+      {visibleRelated.map((item) => (
+        <article class="article-card">
+          <img src={item.image} alt={item.title} loading="lazy" />
+          <div>
+            <span>{item.category}</span>
+            <h3><a href={`/articles/${item.slug}/`}>{item.title}</a></h3>
+            <p>{item.description}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</ContentLayout>

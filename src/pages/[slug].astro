@@ -1,0 +1,225 @@
+---
+import ContentLayout from "../layouts/ContentLayout.astro";
+import { landingPages } from "../data/landingPages";
+import { whatsappLink, site } from "../data/site";
+import { imageMeta } from "../data/imageMeta";
+
+export function getStaticPaths() {
+  return landingPages.map((page) => ({ params: { slug: page.slug }, props: { page } }));
+}
+
+const { page } = Astro.props;
+const slugify = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+const pageUrl = new URL(`/${page.slug}/`, site.domain).toString();
+const img = imageMeta[page.image];
+
+const intent = (() => {
+  if (page.slug.includes("house-for-rent")) return {
+    quick: "Rental decision at a glance",
+    prompt: "Share your preferred block, monthly budget, bedrooms, move-in date, parking needs and whether furnished or unfurnished is acceptable.",
+    items: [
+      ["Monthly budget", "Include your comfortable rent range and expected security/advance amount."],
+      ["House requirement", "Share block, bedrooms, parking, furnished/unfurnished and family/company use."],
+      ["Move-in timing", "Mention the date you need possession so unavailable listings can be filtered out."],
+      ["Lease priorities", "Tell us if notice period, utility status, repairs or privacy are important." ]
+    ]
+  };
+  if (page.slug.includes("house-for-sale")) return {
+    quick: "House-buying decision at a glance",
+    prompt: "Share your preferred block, total budget, house size, bedrooms, condition preference and whether you want immediate possession.",
+    items: [
+      ["Total budget", "Include your approximate all-in purchase range, not only the asking price."],
+      ["House requirement", "Share block, plot/covered size, bedrooms, parking and construction condition."],
+      ["Possession", "Mention whether you need a vacant ready-to-move house or can consider occupied inventory."],
+      ["Viewing priority", "Tell us when you can visit and any condition or document concerns you want checked first."]
+    ]
+  };
+  if (page.slug.includes("map-location")) return {
+    quick: "Map and access in one minute",
+    prompt: "Tell us which phase, sector/block or plot you are locating and the road, interchange or landmark you want to compare it with.",
+    items: [
+      ["Project", "Specify Phase 1 / F-18 or Phase 2 / FT-II first."],
+      ["Area", "Share the exact sector, block or plot number if known."],
+      ["Reference point", "Mention the interchange, airport, road or landmark you care about."],
+      ["Purpose", "Tell us whether you are checking commute, site-visit access, investment or construction suitability."]
+    ]
+  };
+  if (page.slug === "plots-for-sale-faisal-town-islamabad") return {
+    quick: "Plot search at a glance",
+    prompt: "Share your total budget, preferred plot size, Phase 1 or Phase 2 preference, and whether you want possession, resale or fresh-booking options.",
+    items: [
+      ["Total budget", "Share your all-in range so dues and location premiums can be considered."],
+      ["Plot size", "Mention your preferred marla/kanal size or ask for the best fit within budget."],
+      ["Project preference", "Choose Phase 1 / F-18, Phase 2 / FT-II, or ask us to compare both."],
+      ["Buying purpose", "Mention construction, living, resale or longer-term investment."]
+    ]
+  };
+  if (page.slug.includes("block") || page.slug.includes("sector") || page.slug.includes("overseas")) return {
+    quick: "Area-specific buyer summary",
+    prompt: "Share the exact plot size, budget, buying purpose and whether you need map guidance, current inventory or a site visit.",
+    items: [
+      ["Budget", "Share your approximate total budget including dues or special-location premiums."],
+      ["Plot need", "Tell us the preferred size and exact sector/block if you already have one in mind."],
+      ["Map check", "Share a plot number or listing if you want its position checked against the correct plan."],
+      ["Timing", "Mention whether you are buying now, arranging a site visit, or comparing options for later."]
+    ]
+  };
+  return {
+    quick: "Project decision at a glance",
+    prompt: "Share your budget, preferred phase, plot or property size, buying purpose and timing.",
+    items: [
+      ["Budget", "Share your approximate total budget or comfortable payment range."],
+      ["Property need", "Tell us the plot size, house requirement, sector/block, or ask for help choosing."],
+      ["Buying purpose", "Mention construction, living, rental use, resale or longer-term investment."],
+      ["Timing", "Tell us whether you want to buy now, visit first, or are researching for later."]
+    ]
+  };
+})();
+
+const additionalSchema = [
+  {
+    "@type": "WebPage",
+    "@id": `${pageUrl}#webpage`,
+    url: pageUrl,
+    name: page.title,
+    description: page.description,
+    isPartOf: { "@id": `${site.domain}#website` },
+    publisher: { "@id": `${site.domain}#organization` },
+    primaryImageOfPage: { "@type": "ImageObject", url: new URL(page.image, site.domain).toString() },
+    dateModified: page.updated,
+    inLanguage: "en"
+  },
+  {
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: site.domain },
+      { "@type": "ListItem", position: 2, name: page.h1, item: pageUrl }
+    ]
+  }
+];
+---
+<ContentLayout
+  title={page.title}
+  description={page.description}
+  eyebrow={page.eyebrow}
+  heading={page.h1}
+  subheading={page.intro}
+  image={page.image}
+  additionalSchema={additionalSchema}
+  compactHero={true}
+>
+  <section class="content-section landing-page">
+    <section class="landing-quick-answer">
+      <div>
+        <span class="section-label">Quick Answer</span>
+        <h2>{intent.quick}</h2>
+        <p>{page.intro}</p>
+      </div>
+      <aside>
+        <span>Current inventory changes</span>
+        <strong>Use this page to shortlist the right area, then verify the exact property and total payable amount.</strong>
+        <a data-cta-location="quick-answer" href={whatsappLink(`Send current options for: ${page.h1}`)}>Check Current Options</a>
+      </aside>
+    </section>
+
+    <nav class="landing-toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <div>
+        {page.sections.map((section) => <a href={`#${slugify(section.heading)}`}>{section.heading}</a>)}
+        <a href="#buyer-checklist">Buyer checklist</a>
+        <a href="#whatsapp-inquiry">WhatsApp inquiry</a>
+        {page.downloads && page.downloads.length > 0 && <a href="#plan-downloads">Plans & downloads</a>}
+        <a href="#source-verification">Verification sources</a>
+        <a href="#frequently-asked-questions">FAQs</a>
+      </div>
+    </nav>
+
+    <img class="article-hero-image landing-image" src={page.image} alt={page.h1} width={img?.width} height={img?.height} loading="eager" fetchpriority="high" decoding="async" />
+    <div class="landing-highlights">
+      {page.highlights.map(([label, value]) => <article><span>{label}</span><strong>{value}</strong></article>)}
+    </div>
+
+    <div class="no-installment-note landing-verification-note">
+      <strong>Buyer verification note:</strong>
+      <span>Prices, plot availability and payment terms can change. Confirm the exact property, ownership/booking documents, dues, payment recipient and receipt process before making a material payment.</span>
+      <time datetime={page.reviewed}>Reviewed {new Date(`${page.reviewed}T00:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" })}</time>
+    </div>
+
+    <div class="landing-section-grid">
+      {page.sections.map((section) => (
+        <section class="landing-copy landing-copy-card" id={slugify(section.heading)}>
+          <h2>{section.heading}</h2>
+          {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+        </section>
+      ))}
+    </div>
+
+    <section class="landing-copy" id="buyer-checklist">
+      <h2>Buyer checklist for {page.eyebrow}</h2>
+      <div class="landing-bullets">
+        {page.bullets.map((item) => <article><h3>{item.title}</h3><p>{item.text}</p></article>)}
+      </div>
+    </section>
+
+    <section class="landing-copy inquiry-prep" id="whatsapp-inquiry">
+      <div class="section-intro compact-intro">
+        <p class="section-label">Prepare Your Inquiry</p>
+        <h2>Send the details that matter for this property type</h2>
+        <p>{intent.prompt} This helps us reply with relevant current options instead of a generic property list.</p>
+      </div>
+      <div class="inquiry-prep-grid">
+        {intent.items.map(([heading, text], index) => (
+          <article><span>{String(index + 1).padStart(2, "0")}</span><h3>{heading}</h3><p>{text}</p></article>
+        ))}
+      </div>
+      <a class="btn primary inquiry-prep-cta" data-cta-location="structured-inquiry" href={whatsappLink(`Inquiry for ${page.h1}. ${intent.prompt}`)}>Start Structured WhatsApp Inquiry</a>
+    </section>
+
+    {page.downloads && page.downloads.length > 0 && (
+      <section class="landing-copy" id="plan-downloads">
+        <h2>Plans & downloads</h2>
+        <div class="download-card-grid">
+          {page.downloads.map((download) => (
+            <article class="download-card">
+              <span>{download.label}</span><h3>{download.title}</h3><p>{download.text}</p>
+              <a href={download.href} target="_blank" rel="noreferrer">Download PDF</a>
+            </article>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <section class="landing-copy source-verification" id="source-verification">
+      <p class="section-label">Primary verification</p>
+      <h2>Check official and regulatory sources before payment</h2>
+      <p>This website is an independent buyer-information resource. For current project instructions, compare information with the official developer source; for regulatory/approval questions, verify directly with the relevant authority rather than relying on a listing or marketing screenshot.</p>
+      <div class="related-links">
+        <a href="https://faisaltowngroup.com/" target="_blank" rel="noreferrer">Official Faisal Town Group website</a>
+        <a href="https://rda.gop.pk/private-housing-schemes" target="_blank" rel="noreferrer">RDA private housing schemes</a>
+      </div>
+    </section>
+
+    <div class="article-cta">
+      <div><span>Need current details?</span><strong>Ask for current availability, map guidance and buyer support for this exact page.</strong></div>
+      <div class="article-cta-actions">
+        <a data-cta-location="landing-bottom" href={whatsappLink(page.primaryCta)}>{page.primaryCta}</a>
+        <a class="secondary" data-cta-location="landing-bottom-secondary" href={whatsappLink(`${page.secondaryCta}: ${page.h1}`)}>{page.secondaryCta}</a>
+      </div>
+    </div>
+
+    <section class="landing-copy" id="frequently-asked-questions">
+      <h2>Frequently asked questions</h2>
+      <div class="faq-list">
+        {page.faqs.map(([question, answer]) => <details><summary>{question}</summary><p>{answer}</p></details>)}
+      </div>
+    </section>
+
+    <section class="landing-copy">
+      <h2>Related pages</h2>
+      <div class="related-links">
+        {page.links.map(([label, href]) => <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noreferrer" : undefined}>{label}</a>)}
+        <a href="/">Faisal Town Islamabad Home</a>
+      </div>
+    </section>
+  </section>
+</ContentLayout>

@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.astro/
+.npm-cache/
+tmp/
+test-results/
+.playwright/
+*.zip
+.env
+.DS_Store
+npm-debug.log*

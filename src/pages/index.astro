@@ -1,0 +1,405 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import MobileWhatsApp from "../components/MobileWhatsApp.astro";
+import { articles } from "../data/articles";
+import { site, whatsappLink } from "../data/site";
+
+const phoneDisplay = site.phoneDisplay;
+
+const phase2Sectors = [
+  { title: "Sector O / Model Block", href: "/faisal-town-o-block/", text: "Sector O map, plot and current availability guidance." },
+  { title: "Sector P / The Caladan", href: "/faisal-town-p-block/", text: "Current full-payment prices, plot sizes, Sector P plan and availability." },
+  { title: "Sector R", href: "/faisal-town-r-block/", text: "Sector R plot, map and availability guidance." },
+  { title: "Sector S", href: "/faisal-town-sector-s/", text: "Dedicated Sector S plan and current inventory checks." },
+  { title: "Sector T", href: "/faisal-town-sector-t/", text: "Sector T plan, location and current payment/availability guidance." },
+  { title: "Overseas Enclave 05", href: "/faisal-town-overseas-block/", text: "Dedicated Overseas Enclave guidance for local and overseas buyers." }
+];
+
+const phase1Blocks = [
+  { title: "Block A", href: "/faisal-town-block-a/", text: "Established Phase 1 / F-18 block with resale plot, house and map guidance." },
+  { title: "Block B", href: "/faisal-town-block-b/", text: "Popular Phase 1 / F-18 block for plots, map position and current resale availability." },
+  { title: "Block C", href: "/faisal-town-block-c/", text: "Established Phase 1 / F-18 block for plots, houses and location options." }
+];
+
+const priceRows = [
+  ["25 x 50", "5.56 Marla", "4,490,000", "3,590,000"],
+  ["30 x 60", "8 Marla", "6,250,000", "4,990,000"],
+  ["35 x 70", "10.89 Marla", "8,240,000", "6,590,000"],
+  ["40 x 80", "14.22 Marla", "10,440,000", "8,350,000"],
+  ["50 x 90", "1 Kanal", "14,150,000", "11,290,000"],
+  ["75 x 120", "2 Kanal", "27,280,000", "21,790,000"],
+  ["80 x 120", "2 Kanal", "29,090,000", "23,270,000"]
+];
+
+const phase2ArticleSlugs = [
+  "faisal-town-ii-sector-p-guide",
+  "faisal-town-ii-master-plan",
+  "sector-p-prices-explained",
+  "living-near-rawalpindi-ring-road",
+  "new-islamabad-living-guide"
+];
+const phase1ArticleSlugs = [
+  "faisal-town-phase-1-and-faisal-hills",
+  "faisal-town-living"
+];
+const phase2Articles = articles.filter((article) => phase2ArticleSlugs.includes(article.slug));
+const phase1Articles = articles.filter((article) => phase1ArticleSlugs.includes(article.slug));
+---
+
+<BaseLayout
+  title="Faisal Town Islamabad - Phase 1 & Phase 2 Plots, Maps & Availability"
+  description="Explore the two Faisal Town Islamabad projects separately: Faisal Town Phase 2 / FT-II sectors, maps and prices, plus Faisal Town Phase 1 / F-18 blocks and current availability."
+>
+  <div class="top-strip">
+    <span>Faisal Town Islamabad</span>
+    <strong>Phase 2 / FT-II and Phase 1 / F-18 property guidance with WhatsApp availability checks.</strong>
+  </div>
+
+  <SiteHeader home={true} />
+  <main id="top">
+    <section class="hero home-hero">
+      <img class="hero-image" src="/assets/faisal-town-ii/hero-masterplan-preview.webp" alt="Faisal Town II master planned aerial view" width="1440" height="810" fetchpriority="high" decoding="async" />
+      <div class="hero-overlay"></div>
+      <div class="container hero-grid home-hero-grid">
+        <div class="hero-copy">
+          <p class="section-label">Faisal Town Islamabad Property Guide</p>
+          <h1>Faisal Town Phase 2 & Phase 1 plots, maps and current availability</h1>
+          <p>There are two Faisal Town project areas covered here: <strong>Faisal Town Phase 2 / FT-II</strong> and the established <strong>Faisal Town Phase 1 / F-18</strong>. Choose the project you are interested in, review its own sectors or blocks, then ask us on WhatsApp for current inventory and prices.</p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#phase-2">Explore Faisal Town Phase 2</a>
+            <a class="btn light" href="#phase-1">Explore Faisal Town Phase 1</a>
+          </div>
+        </div>
+        <aside class="hero-card quick-whatsapp-card">
+          <span>WhatsApp Property Inquiry</span>
+          <strong>Ask for current options</strong>
+          <p>Choose the project and open a ready-made WhatsApp inquiry with your property requirement.</p>
+          <div class="hero-card-actions compact-actions">
+            <a href={whatsappLink("Send me current Faisal Town Phase 2 plot availability and prices")}>Phase 2 Availability</a>
+            <a href={whatsappLink("Send me current Faisal Town Phase 1 / F-18 property availability")}>Phase 1 Availability</a>
+            <a href={whatsappLink("Help me choose between Faisal Town Phase 2 and Phase 1 based on my budget")}>Help Me Choose</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section project-choice" id="availability">
+      <div class="section-intro compact-intro">
+        <p class="section-label">Choose Your Project</p>
+        <h2>Start with one of the two Faisal Town projects.</h2>
+        <p>No mixed block and sector list. Each project below has its own property pages, map information and WhatsApp availability route.</p>
+      </div>
+      <div class="project-choice-grid">
+        <article class="project-choice-card phase2-choice">
+          <span>Faisal Town Phase 2 / FT-II</span>
+          <h3>Newer sector-based project</h3>
+          <p>Sector O, P, R, S, T and Overseas Enclave, plus the 2026 Phase 2 master plan, development information and current plot guidance.</p>
+          <div class="button-row">
+            <a class="btn primary" href="#phase-2">Explore Phase 2</a>
+            <a class="btn outline" href={whatsappLink("Check current Faisal Town Phase 2 availability")}>WhatsApp Availability</a>
+          </div>
+        </article>
+        <article class="project-choice-card phase1-choice">
+          <span>Faisal Town Phase 1 / F-18</span>
+          <h3>Established block-based project</h3>
+          <p>Block A, Block B and Block C with resale plots, houses, rentals, map guidance and current market availability.</p>
+          <div class="button-row">
+            <a class="btn primary" href="#phase-1">Explore Phase 1</a>
+            <a class="btn outline" href={whatsappLink("Check current Faisal Town Phase 1 / F-18 availability")}>WhatsApp Availability</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="project-zone phase2-zone" id="phase-2">
+      <div class="section project-zone-inner">
+        <div class="section-intro project-heading">
+          <p class="section-label">Faisal Town Phase 2 / FT-II</p>
+          <h2>Faisal Town Phase 2 sectors, master plan, prices and buyer guides</h2>
+          <p>This entire section belongs to Faisal Town Phase 2. Use it to review the correct sector, current Phase 2 map information and related buyer guides before asking for live availability.</p>
+          <div class="button-row">
+            <a class="btn primary" href="/faisal-town-phase-2/">Open Full Phase 2 Guide</a>
+            <a class="btn outline" href={whatsappLink("I want current Faisal Town Phase 2 plots, prices and availability")}>Ask on WhatsApp</a>
+          </div>
+        </div>
+
+        <div class="subsection phase2-master-top" id="master-plan">
+          <div class="phase2-master-copy">
+            <p class="section-label">Faisal Town Phase 2 Master Plan</p>
+            <h3>See the full Phase 2 layout before choosing a sector.</h3>
+            <p>The 2026 Faisal Town-II master plan is the project-wide reference for Sector O, P, R, S, T and Overseas Enclave. Sector-specific plans stay inside their own sector sections.</p>
+            <div class="button-row">
+              <a class="btn primary" href="/assets/faisal-town-ii/faisal-town-phase-2-master-plan.pdf" target="_blank" rel="noreferrer">Open Full Master Plan</a>
+              <a class="btn outline" href={whatsappLink("Use the Faisal Town Phase 2 master plan to help me shortlist a sector")}>Ask for Map Guidance</a>
+            </div>
+          </div>
+          <figure class="phase2-master-preview">
+            <img src="/assets/faisal-town-ii/faisal-town-phase-2-master-plan-preview.webp" alt="Full Faisal Town Phase 2 master plan" loading="lazy" />
+            <figcaption>2026 Faisal Town-II / Phase 2 master plan</figcaption>
+          </figure>
+        </div>
+
+        <div class="subsection" id="phase-2-sectors">
+          <div class="subsection-heading">
+            <p class="section-label">Phase 2 Sectors</p>
+            <h3>Choose the Faisal Town Phase 2 area you want to review.</h3>
+          </div>
+          <div class="block-grid sector-grid-clean">
+            {phase2Sectors.map((sector) => (
+              <article>
+                <span>{sector.title}</span>
+                <p>{sector.text}</p>
+                <a href={sector.href}>Open {sector.title}</a>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div class="sector section-inline" id="sector-p">
+          <div class="sector-media">
+            <img src="/assets/sector-p/caladan-sector-p.jpeg" alt="The Caladan Sector P in Faisal Town Phase 2" loading="lazy" />
+          </div>
+          <div class="sector-copy">
+            <p class="section-label">Phase 2 - Sector P / The Caladan</p>
+            <h2>Sector P plots from PKR 3.59 million</h2>
+            <p>Sector P is a specific Faisal Town Phase 2 opportunity. Its price table and Sector P plan are kept here inside the Sector P subsection so they are not confused with the general Phase 2 master plan or other sectors.</p>
+            <div class="sector-facts">
+              <div><strong>From PKR 3.59M</strong><span>full-payment discounted price</span></div>
+              <div><strong>5.56 Marla - 2 Kanal</strong><span>listed residential sizes</span></div>
+              <div><strong>PKR 20,000</strong><span>listed registration fee</span></div>
+              <div><strong>WhatsApp</strong><span>current availability verification</span></div>
+            </div>
+            <div class="button-row">
+              <a class="btn primary" href="/faisal-town-p-block/">Open Sector P Page</a>
+              <a class="btn outline" href={whatsappLink("Check current Sector P plot numbers, prices and total payable amount")}>Check Sector P Availability</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection sector-p-pricing" id="prices">
+          <div class="section-intro compact-intro">
+            <p class="section-label">Sector P Price Plan</p>
+            <h2>Sector P plot sizes and current listed full-payment prices</h2>
+            <p>Prices last reviewed: 6 August 2026. These prices are shown only under Sector P because they do not represent every Faisal Town Phase 2 sector.</p>
+          </div>
+          <div class="price-grid">
+            {priceRows.map(([size, marla, actual, discount]) => (
+              <article class="price-tile">
+                <div><span>{marla}</span><h3>{size}</h3></div>
+                <dl>
+                  <dt>Actual Price</dt><dd>{actual}</dd>
+                  <dt>Full-Payment Discounted Price</dt><dd>{discount}</dd>
+                </dl>
+                <a href={whatsappLink(`Check current availability for ${marla} Sector P plot size ${size}`)}>Check {marla} on WhatsApp</a>
+              </article>
+            ))}
+          </div>
+          <p class="risk-note">Sector P prices and availability can change. Verify the exact plot, total payable amount, special location charges, documents and payment instructions before making any payment.</p>
+        </div>
+
+        <div class="subsection sector-p-plan">
+          <div class="section-intro compact-intro">
+            <p class="section-label">Sector P Plan</p>
+            <h2>Sector P plan</h2>
+            <p>This is the Sector P-specific plan. It is intentionally kept with the Sector P content instead of being mixed into the general Phase 2 master-plan section.</p>
+          </div>
+          <figure class="master-plan-open">
+            <div class="master-plan-scroll">
+              <img src="/assets/sector-p/rendered/sector-p-masterplan-preview.webp" alt="Sector P Faisal Town Phase 2 plan" loading="lazy" />
+            </div>
+            <div class="plan-download-row">
+              <a class="btn primary" href="/assets/plans/sector-p-ft-ii.pdf" target="_blank" rel="noreferrer">Download Sector P PDF</a>
+              <a class="btn outline" href="/faisal-town-p-block/">Open Sector P Guide</a>
+              <a class="btn outline" href={whatsappLink("Guide me using the Sector P plan and current available plots")}>Ask About a Plot</a>
+            </div>
+          </figure>
+        </div>
+
+        <div class="subsection development-clean">
+          <div class="development-copy">
+            <p class="section-label">Phase 2 Development</p>
+            <h2>See current development before you shortlist a plot.</h2>
+            <p>Development changes by sector and street. Use the latest visual update as a starting point, then confirm the exact location through a current site visit or WhatsApp walkthrough.</p>
+            <a class="btn development-whatsapp" href={whatsappLink("Send me the latest Faisal Town Phase 2 development update and help me arrange a site visit")}>Get Latest Development Update</a>
+          </div>
+          <figure class="development-visual">
+            <img src="/assets/faisal-town-ii/phase2-work-progress.jpeg" alt="Current Faisal Town Phase 2 development work" loading="lazy" />
+            <figcaption>Recent Phase 2 development reference - verify the exact sector before deciding.</figcaption>
+          </figure>
+        </div>
+
+        <div class="subsection related-guides">
+          <div class="section-intro compact-intro">
+            <p class="section-label">Phase 2 Buyer Guides</p>
+            <h2>Articles related to Faisal Town Phase 2</h2>
+            <p>These guides are grouped here because they help Phase 2 buyers understand Sector P, the master plan, prices and the surrounding growth corridor.</p>
+          </div>
+          <div class="article-grid compact">
+            {phase2Articles.map((article) => (
+              <article class="article-card">
+                <img src={article.image} alt={article.title} loading="lazy" />
+                <div>
+                  <span>{article.category}</span>
+                  <h3><a href={`/articles/${article.slug}/`}>{article.title}</a></h3>
+                  <p>{article.description}</p>
+                  <a class="text-link" href={`/articles/${article.slug}/`}>Read Guide</a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-zone phase1-zone" id="phase-1">
+      <div class="section project-zone-inner">
+        <div class="section-intro project-heading">
+          <p class="section-label">Faisal Town Phase 1 / F-18</p>
+          <h2>Faisal Town Phase 1 blocks and related buyer guides</h2>
+          <p>Phase 1 is the established F-18 project. Its Block A, Block B and Block C content is kept together here and does not share the Phase 2 sector structure.</p>
+          <div class="button-row">
+            <a class="btn primary" href="/faisal-town-phase-1/">Open Full Phase 1 Guide</a>
+            <a class="btn outline" href={whatsappLink("I want current Faisal Town Phase 1 Block A, B or C availability")}>Ask Phase 1 Availability</a>
+          </div>
+        </div>
+
+        <div class="block-grid phase1-block-grid">
+          {phase1Blocks.map((block) => (
+            <article>
+              <span>Phase 1 / F-18 - {block.title}</span>
+              <p>{block.text}</p>
+              <a href={block.href}>Open {block.title}</a>
+            </article>
+          ))}
+        </div>
+
+        <div class="phase1-feature">
+          <img src="/assets/faisal-town-phase-1.jpg" alt="Faisal Town Phase 1 F-18" loading="lazy" />
+          <div>
+            <p class="section-label">Phase 1 Property Search</p>
+            <h3>Looking for a resale plot, house or rental in F-18?</h3>
+            <p>Tell us the block, property type and budget on WhatsApp. We can help you check current Phase 1 / F-18 options without mixing them with Phase 2 inventory.</p>
+            <a class="btn primary" href={whatsappLink("I am looking for a Faisal Town Phase 1 / F-18 property. Please send current options")}>Start Phase 1 WhatsApp Inquiry</a>
+          </div>
+        </div>
+
+        <div class="subsection related-guides">
+          <div class="section-intro compact-intro">
+            <p class="section-label">Phase 1 Buyer Guides</p>
+            <h2>Related reading for Faisal Town Phase 1 buyers</h2>
+          </div>
+          <div class="article-grid compact phase1-article-grid">
+            {phase1Articles.map((article) => (
+              <article class="article-card">
+                <img src={article.image} alt={article.title} loading="lazy" />
+                <div>
+                  <span>{article.category}</span>
+                  <h3><a href={`/articles/${article.slug}/`}>{article.title}</a></h3>
+                  <p>{article.description}</p>
+                  <a class="text-link" href={`/articles/${article.slug}/`}>Read Guide</a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="container contact-grid">
+        <div>
+          <p class="section-label">WhatsApp Property Inquiry</p>
+          <h2>Tell us which Faisal Town project you want and get current options.</h2>
+          <p>Send your project, preferred sector or block, plot size and budget. We will continue the inquiry on WhatsApp with current availability and next steps.</p>
+          <div class="contact-links">
+            <a href={whatsappLink("I want current Faisal Town property options, prices and availability")}>WhatsApp: {phoneDisplay}</a>
+          </div>
+        </div>
+        <div class="lead-options">
+          <span>Start with the correct project</span>
+          <h3>What do you want to check?</h3>
+          <a class="btn primary" href={whatsappLink("I want current Faisal Town Phase 2 plot availability and prices")}>Faisal Town Phase 2</a>
+          <a class="btn outline" href={whatsappLink("I want current Faisal Town Phase 1 / F-18 property availability")}>Faisal Town Phase 1</a>
+          <a class="btn outline" href={whatsappLink("I am not sure which Faisal Town project suits my budget. Please guide me")}>Help Me Choose</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <MobileWhatsApp />
+  <SiteFooter />
+
+  <style>
+    .home-hero { min-height: 620px; }
+    .home-hero-grid { align-items: center; grid-template-columns: minmax(0,1fr) minmax(290px,340px); padding: 62px 0 68px; gap: clamp(34px,5vw,64px); }
+    .home-hero .hero-copy h1 { max-width: 760px; font-size: clamp(2.75rem,4.6vw,4.65rem); line-height: .98; }
+    .home-hero .hero-copy p:not(.section-label) { max-width: 700px; font-size: 1.04rem; }
+    .quick-whatsapp-card { align-self: center; padding: 24px; }
+    .quick-whatsapp-card strong { font-size: clamp(1.8rem, 2.5vw, 2.35rem); }
+    .compact-actions { margin-top: 18px; }
+    .compact-actions a { margin-top: 0; }
+    .compact-actions a:nth-child(2),
+    .compact-actions a:nth-child(3) { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.28); }
+
+    .project-choice { padding-top: 72px; }
+    .compact-intro { max-width: 920px; }
+    .project-choice-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 22px; margin-top: 32px; }
+    .project-choice-card { padding: clamp(28px,4vw,48px); border: 1px solid rgba(91,14,29,.15); background: #fff; box-shadow: 0 18px 44px rgba(40,20,20,.06); }
+    .project-choice-card > span { color: var(--gold); font-size: 12px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+    .project-choice-card h3 { margin: 12px 0 10px; font-family: var(--display); font-size: clamp(2rem,3vw,3rem); color: var(--maroon); }
+    .project-choice-card p { max-width: 650px; }
+
+    .project-zone { margin-top: 42px; }
+    .phase2-zone { background: #f7f2ea; border-top: 1px solid rgba(91,14,29,.12); border-bottom: 1px solid rgba(91,14,29,.12); }
+    .phase1-zone { background: #fff; }
+    .project-zone-inner { padding-top: 88px; padding-bottom: 88px; }
+    .project-heading { max-width: 980px; }
+    .project-heading h2 { max-width: 900px; }
+    .subsection { margin-top: 76px; }
+    .subsection-heading { max-width: 860px; margin-bottom: 28px; }
+    .subsection-heading h3 { margin: 8px 0 0; font-family: var(--display); font-size: clamp(2rem,4vw,3.8rem); color: var(--maroon); line-height: 1.02; }
+    .sector-grid-clean { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .section-inline { margin-top: 88px; padding-top: 72px; border-top: 1px solid rgba(91,14,29,.14); }
+    .sector-p-pricing { padding-top: 10px; }
+    .sector-p-plan { padding-top: 4px; }
+    .phase2-master-top { display: grid; grid-template-columns: minmax(280px,.62fr) minmax(420px,1fr); gap: 34px; align-items: center; padding: 34px; background: #fff; border: 1px solid rgba(91,14,29,.14); box-shadow: 0 20px 52px rgba(45,7,16,.08); }
+    .phase2-master-copy h3 { margin: 10px 0 14px; color: var(--maroon); font-family: var(--display); font-size: clamp(2.1rem,3.6vw,3.7rem); line-height: 1.02; font-weight: 500; }
+    .phase2-master-copy p:not(.section-label) { color: var(--muted); }
+    .phase2-master-preview { margin: 0; border: 1px solid rgba(184,146,60,.34); background: #fff; padding: 8px; }
+    .phase2-master-preview img { width: 100%; aspect-ratio: 16/10; object-fit: contain; background: #fff; }
+    .phase2-master-preview figcaption { padding: 10px 8px 4px; color: var(--muted); font-size: .82rem; }
+    .development-clean { display: grid; grid-template-columns: minmax(0,.78fr) minmax(420px,1fr); gap: 0; align-items: stretch; overflow: hidden; background: var(--maroon-900); box-shadow: 0 24px 60px rgba(45,7,16,.15); }
+    .development-clean .development-copy { padding: clamp(34px,5vw,64px); }
+    .development-clean .development-copy h2 { margin: 10px 0 16px; color: #fff; font-size: clamp(2.3rem,4vw,4rem); }
+    .development-clean .development-copy p:not(.section-label) { color: rgba(255,255,255,.78); }
+    .development-whatsapp { margin-top: 14px; background: #25d366; color: #fff; border-color: #25d366; }
+    .development-visual { position: relative; margin: 0; min-height: 430px; overflow: hidden; background: #1f070c; }
+    .development-visual img { width: 100%; height: 100%; min-height: 430px; object-fit: cover; object-position: center 62%; filter: saturate(.9) contrast(1.02); }
+    .development-visual figcaption { position: absolute; right: 18px; bottom: 18px; left: 18px; padding: 11px 14px; background: rgba(45,7,16,.86); color: rgba(255,255,255,.9); font-size: .78rem; backdrop-filter: blur(8px); }
+    .related-guides { padding-top: 8px; }
+    .phase1-block-grid { grid-template-columns: repeat(3,minmax(0,1fr)); margin-top: 36px; }
+    .phase1-feature { display: grid; grid-template-columns: minmax(320px,.9fr) minmax(0,1fr); gap: 48px; align-items: center; margin-top: 68px; padding: 34px; background: #f7f2ea; }
+    .phase1-feature img { width: 100%; min-height: 360px; height: 100%; object-fit: cover; }
+    .phase1-feature h3 { margin: 8px 0 12px; font-family: var(--display); font-size: clamp(2rem,3.6vw,3.6rem); line-height: 1.02; color: var(--maroon); }
+    .phase1-article-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+
+    @media (max-width: 900px) {
+      .project-choice-grid,
+      .sector-grid-clean,
+      .phase1-block-grid,
+      .phase2-master-top,
+      .development-clean,
+      .phase1-feature,
+      .phase1-article-grid { grid-template-columns: 1fr; }
+      .development-visual,
+      .development-visual img { min-height: 300px; height: 300px; }
+      .home-hero { min-height: auto; }
+      .home-hero-grid { grid-template-columns: 1fr; padding: 50px 0 58px; }
+      .project-zone-inner { padding-top: 64px; padding-bottom: 64px; }
+      .subsection { margin-top: 58px; }
+      .section-inline { margin-top: 62px; padding-top: 52px; }
+    }
+  </style>
+</BaseLayout>

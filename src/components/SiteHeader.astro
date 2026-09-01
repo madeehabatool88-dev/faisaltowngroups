@@ -1,0 +1,56 @@
+---
+import { whatsappLink } from "../data/site";
+
+const { home = false } = Astro.props;
+const navItems = home
+  ? [
+      ["Phase 1", "#phase-1"],
+      ["Phase 2", "#phase-2"],
+      ["Plots", "/plots-for-sale-faisal-town-islamabad/"],
+      ["Map", "/faisal-town-islamabad-map-location/"],
+      ["Guides", "/articles/"]
+    ]
+  : [
+      ["Phase 1", "/faisal-town-phase-1/"],
+      ["Phase 2", "/faisal-town-phase-2/"],
+      ["Plots", "/plots-for-sale-faisal-town-islamabad/"],
+      ["Map", "/faisal-town-islamabad-map-location/"],
+      ["Guides", "/articles/"]
+    ];
+---
+<header class="site-header" id="siteHeader">
+  <a class="brand" href={home ? "#top" : "/"} aria-label="FaisalTown Groups home">
+    <img src="/assets/faisal-town-ii/original-logo.png" alt="FaisalTown Groups" width="371" height="98" decoding="async" />
+  </a>
+  <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation" data-nav-toggle>
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="site-nav" id="primary-navigation" aria-label="Primary navigation" data-nav>
+    {navItems.map(([label, href]) => <a href={href}>{label}</a>)}
+  </nav>
+  <a class="header-cta" data-cta-location="header" href={whatsappLink("Check current Faisal Town property availability based on my budget")}>Check Availability</a>
+</header>
+
+<script>
+  const toggle = document.querySelector("[data-nav-toggle]");
+  const nav = document.querySelector("[data-nav]");
+  const header = document.querySelector("#siteHeader");
+
+  const closeNav = () => {
+    toggle?.setAttribute("aria-expanded", "false");
+    nav?.classList.remove("is-open");
+  };
+
+  toggle?.addEventListener("click", () => {
+    const open = toggle.getAttribute("aria-expanded") === "true";
+    toggle.setAttribute("aria-expanded", String(!open));
+    nav?.classList.toggle("is-open", !open);
+  });
+
+  nav?.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeNav));
+  document.addEventListener("keydown", (event) => event.key === "Escape" && closeNav());
+  document.addEventListener("click", (event) => {
+    if (header && event.target instanceof Node && !header.contains(event.target)) closeNav();
+  });
+  window.addEventListener("scroll", () => header?.classList.toggle("is-scrolled", window.scrollY > 20), { passive: true });
+</script>

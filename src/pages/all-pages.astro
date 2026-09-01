@@ -1,0 +1,71 @@
+---
+import ContentLayout from "../layouts/ContentLayout.astro";
+import { articles } from "../data/articles";
+import { landingPages } from "../data/landingPages";
+
+const legalPages = [
+  ["Privacy Policy", "/privacy-policy/", "How inquiry and contact information is handled."],
+  ["Disclaimer", "/disclaimer/", "Important verification, pricing and payment cautions."],
+  ["Terms and Conditions", "/terms-and-conditions/", "Website use, inquiry handling and buyer responsibility."]
+];
+---
+
+<ContentLayout
+  title="All Pages - Faisal Town Phase 1, Phase 2, Sectors & Guides"
+  description="Browse FaisalTown Groups pages for Faisal Town Phase 1/F-18, Phase 2/FT-II, plots, houses, blocks, sectors, maps, buyer guides and legal information."
+  eyebrow="Site Directory"
+  heading="All Faisal Town Pages"
+  subheading="Find separate Phase 1/F-18 and Phase 2/FT-II project hubs, block and sector guides, plots, houses, maps, articles and legal information."
+>
+  <section class="content-section">
+    <div class="section-intro">
+      <p class="section-label">Landing Pages</p>
+      <h2>Project hubs, Phase 1 blocks and Phase 2 sector guides.</h2>
+    </div>
+    <div class="landing-link-grid">
+      {landingPages.map((page) => (
+        <article>
+          <span>{page.eyebrow}</span>
+          <h3><a href={`/${page.slug}/`}>{page.h1}</a></h3>
+          <p>{page.description}</p>
+          <a href={`/${page.slug}/`}>Open Page</a>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="section-intro">
+      <p class="section-label">Buyer Resources</p>
+      <h2>Buyer guides and articles.</h2>
+    </div>
+    <div class="article-grid compact">
+      {articles.map((article) => (
+        <article class="article-card">
+          <img src={article.image} alt={article.title} loading="lazy" />
+          <div>
+            <span>{article.category}</span>
+            <h3><a href={`/articles/${article.slug}/`}>{article.title}</a></h3>
+            <p>{article.description}</p>
+            <a class="text-link" href={`/articles/${article.slug}/`}>Read Guide</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="section-intro">
+      <p class="section-label">Legal</p>
+      <h2>Trust and policy pages.</h2>
+    </div>
+    <div class="related-links">
+      {legalPages.map(([label, href, text]) => (
+        <a href={href}>
+          <span>{label}</span>
+          <small>{text}</small>
+        </a>
+      ))}
+    </div>
+  </section>
+</ContentLayout>

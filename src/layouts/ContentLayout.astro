@@ -1,0 +1,44 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import MobileWhatsApp from "../components/MobileWhatsApp.astro";
+import { whatsappLink } from "../data/site";
+
+const {
+  title,
+  description,
+  eyebrow = "FaisalTown Groups",
+  heading = title,
+  subheading = description,
+  image,
+  ogType = "website",
+  additionalSchema = [],
+  compactHero = false
+} = Astro.props;
+---
+<BaseLayout title={title} description={description} image={image} ogType={ogType} additionalSchema={additionalSchema}>
+  <SiteHeader />
+
+  <main>
+    <section class:list={["content-hero", { "content-hero-compact": compactHero }]}>
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/">Home</a><span aria-hidden="true">/</span><span>{eyebrow}</span>
+        </nav>
+        <p class="section-label">{eyebrow}</p>
+        <h1>{heading}</h1>
+        <p>{subheading}</p>
+        <div class="hero-actions">
+          <a class="btn primary" data-cta-location="content-hero" href={whatsappLink(`Inquiry from page: ${heading}`)}>Check Current Options</a>
+          <a class="btn outline" data-cta-location="content-hero" href={whatsappLink(`I want the latest price and availability for: ${heading}`)}>Ask Price on WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <slot />
+  </main>
+
+  <MobileWhatsApp />
+  <SiteFooter />
+</BaseLayout>

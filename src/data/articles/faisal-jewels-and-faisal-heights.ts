@@ -1,0 +1,49 @@
+import type { Article } from "../articles";
+
+const article: Article = {
+    slug: "faisal-jewels-and-faisal-heights",
+    title: "Faisal Jewels and Faisal Heights: High-Rise Project References",
+    seoTitle: "Faisal Jewels & Faisal Heights | High-Rise Reference Guide",
+    metaDescription: "Compare Faisal Jewels, Faisal Heights and high-rise references with plotted Faisal Town residential buying decisions.",
+    description: "A simple overview of high-rise references connected with the wider FaisalTown project identity and how they differ from residential plot buying.",
+    intro: "High-rise projects and plotted communities serve different buyer goals. Compare them by purpose, payment structure and possession expectations.",
+    category: "Projects",
+    cluster: "Comparisons",
+    date: "2026-08-08",
+    updated: "2026-08-21",
+    reviewed: "August 2026",
+    image: "/assets/portfolio/faisal-jewels-preview.webp",
+    readTime: "4 min read",
+    relatedSlugs: ["faisal-town-phase-1-and-faisal-hills", "why-choose-faisal-town", "faisal-town-complete-guide"],
+    cta: {
+      label: "Project Type",
+      heading: "Unsure whether a plot or high-rise unit fits you?",
+      message: "Compare residential plots with high-rise project options",
+      button: "Ask for Guidance"
+    },
+    sections: [
+      {
+        heading: "Why High-Rise References Matter",
+        paragraphs: [
+          "Buyers sometimes ask about Faisal Jewels, Faisal Heights, and other high-rise references when comparing the wider FaisalTown identity. These projects show a different category of real estate compared with residential plots.",
+          "High-rise projects involve apartments, commercial units, hotel-style concepts, or mixed-use development, while Sector P is primarily a plotted residential opportunity."
+        ]
+      },
+      {
+        heading: "Do Not Compare Them Like-for-Like",
+        paragraphs: [
+          "A plot and a high-rise unit have different risks, payment structures, possession expectations, rental potential, and buyer profiles. Comparing them only by price can be misleading.",
+          "For family living and land ownership, buyers usually compare plotted communities. For rental, commercial visibility, or managed building concepts, buyers may compare high-rise projects."
+        ]
+      },
+      {
+        heading: "How to Decide",
+        paragraphs: [
+          "Start with your purpose. If you want to build a home, a residential plot may be more suitable. If you want a managed asset or apartment-style product, a high-rise option may be worth reviewing separately.",
+          "In all cases, verify payment schedules, construction status, documentation, transfer procedure, and possession expectations before making any decision."
+        ]
+      }
+    ]
+  };
+
+export default article;
