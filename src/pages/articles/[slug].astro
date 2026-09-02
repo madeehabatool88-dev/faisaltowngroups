@@ -1,0 +1,21 @@
+---
+import ArticleDetail from "../../components/ArticleDetail.astro";
+import { articles } from "../../data/articles";
+
+export function getStaticPaths() {
+  const staticArticlePages = import.meta.glob("./*/index.astro");
+  const staticArticleSlugs = new Set(
+    Object.keys(staticArticlePages)
+      .map((path) => path.split("/")[1])
+      .filter(Boolean)
+  );
+
+  return articles
+    .filter((article) => !staticArticleSlugs.has(article.slug))
+    .map((article) => ({ params: { slug: article.slug }, props: { article } }));
+}
+
+const { article } = Astro.props;
+---
+
+<ArticleDetail article={article} />

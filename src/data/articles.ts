@@ -29,26 +29,28 @@ export type Article = {
   faqs?: Array<[string, string]>;
 };
 
-import article1 from "./articles/faisal-town-complete-guide";
-import article2 from "./articles/faisal-town-living";
-import article3 from "./articles/why-choose-faisal-town";
-import article4 from "./articles/faisal-town-phase-1-and-faisal-hills";
-import article5 from "./articles/faisal-town-ii-sector-p-guide";
-import article6 from "./articles/living-near-rawalpindi-ring-road";
-import article7 from "./articles/new-islamabad-living-guide";
-import article8 from "./articles/faisal-town-ii-master-plan";
-import article9 from "./articles/sector-p-prices-explained";
-import article10 from "./articles/faisal-jewels-and-faisal-heights";
-
-export const articles: Article[] = [
-  article1,
-  article2,
-  article3,
-  article4,
-  article5,
-  article6,
-  article7,
-  article8,
-  article9,
-  article10
+const articleOrder = [
+  "faisal-town-complete-guide",
+  "faisal-town-living",
+  "why-choose-faisal-town",
+  "faisal-town-phase-1-and-faisal-hills",
+  "faisal-town-ii-sector-p-guide",
+  "living-near-rawalpindi-ring-road",
+  "new-islamabad-living-guide",
+  "faisal-town-ii-master-plan",
+  "sector-p-prices-explained",
+  "faisal-jewels-and-faisal-heights"
 ];
+
+const articleModules = import.meta.glob<{ default: Article }>("./articles/*.ts", { eager: true });
+
+export const articles: Article[] = Object.values(articleModules)
+  .map((module) => module.default)
+  .sort((a, b) => {
+    const aIndex = articleOrder.indexOf(a.slug);
+    const bIndex = articleOrder.indexOf(b.slug);
+    if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
+    if (aIndex !== -1) return -1;
+    if (bIndex !== -1) return 1;
+    return new Date(b.date).getTime() - new Date(a.date).getTime();
+  });

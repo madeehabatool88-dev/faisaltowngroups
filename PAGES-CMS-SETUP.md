@@ -15,7 +15,8 @@ Keep other future websites in their own repositories.
 The CMS configuration exposes these areas:
 
 - Homepage: `src/pages/index.astro`
-- Project, block and sector page data: `src/data/landingPages.ts`
+- Project, block and sector page index/order: `src/data/landingPages.ts`
+- Individual project, block and sector page files: `src/data/pages/`
 - Website settings and WhatsApp number: `src/data/site.ts`
 - Article content files: `src/data/articles/`
 - Articles archive page: `src/pages/articles/index.astro`
@@ -25,7 +26,26 @@ The CMS configuration exposes these areas:
   - `src/pages/terms-and-conditions.astro`
 - Images and plans:
   - `public/assets/`
+  - `public/assets/uploads/`
+  - `public/assets/maps/`
+  - `public/assets/projects/`
+  - `public/assets/articles/`
   - `public/assets/plans/`
+
+## Editing Project, Block And Sector Pages
+
+Each page now has its own file in:
+
+`src/data/pages/`
+
+Examples:
+
+- `src/data/pages/faisal-town-phase-2.ts`
+- `src/data/pages/faisal-town-p-block.ts`
+- `src/data/pages/faisal-town-overseas-block.ts`
+- `src/data/pages/faisal-town-sector-t.ts`
+
+Use these files for normal content updates. New page files are discovered automatically. Use `src/data/landingPages.ts` only when changing page order in generated lists.
 
 ## Editing Articles
 
@@ -33,11 +53,13 @@ Each article has its own content file in:
 
 `src/data/articles/`
 
-Each live article page has a matching folder in:
+Each current live article page has a matching folder in:
 
 `src/pages/articles/`
 
 Normally edit the content file, not the small page wrapper.
+
+New article files are discovered automatically, so future article publishing can start from `src/data/articles/`.
 
 ## Recommended Workflow
 

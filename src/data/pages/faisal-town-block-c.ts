@@ -1,0 +1,29 @@
+import type { LandingPage } from "../landingPages";
+
+const page: LandingPage = {
+    slug: "faisal-town-block-c",
+    title: "Faisal Town Block C (Phase 1/F-18) - Map, Plots & Guidance",
+    description: "Explore Faisal Town Block C in Phase 1/F-18 with map guidance, current plot listings, resale checks, access comparison and buyer support.",
+    eyebrow: "Phase 1 / F-18 - Block C",
+    h1: "Faisal Town Block C (Phase 1/F-18)",
+    intro: "Faisal Town Block C is an established Phase 1 / F-18 block search and should not be confused with a Faisal Town Phase 2 sector.",
+    image: "/assets/faisal-town-phase-1.jpg",
+    primaryCta: "Check Block C Availability",
+    secondaryCta: "Compare Phase 1 Blocks",
+    updated: "2026-08-31",
+    reviewed: "2026-08-31",
+    highlights: [["Project","Faisal Town Phase 1 / F-18"],["Block","Block C"],["Search Intent","Map and plots for sale"],["Support","Live inventory checks"]],
+    sections: [
+      { heading: "Faisal Town Block C overview", paragraphs: ["Block C searchers are typically comparing Phase 1/F-18 resale plots, map location and access. The block is established enough that street-level differences matter strongly.", "Current property portals show active Block C plot listings, including different sizes and special locations."] },
+      { heading: "Block C map and resale checks", paragraphs: ["Request the correct Phase 1 map, then verify plot number, street width, dues, possession, access and any corner/main-road premium.", "Compare current asking prices only after the plots are matched for size, location and status."] },
+      { heading: "How Block C buyers should compare listings", paragraphs: ["Block C listings should be compared by size, possession, exact street, surrounding activity, access and total transaction cost. A lower asking price can be attractive, but it may reflect location, dues, urgency, documentation status or development condition.", "If you are comparing Block C with Block A or Block B, avoid using block name alone as the deciding factor. A better comparison starts with plot dimensions, route, map position and whether the property fits your end-use or investment plan."] },
+      { heading: "Block C houses, rentals and plot demand", paragraphs: ["Some buyers enter through a plot-for-sale query, while others are checking built houses or rentals in the established Phase 1/F-18 market. These are different decisions and should be reviewed with different checklists.", "For houses and rentals, condition, layout, parking, utilities and lease or transfer terms matter. For plots, focus on title, dues, possession, street width and exact map position."] },
+      { heading: "Block C due-diligence steps", paragraphs: ["Before payment, verify ownership or transfer documents, outstanding dues, plot identity, possession status and any special-location premium. If possible, compare the seller's information with a current map reference and site visit.", "Remote buyers should request fresh photos or video, a map pin, written payable breakdown and a clear receipt process before sending any token amount."] },
+      { heading: "Phase 1 versus Phase 2 naming", paragraphs: ["Block C belongs to Faisal Town Phase 1/F-18 on this website. Phase 2 area pages use Sector O, P, R, S, T and Overseas Enclave references instead."] }
+    ],
+    bullets: [{title:"Use the Phase 1 map",text:"Avoid mixing Block C with FT-II sector plans."},{title:"Check exact inventory",text:"Availability and asking price change frequently."},{title:"Compare like with like",text:"Match size, street and possession before comparing price."},{title:"Verify documents",text:"Check transfer and dues before payment."}],
+    faqs: [["Is Faisal Town Block C in Phase 1?","Yes. This page refers to Faisal Town Phase 1 / F-18 Block C."],["Is Block C a Phase 2 sector?","No. Phase 2 is handled separately."],["Are plots available in Block C?","Current listings exist, but live availability should be checked for your size and budget."],["Should I compare Block C with Block B?","Yes, using exact map position, access, plot status and total price."]],
+    links: [["Phase 1 Hub","/faisal-town-phase-1/"],["Block A","/faisal-town-block-a/"],["Block B","/faisal-town-block-b/"],["Plots for Sale","/plots-for-sale-faisal-town-islamabad/"]]
+  };
+
+export default page;

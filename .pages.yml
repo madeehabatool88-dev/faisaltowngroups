@@ -6,6 +6,34 @@ media:
     categories: [image]
     extensions: [jpg, jpeg, png, webp, svg]
     rename: safe
+  - name: uploads
+    label: New Uploads
+    input: public/assets/uploads
+    output: /assets/uploads
+    categories: [image]
+    extensions: [jpg, jpeg, png, webp, svg]
+    rename: safe
+  - name: maps
+    label: Maps & Location Images
+    input: public/assets/maps
+    output: /assets/maps
+    categories: [image]
+    extensions: [jpg, jpeg, png, webp, svg]
+    rename: safe
+  - name: project_images
+    label: Project Images
+    input: public/assets/projects
+    output: /assets/projects
+    categories: [image]
+    extensions: [jpg, jpeg, png, webp, svg]
+    rename: safe
+  - name: article_images
+    label: Article Images
+    input: public/assets/articles
+    output: /assets/articles
+    categories: [image]
+    extensions: [jpg, jpeg, png, webp, svg]
+    rename: safe
   - name: plans
     label: Master Plans & PDFs
     input: public/assets/plans
@@ -28,14 +56,27 @@ content:
           delete: false
           rename: false
 
-      - name: project_pages_data
-        label: Project, Block & Sector Pages Data
+      - name: project_pages_index
+        label: Project Pages Index & Order
         type: file
         path: src/data/landingPages.ts
         format: code
         operations:
           delete: false
           rename: false
+
+      - name: project_pages
+        label: Individual Project, Block & Sector Pages
+        type: collection
+        path: src/data/pages
+        format: code
+        subfolders: false
+        operations:
+          create: true
+          rename: false
+          delete: false
+        view:
+          layout: list
 
       - name: site_settings
         label: Site Settings & WhatsApp
@@ -57,7 +98,7 @@ content:
         format: code
         subfolders: false
         operations:
-          create: false
+          create: true
           rename: false
           delete: false
         view:
@@ -121,6 +162,15 @@ content:
         type: file
         path: src/pages/sitemap.xml.ts
         format: code
+        operations:
+          delete: false
+          rename: false
+
+      - name: editing_guide
+        label: Editing Guide
+        type: file
+        path: CONTENT-EDITING-GUIDE.md
+        format: markdown
         operations:
           delete: false
           rename: false
