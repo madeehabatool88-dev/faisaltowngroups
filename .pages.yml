@@ -53,8 +53,14 @@ content:
         path: src/content/homepage.json
         format: json
         fields:
-          - { name: seoTitle, label: SEO Title, type: string }
-          - { name: metaDescription, label: Meta Description, type: text }
+          - name: seoTitle
+            label: SEO Title
+            type: string
+            description: Title shown in Google search results.
+          - name: metaDescription
+            label: Meta Description
+            type: text
+            description: Search result description.
           - { name: topStripLabel, label: Top Strip Label, type: string }
           - { name: topStripText, label: Top Strip Text, type: text }
           - { name: heroImage, label: Hero Image, type: image }
@@ -73,7 +79,8 @@ content:
               - { name: text, label: Text, type: text }
               - name: actions
                 label: WhatsApp Actions
-                type: list
+                type: object
+                list: true
                 fields:
                   - { name: label, label: Button Label, type: string }
                   - { name: query, label: WhatsApp Query, type: text }
@@ -86,7 +93,8 @@ content:
               - { name: text, label: Text, type: text }
               - name: cards
                 label: Project Choice Cards
-                type: list
+                type: object
+                list: true
                 fields:
                   - { name: label, label: Label, type: string }
                   - { name: heading, label: Heading, type: string }
@@ -121,7 +129,8 @@ content:
               - { name: sectorsHeading, label: Sectors Heading, type: string }
               - name: sectors
                 label: Phase 2 Sector Cards
-                type: list
+                type: object
+                list: true
                 fields:
                   - { name: title, label: Title, type: string }
                   - { name: href, label: Link, type: string }
@@ -137,7 +146,8 @@ content:
                   - { name: text, label: Text, type: text }
                   - name: facts
                     label: Fact Boxes
-                    type: list
+                    type: object
+                    list: true
                     fields:
                       - { name: value, label: Value, type: string }
                       - { name: label, label: Label, type: string }
@@ -155,7 +165,8 @@ content:
                   - { name: note, label: Buyer Note, type: text }
                   - name: rows
                     label: Price Rows
-                    type: list
+                    type: object
+                    list: true
                     fields:
                       - { name: size, label: Plot Size, type: string }
                       - { name: marla, label: Marla/Kanal, type: string }
@@ -186,8 +197,9 @@ content:
                   - { name: caption, label: Caption, type: string }
               - name: articleSlugs
                 label: Related Article Slugs
-                type: list
-                field: { name: slug, label: Article Slug, type: string }
+                type: string
+                list: true
+                required: false
           - name: phase1
             label: Featured Phase 1 Section
             type: object
@@ -201,7 +213,8 @@ content:
               - { name: secondaryQuery, label: Secondary WhatsApp Query, type: text }
               - name: blocks
                 label: Phase 1 Block Cards
-                type: list
+                type: object
+                list: true
                 fields:
                   - { name: title, label: Title, type: string }
                   - { name: href, label: Link, type: string }
@@ -215,8 +228,9 @@ content:
               - { name: featureQuery, label: Feature WhatsApp Query, type: text }
               - name: articleSlugs
                 label: Related Article Slugs
-                type: list
-                field: { name: slug, label: Article Slug, type: string }
+                type: string
+                list: true
+                required: false
           - name: contact
             label: Contact Section
             type: object
@@ -229,7 +243,8 @@ content:
               - { name: leadHeading, label: Lead Box Heading, type: string }
               - name: options
                 label: WhatsApp Options
-                type: list
+                type: object
+                list: true
                 fields:
                   - { name: label, label: Button Label, type: string }
                   - { name: query, label: WhatsApp Query, type: text }
@@ -266,19 +281,52 @@ content:
     filename: "{slug}.json"
     view:
       layout: list
-      fields: [title, slug, status, order]
+      fields: [h1, pageType, phase, slug, status, updated, order]
     fields:
-      - { name: order, label: Display Order, type: number }
+      - name: order
+        label: Display Order
+        type: number
+        description: Lower numbers appear first.
       - name: status
         label: Status
         type: select
         options:
           values: [published, draft]
-      - { name: slug, label: Slug, type: string }
-      - { name: title, label: SEO Title, type: string }
-      - { name: description, label: Meta Description, type: text }
+      - name: slug
+        label: Slug
+        type: string
+        description: Do not change unless intentionally changing the page URL.
+      - name: pageType
+        label: Page Type
+        type: select
+        required: false
+        options:
+          values:
+            - Project Hub
+            - Sector Guide
+            - Block Guide
+            - Enclave Guide
+            - Property Search
+            - Map & Location
+      - name: phase
+        label: Phase / Area
+        type: select
+        required: false
+        options:
+          values:
+            - Phase 1 / F-18
+            - Phase 2 / FT-II
+            - Phase 1 & Phase 2
+      - name: title
+        label: SEO Title
+        type: string
+        description: Title shown in Google search results.
+      - name: description
+        label: Meta Description
+        type: text
+        description: Search result description.
       - { name: eyebrow, label: Eyebrow, type: string }
-      - { name: h1, label: H1 Heading, type: string }
+      - { name: h1, label: Page Heading, type: string }
       - { name: intro, label: Intro, type: text }
       - { name: image, label: Featured Image, type: image }
       - { name: primaryCta, label: Primary CTA, type: string }
@@ -287,43 +335,49 @@ content:
       - { name: reviewed, label: Reviewed Date, type: date }
       - name: sections
         label: Content Sections
-        type: list
+        type: object
+        list: true
         fields:
           - { name: heading, label: Heading, type: string }
           - name: paragraphs
             label: Paragraphs
-            type: list
-            field: { name: paragraph, label: Paragraph, type: text }
+            type: text
+            list: true
       - name: bullets
         label: Buyer Checklist / Bullet Sections
-        type: list
+        type: object
+        list: true
         fields:
           - { name: title, label: Title, type: string }
           - { name: text, label: Text, type: text }
       - name: downloads
         label: Download Links
-        type: list
+        type: object
+        list: true
         required: false
         fields:
           - { name: label, label: Label, type: string }
           - { name: title, label: Title, type: string }
           - { name: text, label: Text, type: text }
-          - { name: href, label: URL, type: string }
+          - { name: href, label: URL or PDF Path, type: string }
       - name: highlights
         label: Highlights
-        type: list
+        type: object
+        list: true
         fields:
           - { name: label, label: Label, type: string }
           - { name: value, label: Value, type: string }
       - name: faqs
         label: FAQs
-        type: list
+        type: object
+        list: true
         fields:
           - { name: question, label: Question, type: string }
           - { name: answer, label: Answer, type: text }
       - name: links
         label: Related Links
-        type: list
+        type: object
+        list: true
         fields:
           - { name: label, label: Anchor Text, type: string }
           - { name: href, label: URL, type: string }
@@ -341,22 +395,60 @@ content:
     filename: "{slug}.json"
     view:
       layout: list
-      fields: [title, cluster, status, order]
+      fields: [title, cluster, category, status, updated, order]
     fields:
-      - { name: order, label: Display Order, type: number }
+      - name: order
+        label: Display Order
+        type: number
+        description: Lower numbers appear first.
       - name: status
         label: Status
         type: select
         options:
           values: [published, draft]
-      - { name: slug, label: Slug, type: string }
+      - name: slug
+        label: Slug
+        type: string
+        description: Do not change unless intentionally changing the page URL.
       - { name: title, label: Article Title, type: string }
-      - { name: seoTitle, label: SEO Title, type: string, required: false }
-      - { name: metaDescription, label: Meta Description, type: text, required: false }
+      - name: seoTitle
+        label: SEO Title
+        type: string
+        required: false
+        description: Title shown in Google search results.
+      - name: metaDescription
+        label: Meta Description
+        type: text
+        required: false
+        description: Search result description.
       - { name: description, label: Archive Description, type: text }
       - { name: intro, label: Introduction, type: text, required: false }
-      - { name: category, label: Category, type: string }
-      - { name: cluster, label: Cluster, type: string, required: false }
+      - name: category
+        label: Category
+        type: select
+        options:
+          values:
+            - Projects
+            - Buyer Guide
+            - Master Plan
+            - Sector P
+            - Living
+            - Project References
+            - Location
+            - Lifestyle
+            - Prices
+            - Investment Guide
+      - name: cluster
+        label: Cluster
+        type: select
+        required: false
+        options:
+          values:
+            - Comparisons
+            - Investment & Buyer Guides
+            - Location & Maps
+            - Faisal Town Phase 2
+            - Prices & Payment Plans
       - { name: date, label: Publish Date, type: date }
       - { name: updated, label: Updated Date, type: date, required: false }
       - { name: reviewed, label: Reviewed Date, type: string, required: false }
@@ -364,9 +456,9 @@ content:
       - { name: readTime, label: Read Time, type: string }
       - name: relatedSlugs
         label: Related Article Slugs
-        type: list
+        type: string
+        list: true
         required: false
-        field: { name: slug, label: Article Slug, type: string }
       - name: cta
         label: Article CTA
         type: object
@@ -378,29 +470,32 @@ content:
           - { name: button, label: Button Label, type: string }
       - name: sections
         label: Body Sections
-        type: list
+        type: object
+        list: true
         fields:
           - { name: heading, label: Heading, type: string }
           - name: paragraphs
             label: Paragraphs
-            type: list
-            field: { name: paragraph, label: Paragraph, type: text }
+            type: text
+            list: true
           - name: bullets
             label: Bullets
-            type: list
+            type: text
+            list: true
             required: false
-            field: { name: bullet, label: Bullet, type: text }
           - { name: callout, label: Callout, type: text, required: false }
           - name: links
             label: Section Links
-            type: list
+            type: object
+            list: true
             required: false
             fields:
               - { name: label, label: Anchor Text, type: string }
               - { name: href, label: URL, type: string }
       - name: faqs
         label: FAQs
-        type: list
+        type: object
+        list: true
         required: false
         fields:
           - { name: question, label: Question, type: string }
@@ -420,21 +515,28 @@ content:
       layout: list
       fields: [heading, updated]
     fields:
-      - { name: title, label: SEO Title, type: string }
-      - { name: description, label: Meta Description, type: text }
+      - name: title
+        label: SEO Title
+        type: string
+        description: Title shown in Google search results.
+      - name: description
+        label: Meta Description
+        type: text
+        description: Search result description.
       - { name: eyebrow, label: Eyebrow, type: string }
-      - { name: heading, label: H1 Heading, type: string }
+      - { name: heading, label: Page Heading, type: string }
       - { name: subheading, label: Subheading, type: text }
       - { name: updated, label: Updated Date, type: date }
       - name: sections
         label: Legal Sections
-        type: list
+        type: object
+        list: true
         fields:
           - { name: heading, label: Heading, type: string }
           - name: paragraphs
             label: Paragraphs
-            type: list
-            field: { name: paragraph, label: Paragraph, type: text }
+            type: text
+            list: true
       - { name: ctaLabel, label: CTA Label, type: string }
       - { name: ctaQuery, label: CTA WhatsApp Query, type: text }
     operations:

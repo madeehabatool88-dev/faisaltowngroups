@@ -1,5 +1,7 @@
 export type LandingPage = {
   slug: string;
+  pageType?: string;
+  phase?: string;
   title: string;
   description: string;
   eyebrow: string;

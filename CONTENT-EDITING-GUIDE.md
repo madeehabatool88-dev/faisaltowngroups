@@ -1,67 +1,124 @@
 # FaisalTownGroups Editing Guide
 
-This website is now organized so future editing is easier.
+Use Pages CMS when you want to update website text, images, PDFs, articles, project pages, legal pages, phone details, or WhatsApp messages.
 
-## Main Content Folders
+## Best Editing Workflow
 
-- Homepage: `src/pages/index.astro`
-- Homepage content: `src/content/homepage.json`
-- Project, block and sector pages: `src/content/projects/`
-- Articles and buyer guides: `src/content/articles/`
-- Legal page content: `src/content/legal/`
-- Site phone, email and WhatsApp settings: `src/data/site.json`
-- Image notes and labels: `src/data/imageMeta.ts`
+1. Open the FaisalTownGroups project in Pages CMS.
+2. Choose the section you want to edit: Homepage, Projects & Property Pages, Articles & Buyer Guides, Legal Pages, or Site Settings.
+3. Make the change.
+4. Save the entry.
+5. Check the website after the new build is uploaded or deployed.
 
-## Asset Folders
+## Homepage
 
-- General uploads: `public/assets/uploads/`
-- Maps and location graphics: `public/assets/maps/`
-- Project images: `public/assets/projects/`
-- Article images: `public/assets/articles/`
-- Master plans and PDFs: `public/assets/plans/`
-- Faisal Town II images: `public/assets/faisal-town-ii/`
-- Sector P images: `public/assets/sector-p/`
-- Completed project images: `public/assets/portfolio/`
+Edit Homepage when you want to change the main landing page.
 
-## Editing Existing Project Pages
+Useful fields:
 
-Each project, block, sector or property page has its own file in:
+- SEO Title: the title Google may show in search results.
+- Meta Description: the short search result description.
+- Hero Image: the main first-screen image.
+- H1 Heading: the main visible heading on the homepage.
+- Primary CTA and Secondary CTA: the main action buttons.
+- WhatsApp Card: the lead-focused box near the hero.
+- Featured Phase 2 Section: the Faisal Town Phase 2 / FT-II area.
+- Featured Phase 1 Section: the Faisal Town Phase 1 area.
+- Contact Section: the final lead section.
 
-`src/content/projects/`
+Keep homepage text customer-facing. Do not add internal notes, builder notes, task comments, or reminders for yourself.
 
-Examples:
+## Projects & Property Pages
 
-- `src/content/projects/faisal-town-phase-2.json`
-- `src/content/projects/faisal-town-p-block.json`
-- `src/content/projects/faisal-town-overseas-block.json`
-- `src/content/projects/faisal-town-sector-t.json`
+Use this collection for project hubs, sectors, blocks, map/location pages, and property-search pages.
 
-To edit a page, open the matching file and update the title, intro, sections, FAQs, downloads or links.
+Important fields:
 
-## Adding A New Project Page
+- Display Order: lower numbers appear first.
+- Status: use Published for live pages and Draft for pages you are still preparing.
+- Slug: controls the page URL. Do not change it unless you intentionally want a new URL.
+- Page Type: helps you find pages in the CMS list.
+- Phase / Area: helps separate Phase 1, Phase 2 and shared pages.
+- SEO Title and Meta Description: search result text.
+- Page Heading and Intro: the first customer-facing text on the page.
+- Featured Image: the main image for the page.
+- Content Sections: the main page body.
+- Buyer Checklist / Bullet Sections: decision points for buyers.
+- Download Links: master plans, sector plans or PDFs.
+- Highlights: quick facts shown near the page top.
+- FAQs: buyer questions and answers.
+- Related Links: internal links to useful pages.
 
-1. Copy `docs/templates/new-project-page.json.example`.
-2. Save it inside `src/content/projects/` with a clear filename, for example `new-project-name.json`.
-3. Change the `slug` to the page URL you want.
-4. Add any project images to `public/assets/projects/`.
-5. Add plans or PDFs to `public/assets/plans/`.
-6. Run the build before uploading.
+## Adding A New Project, Block Or Sector Page
 
-New project page files are discovered automatically. Use the `order` field to control display order.
+1. Open Projects & Property Pages.
+2. Create a new entry.
+3. Add a clear slug, such as `faisal-town-new-sector`.
+4. Set Status to Draft while preparing it.
+5. Add SEO title, description, heading, intro, image, sections, highlights, FAQs and related links.
+6. Add any relevant PDFs through Master Plans & PDFs, then add the PDF path in Download Links.
+7. Change Status to Published when ready.
 
-## Editing Articles
+## Articles & Buyer Guides
 
-Article content files live in:
+Use this collection for SEO articles, buyer guides, location guides and price explainers.
 
-`src/content/articles/`
+Important fields:
 
-New article files are discovered automatically. Use the `order`, `status`, `category`, and `cluster` fields to control how they appear on the archive.
+- Display Order: lower numbers appear first on article listings.
+- Status: use Draft until the article is ready.
+- Slug: controls the article URL.
+- Article Title: the visible article title.
+- SEO Title and Meta Description: search result text.
+- Category: choose the closest topic from the dropdown.
+- Cluster: choose the broader SEO group from the dropdown.
+- Related Article Slugs: add one related article slug per row.
+- Body Sections: article content.
+- FAQs: optional article FAQs.
+- Article CTA: the WhatsApp lead box inside the article.
 
-## Writing Rules
+Related article slugs should be simple slugs only, for example `faisal-town-ii-master-plan`.
 
-- Keep text customer-facing.
-- Remove internal notes, builder notes, and prompts.
-- Do not invent prices, approvals, possession dates, distances or guarantees.
-- Every important page should lead toward WhatsApp.
-- Use specific CTA text such as "Check Current Availability", "Get Today's Price" or "Arrange a Site Visit".
-- When adding a new WhatsApp link, include the website address and the visitor query in the message.
+## Legal Pages
+
+Use Legal Pages for Privacy Policy, Disclaimer, and Terms & Conditions.
+
+These pages are editable but should not be deleted or renamed. Keep the language clear, conservative and relevant to a property information website.
+
+## Images And PDFs
+
+Use the media library folders based on the type of file:
+
+- Website Images: general images.
+- Project Images: project and sector images.
+- Maps & Location Images: master plans and map previews.
+- Article Images: article thumbnails and guide images.
+- New Uploads: temporary or newly added images.
+- Master Plans & PDFs: downloadable PDF plans.
+
+Use real project images wherever possible. Avoid very small, blurry, cropped or misleading images.
+
+## WhatsApp Messages
+
+WhatsApp is the main lead channel. Each important CTA should use a specific buyer intent, such as:
+
+- Check Current Availability
+- Get Today's Price
+- Request Payment Plan
+- Arrange a Site Visit
+- Ask About This Plot
+
+Every WhatsApp message should include the website address and the visitor query.
+
+## SEO Rules
+
+- Keep one clear topic per page.
+- Use natural customer language.
+- Do not stuff keywords.
+- Do not invent prices, approvals, possession dates, development percentages, distances or guarantees.
+- If information can change, ask buyers to verify current availability, dues and payment terms.
+- Keep internal links useful for buyers.
+
+## Publishing Notes
+
+Pages CMS saves changes into the website repository. After changes are saved, the site still needs to be built and uploaded or deployed before visitors see the update.
