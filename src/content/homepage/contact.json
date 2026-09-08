@@ -1,0 +1,22 @@
+{
+  "eyebrow": "WhatsApp Property Inquiry",
+  "heading": "Tell us which Faisal Town project you want and get current options.",
+  "text": "Send your project, preferred sector or block, plot size and budget. We will continue the inquiry on WhatsApp with current availability and next steps.",
+  "mainQuery": "I want current Faisal Town property options, prices and availability",
+  "leadLabel": "Start with the correct project",
+  "leadHeading": "What do you want to check?",
+  "options": [
+    {
+      "label": "Faisal Town Phase 2",
+      "query": "I want current Faisal Town Phase 2 plot availability and prices"
+    },
+    {
+      "label": "Faisal Town Phase 1",
+      "query": "I want current Faisal Town Phase 1 / F-18 property availability"
+    },
+    {
+      "label": "Help Me Choose",
+      "query": "I am not sure which Faisal Town project suits my budget. Please guide me"
+    }
+  ]
+}

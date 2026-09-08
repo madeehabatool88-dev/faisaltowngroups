@@ -12,7 +12,15 @@ Use Pages CMS when you want to update website text, images, PDFs, articles, proj
 
 ## Homepage
 
-Edit Homepage when you want to change the main landing page.
+The homepage is split into five smaller CMS screens so you do not have to edit one very long page.
+
+Use these entries:
+
+- Homepage - Hero & SEO: search title, meta description, top strip, hero image, main heading, intro and hero WhatsApp buttons.
+- Homepage - Project Choice: the two project choice cards near the top.
+- Homepage - Phase 2: Phase 2, master plan, sectors, Sector P, price rows, plan, development and related Phase 2 articles.
+- Homepage - Phase 1: Phase 1 heading, block cards, feature image and related Phase 1 articles.
+- Homepage - Contact: final WhatsApp lead section.
 
 Useful fields:
 
@@ -22,9 +30,7 @@ Useful fields:
 - H1 Heading: the main visible heading on the homepage.
 - Primary CTA and Secondary CTA: the main action buttons.
 - WhatsApp Card: the lead-focused box near the hero.
-- Featured Phase 2 Section: the Faisal Town Phase 2 / FT-II area.
-- Featured Phase 1 Section: the Faisal Town Phase 1 area.
-- Contact Section: the final lead section.
+- Related Article Slugs: controls which articles appear inside the Phase 1 or Phase 2 homepage sections.
 
 Keep homepage text customer-facing. Do not add internal notes, builder notes, task comments, or reminders for yourself.
 

@@ -47,10 +47,10 @@ content:
     label: Main Website
     type: group
     items:
-      - name: homepage
-        label: Homepage
+      - name: homepage_hero
+        label: Homepage - Hero & SEO
         type: file
-        path: src/content/homepage.json
+        path: src/content/homepage/hero.json
         format: json
         fields:
           - name: seoTitle
@@ -84,172 +84,196 @@ content:
                 fields:
                   - { name: label, label: Button Label, type: string }
                   - { name: query, label: WhatsApp Query, type: text }
-          - name: projectChoice
-            label: Project Choice Section
-            type: object
-            fields:
-              - { name: eyebrow, label: Eyebrow, type: string }
-              - { name: heading, label: Heading, type: string }
-              - { name: text, label: Text, type: text }
-              - name: cards
-                label: Project Choice Cards
-                type: object
-                list: true
-                fields:
-                  - { name: label, label: Label, type: string }
-                  - { name: heading, label: Heading, type: string }
-                  - { name: text, label: Text, type: text }
-                  - { name: primaryLabel, label: Primary Button Label, type: string }
-                  - { name: primaryHref, label: Primary Link, type: string }
-                  - { name: secondaryLabel, label: Secondary Button Label, type: string }
-                  - { name: secondaryQuery, label: WhatsApp Query, type: text }
-          - name: phase2
-            label: Featured Phase 2 Section
-            type: object
-            fields:
-              - { name: eyebrow, label: Eyebrow, type: string }
-              - { name: heading, label: Heading, type: string }
-              - { name: text, label: Text, type: text }
-              - { name: primaryCta, label: Primary CTA, type: string }
-              - { name: primaryHref, label: Primary Link, type: string }
-              - { name: secondaryCta, label: Secondary CTA, type: string }
-              - { name: secondaryQuery, label: Secondary WhatsApp Query, type: text }
-              - name: masterPlan
-                label: Master Plan Block
-                type: object
-                fields:
-                  - { name: eyebrow, label: Eyebrow, type: string }
-                  - { name: heading, label: Heading, type: string }
-                  - { name: text, label: Text, type: text }
-                  - { name: image, label: Master Plan Image, type: image }
-                  - { name: alt, label: Image Alt Text, type: string }
-                  - { name: caption, label: Caption, type: string }
-                  - { name: pdf, label: Master Plan PDF, type: string }
-                  - { name: whatsappQuery, label: WhatsApp Query, type: text }
-              - { name: sectorsHeading, label: Sectors Heading, type: string }
-              - name: sectors
-                label: Phase 2 Sector Cards
-                type: object
-                list: true
-                fields:
-                  - { name: title, label: Title, type: string }
-                  - { name: href, label: Link, type: string }
-                  - { name: text, label: Text, type: text }
-              - name: sectorP
-                label: Sector P Feature
-                type: object
-                fields:
-                  - { name: image, label: Image, type: image }
-                  - { name: alt, label: Image Alt Text, type: string }
-                  - { name: eyebrow, label: Eyebrow, type: string }
-                  - { name: heading, label: Heading, type: string }
-                  - { name: text, label: Text, type: text }
-                  - name: facts
-                    label: Fact Boxes
-                    type: object
-                    list: true
-                    fields:
-                      - { name: value, label: Value, type: string }
-                      - { name: label, label: Label, type: string }
-                  - { name: primaryCta, label: Primary CTA, type: string }
-                  - { name: primaryHref, label: Primary Link, type: string }
-                  - { name: secondaryCta, label: Secondary CTA, type: string }
-                  - { name: secondaryQuery, label: Secondary WhatsApp Query, type: text }
-              - name: priceTable
-                label: Homepage Price Table
-                type: object
-                fields:
-                  - { name: eyebrow, label: Eyebrow, type: string }
-                  - { name: heading, label: Heading, type: string }
-                  - { name: text, label: Text, type: text }
-                  - { name: note, label: Buyer Note, type: text }
-                  - name: rows
-                    label: Price Rows
-                    type: object
-                    list: true
-                    fields:
-                      - { name: size, label: Plot Size, type: string }
-                      - { name: marla, label: Marla/Kanal, type: string }
-                      - { name: actual, label: Actual Price, type: string }
-                      - { name: discount, label: Discounted Price, type: string }
-              - name: sectorPlan
-                label: Sector P Plan
-                type: object
-                fields:
-                  - { name: eyebrow, label: Eyebrow, type: string }
-                  - { name: heading, label: Heading, type: string }
-                  - { name: text, label: Text, type: text }
-                  - { name: image, label: Plan Preview Image, type: image }
-                  - { name: alt, label: Image Alt Text, type: string }
-                  - { name: pdf, label: Plan PDF, type: string }
-                  - { name: whatsappQuery, label: WhatsApp Query, type: text }
-              - name: development
-                label: Development Block
-                type: object
-                fields:
-                  - { name: eyebrow, label: Eyebrow, type: string }
-                  - { name: heading, label: Heading, type: string }
-                  - { name: text, label: Text, type: text }
-                  - { name: cta, label: CTA Label, type: string }
-                  - { name: query, label: WhatsApp Query, type: text }
-                  - { name: image, label: Development Image, type: image }
-                  - { name: alt, label: Image Alt Text, type: string }
-                  - { name: caption, label: Caption, type: string }
-              - name: articleSlugs
-                label: Related Article Slugs
-                type: string
-                list: true
-                required: false
-          - name: phase1
-            label: Featured Phase 1 Section
-            type: object
-            fields:
-              - { name: eyebrow, label: Eyebrow, type: string }
-              - { name: heading, label: Heading, type: string }
-              - { name: text, label: Text, type: text }
-              - { name: primaryCta, label: Primary CTA, type: string }
-              - { name: primaryHref, label: Primary Link, type: string }
-              - { name: secondaryCta, label: Secondary CTA, type: string }
-              - { name: secondaryQuery, label: Secondary WhatsApp Query, type: text }
-              - name: blocks
-                label: Phase 1 Block Cards
-                type: object
-                list: true
-                fields:
-                  - { name: title, label: Title, type: string }
-                  - { name: href, label: Link, type: string }
-                  - { name: text, label: Text, type: text }
-              - { name: featureImage, label: Feature Image, type: image }
-              - { name: featureImageAlt, label: Feature Image Alt Text, type: string }
-              - { name: featureEyebrow, label: Feature Eyebrow, type: string }
-              - { name: featureHeading, label: Feature Heading, type: string }
-              - { name: featureText, label: Feature Text, type: text }
-              - { name: featureCta, label: Feature CTA, type: string }
-              - { name: featureQuery, label: Feature WhatsApp Query, type: text }
-              - name: articleSlugs
-                label: Related Article Slugs
-                type: string
-                list: true
-                required: false
-          - name: contact
-            label: Contact Section
-            type: object
-            fields:
-              - { name: eyebrow, label: Eyebrow, type: string }
-              - { name: heading, label: Heading, type: string }
-              - { name: text, label: Text, type: text }
-              - { name: mainQuery, label: Main WhatsApp Query, type: text }
-              - { name: leadLabel, label: Lead Box Label, type: string }
-              - { name: leadHeading, label: Lead Box Heading, type: string }
-              - name: options
-                label: WhatsApp Options
-                type: object
-                list: true
-                fields:
-                  - { name: label, label: Button Label, type: string }
-                  - { name: query, label: WhatsApp Query, type: text }
           - { name: updated, label: Updated Date, type: date }
           - { name: reviewed, label: Reviewed Date, type: date }
+        operations:
+          delete: false
+          rename: false
+
+      - name: homepage_project_choice
+        label: Homepage - Project Choice
+        type: file
+        path: src/content/homepage/project-choice.json
+        format: json
+        fields:
+          - { name: eyebrow, label: Eyebrow, type: string }
+          - { name: heading, label: Heading, type: string }
+          - { name: text, label: Text, type: text }
+          - name: cards
+            label: Project Choice Cards
+            type: object
+            list: true
+            fields:
+              - { name: label, label: Label, type: string }
+              - { name: heading, label: Heading, type: string }
+              - { name: text, label: Text, type: text }
+              - { name: primaryLabel, label: Primary Button Label, type: string }
+              - { name: primaryHref, label: Primary Link, type: string }
+              - { name: secondaryLabel, label: Secondary Button Label, type: string }
+              - { name: secondaryQuery, label: WhatsApp Query, type: text }
+        operations:
+          delete: false
+          rename: false
+
+      - name: homepage_phase_2
+        label: Homepage - Phase 2
+        type: file
+        path: src/content/homepage/phase-2.json
+        format: json
+        fields:
+          - { name: eyebrow, label: Eyebrow, type: string }
+          - { name: heading, label: Heading, type: string }
+          - { name: text, label: Text, type: text }
+          - { name: primaryCta, label: Primary CTA, type: string }
+          - { name: primaryHref, label: Primary Link, type: string }
+          - { name: secondaryCta, label: Secondary CTA, type: string }
+          - { name: secondaryQuery, label: Secondary WhatsApp Query, type: text }
+          - name: masterPlan
+            label: Master Plan Block
+            type: object
+            fields:
+              - { name: eyebrow, label: Eyebrow, type: string }
+              - { name: heading, label: Heading, type: string }
+              - { name: text, label: Text, type: text }
+              - { name: image, label: Master Plan Image, type: image }
+              - { name: alt, label: Image Alt Text, type: string }
+              - { name: caption, label: Caption, type: string }
+              - { name: pdf, label: Master Plan PDF, type: string }
+              - { name: whatsappQuery, label: WhatsApp Query, type: text }
+          - { name: sectorsHeading, label: Sectors Heading, type: string }
+          - name: sectors
+            label: Phase 2 Sector Cards
+            type: object
+            list: true
+            fields:
+              - { name: title, label: Title, type: string }
+              - { name: href, label: Link, type: string }
+              - { name: text, label: Text, type: text }
+          - name: sectorP
+            label: Sector P Feature
+            type: object
+            fields:
+              - { name: image, label: Image, type: image }
+              - { name: alt, label: Image Alt Text, type: string }
+              - { name: eyebrow, label: Eyebrow, type: string }
+              - { name: heading, label: Heading, type: string }
+              - { name: text, label: Text, type: text }
+              - name: facts
+                label: Fact Boxes
+                type: object
+                list: true
+                fields:
+                  - { name: value, label: Value, type: string }
+                  - { name: label, label: Label, type: string }
+              - { name: primaryCta, label: Primary CTA, type: string }
+              - { name: primaryHref, label: Primary Link, type: string }
+              - { name: secondaryCta, label: Secondary CTA, type: string }
+              - { name: secondaryQuery, label: Secondary WhatsApp Query, type: text }
+          - name: priceTable
+            label: Sector P Price Table
+            type: object
+            fields:
+              - { name: eyebrow, label: Eyebrow, type: string }
+              - { name: heading, label: Heading, type: string }
+              - { name: text, label: Text, type: text }
+              - { name: note, label: Buyer Note, type: text }
+              - name: rows
+                label: Price Rows
+                type: object
+                list: true
+                fields:
+                  - { name: size, label: Plot Size, type: string }
+                  - { name: marla, label: Marla/Kanal, type: string }
+                  - { name: actual, label: Actual Price, type: string }
+                  - { name: discount, label: Discounted Price, type: string }
+          - name: sectorPlan
+            label: Sector P Plan
+            type: object
+            fields:
+              - { name: eyebrow, label: Eyebrow, type: string }
+              - { name: heading, label: Heading, type: string }
+              - { name: text, label: Text, type: text }
+              - { name: image, label: Plan Preview Image, type: image }
+              - { name: alt, label: Image Alt Text, type: string }
+              - { name: pdf, label: Plan PDF, type: string }
+              - { name: whatsappQuery, label: WhatsApp Query, type: text }
+          - name: development
+            label: Development Block
+            type: object
+            fields:
+              - { name: eyebrow, label: Eyebrow, type: string }
+              - { name: heading, label: Heading, type: string }
+              - { name: text, label: Text, type: text }
+              - { name: cta, label: CTA Label, type: string }
+              - { name: query, label: WhatsApp Query, type: text }
+              - { name: image, label: Development Image, type: image }
+              - { name: alt, label: Image Alt Text, type: string }
+              - { name: caption, label: Caption, type: string }
+          - name: articleSlugs
+            label: Related Article Slugs
+            type: string
+            list: true
+            required: false
+        operations:
+          delete: false
+          rename: false
+
+      - name: homepage_phase_1
+        label: Homepage - Phase 1
+        type: file
+        path: src/content/homepage/phase-1.json
+        format: json
+        fields:
+          - { name: eyebrow, label: Eyebrow, type: string }
+          - { name: heading, label: Heading, type: string }
+          - { name: text, label: Text, type: text }
+          - { name: primaryCta, label: Primary CTA, type: string }
+          - { name: primaryHref, label: Primary Link, type: string }
+          - { name: secondaryCta, label: Secondary CTA, type: string }
+          - { name: secondaryQuery, label: Secondary WhatsApp Query, type: text }
+          - name: blocks
+            label: Phase 1 Block Cards
+            type: object
+            list: true
+            fields:
+              - { name: title, label: Title, type: string }
+              - { name: href, label: Link, type: string }
+              - { name: text, label: Text, type: text }
+          - { name: featureImage, label: Feature Image, type: image }
+          - { name: featureImageAlt, label: Feature Image Alt Text, type: string }
+          - { name: featureEyebrow, label: Feature Eyebrow, type: string }
+          - { name: featureHeading, label: Feature Heading, type: string }
+          - { name: featureText, label: Feature Text, type: text }
+          - { name: featureCta, label: Feature CTA, type: string }
+          - { name: featureQuery, label: Feature WhatsApp Query, type: text }
+          - name: articleSlugs
+            label: Related Article Slugs
+            type: string
+            list: true
+            required: false
+        operations:
+          delete: false
+          rename: false
+
+      - name: homepage_contact
+        label: Homepage - Contact
+        type: file
+        path: src/content/homepage/contact.json
+        format: json
+        fields:
+          - { name: eyebrow, label: Eyebrow, type: string }
+          - { name: heading, label: Heading, type: string }
+          - { name: text, label: Text, type: text }
+          - { name: mainQuery, label: Main WhatsApp Query, type: text }
+          - { name: leadLabel, label: Lead Box Label, type: string }
+          - { name: leadHeading, label: Lead Box Heading, type: string }
+          - name: options
+            label: WhatsApp Options
+            type: object
+            list: true
+            fields:
+              - { name: label, label: Button Label, type: string }
+              - { name: query, label: WhatsApp Query, type: text }
         operations:
           delete: false
           rename: false

@@ -1,0 +1,34 @@
+{
+  "seoTitle": "Faisal Town Islamabad - Phase 1 & Phase 2 Plots, Maps & Availability",
+  "metaDescription": "Explore the two Faisal Town Islamabad projects separately: Faisal Town Phase 2 / FT-II sectors, maps and prices, plus Faisal Town Phase 1 / F-18 blocks and current availability.",
+  "topStripLabel": "Faisal Town Islamabad",
+  "topStripText": "Phase 2 / FT-II and Phase 1 / F-18 property guidance with WhatsApp availability checks.",
+  "heroImage": "/assets/faisal-town-ii/hero-masterplan-preview.webp",
+  "heroImageAlt": "Faisal Town II master planned aerial view",
+  "heroEyebrow": "Faisal Town Islamabad Property Guide",
+  "h1": "Faisal Town Phase 2 & Phase 1 plots, maps and current availability",
+  "intro": "There are two Faisal Town project areas covered here: Faisal Town Phase 2 / FT-II and the established Faisal Town Phase 1 / F-18. Choose the project you are interested in, review its own sectors or blocks, then ask us on WhatsApp for current inventory and prices.",
+  "primaryCta": "Explore Faisal Town Phase 2",
+  "secondaryCta": "Explore Faisal Town Phase 1",
+  "whatsappCard": {
+    "label": "WhatsApp Property Inquiry",
+    "heading": "Ask for current options",
+    "text": "Choose the project and open a ready-made WhatsApp inquiry with your property requirement.",
+    "actions": [
+      {
+        "label": "Phase 2 Availability",
+        "query": "Send me current Faisal Town Phase 2 plot availability and prices"
+      },
+      {
+        "label": "Phase 1 Availability",
+        "query": "Send me current Faisal Town Phase 1 / F-18 property availability"
+      },
+      {
+        "label": "Help Me Choose",
+        "query": "Help me choose between Faisal Town Phase 2 and Phase 1 based on my budget"
+      }
+    ]
+  },
+  "updated": "2026-08-31",
+  "reviewed": "2026-08-31"
+}

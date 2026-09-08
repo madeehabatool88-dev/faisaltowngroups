@@ -1,0 +1,25 @@
+{
+  "eyebrow": "Choose Your Project",
+  "heading": "Start with one of the two Faisal Town projects.",
+  "text": "No mixed block and sector list. Each project below has its own property pages, map information and WhatsApp availability route.",
+  "cards": [
+    {
+      "label": "Faisal Town Phase 2 / FT-II",
+      "heading": "Newer sector-based project",
+      "text": "Sector O, P, R, S, T and Overseas Enclave, plus the 2026 Phase 2 master plan, development information and current plot guidance.",
+      "primaryLabel": "Explore Phase 2",
+      "primaryHref": "#phase-2",
+      "secondaryLabel": "WhatsApp Availability",
+      "secondaryQuery": "Check current Faisal Town Phase 2 availability"
+    },
+    {
+      "label": "Faisal Town Phase 1 / F-18",
+      "heading": "Established block-based project",
+      "text": "Block A, Block B and Block C with resale plots, houses, rentals, map guidance and current market availability.",
+      "primaryLabel": "Explore Phase 1",
+      "primaryHref": "#phase-1",
+      "secondaryLabel": "WhatsApp Availability",
+      "secondaryQuery": "Check current Faisal Town Phase 1 / F-18 availability"
+    }
+  ]
+}

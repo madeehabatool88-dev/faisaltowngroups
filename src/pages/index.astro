@@ -5,43 +5,47 @@ import SiteFooter from "../components/SiteFooter.astro";
 import MobileWhatsApp from "../components/MobileWhatsApp.astro";
 import { articles } from "../data/articles";
 import { site, whatsappLink } from "../data/site";
-import homepage from "../content/homepage.json";
+import hero from "../content/homepage/hero.json";
+import projectChoice from "../content/homepage/project-choice.json";
+import phase2 from "../content/homepage/phase-2.json";
+import phase1 from "../content/homepage/phase-1.json";
+import contact from "../content/homepage/contact.json";
 
 const phoneDisplay = site.phoneDisplay;
-const phase2Articles = articles.filter((article) => homepage.phase2.articleSlugs.includes(article.slug));
-const phase1Articles = articles.filter((article) => homepage.phase1.articleSlugs.includes(article.slug));
+const phase2Articles = articles.filter((article) => phase2.articleSlugs.includes(article.slug));
+const phase1Articles = articles.filter((article) => phase1.articleSlugs.includes(article.slug));
 ---
 
 <BaseLayout
-  title={homepage.seoTitle}
-  description={homepage.metaDescription}
+  title={hero.seoTitle}
+  description={hero.metaDescription}
 >
   <div class="top-strip">
-    <span>{homepage.topStripLabel}</span>
-    <strong>{homepage.topStripText}</strong>
+    <span>{hero.topStripLabel}</span>
+    <strong>{hero.topStripText}</strong>
   </div>
 
   <SiteHeader home={true} />
   <main id="top">
     <section class="hero home-hero">
-      <img class="hero-image" src={homepage.heroImage} alt={homepage.heroImageAlt} width="1440" height="810" fetchpriority="high" decoding="async" />
+      <img class="hero-image" src={hero.heroImage} alt={hero.heroImageAlt} width="1440" height="810" fetchpriority="high" decoding="async" />
       <div class="hero-overlay"></div>
       <div class="container hero-grid home-hero-grid">
         <div class="hero-copy">
-          <p class="section-label">{homepage.heroEyebrow}</p>
-          <h1>{homepage.h1}</h1>
-          <p>{homepage.intro}</p>
+          <p class="section-label">{hero.heroEyebrow}</p>
+          <h1>{hero.h1}</h1>
+          <p>{hero.intro}</p>
           <div class="hero-actions">
-            <a class="btn primary" href="#phase-2">{homepage.primaryCta}</a>
-            <a class="btn light" href="#phase-1">{homepage.secondaryCta}</a>
+            <a class="btn primary" href="#phase-2">{hero.primaryCta}</a>
+            <a class="btn light" href="#phase-1">{hero.secondaryCta}</a>
           </div>
         </div>
         <aside class="hero-card quick-whatsapp-card">
-          <span>{homepage.whatsappCard.label}</span>
-          <strong>{homepage.whatsappCard.heading}</strong>
-          <p>{homepage.whatsappCard.text}</p>
+          <span>{hero.whatsappCard.label}</span>
+          <strong>{hero.whatsappCard.heading}</strong>
+          <p>{hero.whatsappCard.text}</p>
           <div class="hero-card-actions compact-actions">
-            {homepage.whatsappCard.actions.map((action) => <a href={whatsappLink(action.query)}>{action.label}</a>)}
+            {hero.whatsappCard.actions.map((action) => <a href={whatsappLink(action.query)}>{action.label}</a>)}
           </div>
         </aside>
       </div>
@@ -49,12 +53,12 @@ const phase1Articles = articles.filter((article) => homepage.phase1.articleSlugs
 
     <section class="section project-choice" id="availability">
       <div class="section-intro compact-intro">
-        <p class="section-label">{homepage.projectChoice.eyebrow}</p>
-        <h2>{homepage.projectChoice.heading}</h2>
-        <p>{homepage.projectChoice.text}</p>
+        <p class="section-label">{projectChoice.eyebrow}</p>
+        <h2>{projectChoice.heading}</h2>
+        <p>{projectChoice.text}</p>
       </div>
       <div class="project-choice-grid">
-        {homepage.projectChoice.cards.map((card) => <article class="project-choice-card">
+        {projectChoice.cards.map((card) => <article class="project-choice-card">
           <span>{card.label}</span>
           <h3>{card.heading}</h3>
           <p>{card.text}</p>
@@ -69,38 +73,38 @@ const phase1Articles = articles.filter((article) => homepage.phase1.articleSlugs
     <section class="project-zone phase2-zone" id="phase-2">
       <div class="section project-zone-inner">
         <div class="section-intro project-heading">
-          <p class="section-label">{homepage.phase2.eyebrow}</p>
-          <h2>{homepage.phase2.heading}</h2>
-          <p>{homepage.phase2.text}</p>
+          <p class="section-label">{phase2.eyebrow}</p>
+          <h2>{phase2.heading}</h2>
+          <p>{phase2.text}</p>
           <div class="button-row">
-            <a class="btn primary" href={homepage.phase2.primaryHref}>{homepage.phase2.primaryCta}</a>
-            <a class="btn outline" href={whatsappLink(homepage.phase2.secondaryQuery)}>{homepage.phase2.secondaryCta}</a>
+            <a class="btn primary" href={phase2.primaryHref}>{phase2.primaryCta}</a>
+            <a class="btn outline" href={whatsappLink(phase2.secondaryQuery)}>{phase2.secondaryCta}</a>
           </div>
         </div>
 
         <div class="subsection phase2-master-top" id="master-plan">
           <div class="phase2-master-copy">
-            <p class="section-label">{homepage.phase2.masterPlan.eyebrow}</p>
-            <h3>{homepage.phase2.masterPlan.heading}</h3>
-            <p>{homepage.phase2.masterPlan.text}</p>
+            <p class="section-label">{phase2.masterPlan.eyebrow}</p>
+            <h3>{phase2.masterPlan.heading}</h3>
+            <p>{phase2.masterPlan.text}</p>
             <div class="button-row">
-              <a class="btn primary" href={homepage.phase2.masterPlan.pdf} target="_blank" rel="noreferrer">Open Full Master Plan</a>
-              <a class="btn outline" href={whatsappLink(homepage.phase2.masterPlan.whatsappQuery)}>Ask for Map Guidance</a>
+              <a class="btn primary" href={phase2.masterPlan.pdf} target="_blank" rel="noreferrer">Open Full Master Plan</a>
+              <a class="btn outline" href={whatsappLink(phase2.masterPlan.whatsappQuery)}>Ask for Map Guidance</a>
             </div>
           </div>
           <figure class="phase2-master-preview">
-            <img src={homepage.phase2.masterPlan.image} alt={homepage.phase2.masterPlan.alt} loading="lazy" />
-            <figcaption>{homepage.phase2.masterPlan.caption}</figcaption>
+            <img src={phase2.masterPlan.image} alt={phase2.masterPlan.alt} loading="lazy" />
+            <figcaption>{phase2.masterPlan.caption}</figcaption>
           </figure>
         </div>
 
         <div class="subsection" id="phase-2-sectors">
           <div class="subsection-heading">
             <p class="section-label">Phase 2 Sectors</p>
-            <h3>{homepage.phase2.sectorsHeading}</h3>
+            <h3>{phase2.sectorsHeading}</h3>
           </div>
           <div class="block-grid sector-grid-clean">
-            {homepage.phase2.sectors.map((sector) => (
+            {phase2.sectors.map((sector) => (
               <article>
                 <span>{sector.title}</span>
                 <p>{sector.text}</p>
@@ -112,30 +116,30 @@ const phase1Articles = articles.filter((article) => homepage.phase1.articleSlugs
 
         <div class="sector section-inline" id="sector-p">
           <div class="sector-media">
-            <img src={homepage.phase2.sectorP.image} alt={homepage.phase2.sectorP.alt} loading="lazy" />
+            <img src={phase2.sectorP.image} alt={phase2.sectorP.alt} loading="lazy" />
           </div>
           <div class="sector-copy">
-            <p class="section-label">{homepage.phase2.sectorP.eyebrow}</p>
-            <h2>{homepage.phase2.sectorP.heading}</h2>
-            <p>{homepage.phase2.sectorP.text}</p>
+            <p class="section-label">{phase2.sectorP.eyebrow}</p>
+            <h2>{phase2.sectorP.heading}</h2>
+            <p>{phase2.sectorP.text}</p>
             <div class="sector-facts">
-              {homepage.phase2.sectorP.facts.map((fact) => <div><strong>{fact.value}</strong><span>{fact.label}</span></div>)}
+              {phase2.sectorP.facts.map((fact) => <div><strong>{fact.value}</strong><span>{fact.label}</span></div>)}
             </div>
             <div class="button-row">
-              <a class="btn primary" href={homepage.phase2.sectorP.primaryHref}>{homepage.phase2.sectorP.primaryCta}</a>
-              <a class="btn outline" href={whatsappLink(homepage.phase2.sectorP.secondaryQuery)}>{homepage.phase2.sectorP.secondaryCta}</a>
+              <a class="btn primary" href={phase2.sectorP.primaryHref}>{phase2.sectorP.primaryCta}</a>
+              <a class="btn outline" href={whatsappLink(phase2.sectorP.secondaryQuery)}>{phase2.sectorP.secondaryCta}</a>
             </div>
           </div>
         </div>
 
         <div class="subsection sector-p-pricing" id="prices">
           <div class="section-intro compact-intro">
-            <p class="section-label">{homepage.phase2.priceTable.eyebrow}</p>
-            <h2>{homepage.phase2.priceTable.heading}</h2>
-            <p>{homepage.phase2.priceTable.text}</p>
+            <p class="section-label">{phase2.priceTable.eyebrow}</p>
+            <h2>{phase2.priceTable.heading}</h2>
+            <p>{phase2.priceTable.text}</p>
           </div>
           <div class="price-grid">
-            {homepage.phase2.priceTable.rows.map((row) => (
+            {phase2.priceTable.rows.map((row) => (
               <article class="price-tile">
                 <div><span>{row.marla}</span><h3>{row.size}</h3></div>
                 <dl>
@@ -146,37 +150,37 @@ const phase1Articles = articles.filter((article) => homepage.phase1.articleSlugs
               </article>
             ))}
           </div>
-          <p class="risk-note">{homepage.phase2.priceTable.note}</p>
+          <p class="risk-note">{phase2.priceTable.note}</p>
         </div>
 
         <div class="subsection sector-p-plan">
           <div class="section-intro compact-intro">
-            <p class="section-label">{homepage.phase2.sectorPlan.eyebrow}</p>
-            <h2>{homepage.phase2.sectorPlan.heading}</h2>
-            <p>{homepage.phase2.sectorPlan.text}</p>
+            <p class="section-label">{phase2.sectorPlan.eyebrow}</p>
+            <h2>{phase2.sectorPlan.heading}</h2>
+            <p>{phase2.sectorPlan.text}</p>
           </div>
           <figure class="master-plan-open">
             <div class="master-plan-scroll">
-              <img src={homepage.phase2.sectorPlan.image} alt={homepage.phase2.sectorPlan.alt} loading="lazy" />
+              <img src={phase2.sectorPlan.image} alt={phase2.sectorPlan.alt} loading="lazy" />
             </div>
             <div class="plan-download-row">
-              <a class="btn primary" href={homepage.phase2.sectorPlan.pdf} target="_blank" rel="noreferrer">Download Sector P PDF</a>
+              <a class="btn primary" href={phase2.sectorPlan.pdf} target="_blank" rel="noreferrer">Download Sector P PDF</a>
               <a class="btn outline" href="/faisal-town-p-block/">Open Sector P Guide</a>
-              <a class="btn outline" href={whatsappLink(homepage.phase2.sectorPlan.whatsappQuery)}>Ask About a Plot</a>
+              <a class="btn outline" href={whatsappLink(phase2.sectorPlan.whatsappQuery)}>Ask About a Plot</a>
             </div>
           </figure>
         </div>
 
         <div class="subsection development-clean">
           <div class="development-copy">
-            <p class="section-label">{homepage.phase2.development.eyebrow}</p>
-            <h2>{homepage.phase2.development.heading}</h2>
-            <p>{homepage.phase2.development.text}</p>
-            <a class="btn development-whatsapp" href={whatsappLink(homepage.phase2.development.query)}>{homepage.phase2.development.cta}</a>
+            <p class="section-label">{phase2.development.eyebrow}</p>
+            <h2>{phase2.development.heading}</h2>
+            <p>{phase2.development.text}</p>
+            <a class="btn development-whatsapp" href={whatsappLink(phase2.development.query)}>{phase2.development.cta}</a>
           </div>
           <figure class="development-visual">
-            <img src={homepage.phase2.development.image} alt={homepage.phase2.development.alt} loading="lazy" />
-            <figcaption>{homepage.phase2.development.caption}</figcaption>
+            <img src={phase2.development.image} alt={phase2.development.alt} loading="lazy" />
+            <figcaption>{phase2.development.caption}</figcaption>
           </figure>
         </div>
 
@@ -206,17 +210,17 @@ const phase1Articles = articles.filter((article) => homepage.phase1.articleSlugs
     <section class="project-zone phase1-zone" id="phase-1">
       <div class="section project-zone-inner">
         <div class="section-intro project-heading">
-          <p class="section-label">{homepage.phase1.eyebrow}</p>
-          <h2>{homepage.phase1.heading}</h2>
-          <p>{homepage.phase1.text}</p>
+          <p class="section-label">{phase1.eyebrow}</p>
+          <h2>{phase1.heading}</h2>
+          <p>{phase1.text}</p>
           <div class="button-row">
-            <a class="btn primary" href={homepage.phase1.primaryHref}>{homepage.phase1.primaryCta}</a>
-            <a class="btn outline" href={whatsappLink(homepage.phase1.secondaryQuery)}>{homepage.phase1.secondaryCta}</a>
+            <a class="btn primary" href={phase1.primaryHref}>{phase1.primaryCta}</a>
+            <a class="btn outline" href={whatsappLink(phase1.secondaryQuery)}>{phase1.secondaryCta}</a>
           </div>
         </div>
 
         <div class="block-grid phase1-block-grid">
-          {homepage.phase1.blocks.map((block) => (
+          {phase1.blocks.map((block) => (
             <article>
               <span>Phase 1 / F-18 - {block.title}</span>
               <p>{block.text}</p>
@@ -226,12 +230,12 @@ const phase1Articles = articles.filter((article) => homepage.phase1.articleSlugs
         </div>
 
         <div class="phase1-feature">
-          <img src={homepage.phase1.featureImage} alt={homepage.phase1.featureImageAlt} loading="lazy" />
+          <img src={phase1.featureImage} alt={phase1.featureImageAlt} loading="lazy" />
           <div>
-            <p class="section-label">{homepage.phase1.featureEyebrow}</p>
-            <h3>{homepage.phase1.featureHeading}</h3>
-            <p>{homepage.phase1.featureText}</p>
-            <a class="btn primary" href={whatsappLink(homepage.phase1.featureQuery)}>{homepage.phase1.featureCta}</a>
+            <p class="section-label">{phase1.featureEyebrow}</p>
+            <h3>{phase1.featureHeading}</h3>
+            <p>{phase1.featureText}</p>
+            <a class="btn primary" href={whatsappLink(phase1.featureQuery)}>{phase1.featureCta}</a>
           </div>
         </div>
 
@@ -260,17 +264,17 @@ const phase1Articles = articles.filter((article) => homepage.phase1.articleSlugs
     <section class="contact" id="contact">
       <div class="container contact-grid">
         <div>
-          <p class="section-label">{homepage.contact.eyebrow}</p>
-          <h2>{homepage.contact.heading}</h2>
-          <p>{homepage.contact.text}</p>
+          <p class="section-label">{contact.eyebrow}</p>
+          <h2>{contact.heading}</h2>
+          <p>{contact.text}</p>
           <div class="contact-links">
-            <a href={whatsappLink(homepage.contact.mainQuery)}>WhatsApp: {phoneDisplay}</a>
+            <a href={whatsappLink(contact.mainQuery)}>WhatsApp: {phoneDisplay}</a>
           </div>
         </div>
         <div class="lead-options">
-          <span>{homepage.contact.leadLabel}</span>
-          <h3>{homepage.contact.leadHeading}</h3>
-          {homepage.contact.options.map((option, index) => (
+          <span>{contact.leadLabel}</span>
+          <h3>{contact.leadHeading}</h3>
+          {contact.options.map((option, index) => (
             <a class={index === 0 ? "btn primary" : "btn outline"} href={whatsappLink(option.query)}>{option.label}</a>
           ))}
         </div>
@@ -353,3 +357,4 @@ const phase1Articles = articles.filter((article) => homepage.phase1.articleSlugs
     }
   </style>
 </BaseLayout>
+

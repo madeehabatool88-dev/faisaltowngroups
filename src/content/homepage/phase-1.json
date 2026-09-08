@@ -1,0 +1,37 @@
+{
+  "eyebrow": "Faisal Town Phase 1 / F-18",
+  "heading": "Faisal Town Phase 1 blocks and related buyer guides",
+  "text": "Phase 1 is the established F-18 project. Its Block A, Block B and Block C content is kept together here and does not share the Phase 2 sector structure.",
+  "primaryCta": "Open Full Phase 1 Guide",
+  "primaryHref": "/faisal-town-phase-1/",
+  "secondaryCta": "Ask Phase 1 Availability",
+  "secondaryQuery": "I want current Faisal Town Phase 1 Block A, B or C availability",
+  "blocks": [
+    {
+      "title": "Block A",
+      "href": "/faisal-town-block-a/",
+      "text": "Established Phase 1 / F-18 block with resale plot, house and map guidance."
+    },
+    {
+      "title": "Block B",
+      "href": "/faisal-town-block-b/",
+      "text": "Popular Phase 1 / F-18 block for plots, map position and current resale availability."
+    },
+    {
+      "title": "Block C",
+      "href": "/faisal-town-block-c/",
+      "text": "Established Phase 1 / F-18 block for plots, houses and location options."
+    }
+  ],
+  "featureImage": "/assets/faisal-town-phase-1.jpg",
+  "featureImageAlt": "Faisal Town Phase 1 F-18",
+  "featureEyebrow": "Phase 1 Property Search",
+  "featureHeading": "Looking for a resale plot, house or rental in F-18?",
+  "featureText": "Tell us the block, property type and budget on WhatsApp. We can help you check current Phase 1 / F-18 options without mixing them with Phase 2 inventory.",
+  "featureCta": "Start Phase 1 WhatsApp Inquiry",
+  "featureQuery": "I am looking for a Faisal Town Phase 1 / F-18 property. Please send current options",
+  "articleSlugs": [
+    "faisal-town-phase-1-and-faisal-hills",
+    "faisal-town-living"
+  ]
+}
