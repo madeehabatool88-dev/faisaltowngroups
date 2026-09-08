@@ -13,13 +13,14 @@ export type Article = {
   image: string;
   readTime: string;
   relatedSlugs?: string[];
+  body?: string;
   cta?: {
     label: string;
     heading: string;
     message: string;
     button: string;
   };
-  sections: Array<{
+  sections?: Array<{
     heading: string;
     paragraphs: string[];
     bullets?: string[];

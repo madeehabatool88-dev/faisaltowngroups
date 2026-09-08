@@ -43,6 +43,62 @@ const escapeHtml = (value: string) =>
 const renderInline = (value: string) =>
   escapeHtml(value).replace(/\[([^\]]+)\]\((\/[^)]+)\)/g, '<a href="$2">$1</a>');
 
+const renderArticleBody = (body: string) => {
+  const html: string[] = [];
+  const paragraphLines: string[] = [];
+  const listItems: string[] = [];
+
+  const flushParagraph = () => {
+    if (paragraphLines.length === 0) return;
+    html.push(`<p>${renderInline(paragraphLines.join(" "))}</p>`);
+    paragraphLines.length = 0;
+  };
+
+  const flushList = () => {
+    if (listItems.length === 0) return;
+    html.push(`<ul class="article-list">${listItems.map((item) => `<li>${renderInline(item)}</li>`).join("")}</ul>`);
+    listItems.length = 0;
+  };
+
+  for (const rawLine of body.replace(/\r\n/g, "\n").split("\n")) {
+    const line = rawLine.trim();
+
+    if (!line) {
+      flushParagraph();
+      flushList();
+      continue;
+    }
+
+    if (line.startsWith("## ")) {
+      flushParagraph();
+      flushList();
+      html.push(`<h2>${renderInline(line.slice(3).trim())}</h2>`);
+      continue;
+    }
+
+    if (line.startsWith("> ")) {
+      flushParagraph();
+      flushList();
+      html.push(`<aside class="article-callout">${renderInline(line.slice(2).trim())}</aside>`);
+      continue;
+    }
+
+    if (line.startsWith("- ")) {
+      flushParagraph();
+      listItems.push(line.slice(2).trim());
+      continue;
+    }
+
+    flushList();
+    paragraphLines.push(line);
+  }
+
+  flushParagraph();
+  flushList();
+
+  return html.join("");
+};
+
 const articleSchema = {
   "@type": "Article",
   "@id": `${domain}/articles/${article.slug}/#article`,
@@ -91,23 +147,27 @@ const breadcrumbSchema = {
       <span>{article.category}</span>
     </div>
     <img class="article-hero-image" src={article.image} alt={article.title} width={img?.width} height={img?.height} loading="eager" fetchpriority="high" decoding="async" />
-    {article.sections.map((section) => (
-      <section>
-        <h2>{section.heading}</h2>
-        {section.paragraphs.map((paragraph) => <p set:html={renderInline(paragraph)} />)}
-        {section.bullets && (
-          <ul class="article-list">
-            {section.bullets.map((item) => <li>{item}</li>)}
-          </ul>
-        )}
-        {section.callout && <aside class="article-callout">{section.callout}</aside>}
-        {section.links && (
-          <div class="article-context-links" aria-label={`Useful links for ${section.heading}`}>
-            {section.links.map((link) => <a href={link.href}>{link.label}</a>)}
-          </div>
-        )}
-      </section>
-    ))}
+    {article.body ? (
+      <div set:html={renderArticleBody(article.body)} />
+    ) : (
+      article.sections?.map((section) => (
+        <section>
+          <h2>{section.heading}</h2>
+          {section.paragraphs.map((paragraph) => <p set:html={renderInline(paragraph)} />)}
+          {section.bullets && (
+            <ul class="article-list">
+              {section.bullets.map((item) => <li>{item}</li>)}
+            </ul>
+          )}
+          {section.callout && <aside class="article-callout">{section.callout}</aside>}
+          {section.links && (
+            <div class="article-context-links" aria-label={`Useful links for ${section.heading}`}>
+              {section.links.map((link) => <a href={link.href}>{link.label}</a>)}
+            </div>
+          )}
+        </section>
+      ))
+    )}
     {article.faqs && (
       <section>
         <h2>Quick Questions</h2>

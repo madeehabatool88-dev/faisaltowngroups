@@ -454,6 +454,10 @@ content:
       - { name: reviewed, label: Reviewed Date, type: string, required: false }
       - { name: image, label: Featured Image, type: image }
       - { name: readTime, label: Read Time, type: string }
+      - name: body
+        label: Full Article Body
+        type: text
+        description: Edit the full article in one place. Use ## for section headings, - for bullet points, and > for highlighted notes.
       - name: relatedSlugs
         label: Related Article Slugs
         type: string
@@ -468,30 +472,6 @@ content:
           - { name: heading, label: Heading, type: string }
           - { name: message, label: WhatsApp Message, type: text }
           - { name: button, label: Button Label, type: string }
-      - name: sections
-        label: Body Sections
-        type: object
-        list: true
-        fields:
-          - { name: heading, label: Heading, type: string }
-          - name: paragraphs
-            label: Paragraphs
-            type: text
-            list: true
-          - name: bullets
-            label: Bullets
-            type: text
-            list: true
-            required: false
-          - { name: callout, label: Callout, type: text, required: false }
-          - name: links
-            label: Section Links
-            type: object
-            list: true
-            required: false
-            fields:
-              - { name: label, label: Anchor Text, type: string }
-              - { name: href, label: URL, type: string }
       - name: faqs
         label: FAQs
         type: object

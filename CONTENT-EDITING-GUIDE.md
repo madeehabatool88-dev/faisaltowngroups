@@ -72,12 +72,20 @@ Important fields:
 - SEO Title and Meta Description: search result text.
 - Category: choose the closest topic from the dropdown.
 - Cluster: choose the broader SEO group from the dropdown.
+- Full Article Body: edit or paste the whole article in one place.
 - Related Article Slugs: add one related article slug per row.
-- Body Sections: article content.
 - FAQs: optional article FAQs.
 - Article CTA: the WhatsApp lead box inside the article.
 
 Related article slugs should be simple slugs only, for example `faisal-town-ii-master-plan`.
+
+Full Article Body supports simple formatting:
+
+- Use `## Heading` for article section headings.
+- Use a blank line between paragraphs.
+- Use `- Bullet point` for bullet lists.
+- Use `> Important note` for a highlighted note.
+- Use `[link text](/page-url/)` for internal links.
 
 ## Legal Pages
 
