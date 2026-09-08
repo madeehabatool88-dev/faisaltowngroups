@@ -1,0 +1,19 @@
+{
+  "title": "Privacy Policy - FaisalTown Groups",
+  "description": "Privacy policy for FaisalTownGroups.com, explaining how property inquiries and WhatsApp messages may be handled.",
+  "eyebrow": "Privacy",
+  "heading": "Privacy Policy",
+  "subheading": "How we handle inquiry details, contact information, and buyer communication submitted through FaisalTownGroups.com.",
+  "updated": "2026-08-31",
+  "sections": [
+    { "heading": "Information We Collect", "paragraphs": ["When you contact FaisalTown Groups through WhatsApp, we may receive your name, WhatsApp number, preferred plot size, budget, buying timeframe, message details, and other information you choose to share for property consultation."] },
+    { "heading": "How We Use Information", "paragraphs": ["We use inquiry information to respond to your request, share project details, arrange site visits, provide price-plan guidance, explain booking steps, and follow up on your property interest."] },
+    { "heading": "WhatsApp Inquiries", "paragraphs": ["Property inquiries from this website are directed to WhatsApp. WhatsApp links may open a pre-filled message containing this website address and the property question or requirement you selected."] },
+    { "heading": "Sharing of Information", "paragraphs": ["We may share your inquiry details with relevant sales or support persons only when needed to handle your request. We do not sell your personal details as a separate database."] },
+    { "heading": "Cookies and Analytics", "paragraphs": ["This website may use analytics, hosting logs, or advertising tools in the future to understand visitor behavior and improve marketing performance. These tools may collect browser, device, and page-visit information."] },
+    { "heading": "Data Accuracy", "paragraphs": ["Property availability, prices, development status, routes, and payment procedures can change. We use your contact details to help verify current information before you make a decision."] },
+    { "heading": "Your Choices", "paragraphs": ["You may ask us to stop contacting you or update your inquiry details through WhatsApp.", "For project information, return to the Faisal Town Islamabad homepage, review Faisal Town Phase 2, or message us through WhatsApp from the homepage."] }
+  ],
+  "ctaLabel": "Ask on WhatsApp",
+  "ctaQuery": "I have a privacy policy question"
+}

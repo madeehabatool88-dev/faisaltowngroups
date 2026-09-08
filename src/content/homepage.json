@@ -1,0 +1,174 @@
+{
+  "seoTitle": "Faisal Town Islamabad - Phase 1 & Phase 2 Plots, Maps & Availability",
+  "metaDescription": "Explore the two Faisal Town Islamabad projects separately: Faisal Town Phase 2 / FT-II sectors, maps and prices, plus Faisal Town Phase 1 / F-18 blocks and current availability.",
+  "topStripLabel": "Faisal Town Islamabad",
+  "topStripText": "Phase 2 / FT-II and Phase 1 / F-18 property guidance with WhatsApp availability checks.",
+  "heroImage": "/assets/faisal-town-ii/hero-masterplan-preview.webp",
+  "heroImageAlt": "Faisal Town II master planned aerial view",
+  "heroEyebrow": "Faisal Town Islamabad Property Guide",
+  "h1": "Faisal Town Phase 2 & Phase 1 plots, maps and current availability",
+  "intro": "There are two Faisal Town project areas covered here: Faisal Town Phase 2 / FT-II and the established Faisal Town Phase 1 / F-18. Choose the project you are interested in, review its own sectors or blocks, then ask us on WhatsApp for current inventory and prices.",
+  "primaryCta": "Explore Faisal Town Phase 2",
+  "secondaryCta": "Explore Faisal Town Phase 1",
+  "whatsappCard": {
+    "label": "WhatsApp Property Inquiry",
+    "heading": "Ask for current options",
+    "text": "Choose the project and open a ready-made WhatsApp inquiry with your property requirement.",
+    "actions": [
+      { "label": "Phase 2 Availability", "query": "Send me current Faisal Town Phase 2 plot availability and prices" },
+      { "label": "Phase 1 Availability", "query": "Send me current Faisal Town Phase 1 / F-18 property availability" },
+      { "label": "Help Me Choose", "query": "Help me choose between Faisal Town Phase 2 and Phase 1 based on my budget" }
+    ]
+  },
+  "projectChoice": {
+    "eyebrow": "Choose Your Project",
+    "heading": "Start with one of the two Faisal Town projects.",
+    "text": "No mixed block and sector list. Each project below has its own property pages, map information and WhatsApp availability route.",
+    "cards": [
+      {
+        "label": "Faisal Town Phase 2 / FT-II",
+        "heading": "Newer sector-based project",
+        "text": "Sector O, P, R, S, T and Overseas Enclave, plus the 2026 Phase 2 master plan, development information and current plot guidance.",
+        "primaryLabel": "Explore Phase 2",
+        "primaryHref": "#phase-2",
+        "secondaryLabel": "WhatsApp Availability",
+        "secondaryQuery": "Check current Faisal Town Phase 2 availability"
+      },
+      {
+        "label": "Faisal Town Phase 1 / F-18",
+        "heading": "Established block-based project",
+        "text": "Block A, Block B and Block C with resale plots, houses, rentals, map guidance and current market availability.",
+        "primaryLabel": "Explore Phase 1",
+        "primaryHref": "#phase-1",
+        "secondaryLabel": "WhatsApp Availability",
+        "secondaryQuery": "Check current Faisal Town Phase 1 / F-18 availability"
+      }
+    ]
+  },
+  "phase2": {
+    "eyebrow": "Faisal Town Phase 2 / FT-II",
+    "heading": "Faisal Town Phase 2 sectors, master plan, prices and buyer guides",
+    "text": "This entire section belongs to Faisal Town Phase 2. Use it to review the correct sector, current Phase 2 map information and related buyer guides before asking for live availability.",
+    "primaryCta": "Open Full Phase 2 Guide",
+    "primaryHref": "/faisal-town-phase-2/",
+    "secondaryCta": "Ask on WhatsApp",
+    "secondaryQuery": "I want current Faisal Town Phase 2 plots, prices and availability",
+    "masterPlan": {
+      "eyebrow": "Faisal Town Phase 2 Master Plan",
+      "heading": "See the full Phase 2 layout before choosing a sector.",
+      "text": "The 2026 Faisal Town-II master plan is the project-wide reference for Sector O, P, R, S, T and Overseas Enclave. Sector-specific plans stay inside their own sector sections.",
+      "image": "/assets/faisal-town-ii/faisal-town-phase-2-master-plan-preview.webp",
+      "alt": "Full Faisal Town Phase 2 master plan",
+      "caption": "2026 Faisal Town-II / Phase 2 master plan",
+      "pdf": "/assets/faisal-town-ii/faisal-town-phase-2-master-plan.pdf",
+      "whatsappQuery": "Use the Faisal Town Phase 2 master plan to help me shortlist a sector"
+    },
+    "sectorsHeading": "Choose the Faisal Town Phase 2 area you want to review.",
+    "sectors": [
+      { "title": "Sector O / Model Block", "href": "/faisal-town-o-block/", "text": "Sector O map, plot and current availability guidance." },
+      { "title": "Sector P / The Caladan", "href": "/faisal-town-p-block/", "text": "Current full-payment prices, plot sizes, Sector P plan and availability." },
+      { "title": "Sector R", "href": "/faisal-town-r-block/", "text": "Sector R plot, map and availability guidance." },
+      { "title": "Sector S", "href": "/faisal-town-sector-s/", "text": "Dedicated Sector S plan and current inventory checks." },
+      { "title": "Sector T", "href": "/faisal-town-sector-t/", "text": "Sector T plan, location and current payment/availability guidance." },
+      { "title": "Overseas Enclave 05", "href": "/faisal-town-overseas-block/", "text": "Dedicated Overseas Enclave guidance for local and overseas buyers." }
+    ],
+    "sectorP": {
+      "image": "/assets/sector-p/caladan-sector-p.jpeg",
+      "alt": "The Caladan Sector P in Faisal Town Phase 2",
+      "eyebrow": "Phase 2 - Sector P / The Caladan",
+      "heading": "Sector P plots from PKR 3.59 million",
+      "text": "Sector P is a specific Faisal Town Phase 2 opportunity. Its price table and Sector P plan are kept here inside the Sector P subsection so they are not confused with the general Phase 2 master plan or other sectors.",
+      "facts": [
+        { "value": "From PKR 3.59M", "label": "full-payment discounted price" },
+        { "value": "5.56 Marla - 2 Kanal", "label": "listed residential sizes" },
+        { "value": "PKR 20,000", "label": "listed registration fee" },
+        { "value": "WhatsApp", "label": "current availability verification" }
+      ],
+      "primaryCta": "Open Sector P Page",
+      "primaryHref": "/faisal-town-p-block/",
+      "secondaryCta": "Check Sector P Availability",
+      "secondaryQuery": "Check current Sector P plot numbers, prices and total payable amount"
+    },
+    "priceTable": {
+      "eyebrow": "Sector P Price Plan",
+      "heading": "Sector P plot sizes and current listed full-payment prices",
+      "text": "Prices last reviewed: 6 August 2026. These prices are shown only under Sector P because they do not represent every Faisal Town Phase 2 sector.",
+      "note": "Sector P prices and availability can change. Verify the exact plot, total payable amount, special location charges, documents and payment instructions before making any payment.",
+      "rows": [
+        { "size": "25 x 50", "marla": "5.56 Marla", "actual": "4,490,000", "discount": "3,590,000" },
+        { "size": "30 x 60", "marla": "8 Marla", "actual": "6,250,000", "discount": "4,990,000" },
+        { "size": "35 x 70", "marla": "10.89 Marla", "actual": "8,240,000", "discount": "6,590,000" },
+        { "size": "40 x 80", "marla": "14.22 Marla", "actual": "10,440,000", "discount": "8,350,000" },
+        { "size": "50 x 90", "marla": "1 Kanal", "actual": "14,150,000", "discount": "11,290,000" },
+        { "size": "75 x 120", "marla": "2 Kanal", "actual": "27,280,000", "discount": "21,790,000" },
+        { "size": "80 x 120", "marla": "2 Kanal", "actual": "29,090,000", "discount": "23,270,000" }
+      ]
+    },
+    "sectorPlan": {
+      "eyebrow": "Sector P Plan",
+      "heading": "Sector P plan",
+      "text": "This is the Sector P-specific plan. It is intentionally kept with the Sector P content instead of being mixed into the general Phase 2 master-plan section.",
+      "image": "/assets/sector-p/rendered/sector-p-masterplan-preview.webp",
+      "alt": "Sector P Faisal Town Phase 2 plan",
+      "pdf": "/assets/plans/sector-p-ft-ii.pdf",
+      "whatsappQuery": "Guide me using the Sector P plan and current available plots"
+    },
+    "development": {
+      "eyebrow": "Phase 2 Development",
+      "heading": "See current development before you shortlist a plot.",
+      "text": "Development changes by sector and street. Use the latest visual update as a starting point, then confirm the exact location through a current site visit or WhatsApp walkthrough.",
+      "cta": "Get Latest Development Update",
+      "query": "Send me the latest Faisal Town Phase 2 development update and help me arrange a site visit",
+      "image": "/assets/faisal-town-ii/phase2-work-progress.jpeg",
+      "alt": "Current Faisal Town Phase 2 development work",
+      "caption": "Recent Phase 2 development reference - verify the exact sector before deciding."
+    },
+    "articleSlugs": [
+      "faisal-town-ii-sector-p-guide",
+      "faisal-town-ii-master-plan",
+      "sector-p-prices-explained",
+      "living-near-rawalpindi-ring-road",
+      "new-islamabad-living-guide"
+    ]
+  },
+  "phase1": {
+    "eyebrow": "Faisal Town Phase 1 / F-18",
+    "heading": "Faisal Town Phase 1 blocks and related buyer guides",
+    "text": "Phase 1 is the established F-18 project. Its Block A, Block B and Block C content is kept together here and does not share the Phase 2 sector structure.",
+    "primaryCta": "Open Full Phase 1 Guide",
+    "primaryHref": "/faisal-town-phase-1/",
+    "secondaryCta": "Ask Phase 1 Availability",
+    "secondaryQuery": "I want current Faisal Town Phase 1 Block A, B or C availability",
+    "blocks": [
+      { "title": "Block A", "href": "/faisal-town-block-a/", "text": "Established Phase 1 / F-18 block with resale plot, house and map guidance." },
+      { "title": "Block B", "href": "/faisal-town-block-b/", "text": "Popular Phase 1 / F-18 block for plots, map position and current resale availability." },
+      { "title": "Block C", "href": "/faisal-town-block-c/", "text": "Established Phase 1 / F-18 block for plots, houses and location options." }
+    ],
+    "featureImage": "/assets/faisal-town-phase-1.jpg",
+    "featureImageAlt": "Faisal Town Phase 1 F-18",
+    "featureEyebrow": "Phase 1 Property Search",
+    "featureHeading": "Looking for a resale plot, house or rental in F-18?",
+    "featureText": "Tell us the block, property type and budget on WhatsApp. We can help you check current Phase 1 / F-18 options without mixing them with Phase 2 inventory.",
+    "featureCta": "Start Phase 1 WhatsApp Inquiry",
+    "featureQuery": "I am looking for a Faisal Town Phase 1 / F-18 property. Please send current options",
+    "articleSlugs": [
+      "faisal-town-phase-1-and-faisal-hills",
+      "faisal-town-living"
+    ]
+  },
+  "contact": {
+    "eyebrow": "WhatsApp Property Inquiry",
+    "heading": "Tell us which Faisal Town project you want and get current options.",
+    "text": "Send your project, preferred sector or block, plot size and budget. We will continue the inquiry on WhatsApp with current availability and next steps.",
+    "mainQuery": "I want current Faisal Town property options, prices and availability",
+    "leadLabel": "Start with the correct project",
+    "leadHeading": "What do you want to check?",
+    "options": [
+      { "label": "Faisal Town Phase 2", "query": "I want current Faisal Town Phase 2 plot availability and prices" },
+      { "label": "Faisal Town Phase 1", "query": "I want current Faisal Town Phase 1 / F-18 property availability" },
+      { "label": "Help Me Choose", "query": "I am not sure which Faisal Town project suits my budget. Please guide me" }
+    ]
+  },
+  "updated": "2026-08-31",
+  "reviewed": "2026-08-31"
+}

@@ -1,34 +1,26 @@
 ---
 import ContentLayout from "../layouts/ContentLayout.astro";
 import { site, whatsappLink } from "../data/site";
+import page from "../content/legal/privacy-policy.json";
 ---
 
 <ContentLayout
-  title="Privacy Policy - FaisalTown Groups"
-  description="Privacy policy for FaisalTownGroups.com, explaining how property inquiries and WhatsApp messages may be handled."
-  eyebrow="Privacy"
-  heading="Privacy Policy"
-  subheading="How we handle inquiry details, contact information, and buyer communication submitted through FaisalTownGroups.com."
+  title={page.title}
+  description={page.description}
+  eyebrow={page.eyebrow}
+  heading={page.heading}
+  subheading={page.subheading}
 >
   <section class="content-section legal-content">
-    <p><strong>Last updated:</strong> 31 August 2026</p>
-    <h2>Information We Collect</h2>
-    <p>When you contact FaisalTown Groups through WhatsApp, we may receive your name, WhatsApp number, preferred plot size, budget, buying timeframe, message details, and other information you choose to share for property consultation.</p>
-    <h2>How We Use Information</h2>
-    <p>We use inquiry information to respond to your request, share project details, arrange site visits, provide price-plan guidance, explain booking steps, and follow up on your property interest.</p>
-    <h2>WhatsApp Inquiries</h2>
-    <p>Property inquiries from this website are directed to WhatsApp. WhatsApp links may open a pre-filled message containing this website address and the property question or requirement you selected.</p>
-    <h2>Sharing of Information</h2>
-    <p>We may share your inquiry details with relevant sales or support persons only when needed to handle your request. We do not sell your personal details as a separate database.</p>
-    <h2>Cookies and Analytics</h2>
-    <p>This website may use analytics, hosting logs, or advertising tools in the future to understand visitor behavior and improve marketing performance. These tools may collect browser, device, and page-visit information.</p>
-    <h2>Data Accuracy</h2>
-    <p>Property availability, prices, development status, routes, and payment procedures can change. We use your contact details to help verify current information before you make a decision.</p>
-    <h2>Your Choices</h2>
-    <p>You may ask us to stop contacting you or update your inquiry details through WhatsApp.</p>
-    <p>For project information, return to the <a href="/">Faisal Town Islamabad homepage</a>, review <a href="/faisal-town-phase-2/">Faisal Town Phase 2</a>, or message us through WhatsApp from the homepage.</p>
+    <p><strong>Last updated:</strong> {new Date(`${page.updated}T00:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })}</p>
+    {page.sections.map((section) => (
+      <>
+        <h2>{section.heading}</h2>
+        {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      </>
+    ))}
     <div class="legal-contact">
-      <a class="btn primary" href={whatsappLink("I have a privacy policy question")}>Ask on WhatsApp: {site.phoneDisplay}</a>
+      <a class="btn primary" href={whatsappLink(page.ctaQuery)}>{page.ctaLabel}: {site.phoneDisplay}</a>
     </div>
   </section>
 </ContentLayout>

@@ -1,32 +1,26 @@
 ---
 import ContentLayout from "../layouts/ContentLayout.astro";
 import { site, whatsappLink } from "../data/site";
+import page from "../content/legal/terms-and-conditions.json";
 ---
 
 <ContentLayout
-  title="Terms and Conditions - FaisalTown Groups"
-  description="Terms and conditions for using FaisalTownGroups.com, including inquiry handling, property information, buyer responsibility, and contact rules."
-  eyebrow="Terms"
-  heading="Terms and Conditions"
-  subheading="These terms explain how visitors should use FaisalTownGroups.com and how property inquiries are handled."
+  title={page.title}
+  description={page.description}
+  eyebrow={page.eyebrow}
+  heading={page.heading}
+  subheading={page.subheading}
 >
   <section class="content-section legal-content">
-    <p><strong>Last updated:</strong> 31 August 2026</p>
-    <h2>Use of This Website</h2>
-    <p>By using FaisalTownGroups.com, you agree to use the website for lawful property information, inquiry, consultation, and comparison purposes only.</p>
-    <h2>Property Information</h2>
-    <p>Information on this website is provided for general marketing and buyer guidance. It should not be treated as a final booking confirmation, legal document, financial advice, or guarantee of availability.</p>
-    <h2>Buyer Responsibility</h2>
-    <p>Buyers must verify project approvals, plot availability, payment instructions, recipient details, booking procedure, documentation, and receipt process before making any payment.</p>
-    <h2>Inquiry and Communication</h2>
-    <p>When you submit a property inquiry or message us through WhatsApp, you allow us to reply about that inquiry. You may request that we stop contacting you at any time.</p>
-    <h2>No Misuse</h2>
-    <p>You may not copy website content for deceptive marketing, submit false inquiries, misuse contact forms, or use this website in a way that harms the website or other visitors.</p>
-    <h2>Changes to Terms</h2>
-    <p>We may update these terms when needed. Continued use of the website after updates means you accept the revised terms.</p>
-    <p>To continue browsing, use the <a href="/">homepage</a>, <a href="/all-pages/">all pages directory</a>, or <a href="/articles/">buyer resources</a>.</p>
+    <p><strong>Last updated:</strong> {new Date(`${page.updated}T00:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })}</p>
+    {page.sections.map((section) => (
+      <>
+        <h2>{section.heading}</h2>
+        {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      </>
+    ))}
     <div class="legal-contact">
-      <a class="btn primary" href={whatsappLink("I have a terms and conditions question")}>Ask on WhatsApp: {site.phoneDisplay}</a>
+      <a class="btn primary" href={whatsappLink(page.ctaQuery)}>{page.ctaLabel}: {site.phoneDisplay}</a>
     </div>
   </section>
 </ContentLayout>

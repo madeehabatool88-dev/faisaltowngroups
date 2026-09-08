@@ -10,41 +10,23 @@ export type LandingPage = {
   secondaryCta: string;
   updated: string;
   reviewed: string;
-  highlights: Array<[string, string]>;
+  highlights: Array<{ label: string; value: string }>;
   sections: Array<{ heading: string; paragraphs: string[] }>;
   bullets: Array<{ title: string; text: string }>;
   downloads?: Array<{ label: string; title: string; text: string; href: string }>;
-  faqs: Array<[string, string]>;
-  links: Array<[string, string]>;
+  faqs: Array<{ question: string; answer: string }>;
+  links: Array<{ label: string; href: string }>;
+  order?: number;
+  status?: "draft" | "published";
 };
 
-const pageOrder = [
-  "faisal-town-phase-2",
-  "faisal-town-phase-1",
-  "plots-for-sale-faisal-town-islamabad",
-  "faisal-town-block-a",
-  "faisal-town-block-b",
-  "faisal-town-block-c",
-  "faisal-town-islamabad-map-location",
-  "faisal-town-overseas-block",
-  "faisal-town-p-block",
-  "faisal-town-r-block",
-  "faisal-town-o-block",
-  "faisal-town-sector-s",
-  "faisal-town-sector-t",
-  "house-for-sale-faisal-town-islamabad",
-  "house-for-rent-faisal-town-islamabad"
-];
-
-const pageModules = import.meta.glob<{ default: LandingPage }>("./pages/*.ts", { eager: true });
+const pageModules = import.meta.glob<{ default: LandingPage }>("../content/projects/*.json", { eager: true });
 
 export const landingPages: LandingPage[] = Object.values(pageModules)
   .map((module) => module.default)
+  .filter((page) => page.status !== "draft")
   .sort((a, b) => {
-    const aIndex = pageOrder.indexOf(a.slug);
-    const bIndex = pageOrder.indexOf(b.slug);
-    if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
-    if (aIndex !== -1) return -1;
-    if (bIndex !== -1) return 1;
+    const orderCompare = (a.order ?? 999) - (b.order ?? 999);
+    if (orderCompare !== 0) return orderCompare;
     return a.slug.localeCompare(b.slug);
   });

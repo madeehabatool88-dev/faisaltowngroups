@@ -26,31 +26,18 @@ export type Article = {
     callout?: string;
     links?: Array<{ label: string; href: string }>;
   }>;
-  faqs?: Array<[string, string]>;
+  faqs?: Array<{ question: string; answer: string }>;
+  order?: number;
+  status?: "draft" | "published";
 };
 
-const articleOrder = [
-  "faisal-town-complete-guide",
-  "faisal-town-living",
-  "why-choose-faisal-town",
-  "faisal-town-phase-1-and-faisal-hills",
-  "faisal-town-ii-sector-p-guide",
-  "living-near-rawalpindi-ring-road",
-  "new-islamabad-living-guide",
-  "faisal-town-ii-master-plan",
-  "sector-p-prices-explained",
-  "faisal-jewels-and-faisal-heights"
-];
-
-const articleModules = import.meta.glob<{ default: Article }>("./articles/*.ts", { eager: true });
+const articleModules = import.meta.glob<{ default: Article }>("../content/articles/*.json", { eager: true });
 
 export const articles: Article[] = Object.values(articleModules)
   .map((module) => module.default)
+  .filter((article) => article.status !== "draft")
   .sort((a, b) => {
-    const aIndex = articleOrder.indexOf(a.slug);
-    const bIndex = articleOrder.indexOf(b.slug);
-    if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
-    if (aIndex !== -1) return -1;
-    if (bIndex !== -1) return 1;
+    const orderCompare = (a.order ?? 999) - (b.order ?? 999);
+    if (orderCompare !== 0) return orderCompare;
     return new Date(b.date).getTime() - new Date(a.date).getTime();
   });

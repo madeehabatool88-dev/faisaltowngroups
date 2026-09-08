@@ -112,10 +112,10 @@ const breadcrumbSchema = {
       <section>
         <h2>Quick Questions</h2>
         <div class="faq-list">
-          {article.faqs.map(([question, answer]) => (
+          {article.faqs.map((faq) => (
             <details>
-              <summary>{question}</summary>
-              <p>{answer}</p>
+              <summary>{faq.question}</summary>
+              <p>{faq.answer}</p>
             </details>
           ))}
         </div>

@@ -6,10 +6,10 @@ media:
     categories: [image]
     extensions: [jpg, jpeg, png, webp, svg]
     rename: safe
-  - name: uploads
-    label: New Uploads
-    input: public/assets/uploads
-    output: /assets/uploads
+  - name: project_images
+    label: Project Images
+    input: public/assets/projects
+    output: /assets/projects
     categories: [image]
     extensions: [jpg, jpeg, png, webp, svg]
     rename: safe
@@ -20,17 +20,17 @@ media:
     categories: [image]
     extensions: [jpg, jpeg, png, webp, svg]
     rename: safe
-  - name: project_images
-    label: Project Images
-    input: public/assets/projects
-    output: /assets/projects
-    categories: [image]
-    extensions: [jpg, jpeg, png, webp, svg]
-    rename: safe
   - name: article_images
     label: Article Images
     input: public/assets/articles
     output: /assets/articles
+    categories: [image]
+    extensions: [jpg, jpeg, png, webp, svg]
+    rename: safe
+  - name: uploads
+    label: New Uploads
+    input: public/assets/uploads
+    output: /assets/uploads
     categories: [image]
     extensions: [jpg, jpeg, png, webp, svg]
     rename: safe
@@ -43,137 +43,413 @@ media:
     rename: safe
 
 content:
-  - name: main_content
-    label: Main Website Content
+  - name: main_website
+    label: Main Website
     type: group
     items:
       - name: homepage
         label: Homepage
         type: file
-        path: src/pages/index.astro
-        format: code
+        path: src/content/homepage.json
+        format: json
+        fields:
+          - { name: seoTitle, label: SEO Title, type: string }
+          - { name: metaDescription, label: Meta Description, type: text }
+          - { name: topStripLabel, label: Top Strip Label, type: string }
+          - { name: topStripText, label: Top Strip Text, type: text }
+          - { name: heroImage, label: Hero Image, type: image }
+          - { name: heroImageAlt, label: Hero Image Alt Text, type: string }
+          - { name: heroEyebrow, label: Hero Eyebrow, type: string }
+          - { name: h1, label: H1 Heading, type: string }
+          - { name: intro, label: Introduction, type: text }
+          - { name: primaryCta, label: Primary CTA, type: string }
+          - { name: secondaryCta, label: Secondary CTA, type: string }
+          - name: whatsappCard
+            label: WhatsApp Card
+            type: object
+            fields:
+              - { name: label, label: Label, type: string }
+              - { name: heading, label: Heading, type: string }
+              - { name: text, label: Text, type: text }
+              - name: actions
+                label: WhatsApp Actions
+                type: list
+                fields:
+                  - { name: label, label: Button Label, type: string }
+                  - { name: query, label: WhatsApp Query, type: text }
+          - name: projectChoice
+            label: Project Choice Section
+            type: object
+            fields:
+              - { name: eyebrow, label: Eyebrow, type: string }
+              - { name: heading, label: Heading, type: string }
+              - { name: text, label: Text, type: text }
+              - name: cards
+                label: Project Choice Cards
+                type: list
+                fields:
+                  - { name: label, label: Label, type: string }
+                  - { name: heading, label: Heading, type: string }
+                  - { name: text, label: Text, type: text }
+                  - { name: primaryLabel, label: Primary Button Label, type: string }
+                  - { name: primaryHref, label: Primary Link, type: string }
+                  - { name: secondaryLabel, label: Secondary Button Label, type: string }
+                  - { name: secondaryQuery, label: WhatsApp Query, type: text }
+          - name: phase2
+            label: Featured Phase 2 Section
+            type: object
+            fields:
+              - { name: eyebrow, label: Eyebrow, type: string }
+              - { name: heading, label: Heading, type: string }
+              - { name: text, label: Text, type: text }
+              - { name: primaryCta, label: Primary CTA, type: string }
+              - { name: primaryHref, label: Primary Link, type: string }
+              - { name: secondaryCta, label: Secondary CTA, type: string }
+              - { name: secondaryQuery, label: Secondary WhatsApp Query, type: text }
+              - name: masterPlan
+                label: Master Plan Block
+                type: object
+                fields:
+                  - { name: eyebrow, label: Eyebrow, type: string }
+                  - { name: heading, label: Heading, type: string }
+                  - { name: text, label: Text, type: text }
+                  - { name: image, label: Master Plan Image, type: image }
+                  - { name: alt, label: Image Alt Text, type: string }
+                  - { name: caption, label: Caption, type: string }
+                  - { name: pdf, label: Master Plan PDF, type: string }
+                  - { name: whatsappQuery, label: WhatsApp Query, type: text }
+              - { name: sectorsHeading, label: Sectors Heading, type: string }
+              - name: sectors
+                label: Phase 2 Sector Cards
+                type: list
+                fields:
+                  - { name: title, label: Title, type: string }
+                  - { name: href, label: Link, type: string }
+                  - { name: text, label: Text, type: text }
+              - name: sectorP
+                label: Sector P Feature
+                type: object
+                fields:
+                  - { name: image, label: Image, type: image }
+                  - { name: alt, label: Image Alt Text, type: string }
+                  - { name: eyebrow, label: Eyebrow, type: string }
+                  - { name: heading, label: Heading, type: string }
+                  - { name: text, label: Text, type: text }
+                  - name: facts
+                    label: Fact Boxes
+                    type: list
+                    fields:
+                      - { name: value, label: Value, type: string }
+                      - { name: label, label: Label, type: string }
+                  - { name: primaryCta, label: Primary CTA, type: string }
+                  - { name: primaryHref, label: Primary Link, type: string }
+                  - { name: secondaryCta, label: Secondary CTA, type: string }
+                  - { name: secondaryQuery, label: Secondary WhatsApp Query, type: text }
+              - name: priceTable
+                label: Homepage Price Table
+                type: object
+                fields:
+                  - { name: eyebrow, label: Eyebrow, type: string }
+                  - { name: heading, label: Heading, type: string }
+                  - { name: text, label: Text, type: text }
+                  - { name: note, label: Buyer Note, type: text }
+                  - name: rows
+                    label: Price Rows
+                    type: list
+                    fields:
+                      - { name: size, label: Plot Size, type: string }
+                      - { name: marla, label: Marla/Kanal, type: string }
+                      - { name: actual, label: Actual Price, type: string }
+                      - { name: discount, label: Discounted Price, type: string }
+              - name: sectorPlan
+                label: Sector P Plan
+                type: object
+                fields:
+                  - { name: eyebrow, label: Eyebrow, type: string }
+                  - { name: heading, label: Heading, type: string }
+                  - { name: text, label: Text, type: text }
+                  - { name: image, label: Plan Preview Image, type: image }
+                  - { name: alt, label: Image Alt Text, type: string }
+                  - { name: pdf, label: Plan PDF, type: string }
+                  - { name: whatsappQuery, label: WhatsApp Query, type: text }
+              - name: development
+                label: Development Block
+                type: object
+                fields:
+                  - { name: eyebrow, label: Eyebrow, type: string }
+                  - { name: heading, label: Heading, type: string }
+                  - { name: text, label: Text, type: text }
+                  - { name: cta, label: CTA Label, type: string }
+                  - { name: query, label: WhatsApp Query, type: text }
+                  - { name: image, label: Development Image, type: image }
+                  - { name: alt, label: Image Alt Text, type: string }
+                  - { name: caption, label: Caption, type: string }
+              - name: articleSlugs
+                label: Related Article Slugs
+                type: list
+                field: { name: slug, label: Article Slug, type: string }
+          - name: phase1
+            label: Featured Phase 1 Section
+            type: object
+            fields:
+              - { name: eyebrow, label: Eyebrow, type: string }
+              - { name: heading, label: Heading, type: string }
+              - { name: text, label: Text, type: text }
+              - { name: primaryCta, label: Primary CTA, type: string }
+              - { name: primaryHref, label: Primary Link, type: string }
+              - { name: secondaryCta, label: Secondary CTA, type: string }
+              - { name: secondaryQuery, label: Secondary WhatsApp Query, type: text }
+              - name: blocks
+                label: Phase 1 Block Cards
+                type: list
+                fields:
+                  - { name: title, label: Title, type: string }
+                  - { name: href, label: Link, type: string }
+                  - { name: text, label: Text, type: text }
+              - { name: featureImage, label: Feature Image, type: image }
+              - { name: featureImageAlt, label: Feature Image Alt Text, type: string }
+              - { name: featureEyebrow, label: Feature Eyebrow, type: string }
+              - { name: featureHeading, label: Feature Heading, type: string }
+              - { name: featureText, label: Feature Text, type: text }
+              - { name: featureCta, label: Feature CTA, type: string }
+              - { name: featureQuery, label: Feature WhatsApp Query, type: text }
+              - name: articleSlugs
+                label: Related Article Slugs
+                type: list
+                field: { name: slug, label: Article Slug, type: string }
+          - name: contact
+            label: Contact Section
+            type: object
+            fields:
+              - { name: eyebrow, label: Eyebrow, type: string }
+              - { name: heading, label: Heading, type: string }
+              - { name: text, label: Text, type: text }
+              - { name: mainQuery, label: Main WhatsApp Query, type: text }
+              - { name: leadLabel, label: Lead Box Label, type: string }
+              - { name: leadHeading, label: Lead Box Heading, type: string }
+              - name: options
+                label: WhatsApp Options
+                type: list
+                fields:
+                  - { name: label, label: Button Label, type: string }
+                  - { name: query, label: WhatsApp Query, type: text }
+          - { name: updated, label: Updated Date, type: date }
+          - { name: reviewed, label: Reviewed Date, type: date }
         operations:
           delete: false
           rename: false
-
-      - name: project_pages_index
-        label: Project Pages Index & Order
-        type: file
-        path: src/data/landingPages.ts
-        format: code
-        operations:
-          delete: false
-          rename: false
-
-      - name: project_pages
-        label: Individual Project, Block & Sector Pages
-        type: collection
-        path: src/data/pages
-        format: code
-        subfolders: false
-        operations:
-          create: true
-          rename: false
-          delete: false
-        view:
-          layout: list
 
       - name: site_settings
-        label: Site Settings & WhatsApp
+        label: Site Settings
         type: file
-        path: src/data/site.ts
-        format: code
+        path: src/data/site.json
+        format: json
+        fields:
+          - { name: name, label: Website Name, type: string }
+          - { name: domain, label: Canonical Domain, type: string }
+          - { name: phoneDisplay, label: Display Phone, type: string }
+          - { name: phoneWhatsApp, label: WhatsApp Number, type: string }
+          - { name: defaultImage, label: Default Social Image, type: image }
+          - { name: disclosure, label: Disclosure, type: text }
+          - { name: globalPrimaryCta, label: Global Primary CTA, type: string }
+          - { name: globalSecondaryCta, label: Global Secondary CTA, type: string }
         operations:
           delete: false
           rename: false
 
-  - name: articles_group
+  - name: projects_property
+    label: Projects & Property Pages
+    type: collection
+    path: src/content/projects
+    format: json
+    subfolders: false
+    filename: "{slug}.json"
+    view:
+      layout: list
+      fields: [title, slug, status, order]
+    fields:
+      - { name: order, label: Display Order, type: number }
+      - name: status
+        label: Status
+        type: select
+        options:
+          values: [published, draft]
+      - { name: slug, label: Slug, type: string }
+      - { name: title, label: SEO Title, type: string }
+      - { name: description, label: Meta Description, type: text }
+      - { name: eyebrow, label: Eyebrow, type: string }
+      - { name: h1, label: H1 Heading, type: string }
+      - { name: intro, label: Intro, type: text }
+      - { name: image, label: Featured Image, type: image }
+      - { name: primaryCta, label: Primary CTA, type: string }
+      - { name: secondaryCta, label: Secondary CTA, type: string }
+      - { name: updated, label: Updated Date, type: date }
+      - { name: reviewed, label: Reviewed Date, type: date }
+      - name: sections
+        label: Content Sections
+        type: list
+        fields:
+          - { name: heading, label: Heading, type: string }
+          - name: paragraphs
+            label: Paragraphs
+            type: list
+            field: { name: paragraph, label: Paragraph, type: text }
+      - name: bullets
+        label: Buyer Checklist / Bullet Sections
+        type: list
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: text, label: Text, type: text }
+      - name: downloads
+        label: Download Links
+        type: list
+        required: false
+        fields:
+          - { name: label, label: Label, type: string }
+          - { name: title, label: Title, type: string }
+          - { name: text, label: Text, type: text }
+          - { name: href, label: URL, type: string }
+      - name: highlights
+        label: Highlights
+        type: list
+        fields:
+          - { name: label, label: Label, type: string }
+          - { name: value, label: Value, type: string }
+      - name: faqs
+        label: FAQs
+        type: list
+        fields:
+          - { name: question, label: Question, type: string }
+          - { name: answer, label: Answer, type: text }
+      - name: links
+        label: Related Links
+        type: list
+        fields:
+          - { name: label, label: Anchor Text, type: string }
+          - { name: href, label: URL, type: string }
+    operations:
+      create: true
+      rename: true
+      delete: false
+
+  - name: articles_guides
     label: Articles & Buyer Guides
-    type: group
-    items:
-      - name: article_content
-        label: Article Content Files
-        type: collection
-        path: src/data/articles
-        format: code
-        subfolders: false
-        operations:
-          create: true
-          rename: false
-          delete: false
-        view:
-          layout: list
-
-      - name: articles_archive
-        label: Articles Archive Page
-        type: file
-        path: src/pages/articles/index.astro
-        format: code
-        operations:
-          delete: false
-          rename: false
+    type: collection
+    path: src/content/articles
+    format: json
+    subfolders: false
+    filename: "{slug}.json"
+    view:
+      layout: list
+      fields: [title, cluster, status, order]
+    fields:
+      - { name: order, label: Display Order, type: number }
+      - name: status
+        label: Status
+        type: select
+        options:
+          values: [published, draft]
+      - { name: slug, label: Slug, type: string }
+      - { name: title, label: Article Title, type: string }
+      - { name: seoTitle, label: SEO Title, type: string, required: false }
+      - { name: metaDescription, label: Meta Description, type: text, required: false }
+      - { name: description, label: Archive Description, type: text }
+      - { name: intro, label: Introduction, type: text, required: false }
+      - { name: category, label: Category, type: string }
+      - { name: cluster, label: Cluster, type: string, required: false }
+      - { name: date, label: Publish Date, type: date }
+      - { name: updated, label: Updated Date, type: date, required: false }
+      - { name: reviewed, label: Reviewed Date, type: string, required: false }
+      - { name: image, label: Featured Image, type: image }
+      - { name: readTime, label: Read Time, type: string }
+      - name: relatedSlugs
+        label: Related Article Slugs
+        type: list
+        required: false
+        field: { name: slug, label: Article Slug, type: string }
+      - name: cta
+        label: Article CTA
+        type: object
+        required: false
+        fields:
+          - { name: label, label: Label, type: string }
+          - { name: heading, label: Heading, type: string }
+          - { name: message, label: WhatsApp Message, type: text }
+          - { name: button, label: Button Label, type: string }
+      - name: sections
+        label: Body Sections
+        type: list
+        fields:
+          - { name: heading, label: Heading, type: string }
+          - name: paragraphs
+            label: Paragraphs
+            type: list
+            field: { name: paragraph, label: Paragraph, type: text }
+          - name: bullets
+            label: Bullets
+            type: list
+            required: false
+            field: { name: bullet, label: Bullet, type: text }
+          - { name: callout, label: Callout, type: text, required: false }
+          - name: links
+            label: Section Links
+            type: list
+            required: false
+            fields:
+              - { name: label, label: Anchor Text, type: string }
+              - { name: href, label: URL, type: string }
+      - name: faqs
+        label: FAQs
+        type: list
+        required: false
+        fields:
+          - { name: question, label: Question, type: string }
+          - { name: answer, label: Answer, type: text }
+    operations:
+      create: true
+      rename: true
+      delete: false
 
   - name: legal_pages
     label: Legal Pages
-    type: group
-    items:
-      - name: privacy_policy
-        label: Privacy Policy
-        type: file
-        path: src/pages/privacy-policy.astro
-        format: code
-        operations:
-          delete: false
-          rename: false
+    type: collection
+    path: src/content/legal
+    format: json
+    subfolders: false
+    view:
+      layout: list
+      fields: [heading, updated]
+    fields:
+      - { name: title, label: SEO Title, type: string }
+      - { name: description, label: Meta Description, type: text }
+      - { name: eyebrow, label: Eyebrow, type: string }
+      - { name: heading, label: H1 Heading, type: string }
+      - { name: subheading, label: Subheading, type: text }
+      - { name: updated, label: Updated Date, type: date }
+      - name: sections
+        label: Legal Sections
+        type: list
+        fields:
+          - { name: heading, label: Heading, type: string }
+          - name: paragraphs
+            label: Paragraphs
+            type: list
+            field: { name: paragraph, label: Paragraph, type: text }
+      - { name: ctaLabel, label: CTA Label, type: string }
+      - { name: ctaQuery, label: CTA WhatsApp Query, type: text }
+    operations:
+      create: false
+      rename: false
+      delete: false
 
-      - name: disclaimer
-        label: Disclaimer
-        type: file
-        path: src/pages/disclaimer.astro
-        format: code
-        operations:
-          delete: false
-          rename: false
-
-      - name: terms
-        label: Terms and Conditions
-        type: file
-        path: src/pages/terms-and-conditions.astro
-        format: code
-        operations:
-          delete: false
-          rename: false
-
-  - name: technical_files
-    label: Technical Files
-    type: group
-    items:
-      - name: all_pages
-        label: All Pages Directory
-        type: file
-        path: src/pages/all-pages.astro
-        format: code
-        operations:
-          delete: false
-          rename: false
-
-      - name: sitemap
-        label: Sitemap
-        type: file
-        path: src/pages/sitemap.xml.ts
-        format: code
-        operations:
-          delete: false
-          rename: false
-
-      - name: editing_guide
-        label: Editing Guide
-        type: file
-        path: CONTENT-EDITING-GUIDE.md
-        format: markdown
-        operations:
-          delete: false
-          rename: false
+  - name: editor_guide
+    label: Editing Guide
+    type: file
+    path: CONTENT-EDITING-GUIDE.md
+    format: markdown
+    operations:
+      delete: false
+      rename: false
 
 settings:
   commit:

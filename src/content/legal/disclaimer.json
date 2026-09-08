@@ -1,0 +1,19 @@
+{
+  "title": "Disclaimer - FaisalTown Groups",
+  "description": "Important disclaimer for FaisalTownGroups.com covering project information, prices, availability, payment verification, and independent property marketing.",
+  "eyebrow": "Disclaimer",
+  "heading": "Website Disclaimer",
+  "subheading": "Please verify all project, price, availability, booking, and payment information before making any property decision.",
+  "updated": "2026-08-31",
+  "sections": [
+    { "heading": "Independent Property Marketing Website", "paragraphs": ["FaisalTownGroups.com provides property information, sales assistance, availability guidance, site-visit support, and booking coordination for selected Faisal Town projects. This is not the official Faisal Town developer website. It is an independent property information, marketing and consultation website."] },
+    { "heading": "No Guaranteed Returns", "paragraphs": ["Any discussion of location potential, road connectivity, demand, future development, or investment appeal is for general comparison only. Property prices and returns are not guaranteed and can go up or down based on market conditions."] },
+    { "heading": "Prices and Availability Can Change", "paragraphs": ["Plot prices, discounts, registration fee, development charges, location charges, payment plans, possession status, and availability can change without notice. Always verify the latest price and inventory before making a decision."] },
+    { "heading": "Verify Before Payment", "paragraphs": ["Do not transfer money before verifying the exact project and phase, plot details, booking or transfer procedure, payment recipient, account information, receipt process and documentation requirements. Buyers are responsible for performing their own due diligence."] },
+    { "heading": "Regulatory / NOC Status", "paragraphs": ["Regulatory status can change and should not be inferred from marketing material. Verify the current approval or NOC position directly with the relevant authority, including the Rawalpindi Development Authority where applicable, before making a property decision."] },
+    { "heading": "Images and Plans", "paragraphs": ["Images, master-plan visuals, location references, and development photos are used for project understanding and marketing presentation. Buyers should verify current site conditions and approved documentation before booking."] },
+    { "heading": "External Links and Third-Party Information", "paragraphs": ["This website may refer to project names, routes, locations, or external information for buyer education. Third-party information may change, and we cannot guarantee the accuracy of information controlled by others.", "For current project navigation, start from the Faisal Town Islamabad homepage, the Faisal Town Phase 2 guide, or the buyer resources section."] }
+  ],
+  "ctaLabel": "Verify Details",
+  "ctaQuery": "I want to verify project details before payment"
+}

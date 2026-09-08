@@ -15,11 +15,11 @@ Keep other future websites in their own repositories.
 The CMS configuration exposes these areas:
 
 - Homepage: `src/pages/index.astro`
-- Project, block and sector page index/order: `src/data/landingPages.ts`
-- Individual project, block and sector page files: `src/data/pages/`
-- Website settings and WhatsApp number: `src/data/site.ts`
-- Article content files: `src/data/articles/`
-- Articles archive page: `src/pages/articles/index.astro`
+- Homepage content: `src/content/homepage.json`
+- Individual project, block and sector page files: `src/content/projects/`
+- Website settings and WhatsApp number: `src/data/site.json`
+- Article content files: `src/content/articles/`
+- Legal page content files: `src/content/legal/`
 - Legal pages:
   - `src/pages/privacy-policy.astro`
   - `src/pages/disclaimer.astro`
@@ -36,30 +36,24 @@ The CMS configuration exposes these areas:
 
 Each page now has its own file in:
 
-`src/data/pages/`
+`src/content/projects/`
 
 Examples:
 
-- `src/data/pages/faisal-town-phase-2.ts`
-- `src/data/pages/faisal-town-p-block.ts`
-- `src/data/pages/faisal-town-overseas-block.ts`
-- `src/data/pages/faisal-town-sector-t.ts`
+- `src/content/projects/faisal-town-phase-2.json`
+- `src/content/projects/faisal-town-p-block.json`
+- `src/content/projects/faisal-town-overseas-block.json`
+- `src/content/projects/faisal-town-sector-t.json`
 
-Use these files for normal content updates. New page files are discovered automatically. Use `src/data/landingPages.ts` only when changing page order in generated lists.
+Use these files for normal content updates. New page files are discovered automatically. Use each page's `order` field when changing page order in generated lists.
 
 ## Editing Articles
 
 Each article has its own content file in:
 
-`src/data/articles/`
+`src/content/articles/`
 
-Each current live article page has a matching folder in:
-
-`src/pages/articles/`
-
-Normally edit the content file, not the small page wrapper.
-
-New article files are discovered automatically, so future article publishing can start from `src/data/articles/`.
+New article files are discovered automatically, so future article publishing can start from `src/content/articles/`.
 
 ## Recommended Workflow
 
@@ -73,6 +67,4 @@ New article files are discovered automatically, so future article publishing can
 
 ## Important Notes
 
-The current site stores content in Astro and TypeScript files, so the first CMS setup uses safe code editing mode. This avoids breaking the existing website structure.
-
-For a more editor-friendly CMS later, migrate articles and project pages into Markdown, YAML or JSON content files. That would allow form-style fields for title, description, images, sections and FAQs.
+The day-to-day editable content now lives in JSON files. Astro files remain as templates and should normally be edited only when changing layout, components or design behavior.

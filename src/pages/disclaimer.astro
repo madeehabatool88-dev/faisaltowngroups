@@ -1,38 +1,30 @@
 ---
 import ContentLayout from "../layouts/ContentLayout.astro";
 import { whatsappLink } from "../data/site";
+import page from "../content/legal/disclaimer.json";
 ---
 
 <ContentLayout
-  title="Disclaimer - FaisalTown Groups"
-  description="Important disclaimer for FaisalTownGroups.com covering project information, prices, availability, payment verification, and independent property marketing."
-  eyebrow="Disclaimer"
-  heading="Website Disclaimer"
-  subheading="Please verify all project, price, availability, booking, and payment information before making any property decision."
+  title={page.title}
+  description={page.description}
+  eyebrow={page.eyebrow}
+  heading={page.heading}
+  subheading={page.subheading}
 >
   <section class="content-section legal-content">
-    <p><strong>Last updated:</strong> 31 August 2026</p>
-    <h2>Independent Property Marketing Website</h2>
-    <p>FaisalTownGroups.com provides property information, sales assistance, availability guidance, site-visit support, and booking coordination for selected Faisal Town projects. This is not the official Faisal Town developer website. It is an independent property information, marketing and consultation website.</p>
-    <h2>No Guaranteed Returns</h2>
-    <p>Any discussion of location potential, road connectivity, demand, future development, or investment appeal is for general comparison only. Property prices and returns are not guaranteed and can go up or down based on market conditions.</p>
-    <h2>Prices and Availability Can Change</h2>
-    <p>Plot prices, discounts, registration fee, development charges, location charges, payment plans, possession status, and availability can change without notice. Always verify the latest price and inventory before making a decision.</p>
-    <h2>Verify Before Payment</h2>
-    <p>Do not transfer money before verifying the exact project and phase, plot details, booking or transfer procedure, payment recipient, account information, receipt process and documentation requirements. Buyers are responsible for performing their own due diligence.</p>
-    <h2>Regulatory / NOC Status</h2>
-    <p>Regulatory status can change and should not be inferred from marketing material. Verify the current approval or NOC position directly with the relevant authority, including the Rawalpindi Development Authority where applicable, before making a property decision.</p>
-    <h2>Images and Plans</h2>
-    <p>Images, master-plan visuals, location references, and development photos are used for project understanding and marketing presentation. Buyers should verify current site conditions and approved documentation before booking.</p>
-    <h2>External Links and Third-Party Information</h2>
-    <p>This website may refer to project names, routes, locations, or external information for buyer education. Third-party information may change, and we cannot guarantee the accuracy of information controlled by others.</p>
-    <p>For current project navigation, start from the <a href="/">Faisal Town Islamabad homepage</a>, the <a href="/faisal-town-phase-2/">Faisal Town Phase 2 guide</a>, or the <a href="/articles/">buyer resources section</a>.</p>
+    <p><strong>Last updated:</strong> {new Date(`${page.updated}T00:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })}</p>
+    {page.sections.map((section) => (
+      <>
+        <h2>{section.heading}</h2>
+        {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      </>
+    ))}
     <div class="article-cta">
       <div>
         <span>Need verification help?</span>
         <strong>Ask for current availability and booking guidance before payment.</strong>
       </div>
-      <a href={whatsappLink("I want to verify project details before payment")}>Verify Details</a>
+      <a href={whatsappLink(page.ctaQuery)}>{page.ctaLabel}</a>
     </div>
   </section>
 </ContentLayout>

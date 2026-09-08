@@ -5,81 +5,43 @@ import SiteFooter from "../components/SiteFooter.astro";
 import MobileWhatsApp from "../components/MobileWhatsApp.astro";
 import { articles } from "../data/articles";
 import { site, whatsappLink } from "../data/site";
+import homepage from "../content/homepage.json";
 
 const phoneDisplay = site.phoneDisplay;
-
-const phase2Sectors = [
-  { title: "Sector O / Model Block", href: "/faisal-town-o-block/", text: "Sector O map, plot and current availability guidance." },
-  { title: "Sector P / The Caladan", href: "/faisal-town-p-block/", text: "Current full-payment prices, plot sizes, Sector P plan and availability." },
-  { title: "Sector R", href: "/faisal-town-r-block/", text: "Sector R plot, map and availability guidance." },
-  { title: "Sector S", href: "/faisal-town-sector-s/", text: "Dedicated Sector S plan and current inventory checks." },
-  { title: "Sector T", href: "/faisal-town-sector-t/", text: "Sector T plan, location and current payment/availability guidance." },
-  { title: "Overseas Enclave 05", href: "/faisal-town-overseas-block/", text: "Dedicated Overseas Enclave guidance for local and overseas buyers." }
-];
-
-const phase1Blocks = [
-  { title: "Block A", href: "/faisal-town-block-a/", text: "Established Phase 1 / F-18 block with resale plot, house and map guidance." },
-  { title: "Block B", href: "/faisal-town-block-b/", text: "Popular Phase 1 / F-18 block for plots, map position and current resale availability." },
-  { title: "Block C", href: "/faisal-town-block-c/", text: "Established Phase 1 / F-18 block for plots, houses and location options." }
-];
-
-const priceRows = [
-  ["25 x 50", "5.56 Marla", "4,490,000", "3,590,000"],
-  ["30 x 60", "8 Marla", "6,250,000", "4,990,000"],
-  ["35 x 70", "10.89 Marla", "8,240,000", "6,590,000"],
-  ["40 x 80", "14.22 Marla", "10,440,000", "8,350,000"],
-  ["50 x 90", "1 Kanal", "14,150,000", "11,290,000"],
-  ["75 x 120", "2 Kanal", "27,280,000", "21,790,000"],
-  ["80 x 120", "2 Kanal", "29,090,000", "23,270,000"]
-];
-
-const phase2ArticleSlugs = [
-  "faisal-town-ii-sector-p-guide",
-  "faisal-town-ii-master-plan",
-  "sector-p-prices-explained",
-  "living-near-rawalpindi-ring-road",
-  "new-islamabad-living-guide"
-];
-const phase1ArticleSlugs = [
-  "faisal-town-phase-1-and-faisal-hills",
-  "faisal-town-living"
-];
-const phase2Articles = articles.filter((article) => phase2ArticleSlugs.includes(article.slug));
-const phase1Articles = articles.filter((article) => phase1ArticleSlugs.includes(article.slug));
+const phase2Articles = articles.filter((article) => homepage.phase2.articleSlugs.includes(article.slug));
+const phase1Articles = articles.filter((article) => homepage.phase1.articleSlugs.includes(article.slug));
 ---
 
 <BaseLayout
-  title="Faisal Town Islamabad - Phase 1 & Phase 2 Plots, Maps & Availability"
-  description="Explore the two Faisal Town Islamabad projects separately: Faisal Town Phase 2 / FT-II sectors, maps and prices, plus Faisal Town Phase 1 / F-18 blocks and current availability."
+  title={homepage.seoTitle}
+  description={homepage.metaDescription}
 >
   <div class="top-strip">
-    <span>Faisal Town Islamabad</span>
-    <strong>Phase 2 / FT-II and Phase 1 / F-18 property guidance with WhatsApp availability checks.</strong>
+    <span>{homepage.topStripLabel}</span>
+    <strong>{homepage.topStripText}</strong>
   </div>
 
   <SiteHeader home={true} />
   <main id="top">
     <section class="hero home-hero">
-      <img class="hero-image" src="/assets/faisal-town-ii/hero-masterplan-preview.webp" alt="Faisal Town II master planned aerial view" width="1440" height="810" fetchpriority="high" decoding="async" />
+      <img class="hero-image" src={homepage.heroImage} alt={homepage.heroImageAlt} width="1440" height="810" fetchpriority="high" decoding="async" />
       <div class="hero-overlay"></div>
       <div class="container hero-grid home-hero-grid">
         <div class="hero-copy">
-          <p class="section-label">Faisal Town Islamabad Property Guide</p>
-          <h1>Faisal Town Phase 2 & Phase 1 plots, maps and current availability</h1>
-          <p>There are two Faisal Town project areas covered here: <strong>Faisal Town Phase 2 / FT-II</strong> and the established <strong>Faisal Town Phase 1 / F-18</strong>. Choose the project you are interested in, review its own sectors or blocks, then ask us on WhatsApp for current inventory and prices.</p>
+          <p class="section-label">{homepage.heroEyebrow}</p>
+          <h1>{homepage.h1}</h1>
+          <p>{homepage.intro}</p>
           <div class="hero-actions">
-            <a class="btn primary" href="#phase-2">Explore Faisal Town Phase 2</a>
-            <a class="btn light" href="#phase-1">Explore Faisal Town Phase 1</a>
+            <a class="btn primary" href="#phase-2">{homepage.primaryCta}</a>
+            <a class="btn light" href="#phase-1">{homepage.secondaryCta}</a>
           </div>
         </div>
         <aside class="hero-card quick-whatsapp-card">
-          <span>WhatsApp Property Inquiry</span>
-          <strong>Ask for current options</strong>
-          <p>Choose the project and open a ready-made WhatsApp inquiry with your property requirement.</p>
+          <span>{homepage.whatsappCard.label}</span>
+          <strong>{homepage.whatsappCard.heading}</strong>
+          <p>{homepage.whatsappCard.text}</p>
           <div class="hero-card-actions compact-actions">
-            <a href={whatsappLink("Send me current Faisal Town Phase 2 plot availability and prices")}>Phase 2 Availability</a>
-            <a href={whatsappLink("Send me current Faisal Town Phase 1 / F-18 property availability")}>Phase 1 Availability</a>
-            <a href={whatsappLink("Help me choose between Faisal Town Phase 2 and Phase 1 based on my budget")}>Help Me Choose</a>
+            {homepage.whatsappCard.actions.map((action) => <a href={whatsappLink(action.query)}>{action.label}</a>)}
           </div>
         </aside>
       </div>
@@ -87,67 +49,58 @@ const phase1Articles = articles.filter((article) => phase1ArticleSlugs.includes(
 
     <section class="section project-choice" id="availability">
       <div class="section-intro compact-intro">
-        <p class="section-label">Choose Your Project</p>
-        <h2>Start with one of the two Faisal Town projects.</h2>
-        <p>No mixed block and sector list. Each project below has its own property pages, map information and WhatsApp availability route.</p>
+        <p class="section-label">{homepage.projectChoice.eyebrow}</p>
+        <h2>{homepage.projectChoice.heading}</h2>
+        <p>{homepage.projectChoice.text}</p>
       </div>
       <div class="project-choice-grid">
-        <article class="project-choice-card phase2-choice">
-          <span>Faisal Town Phase 2 / FT-II</span>
-          <h3>Newer sector-based project</h3>
-          <p>Sector O, P, R, S, T and Overseas Enclave, plus the 2026 Phase 2 master plan, development information and current plot guidance.</p>
+        {homepage.projectChoice.cards.map((card) => <article class="project-choice-card">
+          <span>{card.label}</span>
+          <h3>{card.heading}</h3>
+          <p>{card.text}</p>
           <div class="button-row">
-            <a class="btn primary" href="#phase-2">Explore Phase 2</a>
-            <a class="btn outline" href={whatsappLink("Check current Faisal Town Phase 2 availability")}>WhatsApp Availability</a>
+            <a class="btn primary" href={card.primaryHref}>{card.primaryLabel}</a>
+            <a class="btn outline" href={whatsappLink(card.secondaryQuery)}>{card.secondaryLabel}</a>
           </div>
-        </article>
-        <article class="project-choice-card phase1-choice">
-          <span>Faisal Town Phase 1 / F-18</span>
-          <h3>Established block-based project</h3>
-          <p>Block A, Block B and Block C with resale plots, houses, rentals, map guidance and current market availability.</p>
-          <div class="button-row">
-            <a class="btn primary" href="#phase-1">Explore Phase 1</a>
-            <a class="btn outline" href={whatsappLink("Check current Faisal Town Phase 1 / F-18 availability")}>WhatsApp Availability</a>
-          </div>
-        </article>
+        </article>)}
       </div>
     </section>
 
     <section class="project-zone phase2-zone" id="phase-2">
       <div class="section project-zone-inner">
         <div class="section-intro project-heading">
-          <p class="section-label">Faisal Town Phase 2 / FT-II</p>
-          <h2>Faisal Town Phase 2 sectors, master plan, prices and buyer guides</h2>
-          <p>This entire section belongs to Faisal Town Phase 2. Use it to review the correct sector, current Phase 2 map information and related buyer guides before asking for live availability.</p>
+          <p class="section-label">{homepage.phase2.eyebrow}</p>
+          <h2>{homepage.phase2.heading}</h2>
+          <p>{homepage.phase2.text}</p>
           <div class="button-row">
-            <a class="btn primary" href="/faisal-town-phase-2/">Open Full Phase 2 Guide</a>
-            <a class="btn outline" href={whatsappLink("I want current Faisal Town Phase 2 plots, prices and availability")}>Ask on WhatsApp</a>
+            <a class="btn primary" href={homepage.phase2.primaryHref}>{homepage.phase2.primaryCta}</a>
+            <a class="btn outline" href={whatsappLink(homepage.phase2.secondaryQuery)}>{homepage.phase2.secondaryCta}</a>
           </div>
         </div>
 
         <div class="subsection phase2-master-top" id="master-plan">
           <div class="phase2-master-copy">
-            <p class="section-label">Faisal Town Phase 2 Master Plan</p>
-            <h3>See the full Phase 2 layout before choosing a sector.</h3>
-            <p>The 2026 Faisal Town-II master plan is the project-wide reference for Sector O, P, R, S, T and Overseas Enclave. Sector-specific plans stay inside their own sector sections.</p>
+            <p class="section-label">{homepage.phase2.masterPlan.eyebrow}</p>
+            <h3>{homepage.phase2.masterPlan.heading}</h3>
+            <p>{homepage.phase2.masterPlan.text}</p>
             <div class="button-row">
-              <a class="btn primary" href="/assets/faisal-town-ii/faisal-town-phase-2-master-plan.pdf" target="_blank" rel="noreferrer">Open Full Master Plan</a>
-              <a class="btn outline" href={whatsappLink("Use the Faisal Town Phase 2 master plan to help me shortlist a sector")}>Ask for Map Guidance</a>
+              <a class="btn primary" href={homepage.phase2.masterPlan.pdf} target="_blank" rel="noreferrer">Open Full Master Plan</a>
+              <a class="btn outline" href={whatsappLink(homepage.phase2.masterPlan.whatsappQuery)}>Ask for Map Guidance</a>
             </div>
           </div>
           <figure class="phase2-master-preview">
-            <img src="/assets/faisal-town-ii/faisal-town-phase-2-master-plan-preview.webp" alt="Full Faisal Town Phase 2 master plan" loading="lazy" />
-            <figcaption>2026 Faisal Town-II / Phase 2 master plan</figcaption>
+            <img src={homepage.phase2.masterPlan.image} alt={homepage.phase2.masterPlan.alt} loading="lazy" />
+            <figcaption>{homepage.phase2.masterPlan.caption}</figcaption>
           </figure>
         </div>
 
         <div class="subsection" id="phase-2-sectors">
           <div class="subsection-heading">
             <p class="section-label">Phase 2 Sectors</p>
-            <h3>Choose the Faisal Town Phase 2 area you want to review.</h3>
+            <h3>{homepage.phase2.sectorsHeading}</h3>
           </div>
           <div class="block-grid sector-grid-clean">
-            {phase2Sectors.map((sector) => (
+            {homepage.phase2.sectors.map((sector) => (
               <article>
                 <span>{sector.title}</span>
                 <p>{sector.text}</p>
@@ -159,74 +112,71 @@ const phase1Articles = articles.filter((article) => phase1ArticleSlugs.includes(
 
         <div class="sector section-inline" id="sector-p">
           <div class="sector-media">
-            <img src="/assets/sector-p/caladan-sector-p.jpeg" alt="The Caladan Sector P in Faisal Town Phase 2" loading="lazy" />
+            <img src={homepage.phase2.sectorP.image} alt={homepage.phase2.sectorP.alt} loading="lazy" />
           </div>
           <div class="sector-copy">
-            <p class="section-label">Phase 2 - Sector P / The Caladan</p>
-            <h2>Sector P plots from PKR 3.59 million</h2>
-            <p>Sector P is a specific Faisal Town Phase 2 opportunity. Its price table and Sector P plan are kept here inside the Sector P subsection so they are not confused with the general Phase 2 master plan or other sectors.</p>
+            <p class="section-label">{homepage.phase2.sectorP.eyebrow}</p>
+            <h2>{homepage.phase2.sectorP.heading}</h2>
+            <p>{homepage.phase2.sectorP.text}</p>
             <div class="sector-facts">
-              <div><strong>From PKR 3.59M</strong><span>full-payment discounted price</span></div>
-              <div><strong>5.56 Marla - 2 Kanal</strong><span>listed residential sizes</span></div>
-              <div><strong>PKR 20,000</strong><span>listed registration fee</span></div>
-              <div><strong>WhatsApp</strong><span>current availability verification</span></div>
+              {homepage.phase2.sectorP.facts.map((fact) => <div><strong>{fact.value}</strong><span>{fact.label}</span></div>)}
             </div>
             <div class="button-row">
-              <a class="btn primary" href="/faisal-town-p-block/">Open Sector P Page</a>
-              <a class="btn outline" href={whatsappLink("Check current Sector P plot numbers, prices and total payable amount")}>Check Sector P Availability</a>
+              <a class="btn primary" href={homepage.phase2.sectorP.primaryHref}>{homepage.phase2.sectorP.primaryCta}</a>
+              <a class="btn outline" href={whatsappLink(homepage.phase2.sectorP.secondaryQuery)}>{homepage.phase2.sectorP.secondaryCta}</a>
             </div>
           </div>
         </div>
 
         <div class="subsection sector-p-pricing" id="prices">
           <div class="section-intro compact-intro">
-            <p class="section-label">Sector P Price Plan</p>
-            <h2>Sector P plot sizes and current listed full-payment prices</h2>
-            <p>Prices last reviewed: 6 August 2026. These prices are shown only under Sector P because they do not represent every Faisal Town Phase 2 sector.</p>
+            <p class="section-label">{homepage.phase2.priceTable.eyebrow}</p>
+            <h2>{homepage.phase2.priceTable.heading}</h2>
+            <p>{homepage.phase2.priceTable.text}</p>
           </div>
           <div class="price-grid">
-            {priceRows.map(([size, marla, actual, discount]) => (
+            {homepage.phase2.priceTable.rows.map((row) => (
               <article class="price-tile">
-                <div><span>{marla}</span><h3>{size}</h3></div>
+                <div><span>{row.marla}</span><h3>{row.size}</h3></div>
                 <dl>
-                  <dt>Actual Price</dt><dd>{actual}</dd>
-                  <dt>Full-Payment Discounted Price</dt><dd>{discount}</dd>
+                  <dt>Actual Price</dt><dd>{row.actual}</dd>
+                  <dt>Full-Payment Discounted Price</dt><dd>{row.discount}</dd>
                 </dl>
-                <a href={whatsappLink(`Check current availability for ${marla} Sector P plot size ${size}`)}>Check {marla} on WhatsApp</a>
+                <a href={whatsappLink(`Check current availability for ${row.marla} Sector P plot size ${row.size}`)}>Check {row.marla} on WhatsApp</a>
               </article>
             ))}
           </div>
-          <p class="risk-note">Sector P prices and availability can change. Verify the exact plot, total payable amount, special location charges, documents and payment instructions before making any payment.</p>
+          <p class="risk-note">{homepage.phase2.priceTable.note}</p>
         </div>
 
         <div class="subsection sector-p-plan">
           <div class="section-intro compact-intro">
-            <p class="section-label">Sector P Plan</p>
-            <h2>Sector P plan</h2>
-            <p>This is the Sector P-specific plan. It is intentionally kept with the Sector P content instead of being mixed into the general Phase 2 master-plan section.</p>
+            <p class="section-label">{homepage.phase2.sectorPlan.eyebrow}</p>
+            <h2>{homepage.phase2.sectorPlan.heading}</h2>
+            <p>{homepage.phase2.sectorPlan.text}</p>
           </div>
           <figure class="master-plan-open">
             <div class="master-plan-scroll">
-              <img src="/assets/sector-p/rendered/sector-p-masterplan-preview.webp" alt="Sector P Faisal Town Phase 2 plan" loading="lazy" />
+              <img src={homepage.phase2.sectorPlan.image} alt={homepage.phase2.sectorPlan.alt} loading="lazy" />
             </div>
             <div class="plan-download-row">
-              <a class="btn primary" href="/assets/plans/sector-p-ft-ii.pdf" target="_blank" rel="noreferrer">Download Sector P PDF</a>
+              <a class="btn primary" href={homepage.phase2.sectorPlan.pdf} target="_blank" rel="noreferrer">Download Sector P PDF</a>
               <a class="btn outline" href="/faisal-town-p-block/">Open Sector P Guide</a>
-              <a class="btn outline" href={whatsappLink("Guide me using the Sector P plan and current available plots")}>Ask About a Plot</a>
+              <a class="btn outline" href={whatsappLink(homepage.phase2.sectorPlan.whatsappQuery)}>Ask About a Plot</a>
             </div>
           </figure>
         </div>
 
         <div class="subsection development-clean">
           <div class="development-copy">
-            <p class="section-label">Phase 2 Development</p>
-            <h2>See current development before you shortlist a plot.</h2>
-            <p>Development changes by sector and street. Use the latest visual update as a starting point, then confirm the exact location through a current site visit or WhatsApp walkthrough.</p>
-            <a class="btn development-whatsapp" href={whatsappLink("Send me the latest Faisal Town Phase 2 development update and help me arrange a site visit")}>Get Latest Development Update</a>
+            <p class="section-label">{homepage.phase2.development.eyebrow}</p>
+            <h2>{homepage.phase2.development.heading}</h2>
+            <p>{homepage.phase2.development.text}</p>
+            <a class="btn development-whatsapp" href={whatsappLink(homepage.phase2.development.query)}>{homepage.phase2.development.cta}</a>
           </div>
           <figure class="development-visual">
-            <img src="/assets/faisal-town-ii/phase2-work-progress.jpeg" alt="Current Faisal Town Phase 2 development work" loading="lazy" />
-            <figcaption>Recent Phase 2 development reference - verify the exact sector before deciding.</figcaption>
+            <img src={homepage.phase2.development.image} alt={homepage.phase2.development.alt} loading="lazy" />
+            <figcaption>{homepage.phase2.development.caption}</figcaption>
           </figure>
         </div>
 
@@ -256,17 +206,17 @@ const phase1Articles = articles.filter((article) => phase1ArticleSlugs.includes(
     <section class="project-zone phase1-zone" id="phase-1">
       <div class="section project-zone-inner">
         <div class="section-intro project-heading">
-          <p class="section-label">Faisal Town Phase 1 / F-18</p>
-          <h2>Faisal Town Phase 1 blocks and related buyer guides</h2>
-          <p>Phase 1 is the established F-18 project. Its Block A, Block B and Block C content is kept together here and does not share the Phase 2 sector structure.</p>
+          <p class="section-label">{homepage.phase1.eyebrow}</p>
+          <h2>{homepage.phase1.heading}</h2>
+          <p>{homepage.phase1.text}</p>
           <div class="button-row">
-            <a class="btn primary" href="/faisal-town-phase-1/">Open Full Phase 1 Guide</a>
-            <a class="btn outline" href={whatsappLink("I want current Faisal Town Phase 1 Block A, B or C availability")}>Ask Phase 1 Availability</a>
+            <a class="btn primary" href={homepage.phase1.primaryHref}>{homepage.phase1.primaryCta}</a>
+            <a class="btn outline" href={whatsappLink(homepage.phase1.secondaryQuery)}>{homepage.phase1.secondaryCta}</a>
           </div>
         </div>
 
         <div class="block-grid phase1-block-grid">
-          {phase1Blocks.map((block) => (
+          {homepage.phase1.blocks.map((block) => (
             <article>
               <span>Phase 1 / F-18 - {block.title}</span>
               <p>{block.text}</p>
@@ -276,12 +226,12 @@ const phase1Articles = articles.filter((article) => phase1ArticleSlugs.includes(
         </div>
 
         <div class="phase1-feature">
-          <img src="/assets/faisal-town-phase-1.jpg" alt="Faisal Town Phase 1 F-18" loading="lazy" />
+          <img src={homepage.phase1.featureImage} alt={homepage.phase1.featureImageAlt} loading="lazy" />
           <div>
-            <p class="section-label">Phase 1 Property Search</p>
-            <h3>Looking for a resale plot, house or rental in F-18?</h3>
-            <p>Tell us the block, property type and budget on WhatsApp. We can help you check current Phase 1 / F-18 options without mixing them with Phase 2 inventory.</p>
-            <a class="btn primary" href={whatsappLink("I am looking for a Faisal Town Phase 1 / F-18 property. Please send current options")}>Start Phase 1 WhatsApp Inquiry</a>
+            <p class="section-label">{homepage.phase1.featureEyebrow}</p>
+            <h3>{homepage.phase1.featureHeading}</h3>
+            <p>{homepage.phase1.featureText}</p>
+            <a class="btn primary" href={whatsappLink(homepage.phase1.featureQuery)}>{homepage.phase1.featureCta}</a>
           </div>
         </div>
 
@@ -310,19 +260,19 @@ const phase1Articles = articles.filter((article) => phase1ArticleSlugs.includes(
     <section class="contact" id="contact">
       <div class="container contact-grid">
         <div>
-          <p class="section-label">WhatsApp Property Inquiry</p>
-          <h2>Tell us which Faisal Town project you want and get current options.</h2>
-          <p>Send your project, preferred sector or block, plot size and budget. We will continue the inquiry on WhatsApp with current availability and next steps.</p>
+          <p class="section-label">{homepage.contact.eyebrow}</p>
+          <h2>{homepage.contact.heading}</h2>
+          <p>{homepage.contact.text}</p>
           <div class="contact-links">
-            <a href={whatsappLink("I want current Faisal Town property options, prices and availability")}>WhatsApp: {phoneDisplay}</a>
+            <a href={whatsappLink(homepage.contact.mainQuery)}>WhatsApp: {phoneDisplay}</a>
           </div>
         </div>
         <div class="lead-options">
-          <span>Start with the correct project</span>
-          <h3>What do you want to check?</h3>
-          <a class="btn primary" href={whatsappLink("I want current Faisal Town Phase 2 plot availability and prices")}>Faisal Town Phase 2</a>
-          <a class="btn outline" href={whatsappLink("I want current Faisal Town Phase 1 / F-18 property availability")}>Faisal Town Phase 1</a>
-          <a class="btn outline" href={whatsappLink("I am not sure which Faisal Town project suits my budget. Please guide me")}>Help Me Choose</a>
+          <span>{homepage.contact.leadLabel}</span>
+          <h3>{homepage.contact.leadHeading}</h3>
+          {homepage.contact.options.map((option, index) => (
+            <a class={index === 0 ? "btn primary" : "btn outline"} href={whatsappLink(option.query)}>{option.label}</a>
+          ))}
         </div>
       </div>
     </section>
