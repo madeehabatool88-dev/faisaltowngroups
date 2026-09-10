@@ -1,3 +1,5 @@
+import { normalizeProject } from './projectBulk';
+
 export type LandingPage = {
   slug: string;
   pageType?: string;
@@ -25,7 +27,7 @@ export type LandingPage = {
 const pageModules = import.meta.glob<{ default: LandingPage }>("../content/projects/*.json", { eager: true });
 
 export const landingPages: LandingPage[] = Object.values(pageModules)
-  .map((module) => module.default)
+  .map((module) => normalizeProject(module.default) as LandingPage)
   .filter((page) => page.status !== "draft")
   .sort((a, b) => {
     const orderCompare = (a.order ?? 999) - (b.order ?? 999);

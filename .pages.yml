@@ -357,54 +357,36 @@ content:
       - { name: secondaryCta, label: Secondary CTA, type: string }
       - { name: updated, label: Updated Date, type: date }
       - { name: reviewed, label: Reviewed Date, type: date }
-      - name: sections
-        label: Content Sections
-        type: object
-        list: true
-        fields:
-          - { name: heading, label: Heading, type: string }
-          - name: paragraphs
-            label: Paragraphs
-            type: text
-            list: true
-      - name: bullets
-        label: Buyer Checklist / Bullet Sections
-        type: object
-        list: true
-        fields:
-          - { name: title, label: Title, type: string }
-          - { name: text, label: Text, type: text }
-      - name: downloads
-        label: Download Links
-        type: object
-        list: true
+      - name: body
+        label: Full Project Body
+        type: text
         required: false
-        fields:
-          - { name: label, label: Label, type: string }
-          - { name: title, label: Title, type: string }
-          - { name: text, label: Text, type: text }
-          - { name: href, label: URL or PDF Path, type: string }
-      - name: highlights
-        label: Highlights
-        type: object
-        list: true
-        fields:
-          - { name: label, label: Label, type: string }
-          - { name: value, label: Value, type: string }
-      - name: faqs
-        label: FAQs
-        type: object
-        list: true
-        fields:
-          - { name: question, label: Question, type: string }
-          - { name: answer, label: Answer, type: text }
-      - name: links
-        label: Related Links
-        type: object
-        list: true
-        fields:
-          - { name: label, label: Anchor Text, type: string }
-          - { name: href, label: URL, type: string }
+        description: "Paste the whole page body here. Use ## Heading for each section and blank lines between paragraphs."
+      - name: bulletsText
+        label: Buyer Checklist - Bulk Edit
+        type: text
+        required: false
+        description: "One item per line: Title | Description. You can also paste two columns from a spreadsheet."
+      - name: downloadsText
+        label: Downloads - Bulk Edit
+        type: text
+        required: false
+        description: "One download per line: Label | Title | Description | URL or PDF path. Spreadsheet paste is supported."
+      - name: highlightsText
+        label: Highlights - Bulk Edit
+        type: text
+        required: false
+        description: "One highlight per line: Label | Value. Spreadsheet paste is supported."
+      - name: faqsText
+        label: FAQs - Bulk Edit
+        type: text
+        required: false
+        description: "One FAQ per line: Question | Answer. Spreadsheet paste is supported."
+      - name: linksText
+        label: Related Links - Bulk Edit
+        type: text
+        required: false
+        description: "One link per line: Link text | URL. Use /page-path/ or a full https URL. Spreadsheet paste is supported."
     operations:
       create: true
       rename: true

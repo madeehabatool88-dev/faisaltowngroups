@@ -12,30 +12,10 @@
   "secondaryCta": "View Details",
   "updated": "2026-09-08",
   "reviewed": "2026-09-08",
-  "highlights": [
-    { "label": "Project", "value": "Project name" },
-    { "label": "Focus", "value": "Plots, prices and location" },
-    { "label": "Buyer Need", "value": "Availability and verification" },
-    { "label": "Support", "value": "WhatsApp guidance" }
-  ],
-  "sections": [
-    {
-      "heading": "Overview",
-      "paragraphs": [
-        "Add clear customer-facing information here. Do not add internal notes or builder instructions."
-      ]
-    }
-  ],
-  "bullets": [
-    { "title": "Verify details", "text": "Confirm current inventory, dues and location before payment." }
-  ],
-  "downloads": [
-    { "label": "Plan", "title": "Download Plan", "text": "Open the related plan file.", "href": "/assets/plans/example.pdf" }
-  ],
-  "faqs": [
-    { "question": "Question?", "answer": "Answer for buyers." }
-  ],
-  "links": [
-    { "label": "Related Page", "href": "/related-page/" }
-  ]
+  "body": "## Overview\n\nAdd clear customer-facing information here. Do not add internal notes or builder instructions.",
+  "bulletsText": "Verify details | Confirm current inventory, dues and location before payment.",
+  "downloadsText": "Plan | Download Plan | Open the related plan file. | /assets/plans/example.pdf",
+  "highlightsText": "Project | Project name\nFocus | Plots, prices and location\nBuyer Need | Availability and verification\nSupport | WhatsApp guidance",
+  "faqsText": "Question? | Answer for buyers.",
+  "linksText": "Related Page | /related-page/"
 }

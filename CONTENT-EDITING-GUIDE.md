@@ -48,12 +48,37 @@ Important fields:
 - SEO Title and Meta Description: search result text.
 - Page Heading and Intro: the first customer-facing text on the page.
 - Featured Image: the main image for the page.
-- Content Sections: the main page body.
-- Buyer Checklist / Bullet Sections: decision points for buyers.
-- Download Links: master plans, sector plans or PDFs.
-- Highlights: quick facts shown near the page top.
-- FAQs: buyer questions and answers.
-- Related Links: internal links to useful pages.
+- Full Project Body: paste or edit all sections in one text box. Use `## Heading` before each section and a blank line between paragraphs.
+- Buyer Checklist - Bulk Edit: one `Title | Description` per line.
+- Downloads - Bulk Edit: one `Label | Title | Description | URL or PDF path` per line.
+- Highlights - Bulk Edit: one `Label | Value` per line.
+- FAQs - Bulk Edit: one `Question | Answer` per line.
+- Related Links - Bulk Edit: one `Link text | URL` per line.
+
+All existing project content is already filled in. You can replace a whole text box at once instead of opening and filling individual rows. For the bulk lists, you can also copy the matching columns from Excel or Google Sheets and paste them directly, without a header row. Blank lines are ignored; clearing a field removes those items. Keep each list item on one line and use `|` only between columns (or paste tab-separated spreadsheet cells). Every column must have a value. Invalid rows stop the build with the page name, field and line number so content is not silently lost.
+
+Example Full Project Body:
+
+```text
+## Overview
+
+Your project overview goes here.
+
+A second paragraph goes here.
+
+## Location
+
+Your location information goes here.
+```
+
+Example FAQs - Bulk Edit:
+
+```text
+How can I check availability? | Ask for current options on WhatsApp.
+Can I request a plan? | Ask for the relevant project or sector plan.
+```
+
+Keep SEO, heading, image and other page settings in their named fields above the bulk text boxes. These bulk fields edit the content within one project page; save each project page separately.
 
 ## Adding A New Project, Block Or Sector Page
 
@@ -61,8 +86,8 @@ Important fields:
 2. Create a new entry.
 3. Add a clear slug, such as `faisal-town-new-sector`.
 4. Set Status to Draft while preparing it.
-5. Add SEO title, description, heading, intro, image, sections, highlights, FAQs and related links.
-6. Add any relevant PDFs through Master Plans & PDFs, then add the PDF path in Download Links.
+5. Add SEO title, description, heading, intro and image, then paste the Full Project Body and the bulk lists.
+6. Add any relevant PDFs through Master Plans & PDFs, then add the PDF path in Downloads - Bulk Edit.
 7. Change Status to Published when ready.
 
 ## Articles & Buyer Guides
