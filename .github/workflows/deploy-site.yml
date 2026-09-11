@@ -55,7 +55,7 @@ jobs:
 
           for key in FTP_SERVER FTP_USERNAME FTP_PASSWORD FTP_SERVER_DIR; do
             if [ -z "${!key}" ]; then
-              echo "::error::Add the $key repository secret. See DEPLOYMENT.md."
+              echo "::error::Add the $key repository secret."
               missing=1
             fi
           done
@@ -81,8 +81,11 @@ jobs:
           port: 21
           local-dir: ./dist/
           server-dir: ${{ secrets.FTP_SERVER_DIR }}
-          state-name: .ftp-deploy-sync-state.json
-          log-level: minimal
+
+          # New state file forces a fresh sync.
+          state-name: .ftp-deploy-sync-state-v2.json
+
+          log-level: standard
           timeout: 120000
 
           exclude: |
