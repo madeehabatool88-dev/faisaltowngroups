@@ -160,4 +160,4 @@ Every WhatsApp message should include the website address and the visitor query.
 
 ## Publishing Notes
 
-Pages CMS saves changes into the website repository. After changes are saved, the site still needs to be built and uploaded or deployed before visitors see the update.
+Pages CMS saves changes into the website repository. Saves to `main` trigger the GitHub deployment workflow once the Hostinger secrets are configured. You can also use **Check saved content** or **Deploy live website** in Pages CMS. Check GitHub Actions for the deployment result. See DEPLOYMENT.md for the one-time hosting connection setup.

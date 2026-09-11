@@ -1,0 +1,81 @@
+name: Deploy live website
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      payload:
+        description: Pages CMS action context
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-deployment
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Build every page
+        run: npm run build
+      - name: Check hosting connection settings
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_SERVER_DIR: ${{ secrets.FTP_SERVER_DIR }}
+        run: |
+          missing=0
+          for key in FTP_SERVER FTP_USERNAME FTP_PASSWORD FTP_SERVER_DIR; do
+            if [ -z "${!key}" ]; then
+              echo "::error::Add the $key repository secret. See DEPLOYMENT.md."
+              missing=1
+            fi
+          done
+          [ "$missing" = 0 ] || exit 1
+          case "$FTP_SERVER_DIR" in
+            */) ;;
+            *) echo "::error::FTP_SERVER_DIR must end with /."; exit 1 ;;
+          esac
+      - name: Upload changed files to Hostinger
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          security: strict
+          port: 21
+          local-dir: ./dist/
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}
+          state-name: .ftp-deploy-sync-state.json
+          log-level: minimal
+          timeout: 120000
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            .well-known/**
+            cgi-bin/**
+            .ftpquota
+      - name: Verify published pages match this build
+        run: |
+          for path in index.html faisal-town-phase-2/index.html articles/faisal-town-complete-guide/index.html sitemap.xml; do
+            curl --fail --silent --show-error --location --retry 3 \
+              "https://www.faisaltowngroups.com/$path?deploy=$GITHUB_SHA" -o /tmp/live-page
+            cmp "dist/$path" /tmp/live-page || { echo "::error::Published $path does not match this build."; exit 1; }
+          done

@@ -1,3 +1,15 @@
+actions:
+  - name: validate-site
+    label: Check saved content
+    workflow: validate-site.yml
+    ref: main
+    confirm: false
+  - name: deploy-site
+    label: Deploy live website
+    workflow: deploy-site.yml
+    ref: main
+    confirm: false
+
 media:
   - name: images
     label: Website Images
