@@ -40,16 +40,16 @@ jobs:
       - name: Build every page
         run: npm run build
 
-      - name: Check hosting connection settings
+      - name: Check SSH deployment settings
         env:
-          FTP_SERVER: ${{ secrets.FTP_SERVER }}
-          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-          FTP_SERVER_DIR: ${{ secrets.FTP_SERVER_DIR }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
+          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
         run: |
           missing=0
 
-          for key in FTP_SERVER FTP_USERNAME FTP_PASSWORD FTP_SERVER_DIR; do
+          for key in SSH_HOST SSH_PORT SSH_USERNAME SSH_PASSWORD; do
             if [ -z "${!key}" ]; then
               echo "::error::Add the $key repository secret."
               missing=1
@@ -58,37 +58,43 @@ jobs:
 
           [ "$missing" = 0 ] || exit 1
 
-          case "$FTP_SERVER_DIR" in
-            */)
-              ;;
-            *)
-              echo "::error::FTP_SERVER_DIR must end with /."
-              exit 1
-              ;;
-          esac
+      - name: Install sshpass
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y sshpass
 
-      - name: Upload changed files to Hostinger
-        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftp
-          port: 21
-          local-dir: ./dist/
-          server-dir: ${{ secrets.FTP_SERVER_DIR }}
+      - name: Test SSH connection
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
+          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
+        run: |
+          sshpass -p "$SSH_PASSWORD" \
+            ssh \
+            -p "$SSH_PORT" \
+            -o StrictHostKeyChecking=no \
+            -o UserKnownHostsFile=/dev/null \
+            -o ConnectTimeout=20 \
+            "$SSH_USERNAME@$SSH_HOST" \
+            "echo 'SSH connection successful'"
 
-          state-name: .ftp-deploy-sync-state-v2.json
-          log-level: standard
-          timeout: 120000
-
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
-            .well-known/**
-            cgi-bin/**
-            .ftpquota
+      - name: Deploy site to Hostinger
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
+          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
+        run: |
+          sshpass -p "$SSH_PASSWORD" \
+            rsync \
+            -avz \
+            --delete \
+            --exclude=".well-known/" \
+            --exclude="cgi-bin/" \
+            -e "ssh -p $SSH_PORT -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" \
+            ./dist/ \
+            "$SSH_USERNAME@$SSH_HOST:public_html/"
 
       - name: Verify important live pages
         run: |
