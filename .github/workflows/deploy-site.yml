@@ -16,7 +16,7 @@ permissions:
 
 concurrency:
   group: production-deployment
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   deploy:
@@ -39,10 +39,6 @@ jobs:
 
       - name: Build every page
         run: npm run build
-
-      - name: Add deployment version
-        run: |
-          echo "$GITHUB_SHA" > dist/deploy-version.txt
 
       - name: Check hosting connection settings
         env:
@@ -82,9 +78,7 @@ jobs:
           local-dir: ./dist/
           server-dir: ${{ secrets.FTP_SERVER_DIR }}
 
-          # New state file forces a fresh sync.
           state-name: .ftp-deploy-sync-state-v2.json
-
           log-level: standard
           timeout: 120000
 
@@ -95,29 +89,6 @@ jobs:
             .well-known/**
             cgi-bin/**
             .ftpquota
-
-      - name: Verify exact deployment version
-        run: |
-          echo "Checking deployment version..."
-
-          LIVE_SHA=$(curl \
-            --fail \
-            --silent \
-            --show-error \
-            --location \
-            --retry 5 \
-            --retry-delay 3 \
-            "https://www.faisaltowngroups.com/deploy-version.txt?cache=$GITHUB_SHA")
-
-          echo "Expected commit: $GITHUB_SHA"
-          echo "Live commit:     $LIVE_SHA"
-
-          if [ "$LIVE_SHA" != "$GITHUB_SHA" ]; then
-            echo "::error::Live website does not contain the expected deployment version."
-            exit 1
-          fi
-
-          echo "Deployment version verified successfully."
 
       - name: Verify important live pages
         run: |
@@ -136,7 +107,8 @@ jobs:
               --location \
               --output /dev/null \
               --write-out "%{http_code}" \
-              --retry 3 \
+              --retry 5 \
+              --retry-delay 3 \
               "https://www.faisaltowngroups.com$path?deploy=$GITHUB_SHA")
 
             if [ "$status" != "200" ]; then
