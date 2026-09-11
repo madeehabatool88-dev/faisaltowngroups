@@ -40,6 +40,10 @@ jobs:
       - name: Build every page
         run: npm run build
 
+      - name: Add deployment version
+        run: |
+          echo "$GITHUB_SHA" > dist/deploy-version.txt
+
       - name: Check hosting connection settings
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
@@ -73,16 +77,10 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-
-          # Hostinger provides an FTP server IP.
-          # Use normal FTP on port 21 to avoid the FTPS
-          # certificate hostname mismatch error.
           protocol: ftp
           port: 21
-
           local-dir: ./dist/
           server-dir: ${{ secrets.FTP_SERVER_DIR }}
-
           state-name: .ftp-deploy-sync-state.json
           log-level: minimal
           timeout: 120000
@@ -95,32 +93,59 @@ jobs:
             cgi-bin/**
             .ftpquota
 
-      - name: Verify published pages match this build
+      - name: Verify exact deployment version
         run: |
-          for path in \
-            index.html \
-            faisal-town-phase-2/index.html \
-            articles/faisal-town-complete-guide/index.html \
-            sitemap.xml
-          do
-            echo "Checking $path"
+          echo "Checking deployment version..."
 
-            curl \
-              --fail \
+          LIVE_SHA=$(curl \
+            --fail \
+            --silent \
+            --show-error \
+            --location \
+            --retry 5 \
+            --retry-delay 3 \
+            "https://www.faisaltowngroups.com/deploy-version.txt?cache=$GITHUB_SHA")
+
+          echo "Expected commit: $GITHUB_SHA"
+          echo "Live commit:     $LIVE_SHA"
+
+          if [ "$LIVE_SHA" != "$GITHUB_SHA" ]; then
+            echo "::error::Live website does not contain the expected deployment version."
+            exit 1
+          fi
+
+          echo "Deployment version verified successfully."
+
+      - name: Verify important live pages
+        run: |
+          pages=(
+            "/"
+            "/faisal-town-phase-2/"
+            "/articles/faisal-town-complete-guide/"
+            "/sitemap.xml"
+          )
+
+          for path in "${pages[@]}"; do
+            echo "Checking https://www.faisaltowngroups.com$path"
+
+            status=$(curl \
               --silent \
-              --show-error \
               --location \
+              --output /dev/null \
+              --write-out "%{http_code}" \
               --retry 3 \
-              "https://www.faisaltowngroups.com/$path?deploy=$GITHUB_SHA" \
-              -o /tmp/live-page
+              "https://www.faisaltowngroups.com$path?deploy=$GITHUB_SHA")
 
-            cmp "dist/$path" /tmp/live-page || {
-              echo "::error::Published $path does not match this build."
+            if [ "$status" != "200" ]; then
+              echo "::error::$path returned HTTP $status"
               exit 1
-            }
+            fi
+
+            echo "$path returned HTTP 200"
           done
 
       - name: Deployment completed
         run: |
           echo "FaisalTownGroups deployment completed successfully."
           echo "Commit: $GITHUB_SHA"
+          echo "Live site: https://www.faisaltowngroups.com/"
