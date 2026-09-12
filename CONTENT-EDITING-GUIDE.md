@@ -104,11 +104,13 @@ Important fields:
 - Category: choose the closest topic from the dropdown.
 - Cluster: choose the broader SEO group from the dropdown.
 - Full Article Body: edit or paste the whole article in one place.
-- Related Article Slugs: add one related article slug per row.
-- FAQs: optional article FAQs.
+- Related Articles - Bulk Edit: paste every related article slug into one text box, one slug per line.
+- FAQs - Bulk Edit: paste all questions and answers into one text box, one `Question | Answer` per line. You can also paste two columns from a spreadsheet without a header row.
 - Article CTA: the WhatsApp lead box inside the article.
 
 Related article slugs should be simple slugs only, for example `faisal-town-ii-master-plan`.
+
+The bulk fields are prefilled with existing saved content. Blank lines are ignored. Clearing FAQs removes them; clearing Related Articles removes your manual selections (automatic related guides may still appear). Keep each FAQ on one line, with `|` only between the question and answer. Invalid FAQ lines stop the build with the article slug and line number.
 
 Full Article Body supports simple formatting:
 

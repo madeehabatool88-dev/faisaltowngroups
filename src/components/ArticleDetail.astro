@@ -168,7 +168,7 @@ const breadcrumbSchema = {
         </section>
       ))
     )}
-    {article.faqs && (
+    {article.faqs && article.faqs.length > 0 && (
       <section>
         <h2>Quick Questions</h2>
         <div class="faq-list">

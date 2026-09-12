@@ -1,3 +1,5 @@
+import { normalizeArticle } from './articleBulk';
+
 export type Article = {
   slug: string;
   title: string;
@@ -13,6 +15,8 @@ export type Article = {
   image: string;
   readTime: string;
   relatedSlugs?: string[];
+  relatedSlugsText?: string;
+  faqsText?: string;
   body?: string;
   cta?: {
     label: string;
@@ -35,7 +39,7 @@ export type Article = {
 const articleModules = import.meta.glob<{ default: Article }>("../content/articles/*.json", { eager: true });
 
 export const articles: Article[] = Object.values(articleModules)
-  .map((module) => module.default)
+  .map((module) => normalizeArticle(module.default))
   .filter((article) => article.status !== "draft")
   .sort((a, b) => {
     const orderCompare = (a.order ?? 999) - (b.order ?? 999);

@@ -476,10 +476,10 @@ content:
         label: Full Article Body
         type: text
         description: Edit the full article in one place. Use ## for section headings, - for bullet points, and > for highlighted notes.
-      - name: relatedSlugs
-        label: Related Article Slugs
-        type: string
-        list: true
+      - name: relatedSlugsText
+        label: Related Articles - Bulk Edit
+        type: text
+        description: "Paste all related article slugs here, one per line. Use slugs only, for example faisal-town-complete-guide. Clear the box to remove manually selected related articles."
         required: false
       - name: cta
         label: Article CTA
@@ -490,14 +490,11 @@ content:
           - { name: heading, label: Heading, type: string }
           - { name: message, label: WhatsApp Message, type: text }
           - { name: button, label: Button Label, type: string }
-      - name: faqs
-        label: FAQs
-        type: object
-        list: true
+      - name: faqsText
+        label: FAQs - Bulk Edit
+        type: text
         required: false
-        fields:
-          - { name: question, label: Question, type: string }
-          - { name: answer, label: Answer, type: text }
+        description: "Paste all FAQs here, one per line: Question | Answer. You can also paste two spreadsheet columns. Blank lines are ignored. Clear the box to remove all FAQs."
     operations:
       create: true
       rename: true
