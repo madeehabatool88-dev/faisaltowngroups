@@ -1,24 +1,24 @@
 {
   "siteVisit": {
-    "enabled": false,
-    "heading": "",
-    "text": "",
+    "enabled": true,
+    "heading": "Want to See Faisal Town Phase 2 in Person?",
+    "text": "Tell us which sector or plot size interests you and we can help you shortlist options before arranging a site visit.",
     "image": "",
-    "alt": "",
-    "ctaLabel": "",
+    "alt": "Faisal Town Phase 2 site visit",
+    "ctaLabel": "Arrange a Site Visit",
     "ctaType": "whatsapp",
-    "whatsappQuery": "",
+    "whatsappQuery": "I would like to arrange a Faisal Town Phase 2 site visit. Please help me shortlist suitable plots first.",
     "href": ""
   },
   "overseas": {
-    "enabled": false,
-    "heading": "",
-    "text": "",
+    "enabled": true,
+    "heading": "Buying From Outside Pakistan?",
+    "text": "We can share current options, maps, location information and WhatsApp guidance so you can narrow your choices before arranging local representation or a visit.",
     "image": "",
-    "alt": "",
-    "ctaLabel": "",
+    "alt": "Faisal Town Phase 2 overseas buyer assistance",
+    "ctaLabel": "Get Overseas Buyer Assistance",
     "ctaType": "whatsapp",
-    "whatsappQuery": "",
+    "whatsappQuery": "I am an overseas buyer interested in Faisal Town Phase 2. Please send me current options, prices, maps and guidance.",
     "href": ""
   }
 }
