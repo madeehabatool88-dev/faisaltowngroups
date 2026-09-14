@@ -5,18 +5,9 @@
   "mainQuery": "I want current Faisal Town property options, prices and availability",
   "leadLabel": "Start with the correct project",
   "leadHeading": "What do you want to check?",
-  "options": [
-    {
-      "label": "Faisal Town Phase 2",
-      "query": "I want current Faisal Town Phase 2 plot availability and prices"
-    },
-    {
-      "label": "Faisal Town Phase 1",
-      "query": "I want current Faisal Town Phase 1 / F-18 property availability"
-    },
-    {
-      "label": "Help Me Choose",
-      "query": "I am not sure which Faisal Town project suits my budget. Please guide me"
-    }
-  ]
+  "optionsText": "Faisal Town Phase 2 | I want current Faisal Town Phase 2 plot availability and prices\nFaisal Town Phase 1 | I want current Faisal Town Phase 1 / F-18 property availability\nHelp Me Choose | I am not sure which Faisal Town project suits my budget. Please guide me",
+  "whatsappButton": "Talk on WhatsApp",
+  "callButton": "Call Now",
+  "backgroundImage": "",
+  "backgroundImageAlt": ""
 }

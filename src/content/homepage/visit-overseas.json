@@ -1,0 +1,24 @@
+{
+  "siteVisit": {
+    "enabled": false,
+    "heading": "",
+    "text": "",
+    "image": "",
+    "alt": "",
+    "ctaLabel": "",
+    "ctaType": "whatsapp",
+    "whatsappQuery": "",
+    "href": ""
+  },
+  "overseas": {
+    "enabled": false,
+    "heading": "",
+    "text": "",
+    "image": "",
+    "alt": "",
+    "ctaLabel": "",
+    "ctaType": "whatsapp",
+    "whatsappQuery": "",
+    "href": ""
+  }
+}

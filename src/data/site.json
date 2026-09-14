@@ -6,5 +6,18 @@
   "defaultImage": "/assets/faisal-town-ii/hero-masterplan-preview.webp",
   "disclosure": "Independent property information and buyer-assistance website. Not presented as the official Faisal Town developer website.",
   "globalPrimaryCta": "Check Current Availability",
-  "globalSecondaryCta": "Arrange a Site Visit"
+  "globalSecondaryCta": "Arrange a Site Visit",
+  "phoneDial": "+923358049806",
+  "email": "",
+  "officeAddress": "",
+  "representativeName": "",
+  "partnerStatement": "",
+  "dealerNumber": "",
+  "facebookUrl": "",
+  "instagramUrl": "",
+  "googleMapsUrl": "",
+  "businessHours": "",
+  "defaultWhatsAppMessage": "I want current Faisal Town property availability",
+  "stickyWhatsAppEnabled": true,
+  "stickyCallEnabled": false
 }

@@ -9,305 +9,1055 @@ actions:
     workflow: deploy-site.yml
     ref: main
     confirm: false
-
 media:
   - name: images
     label: Website Images
     input: public/assets
     output: /assets
-    categories: [image]
-    extensions: [jpg, jpeg, png, webp, svg]
+    categories:
+      - image
+    extensions:
+      - jpg
+      - jpeg
+      - png
+      - webp
+      - svg
     rename: safe
   - name: project_images
     label: Project Images
     input: public/assets/projects
     output: /assets/projects
-    categories: [image]
-    extensions: [jpg, jpeg, png, webp, svg]
+    categories:
+      - image
+    extensions:
+      - jpg
+      - jpeg
+      - png
+      - webp
+      - svg
     rename: safe
   - name: maps
     label: Maps & Location Images
     input: public/assets/maps
     output: /assets/maps
-    categories: [image]
-    extensions: [jpg, jpeg, png, webp, svg]
+    categories:
+      - image
+    extensions:
+      - jpg
+      - jpeg
+      - png
+      - webp
+      - svg
     rename: safe
   - name: article_images
     label: Article Images
     input: public/assets/articles
     output: /assets/articles
-    categories: [image]
-    extensions: [jpg, jpeg, png, webp, svg]
+    categories:
+      - image
+    extensions:
+      - jpg
+      - jpeg
+      - png
+      - webp
+      - svg
     rename: safe
   - name: uploads
     label: New Uploads
     input: public/assets/uploads
     output: /assets/uploads
-    categories: [image]
-    extensions: [jpg, jpeg, png, webp, svg]
+    categories:
+      - image
+    extensions:
+      - jpg
+      - jpeg
+      - png
+      - webp
+      - svg
     rename: safe
   - name: plans
     label: Master Plans & PDFs
     input: public/assets/plans
     output: /assets/plans
-    categories: [document]
-    extensions: [pdf]
+    categories:
+      - document
+    extensions:
+      - pdf
     rename: safe
-
 content:
   - name: main_website
     label: Main Website
     type: group
     items:
-      - name: homepage_hero
-        label: Homepage - Hero & SEO
-        type: file
-        path: src/content/homepage/hero.json
-        format: json
-        fields:
-          - name: seoTitle
-            label: SEO Title
-            type: string
-            description: Title shown in Google search results.
-          - name: metaDescription
-            label: Meta Description
-            type: text
-            description: Search result description.
-          - { name: topStripLabel, label: Top Strip Label, type: string }
-          - { name: topStripText, label: Top Strip Text, type: text }
-          - { name: heroImage, label: Hero Image, type: image }
-          - { name: heroImageAlt, label: Hero Image Alt Text, type: string }
-          - { name: heroEyebrow, label: Hero Eyebrow, type: string }
-          - { name: h1, label: H1 Heading, type: string }
-          - { name: intro, label: Introduction, type: text }
-          - { name: primaryCta, label: Primary CTA, type: string }
-          - { name: secondaryCta, label: Secondary CTA, type: string }
-          - name: whatsappCard
-            label: WhatsApp Card
-            type: object
+      - name: homepage
+        label: Homepage
+        type: group
+        items:
+          - name: homepage_controls
+            label: 00 - Section Controls
+            type: file
+            path: src/content/homepage/controls.json
+            format: json
+            description: >-
+              These switches prepare the future homepage. The current layout and visibility stay unchanged until
+              frontend wiring.
             fields:
-              - { name: label, label: Label, type: string }
-              - { name: heading, label: Heading, type: string }
-              - { name: text, label: Text, type: text }
-              - name: actions
-                label: WhatsApp Actions
+              - name: hero
+                label: SEO & Hero Enabled
+                type: boolean
+                required: false
+              - name: trust
+                label: Trust / Authorized Partner Enabled
+                type: boolean
+                required: false
+              - name: featuredOffer
+                label: Featured Phase 2 Offer Enabled
+                type: boolean
+                required: false
+              - name: prices
+                label: Plot Sizes & Prices Enabled
+                type: boolean
+                required: false
+              - name: budgets
+                label: Find by Budget Enabled
+                type: boolean
+                required: false
+              - name: sectors
+                label: Phase 2 Sectors Enabled
+                type: boolean
+                required: false
+              - name: development
+                label: Development Updates Enabled
+                type: boolean
+                required: false
+              - name: masterPlan
+                label: Master Plan Enabled
+                type: boolean
+                required: false
+              - name: buyerSupport
+                label: Why Buy Through Us Enabled
+                type: boolean
+                required: false
+              - name: buyingProcess
+                label: How Buying Works Enabled
+                type: boolean
+                required: false
+              - name: visitOverseas
+                label: Site Visit / Overseas Buyers Enabled
+                type: boolean
+                required: false
+              - name: faqs
+                label: FAQs Enabled
+                type: boolean
+                required: false
+              - name: buyerGuides
+                label: Buyer Guides Enabled
+                type: boolean
+                required: false
+              - name: finalCta
+                label: Final WhatsApp CTA Enabled
+                type: boolean
+                required: false
+              - name: phase1
+                label: Phase 1 Secondary Project Enabled
+                type: boolean
+                required: false
+            operations:
+              delete: false
+              rename: false
+          - name: homepage_hero
+            label: 01 - SEO & Hero
+            type: file
+            path: src/content/homepage/hero.json
+            format: json
+            description: >-
+              Existing fields still edit the current hero. New CTA types, trust points and starting-price display await
+              the redesign. Prices are maintained only in 04.
+            fields:
+              - name: seoTitle
+                label: SEO Title
+                type: string
+                description: Title shown in Google search results.
+              - name: metaDescription
+                label: Meta Description
+                type: text
+                description: Search result description.
+              - name: topStripLabel
+                label: Top Strip Label
+                type: string
+              - name: topStripText
+                label: Top Strip Text
+                type: text
+              - name: heroImage
+                label: Hero Image
+                type: image
+              - name: heroImageAlt
+                label: Hero Image Alt Text
+                type: string
+              - name: heroEyebrow
+                label: Hero Eyebrow
+                type: string
+              - name: h1
+                label: H1 Heading
+                type: string
+              - name: intro
+                label: Introduction
+                type: text
+              - name: primaryCta
+                label: Primary CTA
+                type: string
+              - name: secondaryCta
+                label: Secondary CTA
+                type: string
+              - name: whatsappCard
+                label: WhatsApp Card
                 type: object
-                list: true
                 fields:
-                  - { name: label, label: Button Label, type: string }
-                  - { name: query, label: WhatsApp Query, type: text }
-          - { name: updated, label: Updated Date, type: date }
-          - { name: reviewed, label: Reviewed Date, type: date }
-        operations:
-          delete: false
-          rename: false
-
-      - name: homepage_project_choice
-        label: Homepage - Project Choice
-        type: file
-        path: src/content/homepage/project-choice.json
-        format: json
-        fields:
-          - { name: eyebrow, label: Eyebrow, type: string }
-          - { name: heading, label: Heading, type: string }
-          - { name: text, label: Text, type: text }
-          - name: cards
-            label: Project Choice Cards
-            type: object
-            list: true
+                  - name: label
+                    label: Label
+                    type: string
+                  - name: heading
+                    label: Heading
+                    type: string
+                  - name: text
+                    label: Text
+                    type: text
+                  - name: actionsText
+                    label: WhatsApp Actions - Bulk Edit
+                    type: text
+                    required: false
+                    description: >-
+                      Paste all items here, one per line: Button label | WhatsApp message. Spreadsheet columns also
+                      work. Keep empty optional columns between separators. Reorder by moving lines.
+              - name: updated
+                label: Updated Date
+                type: date
+              - name: reviewed
+                label: Reviewed Date
+                type: date
+              - name: startingPriceLabel
+                label: Starting Price Label
+                type: string
+                required: false
+              - name: priceDisclaimer
+                label: Price Disclaimer
+                type: text
+                required: false
+              - name: trustPointsText
+                label: Trust Points - Bulk Edit
+                type: text
+                required: false
+                description: One trust point per line. Only use confirmed wording. Prepared for the future homepage.
+              - name: primaryCtaType
+                label: primary CTA Type
+                type: select
+                required: false
+                options:
+                  values:
+                    - whatsapp
+                    - phone
+                    - internal
+              - name: primaryHref
+                label: primary Link
+                type: string
+                required: false
+              - name: primaryWhatsappQuery
+                label: primary WhatsApp Message
+                type: text
+                required: false
+              - name: secondaryCtaType
+                label: secondary CTA Type
+                type: select
+                required: false
+                options:
+                  values:
+                    - whatsapp
+                    - phone
+                    - internal
+              - name: secondaryHref
+                label: secondary Link
+                type: string
+                required: false
+              - name: secondaryWhatsappQuery
+                label: secondary WhatsApp Message
+                type: text
+                required: false
+            operations:
+              delete: false
+              rename: false
+          - name: homepage_trust
+            label: 02 - Trust / Authorized Partner
+            type: file
+            path: src/content/homepage/trust.json
+            format: json
+            description: >-
+              Prepared for the future homepage redesign; this new section is not displayed on the current homepage.
+              Company identity and partner wording are maintained in Site Settings.
             fields:
-              - { name: label, label: Label, type: string }
-              - { name: heading, label: Heading, type: string }
-              - { name: text, label: Text, type: text }
-              - { name: primaryLabel, label: Primary Button Label, type: string }
-              - { name: primaryHref, label: Primary Link, type: string }
-              - { name: secondaryLabel, label: Secondary Button Label, type: string }
-              - { name: secondaryQuery, label: WhatsApp Query, type: text }
-        operations:
-          delete: false
-          rename: false
-
-      - name: homepage_phase_2
-        label: Homepage - Phase 2
-        type: file
-        path: src/content/homepage/phase-2.json
-        format: json
-        fields:
-          - { name: eyebrow, label: Eyebrow, type: string }
-          - { name: heading, label: Heading, type: string }
-          - { name: text, label: Text, type: text }
-          - { name: primaryCta, label: Primary CTA, type: string }
-          - { name: primaryHref, label: Primary Link, type: string }
-          - { name: secondaryCta, label: Secondary CTA, type: string }
-          - { name: secondaryQuery, label: Secondary WhatsApp Query, type: text }
-          - name: masterPlan
-            label: Master Plan Block
-            type: object
+              - name: eyebrow
+                label: Eyebrow
+                type: string
+                required: false
+              - name: heading
+                label: Heading
+                type: string
+                required: false
+              - name: text
+                label: Description
+                type: text
+                required: false
+              - name: showPartnerStatement
+                label: Show Global Partner Statement
+                type: boolean
+                required: false
+              - name: authorizationImage
+                label: Authorization Image
+                type: image
+                required: false
+              - name: authorizationImageAlt
+                label: Image Alt
+                type: string
+                required: false
+              - name: showAuthorizationImage
+                label: Show Authorization Image
+                type: boolean
+                required: false
+            operations:
+              delete: false
+              rename: false
+          - name: homepage_offer
+            label: 03 - Featured Phase 2 Offer
+            type: file
+            path: src/content/homepage/featured-offer.json
+            format: json
+            description: >-
+              Existing Sector P feature and plan content. All offer prices are maintained in 04; do not duplicate
+              amounts here.
             fields:
-              - { name: eyebrow, label: Eyebrow, type: string }
-              - { name: heading, label: Heading, type: string }
-              - { name: text, label: Text, type: text }
-              - { name: image, label: Master Plan Image, type: image }
-              - { name: alt, label: Image Alt Text, type: string }
-              - { name: caption, label: Caption, type: string }
-              - { name: pdf, label: Master Plan PDF, type: string }
-              - { name: whatsappQuery, label: WhatsApp Query, type: text }
-          - { name: sectorsHeading, label: Sectors Heading, type: string }
-          - name: sectors
-            label: Phase 2 Sector Cards
-            type: object
-            list: true
-            fields:
-              - { name: title, label: Title, type: string }
-              - { name: href, label: Link, type: string }
-              - { name: text, label: Text, type: text }
-          - name: sectorP
-            label: Sector P Feature
-            type: object
-            fields:
-              - { name: image, label: Image, type: image }
-              - { name: alt, label: Image Alt Text, type: string }
-              - { name: eyebrow, label: Eyebrow, type: string }
-              - { name: heading, label: Heading, type: string }
-              - { name: text, label: Text, type: text }
-              - name: facts
-                label: Fact Boxes
+              - name: image
+                label: Image
+                type: image
+              - name: alt
+                label: Image Alt Text
+                type: string
+              - name: eyebrow
+                label: Eyebrow
+                type: string
+              - name: heading
+                label: Heading
+                type: string
+              - name: text
+                label: Text
+                type: text
+              - name: primaryCta
+                label: Primary CTA
+                type: string
+              - name: primaryHref
+                label: Primary Link
+                type: string
+              - name: secondaryCta
+                label: Secondary CTA
+                type: string
+              - name: secondaryQuery
+                label: Secondary WhatsApp Query
+                type: text
+              - name: status
+                label: Status
+                type: select
+                required: false
+                options:
+                  values:
+                    - Featured
+                    - Available
+                    - Limited
+                    - Ask for availability
+                    - Sold
+              - name: factsText
+                label: Feature Facts - Bulk Edit
+                type: text
+                required: false
+                description: >-
+                  Paste all items here, one per line: Value | Label. Spreadsheet columns also work. Keep empty optional
+                  columns between separators. Reorder by moving lines.
+              - name: sectorPlan
+                label: Sector P Plan
                 type: object
-                list: true
                 fields:
-                  - { name: value, label: Value, type: string }
-                  - { name: label, label: Label, type: string }
-              - { name: primaryCta, label: Primary CTA, type: string }
-              - { name: primaryHref, label: Primary Link, type: string }
-              - { name: secondaryCta, label: Secondary CTA, type: string }
-              - { name: secondaryQuery, label: Secondary WhatsApp Query, type: text }
-          - name: priceTable
-            label: Sector P Price Table
-            type: object
+                  - name: eyebrow
+                    label: Eyebrow
+                    type: string
+                  - name: heading
+                    label: Heading
+                    type: string
+                  - name: text
+                    label: Text
+                    type: text
+                  - name: image
+                    label: Plan Preview Image
+                    type: image
+                  - name: alt
+                    label: Image Alt Text
+                    type: string
+                  - name: pdf
+                    label: Plan PDF
+                    type: string
+                  - name: whatsappQuery
+                    label: WhatsApp Query
+                    type: text
+            operations:
+              delete: false
+              rename: false
+          - name: homepage_prices
+            label: 04 - Plot Sizes & Prices
+            type: file
+            path: src/content/homepage/prices.json
+            format: json
+            description: >-
+              One source for offer prices. Availability, enabled and per-offer messages are prepared for the redesigned
+              frontend; the current price table uses the first four columns.
             fields:
-              - { name: eyebrow, label: Eyebrow, type: string }
-              - { name: heading, label: Heading, type: string }
-              - { name: text, label: Text, type: text }
-              - { name: note, label: Buyer Note, type: text }
-              - name: rows
-                label: Price Rows
+              - name: eyebrow
+                label: Eyebrow
+                type: string
+              - name: heading
+                label: Heading
+                type: string
+              - name: text
+                label: Text
+                type: text
+              - name: note
+                label: Buyer Note
+                type: text
+              - name: rowsText
+                label: Shared Plot Offers - Bulk Edit
+                type: text
+                required: false
+                description: >-
+                  Paste all items here, one per line: Dimensions | Marla/Kanal | Original PKR | Current PKR |
+                  Availability | Enabled (yes/no) | WhatsApp message. Spreadsheet columns also work. Keep empty optional
+                  columns between separators. Reorder by moving lines.
+            operations:
+              delete: false
+              rename: false
+          - name: homepage_budgets
+            label: 05 - Find by Budget
+            type: file
+            path: src/content/homepage/budgets.json
+            format: json
+            description: Prepared for the future homepage redesign; this new section is not displayed on the current homepage.
+            fields:
+              - name: eyebrow
+                label: Eyebrow
+                type: string
+                required: false
+              - name: heading
+                label: Heading
+                type: string
+                required: false
+              - name: text
+                label: Description
+                type: text
+                required: false
+              - name: itemsText
+                label: Budget Options - Bulk Edit
+                type: text
+                required: false
+                description: >-
+                  Paste all items here, one per line: Label | Description | WhatsApp message | Enabled (yes/no).
+                  Spreadsheet columns also work. Keep empty optional columns between separators. Reorder by moving
+                  lines.
+            operations:
+              delete: false
+              rename: false
+          - name: homepage_sectors
+            label: 06 - Phase 2 Sectors
+            type: file
+            path: src/content/homepage/sectors.json
+            format: json
+            description: Names, links and descriptions edit the current cards. Extra display fields await the redesign.
+            fields:
+              - name: heading
+                label: Heading
+                type: string
+                required: false
+              - name: sectorsText
+                label: Sector Cards - Bulk Edit
+                type: text
+                required: false
+                description: >-
+                  Paste all items here, one per line: Name/sub-name | Page URL | Description | Image path | Alt text |
+                  Status | WhatsApp message | Enabled (yes/no). Spreadsheet columns also work. Keep empty optional
+                  columns between separators. Reorder by moving lines.
+            operations:
+              delete: false
+              rename: false
+          - name: homepage_development
+            label: 07 - Development Updates
+            type: file
+            path: src/content/homepage/development.json
+            format: json
+            description: >-
+              Current development content remains editable. Additional images, date and video are prepared for the
+              redesign.
+            fields:
+              - name: eyebrow
+                label: Eyebrow
+                type: string
+              - name: heading
+                label: Heading
+                type: string
+              - name: text
+                label: Text
+                type: text
+              - name: cta
+                label: CTA Label
+                type: string
+              - name: query
+                label: WhatsApp Query
+                type: text
+              - name: image
+                label: Development Image
+                type: image
+              - name: alt
+                label: Image Alt Text
+                type: string
+              - name: caption
+                label: Caption
+                type: string
+              - name: updateDate
+                label: Actual Update Date
+                type: date
+                required: false
+              - name: additionalImagesText
+                label: Additional Images - Bulk Edit
+                type: text
+                required: false
+                description: >-
+                  Paste all items here, one per line: Image path | Alt text | Caption. Spreadsheet columns also work.
+                  Keep empty optional columns between separators. Reorder by moving lines.
+              - name: videoUrl
+                label: Video URL
+                type: string
+                required: false
+            operations:
+              delete: false
+              rename: false
+          - name: homepage_master_plan
+            label: 08 - Master Plan
+            type: file
+            path: src/content/homepage/master-plan.json
+            format: json
+            fields:
+              - name: eyebrow
+                label: Eyebrow
+                type: string
+              - name: heading
+                label: Heading
+                type: string
+              - name: text
+                label: Text
+                type: text
+              - name: image
+                label: Master Plan Image
+                type: image
+              - name: alt
+                label: Image Alt Text
+                type: string
+              - name: caption
+                label: Caption
+                type: string
+              - name: pdf
+                label: Master Plan PDF
+                type: string
+              - name: whatsappQuery
+                label: WhatsApp Query
+                type: text
+              - name: viewLabel
+                label: View Button Label
+                type: string
+                required: false
+              - name: whatsappLabel
+                label: WhatsApp Button Label
+                type: string
+                required: false
+            operations:
+              delete: false
+              rename: false
+          - name: homepage_support
+            label: 09 - Why Buy Through Us
+            type: file
+            path: src/content/homepage/buyer-support.json
+            format: json
+            description: Prepared for the future homepage redesign; this new section is not displayed on the current homepage.
+            fields:
+              - name: eyebrow
+                label: Eyebrow
+                type: string
+                required: false
+              - name: heading
+                label: Heading
+                type: string
+                required: false
+              - name: text
+                label: Description
+                type: text
+                required: false
+              - name: itemsText
+                label: Support Cards - Bulk Edit
+                type: text
+                required: false
+                description: >-
+                  Paste all items here, one per line: Title | Description | Icon (check/map/phone/home/globe) | Enabled
+                  (yes/no). Spreadsheet columns also work. Keep empty optional columns between separators. Reorder by
+                  moving lines.
+            operations:
+              delete: false
+              rename: false
+          - name: homepage_process
+            label: 10 - How Buying Works
+            type: file
+            path: src/content/homepage/buying-process.json
+            format: json
+            description: Prepared for the future homepage redesign; this new section is not displayed on the current homepage.
+            fields:
+              - name: eyebrow
+                label: Eyebrow
+                type: string
+                required: false
+              - name: heading
+                label: Heading
+                type: string
+                required: false
+              - name: text
+                label: Description
+                type: text
+                required: false
+              - name: stepsText
+                label: Buying Steps - Bulk Edit
+                type: text
+                required: false
+                description: >-
+                  Paste all items here, one per line: Title | Description | Enabled (yes/no). Spreadsheet columns also
+                  work. Keep empty optional columns between separators. Reorder by moving lines.
+            operations:
+              delete: false
+              rename: false
+          - name: homepage_assistance
+            label: 11 - Site Visit / Overseas Buyers
+            type: file
+            path: src/content/homepage/visit-overseas.json
+            format: json
+            description: Prepared for the future homepage redesign; this new section is not displayed on the current homepage.
+            fields:
+              - name: siteVisit
+                label: Site Visit
                 type: object
-                list: true
                 fields:
-                  - { name: size, label: Plot Size, type: string }
-                  - { name: marla, label: Marla/Kanal, type: string }
-                  - { name: actual, label: Actual Price, type: string }
-                  - { name: discount, label: Discounted Price, type: string }
-          - name: sectorPlan
-            label: Sector P Plan
-            type: object
+                  - name: enabled
+                    label: Enabled
+                    type: boolean
+                    required: false
+                  - name: heading
+                    label: Heading
+                    type: string
+                    required: false
+                  - name: text
+                    label: Description
+                    type: text
+                    required: false
+                  - name: image
+                    label: Image
+                    type: image
+                    required: false
+                  - name: alt
+                    label: Image Alt
+                    type: string
+                    required: false
+                  - name: ctaLabel
+                    label: Button Label
+                    type: string
+                    required: false
+                  - name: ctaType
+                    label: Button Type
+                    type: select
+                    required: false
+                    options:
+                      values:
+                        - whatsapp
+                        - phone
+                        - internal
+                  - name: whatsappQuery
+                    label: WhatsApp Message
+                    type: text
+                    required: false
+                  - name: href
+                    label: Internal Link
+                    type: string
+                    required: false
+              - name: overseas
+                label: Overseas Buyers
+                type: object
+                fields:
+                  - name: enabled
+                    label: Enabled
+                    type: boolean
+                    required: false
+                  - name: heading
+                    label: Heading
+                    type: string
+                    required: false
+                  - name: text
+                    label: Description
+                    type: text
+                    required: false
+                  - name: image
+                    label: Image
+                    type: image
+                    required: false
+                  - name: alt
+                    label: Image Alt
+                    type: string
+                    required: false
+                  - name: ctaLabel
+                    label: Button Label
+                    type: string
+                    required: false
+                  - name: ctaType
+                    label: Button Type
+                    type: select
+                    required: false
+                    options:
+                      values:
+                        - whatsapp
+                        - phone
+                        - internal
+                  - name: whatsappQuery
+                    label: WhatsApp Message
+                    type: text
+                    required: false
+                  - name: href
+                    label: Internal Link
+                    type: string
+                    required: false
+            operations:
+              delete: false
+              rename: false
+          - name: homepage_faqs
+            label: 12 - FAQs
+            type: file
+            path: src/content/homepage/faqs.json
+            format: json
+            description: Prepared for the future homepage redesign; this new section is not displayed on the current homepage.
             fields:
-              - { name: eyebrow, label: Eyebrow, type: string }
-              - { name: heading, label: Heading, type: string }
-              - { name: text, label: Text, type: text }
-              - { name: image, label: Plan Preview Image, type: image }
-              - { name: alt, label: Image Alt Text, type: string }
-              - { name: pdf, label: Plan PDF, type: string }
-              - { name: whatsappQuery, label: WhatsApp Query, type: text }
-          - name: development
-            label: Development Block
-            type: object
+              - name: heading
+                label: Heading
+                type: string
+                required: false
+              - name: faqsText
+                label: FAQs - Bulk Edit
+                type: text
+                required: false
+                description: >-
+                  Paste all items here, one per line: Question | Answer | Enabled (yes/no). Spreadsheet columns also
+                  work. Keep empty optional columns between separators. Reorder by moving lines.
+            operations:
+              delete: false
+              rename: false
+          - name: homepage_guides
+            label: 13 - Buyer Guides
+            type: file
+            path: src/content/homepage/buyer-guides.json
+            format: json
+            description: >-
+              The two selected-guide lists control the current homepage. Section copy and display limit are prepared for
+              the redesign.
             fields:
-              - { name: eyebrow, label: Eyebrow, type: string }
-              - { name: heading, label: Heading, type: string }
-              - { name: text, label: Text, type: text }
-              - { name: cta, label: CTA Label, type: string }
-              - { name: query, label: WhatsApp Query, type: text }
-              - { name: image, label: Development Image, type: image }
-              - { name: alt, label: Image Alt Text, type: string }
-              - { name: caption, label: Caption, type: string }
-          - name: articleSlugs
-            label: Related Article Slugs
-            type: string
-            list: true
-            required: false
-        operations:
-          delete: false
-          rename: false
-
-      - name: homepage_phase_1
-        label: Homepage - Phase 1
-        type: file
-        path: src/content/homepage/phase-1.json
-        format: json
-        fields:
-          - { name: eyebrow, label: Eyebrow, type: string }
-          - { name: heading, label: Heading, type: string }
-          - { name: text, label: Text, type: text }
-          - { name: primaryCta, label: Primary CTA, type: string }
-          - { name: primaryHref, label: Primary Link, type: string }
-          - { name: secondaryCta, label: Secondary CTA, type: string }
-          - { name: secondaryQuery, label: Secondary WhatsApp Query, type: text }
-          - name: blocks
-            label: Phase 1 Block Cards
-            type: object
-            list: true
+              - name: eyebrow
+                label: Eyebrow
+                type: string
+                required: false
+              - name: heading
+                label: Heading
+                type: string
+                required: false
+              - name: text
+                label: Description
+                type: text
+                required: false
+              - name: phase2SlugsText
+                label: Phase 2 Guides - Bulk Edit
+                type: text
+                required: false
+                description: One article slug per line. Titles, images and links come from the articles collection.
+              - name: phase1SlugsText
+                label: Phase 1 Guides - Bulk Edit
+                type: text
+                required: false
+                description: One article slug per line.
+              - name: displayLimit
+                label: Future Display Limit
+                type: number
+                required: false
+            operations:
+              delete: false
+              rename: false
+          - name: homepage_contact
+            label: 14 - Final WhatsApp CTA
+            type: file
+            path: src/content/homepage/contact.json
+            format: json
+            description: Existing contact copy and options remain live. New button labels and background image await the redesign.
             fields:
-              - { name: title, label: Title, type: string }
-              - { name: href, label: Link, type: string }
-              - { name: text, label: Text, type: text }
-          - { name: featureImage, label: Feature Image, type: image }
-          - { name: featureImageAlt, label: Feature Image Alt Text, type: string }
-          - { name: featureEyebrow, label: Feature Eyebrow, type: string }
-          - { name: featureHeading, label: Feature Heading, type: string }
-          - { name: featureText, label: Feature Text, type: text }
-          - { name: featureCta, label: Feature CTA, type: string }
-          - { name: featureQuery, label: Feature WhatsApp Query, type: text }
-          - name: articleSlugs
-            label: Related Article Slugs
-            type: string
-            list: true
-            required: false
-        operations:
-          delete: false
-          rename: false
-
-      - name: homepage_contact
-        label: Homepage - Contact
-        type: file
-        path: src/content/homepage/contact.json
-        format: json
-        fields:
-          - { name: eyebrow, label: Eyebrow, type: string }
-          - { name: heading, label: Heading, type: string }
-          - { name: text, label: Text, type: text }
-          - { name: mainQuery, label: Main WhatsApp Query, type: text }
-          - { name: leadLabel, label: Lead Box Label, type: string }
-          - { name: leadHeading, label: Lead Box Heading, type: string }
-          - name: options
-            label: WhatsApp Options
-            type: object
-            list: true
-            fields:
-              - { name: label, label: Button Label, type: string }
-              - { name: query, label: WhatsApp Query, type: text }
-        operations:
-          delete: false
-          rename: false
-
+              - name: eyebrow
+                label: Eyebrow
+                type: string
+              - name: heading
+                label: Heading
+                type: string
+              - name: text
+                label: Text
+                type: text
+              - name: mainQuery
+                label: Main WhatsApp Query
+                type: text
+              - name: leadLabel
+                label: Lead Box Label
+                type: string
+              - name: leadHeading
+                label: Lead Box Heading
+                type: string
+              - name: optionsText
+                label: WhatsApp Options - Bulk Edit
+                type: text
+                required: false
+                description: >-
+                  Paste all items here, one per line: Button label | WhatsApp message. Spreadsheet columns also work.
+                  Keep empty optional columns between separators. Reorder by moving lines.
+              - name: whatsappButton
+                label: WhatsApp Button
+                type: string
+                required: false
+              - name: callButton
+                label: Call Button
+                type: string
+                required: false
+              - name: backgroundImage
+                label: Background Image
+                type: image
+                required: false
+              - name: backgroundImageAlt
+                label: Background Image Alt
+                type: string
+                required: false
+            operations:
+              delete: false
+              rename: false
       - name: site_settings
         label: Site Settings
         type: file
         path: src/data/site.json
         format: json
         fields:
-          - { name: name, label: Website Name, type: string }
-          - { name: domain, label: Canonical Domain, type: string }
-          - { name: phoneDisplay, label: Display Phone, type: string }
-          - { name: phoneWhatsApp, label: WhatsApp Number, type: string }
-          - { name: defaultImage, label: Default Social Image, type: image }
-          - { name: disclosure, label: Disclosure, type: text }
-          - { name: globalPrimaryCta, label: Global Primary CTA, type: string }
-          - { name: globalSecondaryCta, label: Global Secondary CTA, type: string }
+          - name: name
+            label: Website Name
+            type: string
+          - name: domain
+            label: Canonical Domain
+            type: string
+          - name: phoneDisplay
+            label: Display Phone
+            type: string
+          - name: phoneWhatsApp
+            label: WhatsApp Number
+            type: string
+          - name: defaultImage
+            label: Default Social Image
+            type: image
+          - name: disclosure
+            label: Disclosure
+            type: text
+          - name: globalPrimaryCta
+            label: Global Primary CTA
+            type: string
+          - name: globalSecondaryCta
+            label: Global Secondary CTA
+            type: string
+          - name: phoneDial
+            label: Dialable Phone Number
+            type: string
+            required: false
+          - name: email
+            label: Email
+            type: string
+            required: false
+          - name: officeAddress
+            label: Office Address
+            type: text
+            required: false
+          - name: representativeName
+            label: Representative Name
+            type: string
+            required: false
+          - name: partnerStatement
+            label: Confirmed Partner Wording
+            type: text
+            required: false
+          - name: dealerNumber
+            label: Dealer / Partner Number
+            type: string
+            required: false
+          - name: facebookUrl
+            label: Facebook URL
+            type: string
+            required: false
+          - name: instagramUrl
+            label: Instagram URL
+            type: string
+            required: false
+          - name: googleMapsUrl
+            label: Google Maps URL
+            type: string
+            required: false
+          - name: businessHours
+            label: Business Hours
+            type: text
+            required: false
+          - name: defaultWhatsAppMessage
+            label: Default WhatsApp Message
+            type: text
+            required: false
+          - name: stickyWhatsAppEnabled
+            label: Future Sticky WhatsApp Enabled
+            type: boolean
+            required: false
+          - name: stickyCallEnabled
+            label: Future Sticky Call Enabled
+            type: boolean
+            required: false
         operations:
           delete: false
           rename: false
-
+        description: >-
+          Global identity and contacts. New fields and sticky controls are prepared for the future frontend; the
+          existing phone, WhatsApp, company and disclosure fields remain in use.
+      - name: homepage_preserved
+        label: Preserved Homepage Content
+        type: group
+        items:
+          - name: homepage_phase_1
+            label: Phase 1 - Secondary Project
+            type: file
+            path: src/content/homepage/phase-1.json
+            format: json
+            fields:
+              - name: eyebrow
+                label: Eyebrow
+                type: string
+              - name: heading
+                label: Heading
+                type: string
+              - name: text
+                label: Text
+                type: text
+              - name: primaryCta
+                label: Primary CTA
+                type: string
+              - name: primaryHref
+                label: Primary Link
+                type: string
+              - name: secondaryCta
+                label: Secondary CTA
+                type: string
+              - name: secondaryQuery
+                label: Secondary WhatsApp Query
+                type: text
+              - name: featureImage
+                label: Feature Image
+                type: image
+              - name: featureImageAlt
+                label: Feature Image Alt Text
+                type: string
+              - name: featureEyebrow
+                label: Feature Eyebrow
+                type: string
+              - name: featureHeading
+                label: Feature Heading
+                type: string
+              - name: featureText
+                label: Feature Text
+                type: text
+              - name: featureCta
+                label: Feature CTA
+                type: string
+              - name: featureQuery
+                label: Feature WhatsApp Query
+                type: text
+              - name: blocksText
+                label: Phase 1 Blocks - Bulk Edit
+                type: text
+                required: false
+                description: >-
+                  Paste all items here, one per line: Title | URL | Description. Spreadsheet columns also work. Keep
+                  empty optional columns between separators. Reorder by moving lines.
+            operations:
+              delete: false
+              rename: false
+          - name: homepage_project_choice
+            label: Current Layout - Project Choice
+            type: file
+            path: src/content/homepage/project-choice.json
+            format: json
+            fields:
+              - name: eyebrow
+                label: Eyebrow
+                type: string
+              - name: heading
+                label: Heading
+                type: string
+              - name: text
+                label: Text
+                type: text
+              - name: cardsText
+                label: Project Choice Cards - Bulk Edit
+                type: text
+                required: false
+                description: >-
+                  Paste all items here, one per line: Label | Heading | Description | Primary label | Primary URL |
+                  WhatsApp label | WhatsApp message. Spreadsheet columns also work. Keep empty optional columns between
+                  separators. Reorder by moving lines.
+            operations:
+              delete: false
+              rename: false
+          - name: homepage_phase_2
+            label: Current Layout - Phase 2 Introduction
+            type: file
+            path: src/content/homepage/phase-2.json
+            format: json
+            fields:
+              - name: eyebrow
+                label: Eyebrow
+                type: string
+              - name: heading
+                label: Heading
+                type: string
+              - name: text
+                label: Text
+                type: text
+              - name: primaryCta
+                label: Primary CTA
+                type: string
+              - name: primaryHref
+                label: Primary Link
+                type: string
+              - name: secondaryCta
+                label: Secondary CTA
+                type: string
+              - name: secondaryQuery
+                label: Secondary WhatsApp Query
+                type: text
+            operations:
+              delete: false
+              rename: false
   - name: projects_property
     label: Projects & Property Pages
     type: collection
@@ -317,7 +1067,14 @@ content:
     filename: "{slug}.json"
     view:
       layout: list
-      fields: [h1, pageType, phase, slug, status, updated, order]
+      fields:
+        - h1
+        - pageType
+        - phase
+        - slug
+        - status
+        - updated
+        - order
     fields:
       - name: order
         label: Display Order
@@ -327,7 +1084,9 @@ content:
         label: Status
         type: select
         options:
-          values: [published, draft]
+          values:
+            - published
+            - draft
       - name: slug
         label: Slug
         type: string
@@ -361,14 +1120,30 @@ content:
         label: Meta Description
         type: text
         description: Search result description.
-      - { name: eyebrow, label: Eyebrow, type: string }
-      - { name: h1, label: Page Heading, type: string }
-      - { name: intro, label: Intro, type: text }
-      - { name: image, label: Featured Image, type: image }
-      - { name: primaryCta, label: Primary CTA, type: string }
-      - { name: secondaryCta, label: Secondary CTA, type: string }
-      - { name: updated, label: Updated Date, type: date }
-      - { name: reviewed, label: Reviewed Date, type: date }
+      - name: eyebrow
+        label: Eyebrow
+        type: string
+      - name: h1
+        label: Page Heading
+        type: string
+      - name: intro
+        label: Intro
+        type: text
+      - name: image
+        label: Featured Image
+        type: image
+      - name: primaryCta
+        label: Primary CTA
+        type: string
+      - name: secondaryCta
+        label: Secondary CTA
+        type: string
+      - name: updated
+        label: Updated Date
+        type: date
+      - name: reviewed
+        label: Reviewed Date
+        type: date
       - name: body
         label: Full Project Body
         type: text
@@ -403,7 +1178,6 @@ content:
       create: true
       rename: true
       delete: false
-
   - name: articles_guides
     label: Articles & Buyer Guides
     type: collection
@@ -413,7 +1187,13 @@ content:
     filename: "{slug}.json"
     view:
       layout: list
-      fields: [title, cluster, category, status, updated, order]
+      fields:
+        - title
+        - cluster
+        - category
+        - status
+        - updated
+        - order
     fields:
       - name: order
         label: Display Order
@@ -423,12 +1203,16 @@ content:
         label: Status
         type: select
         options:
-          values: [published, draft]
+          values:
+            - published
+            - draft
       - name: slug
         label: Slug
         type: string
         description: Do not change unless intentionally changing the page URL.
-      - { name: title, label: Article Title, type: string }
+      - name: title
+        label: Article Title
+        type: string
       - name: seoTitle
         label: SEO Title
         type: string
@@ -439,8 +1223,13 @@ content:
         type: text
         required: false
         description: Search result description.
-      - { name: description, label: Archive Description, type: text }
-      - { name: intro, label: Introduction, type: text, required: false }
+      - name: description
+        label: Archive Description
+        type: text
+      - name: intro
+        label: Introduction
+        type: text
+        required: false
       - name: category
         label: Category
         type: select
@@ -467,39 +1256,62 @@ content:
             - Location & Maps
             - Faisal Town Phase 2
             - Prices & Payment Plans
-      - { name: date, label: Publish Date, type: date }
-      - { name: updated, label: Updated Date, type: date, required: false }
-      - { name: reviewed, label: Reviewed Date, type: string, required: false }
-      - { name: image, label: Featured Image, type: image }
-      - { name: readTime, label: Read Time, type: string }
+      - name: date
+        label: Publish Date
+        type: date
+      - name: updated
+        label: Updated Date
+        type: date
+        required: false
+      - name: reviewed
+        label: Reviewed Date
+        type: string
+        required: false
+      - name: image
+        label: Featured Image
+        type: image
+      - name: readTime
+        label: Read Time
+        type: string
       - name: body
         label: Full Article Body
         type: text
-        description: Edit the full article in one place. Use ## for section headings, - for bullet points, and > for highlighted notes.
+        description: Edit the full article in one place. Use
       - name: relatedSlugsText
         label: Related Articles - Bulk Edit
         type: text
-        description: "Paste all related article slugs here, one per line. Use slugs only, for example faisal-town-complete-guide. Clear the box to remove manually selected related articles."
+        description: >-
+          Paste all related article slugs here, one per line. Use slugs only, for example faisal-town-complete-guide.
+          Clear the box to remove manually selected related articles.
         required: false
       - name: cta
         label: Article CTA
         type: object
         required: false
         fields:
-          - { name: label, label: Label, type: string }
-          - { name: heading, label: Heading, type: string }
-          - { name: message, label: WhatsApp Message, type: text }
-          - { name: button, label: Button Label, type: string }
+          - name: label
+            label: Label
+            type: string
+          - name: heading
+            label: Heading
+            type: string
+          - name: message
+            label: WhatsApp Message
+            type: text
+          - name: button
+            label: Button Label
+            type: string
       - name: faqsText
         label: FAQs - Bulk Edit
         type: text
         required: false
-        description: "Paste all FAQs here, one per line: Question | Answer. You can also paste two spreadsheet columns. Blank lines are ignored. Clear the box to remove all FAQs."
+        description: >-
+          Paste all FAQs here, one per line: Question | Answer. You can also paste two spreadsheet columns. Blank lines
+          are ignored. Clear the box to remove all FAQs.
     operations:
       create: true
       rename: true
       delete: false
-
   - name: legal_pages
     label: Legal Pages
     type: collection
@@ -508,7 +1320,9 @@ content:
     subfolders: false
     view:
       layout: list
-      fields: [heading, updated]
+      fields:
+        - heading
+        - updated
     fields:
       - name: title
         label: SEO Title
@@ -518,27 +1332,40 @@ content:
         label: Meta Description
         type: text
         description: Search result description.
-      - { name: eyebrow, label: Eyebrow, type: string }
-      - { name: heading, label: Page Heading, type: string }
-      - { name: subheading, label: Subheading, type: text }
-      - { name: updated, label: Updated Date, type: date }
+      - name: eyebrow
+        label: Eyebrow
+        type: string
+      - name: heading
+        label: Page Heading
+        type: string
+      - name: subheading
+        label: Subheading
+        type: text
+      - name: updated
+        label: Updated Date
+        type: date
       - name: sections
         label: Legal Sections
         type: object
         list: true
         fields:
-          - { name: heading, label: Heading, type: string }
+          - name: heading
+            label: Heading
+            type: string
           - name: paragraphs
             label: Paragraphs
             type: text
             list: true
-      - { name: ctaLabel, label: CTA Label, type: string }
-      - { name: ctaQuery, label: CTA WhatsApp Query, type: text }
+      - name: ctaLabel
+        label: CTA Label
+        type: string
+      - name: ctaQuery
+        label: CTA WhatsApp Query
+        type: text
     operations:
       create: false
       rename: false
       delete: false
-
   - name: editor_guide
     label: Editing Guide
     type: file
@@ -547,7 +1374,6 @@ content:
     operations:
       delete: false
       rename: false
-
 settings:
   commit:
     templates:

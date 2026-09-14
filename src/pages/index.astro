@@ -5,11 +5,7 @@ import SiteFooter from "../components/SiteFooter.astro";
 import MobileWhatsApp from "../components/MobileWhatsApp.astro";
 import { articles } from "../data/articles";
 import { site, whatsappLink } from "../data/site";
-import hero from "../content/homepage/hero.json";
-import projectChoice from "../content/homepage/project-choice.json";
-import phase2 from "../content/homepage/phase-2.json";
-import phase1 from "../content/homepage/phase-1.json";
-import contact from "../content/homepage/contact.json";
+import { hero, projectChoice, phase2, phase1, contact } from "../data/homepage";
 
 const phoneDisplay = site.phoneDisplay;
 const phase2Articles = articles.filter((article) => phase2.articleSlugs.includes(article.slug));

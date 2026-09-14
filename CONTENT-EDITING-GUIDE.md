@@ -12,27 +12,37 @@ Use Pages CMS when you want to update website text, images, PDFs, articles, proj
 
 ## Homepage
 
-The homepage is split into five smaller CMS screens so you do not have to edit one very long page.
+Open **Main Website → Homepage**. The sections are organized for the planned Phase-2-first homepage:
 
-Use these entries:
+- 00 - Section Controls
+- 01 - SEO & Hero
+- 02 - Trust / Authorized Partner
+- 03 - Featured Phase 2 Offer
+- 04 - Plot Sizes & Prices
+- 05 - Find by Budget
+- 06 - Phase 2 Sectors
+- 07 - Development Updates
+- 08 - Master Plan
+- 09 - Why Buy Through Us
+- 10 - How Buying Works
+- 11 - Site Visit / Overseas Buyers
+- 12 - FAQs
+- 13 - Buyer Guides
+- 14 - Final WhatsApp CTA
 
-- Homepage - Hero & SEO: search title, meta description, top strip, hero image, main heading, intro and hero WhatsApp buttons.
-- Homepage - Project Choice: the two project choice cards near the top.
-- Homepage - Phase 2: Phase 2, master plan, sectors, Sector P, price rows, plan, development and related Phase 2 articles.
-- Homepage - Phase 1: Phase 1 heading, block cards, feature image and related Phase 1 articles.
-- Homepage - Contact: final WhatsApp lead section.
+**This release restructures the CMS only.** The current homepage appearance and order are unchanged. Existing content still controls the page from its new location. New sections, visibility switches, CTA types, per-item status and visibility, extra images, and new contact display options are prepared for the later frontend redesign. They do not change the current layout yet. Each entry explains which controls apply now.
 
-Useful fields:
+Repeated items use a single bulk text box. Paste all rows using the column order shown below the field, or paste spreadsheet columns without a header row. Reorder by moving lines. Blank lines are ignored. Keep empty optional columns between separators. Use yes/no for Enabled.
 
-- SEO Title: the title Google may show in search results.
-- Meta Description: the short search result description.
-- Hero Image: the main first-screen image.
-- H1 Heading: the main visible heading on the homepage.
-- Primary CTA and Secondary CTA: the main action buttons.
-- WhatsApp Card: the lead-focused box near the hero.
-- Related Article Slugs: controls which articles appear inside the Phase 1 or Phase 2 homepage sections.
+- **04 - Plot Sizes & Prices** owns the shared price table. Format: `Dimensions | Marla/Kanal | Original PKR | Current PKR | Availability | Enabled (yes/no) | WhatsApp message`.
+- **03 - Featured Phase 2 Offer** owns the feature copy, facts and Sector P plan. It does not have a second price table. Existing prose that mentions a price still needs to be reviewed separately when prices change.
+- **06 - Phase 2 Sectors** owns sector names, URLs and descriptions, with additional fields prepared for the redesign.
+- **12 - FAQs** accepts `Question | Answer | Enabled (yes/no)`, one FAQ per line. This new homepage section will display after the frontend stage.
+- **13 - Buyer Guides** has separate bulk selections for Phase 2 and Phase 1, one article slug per line. Article titles, images and URLs come from the articles collection.
 
-Keep homepage text customer-facing. Do not add internal notes, builder notes, task comments, or reminders for yourself.
+**Main Website → Preserved Homepage Content** keeps Phase 1, Project Choice and the Phase 2 introduction editable. These still appear in their original positions on the current homepage. No Phase 1 content or URLs were removed.
+
+**Site Settings** remains the source for the global company name, domain, phone and WhatsApp number. It now also has fields for email, office address, representative, confirmed partner wording, dealer number, social URLs, Google Maps, business hours, default WhatsApp message and future sticky-contact controls. New fields await frontend wiring. Unknown details are blank; only enter confirmed information. No authorized-partner claim is assumed.
 
 ## Projects & Property Pages
 

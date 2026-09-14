@@ -1,0 +1,22 @@
+{
+  "image": "/assets/sector-p/caladan-sector-p.jpeg",
+  "alt": "The Caladan Sector P in Faisal Town Phase 2",
+  "eyebrow": "Phase 2 - Sector P / The Caladan",
+  "heading": "Sector P plots from PKR 3.59 million",
+  "text": "Sector P is a specific Faisal Town Phase 2 opportunity. Its price table and Sector P plan are kept here inside the Sector P subsection so they are not confused with the general Phase 2 master plan or other sectors.",
+  "primaryCta": "Open Sector P Page",
+  "primaryHref": "/faisal-town-p-block/",
+  "secondaryCta": "Check Sector P Availability",
+  "secondaryQuery": "Check current Sector P plot numbers, prices and total payable amount",
+  "status": "Ask for availability",
+  "sectorPlan": {
+    "eyebrow": "Sector P Plan",
+    "heading": "Sector P plan",
+    "text": "This is the Sector P-specific plan. It is intentionally kept with the Sector P content instead of being mixed into the general Phase 2 master-plan section.",
+    "image": "/assets/sector-p/rendered/sector-p-masterplan-preview.webp",
+    "alt": "Sector P Faisal Town Phase 2 plan",
+    "pdf": "/assets/plans/sector-p-ft-ii.pdf",
+    "whatsappQuery": "Guide me using the Sector P plan and current available plots"
+  },
+  "factsText": "From PKR 3.59M | full-payment discounted price\n5.56 Marla - 2 Kanal | listed residential sizes\nPKR 20,000 | listed registration fee\nWhatsApp | current availability verification"
+}

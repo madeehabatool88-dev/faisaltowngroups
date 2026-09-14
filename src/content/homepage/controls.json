@@ -1,0 +1,17 @@
+{
+  "hero": true,
+  "trust": false,
+  "featuredOffer": true,
+  "prices": true,
+  "budgets": false,
+  "sectors": true,
+  "development": true,
+  "masterPlan": true,
+  "buyerSupport": false,
+  "buyingProcess": false,
+  "visitOverseas": false,
+  "faqs": false,
+  "buyerGuides": true,
+  "finalCta": true,
+  "phase1": true
+}

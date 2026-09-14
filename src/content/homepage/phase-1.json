@@ -6,23 +6,6 @@
   "primaryHref": "/faisal-town-phase-1/",
   "secondaryCta": "Ask Phase 1 Availability",
   "secondaryQuery": "I want current Faisal Town Phase 1 Block A, B or C availability",
-  "blocks": [
-    {
-      "title": "Block A",
-      "href": "/faisal-town-block-a/",
-      "text": "Established Phase 1 / F-18 block with resale plot, house and map guidance."
-    },
-    {
-      "title": "Block B",
-      "href": "/faisal-town-block-b/",
-      "text": "Popular Phase 1 / F-18 block for plots, map position and current resale availability."
-    },
-    {
-      "title": "Block C",
-      "href": "/faisal-town-block-c/",
-      "text": "Established Phase 1 / F-18 block for plots, houses and location options."
-    }
-  ],
   "featureImage": "/assets/faisal-town-phase-1.jpg",
   "featureImageAlt": "Faisal Town Phase 1 F-18",
   "featureEyebrow": "Phase 1 Property Search",
@@ -30,8 +13,5 @@
   "featureText": "Tell us the block, property type and budget on WhatsApp. We can help you check current Phase 1 / F-18 options without mixing them with Phase 2 inventory.",
   "featureCta": "Start Phase 1 WhatsApp Inquiry",
   "featureQuery": "I am looking for a Faisal Town Phase 1 / F-18 property. Please send current options",
-  "articleSlugs": [
-    "faisal-town-phase-1-and-faisal-hills",
-    "faisal-town-living"
-  ]
+  "blocksText": "Block A | /faisal-town-block-a/ | Established Phase 1 / F-18 block with resale plot, house and map guidance.\nBlock B | /faisal-town-block-b/ | Popular Phase 1 / F-18 block for plots, map position and current resale availability.\nBlock C | /faisal-town-block-c/ | Established Phase 1 / F-18 block for plots, houses and location options."
 }
