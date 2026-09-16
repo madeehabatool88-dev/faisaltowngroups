@@ -1,0 +1,37 @@
+---
+import { whatsappLink, site } from "../data/site";
+const {
+  label,
+  query,
+  href,
+  type = query ? "whatsapp" : "internal",
+  secondary = false,
+  event,
+  section,
+  sector,
+  plot,
+  budget,
+} = Astro.props;
+const destination =
+  type === "whatsapp"
+    ? whatsappLink(query || site.defaultWhatsAppMessage)
+    : type === "call"
+      ? `tel:${site.phoneDial}`
+      : href;
+---
+
+{destination && (
+  <a
+    class:list={["hp-button", { "hp-secondary": secondary }]}
+    href={destination}
+    data-event={event}
+    data-cta-label={label}
+    data-source-section={section}
+    data-sector={sector}
+    data-plot-size={plot}
+    data-budget-range={budget}
+  >
+    {label}
+    <span aria-hidden="true">↗</span>
+  </a>
+)}

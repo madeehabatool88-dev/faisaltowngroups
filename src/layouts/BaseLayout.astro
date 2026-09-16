@@ -9,7 +9,8 @@ const {
   image = site.defaultImage,
   ogType = "website",
   additionalSchema = [],
-  noindex = false
+  bodyClass = "",
+  noindex = false,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, site.domain).toString();
@@ -20,8 +21,9 @@ const baseGraph = [
     "@id": `${site.domain}#website`,
     url: site.domain,
     name: site.name,
-    description: "Independent property information, map guidance and buyer assistance for selected Faisal Town projects in Pakistan.",
-    inLanguage: "en"
+    description:
+      "Independent property information, map guidance and buyer assistance for selected Faisal Town projects in Pakistan.",
+    inLanguage: "en",
   },
   {
     "@type": "Organization",
@@ -34,11 +36,12 @@ const baseGraph = [
       url: `https://wa.me/${site.phoneWhatsApp}`,
       contactType: "property information and buyer assistance via WhatsApp",
       areaServed: "PK",
-      availableLanguage: ["en", "ur"]
-    }
-  }
+      availableLanguage: ["en", "ur"],
+    },
+  },
 ];
 ---
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -62,31 +65,18 @@ const baseGraph = [
     <meta name="twitter:image" content={socialImage} />
     <meta name="twitter:card" content="summary_large_image" />
     <title>{title}</title>
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@graph": [...baseGraph, ...additionalSchema]
-    })}></script>
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@graph": [...baseGraph, ...additionalSchema],
+      })}
+    ></script>
   </head>
-  <body>
+  <body class={bodyClass}>
     <slot />
-    <script is:inline>
-      (() => {
-        const page = window.location.pathname;
-        document.addEventListener("click", (event) => {
-          const target = event.target instanceof Element ? event.target.closest('a[href^="https://wa.me/"]') : null;
-          if (!target) return;
-          const detail = {
-            event: "whatsapp_click",
-            page,
-            cta_location: target.getAttribute("data-cta-location") || target.closest("section")?.id || "content",
-            cta_text: (target.textContent || "WhatsApp").trim().replace(/\s+/g, " ").slice(0, 100)
-          };
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push(detail);
-          if (typeof window.gtag === "function") window.gtag("event", "whatsapp_click", detail);
-          window.dispatchEvent(new CustomEvent("faisaltown:whatsapp_click", { detail }));
-        });
-      })();
+    <script>
+      import "../scripts/enquiries";
     </script>
   </body>
 </html>

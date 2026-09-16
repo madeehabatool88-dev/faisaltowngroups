@@ -1,0 +1,17 @@
+---
+import { imageMeta } from "../data/imageMeta";
+const { src, alt = "", eager = false } = Astro.props;
+const dimensions = imageMeta[src] || { width: 1440, height: 960 };
+---
+
+{src && (
+  <img
+    src={src}
+    alt={alt}
+    width={dimensions.width}
+    height={dimensions.height}
+    loading={eager ? "eager" : "lazy"}
+    fetchpriority={eager ? "high" : "auto"}
+    decoding="async"
+  />
+)}
