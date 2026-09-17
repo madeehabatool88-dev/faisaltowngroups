@@ -86,44 +86,75 @@ jobs:
           SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
           SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
         run: |
-          sshpass -p "$SSH_PASSWORD" \
-            rsync \
-            -avz \
-            --delete \
-            --exclude=".well-known/" \
-            --exclude="cgi-bin/" \
-            -e "ssh -p $SSH_PORT -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" \
-            ./dist/ \
-            "$SSH_USERNAME@$SSH_HOST:public_html/"
-
-      - name: Verify important live pages
-        run: |
-          pages=(
-            "/"
-            "/faisal-town-phase-2/"
-            "/articles/faisal-town-complete-guide/"
-            "/sitemap.xml"
+          set -euo pipefail
+          export SSHPASS="$SSH_PASSWORD"
+          # Hostinger accounts can host several domains. Resolve this domain,
+          # rather than assuming the account-level public_html serves this site.
+          target=$(sshpass -e ssh -p "$SSH_PORT" \
+            -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+            "$SSH_USERNAME@$SSH_HOST" 'bash -s' <<'REMOTE'
+          set -eu
+          domain_dir="$HOME/domains/faisaltowngroups.com/public_html"
+          if [ -d "$domain_dir" ]; then
+            readlink -f "$domain_dir"
+          elif [ -d "$HOME/public_html" ] && readlink -f "$HOME/public_html" | grep -q '/faisaltowngroups.com/public_html$'; then
+            readlink -f "$HOME/public_html"
+          else
+            echo "Cannot identify the faisaltowngroups.com document root. No files uploaded." >&2
+            exit 1
+          fi
+          REMOTE
           )
+          case "$target" in
+            /*/faisaltowngroups.com/public_html) ;;
+            *) echo "::error::Unexpected deployment directory. No files uploaded."; exit 1 ;;
+          esac
+          printf '%s\n' "$GITHUB_SHA" > dist/deployment-version.txt
+          # Preserve files managed outside this static site.
+          sshpass -e rsync -avz \
+            --exclude=".well-known/" --exclude="cgi-bin/" \
+            -e "ssh -p $SSH_PORT -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" \
+            ./dist/ "$SSH_USERNAME@$SSH_HOST:$target/"
 
-          for path in "${pages[@]}"; do
-            echo "Checking https://www.faisaltowngroups.com$path"
-
-            status=$(curl \
-              --silent \
-              --location \
-              --output /dev/null \
-              --write-out "%{http_code}" \
-              --retry 5 \
-              --retry-delay 3 \
-              "https://www.faisaltowngroups.com$path?deploy=$GITHUB_SHA")
-
-            if [ "$status" != "200" ]; then
-              echo "::error::$path returned HTTP $status"
-              exit 1
+      - name: Verify the deployed version and homepage
+        run: |
+          set -euo pipefail
+          base="https://www.faisaltowngroups.com"
+          verified=0
+          for attempt in 1 2 3 4 5; do
+            version=$(curl --fail --silent --show-error --location --max-time 30 \
+              -H 'Cache-Control: no-cache' "$base/deployment-version.txt?deploy=$GITHUB_SHA&attempt=$attempt" || true)
+            if [ "$version" = "$GITHUB_SHA" ]; then
+              verified=1
+              break
             fi
-
-            echo "$path returned HTTP 200"
+            sleep 5
           done
+          if [ "$verified" != 1 ]; then
+            echo "::error::Live domain is not serving this commit. Check the document root or hosting cache."
+            exit 1
+          fi
+          for path in / /faisal-town-phase-2/ /articles/faisal-town-complete-guide/ /sitemap.xml; do
+            curl --fail --silent --show-error --location --compressed --max-time 30 \
+              -H 'Cache-Control: no-cache' "$base$path?deploy=$GITHUB_SHA" -o /tmp/live-page
+            if [ "$path" = / ]; then
+              cmp dist/index.html /tmp/live-page || {
+                echo "::error::The live homepage differs from this build. Hosting may still be serving cached HTML."
+                exit 1
+              }
+            fi
+          done
+          # Verify that every stylesheet referenced by this homepage is live.
+          python3 - <<'PY'
+          import re, pathlib, urllib.request
+          html = pathlib.Path('dist/index.html').read_text()
+          for asset in re.findall(r'href="(/[^" ]+\.css)"', html):
+              with urllib.request.urlopen('https://www.faisaltowngroups.com' + asset, timeout=30) as response:
+                  actual = response.read()
+              expected = pathlib.Path('dist' + asset).read_bytes()
+              if actual != expected:
+                  raise SystemExit('Live stylesheet differs from build: ' + asset)
+          PY
 
       - name: Deployment completed
         run: |

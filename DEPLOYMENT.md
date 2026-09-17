@@ -1,24 +1,11 @@
-# GitHub to Hostinger deployment
+# GitHub / Pages CMS to Hostinger deployment
 
-Pages CMS saves to GitHub. Every push to `main` now starts **Deploy live website**, which installs dependencies, builds Astro, uploads changed files over encrypted FTPS, and compares representative live pages with the build. A failed build stops the upload. The workflows use the same deployment action as petlifetimecost.com, with this site's own hosting settings.
+Pages CMS saves content to the GitHub `main` branch. Every push runs **Deploy live website**. The Pages CMS deployment action runs the same workflow; save CMS changes before using it.
 
-You can also choose **Deploy live website** or **Check saved content** in Pages CMS. Save your edits first. Deployment always uses `main`. GitHub Actions also provides a manual Run workflow button.
+The workflow builds all pages, connects over SSH, locates `domains/faisaltowngroups.com/public_html` in the hosting account, and uploads the static build. It refuses an unidentified document root and preserves hosting files outside the static build.
 
-## One-time connection setup
+Required repository secrets: `SSH_HOST`, `SSH_PORT`, `SSH_USERNAME`, `SSH_PASSWORD`. These must belong to the hosting account containing faisaltowngroups.com. No credentials belong in CMS content or committed files.
 
-In this repository's **Settings → Secrets and variables → Actions**, add these repository secrets using the FTP account for **faisaltowngroups.com**:
+Verification checks the exact Git commit through `deployment-version.txt`, compares the live homepage against the build, verifies homepage stylesheets byte-for-byte, and checks important pages. HTTP 200 alone is no longer treated as evidence that the new site is live.
 
-| Secret | Value |
-| --- | --- |
-| `FTP_SERVER` | The direct FTP server hostname shown by Hostinger; its TLS certificate must match this hostname. |
-| `FTP_USERNAME` | The FTP account username for this website. |
-| `FTP_PASSWORD` | That FTP account's password, not your Google login password. |
-| `FTP_SERVER_DIR` | The website's `public_html` directory relative to this FTP account. Use `./` only if the FTP account is already rooted in this site's `public_html`; otherwise use the exact site directory. Must end in `/`. |
-
-Do not use the petlifetimecost.com connection: it is on a different hosting provider. Do not put passwords in the repository or CMS content. Confirm that the FTP directory belongs to faisaltowngroups.com before running the workflow.
-
-The workflow reports missing settings without printing credentials. It does not clear the hosting account or upload source files. It tracks the files it publishes so later runs transfer only changes. Files outside its deployment state are left alone.
-
-After the secrets are configured, run **Deploy live website** once. Check its GitHub Actions result before considering setup complete. Future CMS saves to `main` deploy automatically; the extra deployment button is useful for retrying a failed run.
-
-If Pages CMS requests GitHub Actions access, authorize the repository's workflow integration in your own account. A successful CMS save alone does not mean hosting deployment succeeded; check the workflow status.
+If verification fails, inspect the failing workflow step. A directory error means the SSH account does not expose the expected domain folder. A version or content mismatch means the domain may point elsewhere or hosting cache is serving an older build. Correct the hosting configuration and rerun the workflow.
