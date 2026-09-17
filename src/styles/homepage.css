@@ -887,3 +887,151 @@
 .hp-page .site-footer a {
   color: #f4f6ef;
 }
+
+
+/* 2026-09-16 mobile conversion refinements */
+@media (max-width: 800px) {
+  .hp-header {
+    height: 62px;
+    padding: 8px 14px;
+  }
+  .hp-brand {
+    width: 112px;
+  }
+  .hp-header nav {
+    top: 62px;
+  }
+  .hp-header-actions > .hp-button {
+    display: none;
+  }
+  .hp-menu {
+    width: 42px;
+    height: 42px;
+  }
+  .hp-hero {
+    padding: 32px 0 38px;
+  }
+  .hp-section {
+    padding-block: 46px;
+  }
+  .hp-heading {
+    margin-bottom: 28px;
+  }
+  .hp-development-photo img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    max-height: none;
+    object-fit: cover;
+  }
+  .hp-contact-bar {
+    padding: 9px 12px calc(9px + env(safe-area-inset-bottom));
+  }
+  .hp-contact-bar .hp-button {
+    width: 100%;
+    min-height: 52px;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .hp-page h1 {
+    font-size: clamp(2.15rem, 10vw, 2.65rem);
+    line-height: 1.02;
+    max-width: 14ch;
+    margin-bottom: 16px;
+  }
+  .hp-page h2 {
+    font-size: clamp(1.75rem, 8.2vw, 2.15rem);
+    line-height: 1.08;
+    margin-bottom: 16px;
+  }
+  .hp-page h3 {
+    font-size: 1.28rem;
+  }
+  .hp-page p {
+    line-height: 1.58;
+  }
+  .hp-wrap {
+    width: calc(100% - 30px);
+  }
+  .hp-hero .hp-intro {
+    font-size: 0.92rem;
+  }
+  .hp-start {
+    margin: 20px 0;
+    padding-left: 14px;
+  }
+  .hp-start strong {
+    font-size: 1.72rem;
+  }
+  .hp-actions {
+    margin: 20px 0;
+    gap: 10px;
+  }
+  .hp-button {
+    min-height: 50px;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+  .hp-hero-photo img {
+    aspect-ratio: 4 / 3;
+  }
+  .hp-price-grid,
+  .hp-card-grid,
+  .hp-budget-grid,
+  .hp-support-grid,
+  .hp-process {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .hp-price-card,
+  .hp-sector {
+    min-width: 0;
+    width: 100%;
+  }
+  .hp-price {
+    font-size: 1.48rem;
+  }
+  .hp-price-top h3 {
+    font-size: 1.38rem;
+  }
+  .hp-sector {
+    padding: 22px 20px;
+  }
+  .hp-sector .hp-secondary {
+    justify-content: flex-start;
+    text-align: left;
+  }
+  .hp-feature-price {
+    font-size: 1.55rem !important;
+  }
+  .hp-offer-photo img {
+    max-height: 440px;
+  }
+  .hp-map figcaption,
+  .hp-development-photo figcaption {
+    font-size: 0.75rem;
+  }
+  .hp-phase1 {
+    padding-block: 34px;
+    background: #f4f5f0;
+  }
+  .hp-phase1 h2 {
+    font-size: 1.5rem;
+    max-width: 24ch;
+  }
+  .hp-phase1 p {
+    font-size: 0.84rem;
+    margin-bottom: 14px;
+  }
+  .hp-phase1 .hp-inline-links {
+    display: none;
+  }
+  .hp-final .hp-split {
+    gap: 24px;
+  }
+  .hp-quick {
+    padding: 20px;
+  }
+}
