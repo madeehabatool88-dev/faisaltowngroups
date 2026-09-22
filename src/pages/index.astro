@@ -25,13 +25,53 @@ import { bulkRows, bulkSlugs } from "../data/homepageBulk";
 import { articles } from "../data/articles";
 import { site } from "../data/site";
 import "../styles/homepage.css";
+
 const offers = phase2.priceTable.rows.filter(enabled);
+
 const currentPrices = offers
   .filter((row) => !/sold|unavailable/i.test(row.availability))
   .map((row) => amount(row.discount))
   .filter((n) => n > 0);
-const starting = currentPrices.length ? price(Math.min(...currentPrices)) : "";
+
+const sectorPStarting = currentPrices.length
+  ? price(Math.min(...currentPrices))
+  : "";
+
 const offer = phase2.sectorP;
+
+/*
+ * Homepage starting price now comes from the CMS Featured Offer.
+ * This allows Sector T to be the homepage entry-price offer while
+ * the separate Sector P price table stays untouched.
+ */
+const featuredPriceFact = offer.facts?.find((fact) =>
+  /discounted price/i.test(fact.label),
+);
+
+const featuredStarting = featuredPriceFact?.value || "";
+
+/*
+ * Detect featured sector from the CMS heading.
+ * Examples:
+ * "Sector T 5.56 Marla from PKR 27.90 Lac" -> "Sector T"
+ * "Sector P / The Caladan..." -> "Sector P"
+ */
+const featuredSector =
+  offer.heading?.match(/^Sector\s+[A-Z0-9]+/i)?.[0] || "Sector T";
+
+/*
+ * Only show a featured-sector plan when the saved plan actually belongs
+ * to the currently featured sector. This prevents the old Sector P plan
+ * appearing inside a Sector T featured offer.
+ */
+const showFeaturedPlan =
+  Boolean(offer.sectorPlan?.pdf) &&
+  Boolean(
+    offer.sectorPlan?.heading
+      ?.toLowerCase()
+      .includes(featuredSector.toLowerCase()),
+  );
+
 const sectors = phase2.sectors
   .filter(enabled)
   .sort(
@@ -39,10 +79,12 @@ const sectors = phase2.sectors
       Number(b.href === offer.primaryHref) -
       Number(a.href === offer.primaryHref),
   );
+
 const selectedGuides = phase2.articleSlugs
   .map((slug) => articles.find((a) => a.slug === slug))
   .filter(Boolean)
   .slice(0, Math.max(0, guides.displayLimit));
+
 const schema =
   c.faqs && faqRows.length
     ? [
@@ -51,11 +93,15 @@ const schema =
           mainEntity: faqRows.map((row) => ({
             "@type": "Question",
             name: row.question,
-            acceptedAnswer: { "@type": "Answer", text: row.answer },
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: row.answer,
+            },
           })),
         },
       ]
     : [];
+
 const d = phase2.development;
 const m = phase2.masterPlan;
 const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
@@ -71,6 +117,7 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
   <a class="hp-skip" href="#top">
     Skip to content
   </a>
+
   <header class="hp-header">
     <a class="hp-brand" href="/" aria-label="FaisalTown Groups home">
       <img
@@ -80,6 +127,7 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
         alt="FaisalTown Groups"
       />
     </a>
+
     <nav id="hp-nav" aria-label="Primary navigation">
       <a href="/faisal-town-phase-2/">Phase 2</a>
       <a href="/faisal-town-phase-1/">Phase 1</a>
@@ -88,6 +136,7 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
       </a>
       <a href="/articles/">Buyer guides</a>
     </nav>
+
     <div class="hp-header-actions">
       <Cta label="Call" type="call" section="header" secondary />
       <Cta
@@ -105,21 +154,30 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
       </button>
     </div>
   </header>
+
   <main id="top">
     {c.hero && (
       <section class="hp-hero" id="phase-2" data-home-section="hero">
         <div class="hp-wrap hp-hero-grid">
           <div class="hp-hero-copy">
             <p class="hp-kicker">{hero.heroEyebrow}</p>
+
             <h1>{hero.h1}</h1>
+
             <p class="hp-intro">{hero.intro}</p>
-            {starting && (
+
+            {featuredStarting && (
               <div class="hp-start">
-                <span>{hero.startingPriceLabel} · Sector P</span>
-                <strong>{starting}</strong>
+                <span>
+                  {hero.startingPriceLabel} · {featuredSector}
+                </span>
+
+                <strong>{featuredStarting}</strong>
+
                 <small>{hero.priceDisclaimer}</small>
               </div>
             )}
+
             <div class="hp-actions">
               <Cta
                 label={hero.primaryCta}
@@ -128,6 +186,7 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
                 query={hero.primaryWhatsappQuery}
                 section="hero"
               />
+
               <Cta
                 label={hero.secondaryCta}
                 type={hero.secondaryCtaType}
@@ -141,6 +200,7 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
                 secondary
               />
             </div>
+
             <ul class="hp-points">
               {bulkSlugs(hero.trustPointsText).map((point) => (
                 <li>
@@ -150,8 +210,10 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
               ))}
             </ul>
           </div>
+
           <figure class="hp-hero-photo">
             <Photo src={hero.heroImage} alt={hero.heroImageAlt} eager />
+
             <figcaption>
               <span>{hero.topStripLabel}</span>
               {hero.topStripText}
@@ -160,15 +222,18 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
         </div>
       </section>
     )}
+
     {c.trust && (
       <section class="hp-section" data-home-section="trust">
         <div class="hp-wrap">
           <p class="hp-kicker">{trust.eyebrow}</p>
           <h2>{trust.heading}</h2>
           <p>{trust.text}</p>
+
           {trust.showPartnerStatement && site.partnerStatement && (
             <p>{site.partnerStatement}</p>
           )}
+
           {trust.showAuthorizationImage && (
             <Photo
               src={trust.authorizationImage}
@@ -178,69 +243,104 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
         </div>
       </section>
     )}
+
     {c.featuredOffer && (
       <section
         class="hp-section hp-tint"
-        id="sector-p"
+        id="featured-offer"
         data-home-section="featuredOffer"
       >
         <div class="hp-wrap hp-split">
           <div>
             <p class="hp-kicker">{offer.eyebrow}</p>
-            <h2>{offer.heading.replace(/\s+from\s+PKR.*$/i, "")}</h2>
-            {starting && <p class="hp-feature-price">From {starting}</p>}
+
+            <h2>
+              {offer.heading.replace(/\s+from\s+PKR.*$/i, "")}
+            </h2>
+
+            {featuredStarting && (
+              <p class="hp-feature-price">
+                From {featuredStarting}
+              </p>
+            )}
+
             <p>{offer.text}</p>
+
             <p class="hp-status">{offer.status}</p>
+
             <dl class="hp-facts">
               {offer.facts
-                .filter((f) => !/^(from\s+)?PKR\s*[\d.]+M/i.test(f.value))
-                .map((f) => (
+                .filter(
+                  (fact) =>
+                    !/discounted price/i.test(fact.label),
+                )
+                .map((fact) => (
                   <div>
-                    <dt>{f.label}</dt>
-                    <dd>{f.value}</dd>
+                    <dt>{fact.label}</dt>
+                    <dd>{fact.value}</dd>
                   </div>
                 ))}
             </dl>
+
             <div class="hp-actions">
               <Cta
-                label="Check Current Availability"
+                label={
+                  offer.secondaryCta ||
+                  `Check ${featuredSector} Availability`
+                }
                 query={offer.secondaryQuery}
-                event="sector_p_click"
-                sector="Sector P"
+                sector={featuredSector}
                 section="featured_offer"
               />
+
               <Cta
-                label="View Sector P Details"
+                label={
+                  offer.primaryCta ||
+                  `View ${featuredSector} Details`
+                }
                 href={offer.primaryHref}
-                event="sector_p_click"
                 section="featured_offer"
-                sector="Sector P"
+                sector={featuredSector}
                 secondary
               />
             </div>
-            <a
-              class="hp-text-link"
-              href={offer.sectorPlan.pdf}
-              data-event="master_plan_click"
-              data-source-section="sector_p_plan"
-            >
-              View Sector P plan PDF ↗
-            </a>
+
+            {showFeaturedPlan && (
+              <a
+                class="hp-text-link"
+                href={offer.sectorPlan.pdf}
+                data-event="master_plan_click"
+                data-source-section="featured_sector_plan"
+              >
+                View {featuredSector} plan PDF ↗
+              </a>
+            )}
           </div>
+
           <figure class="hp-offer-photo">
             <Photo src={offer.image} alt={offer.alt} />
           </figure>
         </div>
       </section>
     )}
+
     {c.prices && (
-      <section class="hp-section" id="prices" data-home-section="prices">
+      <section
+        class="hp-section"
+        id="prices"
+        data-home-section="prices"
+      >
         <div class="hp-wrap">
           <div class="hp-heading">
-            <p class="hp-kicker">{phase2.priceTable.eyebrow}</p>
+            <p class="hp-kicker">
+              {phase2.priceTable.eyebrow}
+            </p>
+
             <h2>{phase2.priceTable.heading}</h2>
+
             <p>{phase2.priceTable.text}</p>
           </div>
+
           <div class="hp-price-grid">
             {offers.map((row) => (
               <article class="hp-price-card">
@@ -248,13 +348,20 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
                   <h3>{row.marla}</h3>
                   <span>{row.availability}</span>
                 </div>
+
                 <p class="hp-dimensions">{row.size}</p>
-                <strong class="hp-price">{price(row.discount)}</strong>
+
+                <strong class="hp-price">
+                  {price(row.discount)}
+                </strong>
+
                 {amount(row.actual) > amount(row.discount) && (
                   <p class="hp-original">
-                    Original price <s>{price(row.actual)}</s>
+                    Original price{" "}
+                    <s>{price(row.actual)}</s>
                   </p>
                 )}
+
                 <Cta
                   label="Enquire About This Plot"
                   query={row.query}
@@ -266,10 +373,14 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
               </article>
             ))}
           </div>
-          <p class="hp-note">{phase2.priceTable.note}</p>
+
+          <p class="hp-note">
+            {phase2.priceTable.note}
+          </p>
         </div>
       </section>
     )}
+
     {c.budgets && (
       <section
         class="hp-section hp-dark"
@@ -282,6 +393,7 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
             <h2>{budgets.heading}</h2>
             <p>{budgets.text}</p>
           </div>
+
           <div class="hp-budget-grid">
             {budgetRows.map((row) => (
               <article>
@@ -292,6 +404,7 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
                   budget={row.label}
                   section="budgets"
                 />
+
                 <p>{row.text}</p>
               </article>
             ))}
@@ -299,6 +412,7 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
         </div>
       </section>
     )}
+
     {c.sectors && (
       <section
         class="hp-section"
@@ -307,33 +421,45 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
       >
         <div class="hp-wrap">
           <div class="hp-heading">
-            <p class="hp-kicker">Find your location</p>
+            <p class="hp-kicker">
+              Find your location
+            </p>
+
             <h2>{phase2.sectorsHeading}</h2>
           </div>
+
           <div class="hp-card-grid">
             {sectors.map((row, i) => (
               <article
                 class:list={[
                   "hp-sector",
-                  { "hp-sector-featured": row.href === offer.primaryHref },
+                  {
+                    "hp-sector-featured":
+                      row.href === offer.primaryHref,
+                  },
                 ]}
               >
                 <Photo src={row.image} alt={row.alt} />
-                <span class="hp-index">{String(i + 1).padStart(2, "0")}</span>
+
+                <span class="hp-index">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+
                 <h3>{row.title}</h3>
+
                 <p>{row.text}</p>
-                <p class="hp-status">{row.status}</p>
+
+                <p class="hp-status">
+                  {row.status}
+                </p>
+
                 <Cta
                   label="Check Availability"
                   query={row.query}
                   section="sectors"
                   sector={row.title}
-                  event={
-                    row.href === offer.primaryHref
-                      ? "sector_p_click"
-                      : undefined
-                  }
                 />
+
                 <Cta
                   label="Explore Sector"
                   href={row.href}
@@ -346,6 +472,7 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
         </div>
       </section>
     )}
+
     {c.development && (
       <section
         class="hp-section hp-tint"
@@ -354,38 +481,70 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
       >
         <div class="hp-wrap hp-split">
           <div>
-            <p class="hp-kicker">{d.eyebrow}</p>
+            <p class="hp-kicker">
+              {d.eyebrow}
+            </p>
+
             <h2>{d.heading}</h2>
+
             {d.updateDate && (
               <p class="hp-status">
-                Updated <time datetime={d.updateDate}>{d.updateDate}</time>
+                Updated{" "}
+                <time datetime={d.updateDate}>
+                  {d.updateDate}
+                </time>
               </p>
             )}
+
             <p>{d.text}</p>
-            <Cta label={d.cta} query={d.query} section="development" />
+
+            <Cta
+              label={d.cta}
+              query={d.query}
+              section="development"
+            />
+
             {d.videoUrl && (
-              <a class="hp-text-link" href={d.videoUrl}>
+              <a
+                class="hp-text-link"
+                href={d.videoUrl}
+              >
                 View development video ↗
               </a>
             )}
           </div>
+
           <figure class="hp-development-photo">
-            <Photo src={d.image} alt={d.alt} />
-            <figcaption>{d.caption}</figcaption>
+            <Photo
+              src={d.image}
+              alt={d.alt}
+            />
+
+            <figcaption>
+              {d.caption}
+            </figcaption>
           </figure>
+
           {bulkRows(
             d.additionalImagesText,
             ["image", "alt", "caption"],
             "Development gallery",
           ).map((row) => (
             <figure>
-              <Photo src={row.image} alt={row.alt} />
-              <figcaption>{row.caption}</figcaption>
+              <Photo
+                src={row.image}
+                alt={row.alt}
+              />
+
+              <figcaption>
+                {row.caption}
+              </figcaption>
             </figure>
           ))}
         </div>
       </section>
     )}
+
     {c.masterPlan && (
       <section
         class="hp-section"
@@ -400,14 +559,26 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
               data-event="master_plan_click"
               data-source-section="master_plan"
             >
-              <Photo src={m.image} alt={m.alt} />
+              <Photo
+                src={m.image}
+                alt={m.alt}
+              />
             </a>
-            <figcaption>{m.caption} · Tap to enlarge ↗</figcaption>
+
+            <figcaption>
+              {m.caption} · Tap to enlarge ↗
+            </figcaption>
           </figure>
+
           <div>
-            <p class="hp-kicker">{m.eyebrow}</p>
+            <p class="hp-kicker">
+              {m.eyebrow}
+            </p>
+
             <h2>{m.heading}</h2>
+
             <p>{m.text}</p>
+
             <div class="hp-actions">
               <Cta
                 label={m.viewLabel}
@@ -415,6 +586,7 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
                 event="master_plan_click"
                 section="master_plan"
               />
+
               <Cta
                 label={m.whatsappLabel}
                 query={m.whatsappQuery}
@@ -427,23 +599,41 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
         </div>
       </section>
     )}
+
     {c.buyerSupport && (
-      <section class="hp-section hp-tint" data-home-section="buyerSupport">
+      <section
+        class="hp-section hp-tint"
+        data-home-section="buyerSupport"
+      >
         <div class="hp-wrap">
           <div class="hp-heading">
-            <p class="hp-kicker">{support.eyebrow}</p>
+            <p class="hp-kicker">
+              {support.eyebrow}
+            </p>
+
             <h2>{support.heading}</h2>
+
             <p>{support.text}</p>
           </div>
+
           <div class="hp-support-grid">
             {supportRows.map((row) => (
               <article>
-                <span class="hp-symbol" aria-hidden="true">
-                  {{ check: "✓", map: "⌖", phone: "☎", home: "⌂", globe: "◎" }[
-                    row.icon
-                  ] || "✓"}
+                <span
+                  class="hp-symbol"
+                  aria-hidden="true"
+                >
+                  {{
+                    check: "✓",
+                    map: "⌖",
+                    phone: "☎",
+                    home: "⌂",
+                    globe: "◎",
+                  }[row.icon] || "✓"}
                 </span>
+
                 <h3>{row.title}</h3>
+
                 <p>{row.text}</p>
               </article>
             ))}
@@ -451,14 +641,23 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
         </div>
       </section>
     )}
+
     {c.buyingProcess && (
-      <section class="hp-section" data-home-section="buyingProcess">
+      <section
+        class="hp-section"
+        data-home-section="buyingProcess"
+      >
         <div class="hp-wrap">
           <div class="hp-heading">
-            <p class="hp-kicker">{process.eyebrow}</p>
+            <p class="hp-kicker">
+              {process.eyebrow}
+            </p>
+
             <h2>{process.heading}</h2>
+
             <p>{process.text}</p>
           </div>
+
           <ol class="hp-process">
             {processRows.map((row) => (
               <li>
@@ -470,27 +669,42 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
         </div>
       </section>
     )}
+
     {c.visitOverseas && (
-      <section class="hp-section hp-tint" data-home-section="visitOverseas">
+      <section
+        class="hp-section hp-tint"
+        data-home-section="visitOverseas"
+      >
         <div class="hp-wrap hp-assistance">
           {Object.entries(assistance)
             .filter(([, card]) => card.enabled)
             .map(([key, card]) => (
               <article>
-                <Photo src={card.image} alt={card.alt} />
+                <Photo
+                  src={card.image}
+                  alt={card.alt}
+                />
+
                 <p class="hp-kicker">
                   {key === "siteVisit"
                     ? "Visit the project"
                     : "Overseas assistance"}
                 </p>
+
                 <h2>{card.heading}</h2>
+
                 <p>{card.text}</p>
+
                 <Cta
                   label={card.ctaLabel}
                   type={card.ctaType}
                   href={card.href}
                   query={card.whatsappQuery}
-                  event={key === "siteVisit" ? "site_visit_click" : undefined}
+                  event={
+                    key === "siteVisit"
+                      ? "site_visit_click"
+                      : undefined
+                  }
                   section={key}
                 />
               </article>
@@ -498,13 +712,22 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
         </div>
       </section>
     )}
+
     {c.faqs && faqRows.length > 0 && (
-      <section class="hp-section" id="faqs" data-home-section="faqs">
+      <section
+        class="hp-section"
+        id="faqs"
+        data-home-section="faqs"
+      >
         <div class="hp-wrap hp-faq-layout">
           <div>
-            <p class="hp-kicker">Before you decide</p>
+            <p class="hp-kicker">
+              Before you decide
+            </p>
+
             <h2>{faqs.heading}</h2>
           </div>
+
           <div>
             {faqRows.map((row, i) => (
               <div class="hp-faq">
@@ -516,10 +739,17 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
                     data-faq
                   >
                     {row.question}
-                    <span aria-hidden="true">−</span>
+
+                    <span aria-hidden="true">
+                      −
+                    </span>
                   </button>
                 </h3>
-                <div id={`hp-answer-${i}`} aria-labelledby={`hp-question-${i}`}>
+
+                <div
+                  id={`hp-answer-${i}`}
+                  aria-labelledby={`hp-question-${i}`}
+                >
                   <p>{row.answer}</p>
                 </div>
               </div>
@@ -528,23 +758,41 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
         </div>
       </section>
     )}
+
     {c.buyerGuides && (
-      <section class="hp-section hp-tint" data-home-section="buyerGuides">
+      <section
+        class="hp-section hp-tint"
+        data-home-section="buyerGuides"
+      >
         <div class="hp-wrap">
           <div class="hp-heading">
-            <p class="hp-kicker">{guides.eyebrow}</p>
+            <p class="hp-kicker">
+              {guides.eyebrow}
+            </p>
+
             <h2>{guides.heading}</h2>
+
             <p>{guides.text}</p>
           </div>
+
           <div class="hp-card-grid">
             {selectedGuides.map((article) => (
               <article class="hp-guide">
                 <a href={`/articles/${article!.slug}/`}>
-                  <Photo src={article!.image} alt={article!.title} />
+                  <Photo
+                    src={article!.image}
+                    alt={article!.title}
+                  />
+
                   <h3>{article!.title}</h3>
                 </a>
+
                 <p>{article!.description}</p>
-                <a class="hp-text-link" href={`/articles/${article!.slug}/`}>
+
+                <a
+                  class="hp-text-link"
+                  href={`/articles/${article!.slug}/`}
+                >
                   Read buyer guide ↗
                 </a>
               </article>
@@ -553,6 +801,7 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
         </div>
       </section>
     )}
+
     {c.phase1 && (
       <aside
         class="hp-section hp-phase1"
@@ -560,15 +809,21 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
         data-home-section="phase1"
       >
         <div class="hp-wrap">
-          <p class="hp-kicker">{phase1.eyebrow}</p>
+          <p class="hp-kicker">
+            {phase1.eyebrow}
+          </p>
+
           <h2>{phase1.heading}</h2>
+
           <p>{phase1.text}</p>
+
           <div class="hp-actions">
             <Cta
               label={phase1.primaryCta}
               href={phase1.primaryHref}
               secondary
             />
+
             <Cta
               label={phase1.secondaryCta}
               query={phase1.secondaryQuery}
@@ -576,20 +831,31 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
               secondary
             />
           </div>
+
           <div class="hp-inline-links">
             {phase1.blocks.map((block) => (
-              <a href={block.href}>{block.title} ↗</a>
+              <a href={block.href}>
+                {block.title} ↗
+              </a>
             ))}
+
             {phase1.articleSlugs
-              .map((slug) => articles.find((a) => a.slug === slug))
+              .map((slug) =>
+                articles.find((a) => a.slug === slug),
+              )
               .filter(Boolean)
               .map((article) => (
-                <a href={`/articles/${article!.slug}/`}>{article!.title} ↗</a>
+                <a
+                  href={`/articles/${article!.slug}/`}
+                >
+                  {article!.title} ↗
+                </a>
               ))}
           </div>
         </div>
       </aside>
     )}
+
     {c.finalCta && (
       <section
         class="hp-section hp-dark hp-final"
@@ -598,15 +864,21 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
       >
         <div class="hp-wrap hp-split">
           <div>
-            <p class="hp-kicker">{contact.eyebrow}</p>
+            <p class="hp-kicker">
+              {contact.eyebrow}
+            </p>
+
             <h2>{contact.heading}</h2>
+
             <p>{contact.text}</p>
+
             <div class="hp-actions">
               <Cta
                 label={contact.whatsappButton}
                 query={contact.mainQuery}
                 section="final_cta"
               />
+
               <Cta
                 label={contact.callButton}
                 type="call"
@@ -614,21 +886,29 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
                 secondary
               />
             </div>
+
             <Photo
               src={contact.backgroundImage}
               alt={contact.backgroundImageAlt}
             />
           </div>
+
           <div class="hp-quick">
-            <p class="hp-kicker">{contact.leadLabel}</p>
+            <p class="hp-kicker">
+              {contact.leadLabel}
+            </p>
+
             <h3>{contact.leadHeading}</h3>
+
             {contact.options.map((row) => (
               <Cta
                 label={row.label}
                 query={row.query}
                 section="final_options"
                 event={
-                  /site visit/i.test(row.label) ? "site_visit_click" : undefined
+                  /site visit/i.test(row.label)
+                    ? "site_visit_click"
+                    : undefined
                 }
                 secondary
               />
@@ -638,12 +918,23 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
       </section>
     )}
   </main>
+
   <SiteFooter />
+
   {sticky && (
-    <nav class="hp-contact-bar" aria-label="Quick contact">
+    <nav
+      class="hp-contact-bar"
+      aria-label="Quick contact"
+    >
       {site.stickyCallEnabled && (
-        <Cta label="Call" type="call" section="sticky_bar" secondary />
+        <Cta
+          label="Call"
+          type="call"
+          section="sticky_bar"
+          secondary
+        />
       )}
+
       {site.stickyWhatsAppEnabled && (
         <Cta
           label="Check Availability on WhatsApp"
@@ -653,49 +944,120 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
       )}
     </nav>
   )}
+
   <script>
-    const toggle = document.querySelector<HTMLButtonElement>(".hp-menu");
-    const nav = document.querySelector<HTMLElement>("#hp-nav");
+    const toggle =
+      document.querySelector<HTMLButtonElement>(".hp-menu");
+
+    const nav =
+      document.querySelector<HTMLElement>("#hp-nav");
+
     function closeMenu() {
-      toggle?.setAttribute("aria-expanded", "false");
+      toggle?.setAttribute(
+        "aria-expanded",
+        "false",
+      );
+
       nav?.classList.remove("hp-open");
     }
+
     toggle?.addEventListener("click", () => {
-      const open = toggle.getAttribute("aria-expanded") !== "true";
-      toggle.setAttribute("aria-expanded", String(open));
-      nav?.classList.toggle("hp-open", open);
+      const open =
+        toggle.getAttribute("aria-expanded") !== "true";
+
+      toggle.setAttribute(
+        "aria-expanded",
+        String(open),
+      );
+
+      nav?.classList.toggle(
+        "hp-open",
+        open,
+      );
     });
+
     nav?.addEventListener("click", (event) => {
-      if ((event.target as Element).closest("a")) closeMenu();
-    });
-    document.addEventListener("keydown", (event) => {
       if (
-        event.key === "Escape" &&
-        toggle?.getAttribute("aria-expanded") === "true"
+        (event.target as Element).closest("a")
       ) {
         closeMenu();
-        toggle.focus();
       }
     });
-    document.addEventListener("click", (event) => {
-      if (!(event.target as Element).closest(".hp-header")) closeMenu();
-    });
+
+    document.addEventListener(
+      "keydown",
+      (event) => {
+        if (
+          event.key === "Escape" &&
+          toggle?.getAttribute("aria-expanded") ===
+            "true"
+        ) {
+          closeMenu();
+          toggle.focus();
+        }
+      },
+    );
+
+    document.addEventListener(
+      "click",
+      (event) => {
+        if (
+          !(event.target as Element).closest(
+            ".hp-header",
+          )
+        ) {
+          closeMenu();
+        }
+      },
+    );
+
     document
-      .querySelectorAll<HTMLButtonElement>("[data-faq]")
+      .querySelectorAll<HTMLButtonElement>(
+        "[data-faq]",
+      )
       .forEach((button) => {
-        const panel = document.getElementById(
-          button.getAttribute("aria-controls")!,
-        );
+        const panel =
+          document.getElementById(
+            button.getAttribute(
+              "aria-controls",
+            )!,
+          );
+
         if (!panel) return;
+
         panel.hidden = true;
-        button.setAttribute("aria-expanded", "false");
-        button.querySelector("span")!.textContent = "+";
-        button.addEventListener("click", () => {
-          const open = button.getAttribute("aria-expanded") !== "true";
-          button.setAttribute("aria-expanded", String(open));
-          panel.hidden = !open;
-          button.querySelector("span")!.textContent = open ? "−" : "+";
-        });
+
+        button.setAttribute(
+          "aria-expanded",
+          "false",
+        );
+
+        button.querySelector(
+          "span",
+        )!.textContent = "+";
+
+        button.addEventListener(
+          "click",
+          () => {
+            const open =
+              button.getAttribute(
+                "aria-expanded",
+              ) !== "true";
+
+            button.setAttribute(
+              "aria-expanded",
+              String(open),
+            );
+
+            panel.hidden = !open;
+
+            button.querySelector(
+              "span",
+            )!.textContent = open
+              ? "−"
+              : "+";
+          },
+        );
       });
   </script>
 </BaseLayout>
