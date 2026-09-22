@@ -9,14 +9,13 @@
   "secondaryCta": "View Sector T Details",
   "secondaryQuery": "Assalamualaikum, I am interested in the 5.56 Marla Sector T plot at PKR 27.90 Lac. Please send me current available plot numbers, total payable amount and location details.",
   "status": "Ask for availability",
-  "factsText": "From PKR 2.79M | full-payment discounted price\n5.56 Marla - 2 Kanal | listed residential sizes\nPKR 20,000 | listed registration fee\nWhatsApp | current availability verification",
+  "factsText": "PKR 27.90 Lac | discounted price\n5.56 Marla - 1 Kanal | listed residential sizes\nPKR 20,000 | listed registration fee\nWhatsApp | current availability verification",
   "sectorPlan": {
-    "eyebrow": "Sector P Plan",
-    "heading": "Sector P plan",
-    "text": "This is the Sector P-specific plan. It is intentionally kept with the Sector P content instead of being mixed into the general Phase 2 master-plan section.",
-    "image": "/assets/sector-p/rendered/sector-p-masterplan-preview.webp",
-    "alt": "Sector P Faisal Town Phase 2 plan",
-    "pdf": "/assets/plans/sector-p-ft-ii.pdf",
-    "whatsappQuery": "Guide me using the Sector P plan and current available plots"
+    "eyebrow": "Sector T Plan",
+    "heading": "Sector T Plan",
+    "text": "Review the Sector T Pricing before shortlisting an available plot. Confirm the exact plot number, road position and any special-location charges before payment.",
+    "image": "/assets/cc3cb7b4-8697-4899-9679-9467113f207b.jpg",
+    "alt": "Sector T Faisal Town Phase 2 Pricing plan",
+    "whatsappQuery": "Guide me using the Sector T plan and current available plots"
   }
 }
