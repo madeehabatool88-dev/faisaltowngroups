@@ -3,6 +3,7 @@ export const rowFields = {
   bullets: ['title', 'text'],
   downloads: ['label', 'title', 'text', 'href'],
   highlights: ['label', 'value'],
+  priceTableRows: ['size', 'dimensions', 'payment', 'price', 'availability'],
   faqs: ['question', 'answer'],
   links: ['label', 'href'],
 } as const;

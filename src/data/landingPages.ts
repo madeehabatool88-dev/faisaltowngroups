@@ -15,6 +15,15 @@ export type LandingPage = {
   updated: string;
   reviewed: string;
   highlights: Array<{ label: string; value: string }>;
+  priceTableHeading?: string;
+  priceTableNote?: string;
+  priceTableRows?: Array<{
+    size: string;
+    dimensions: string;
+    payment: string;
+    price: string;
+    availability: string;
+  }>;
   sections: Array<{ heading: string; paragraphs: string[] }>;
   bullets: Array<{ title: string; text: string }>;
   downloads?: Array<{ label: string; title: string; text: string; href: string }>;

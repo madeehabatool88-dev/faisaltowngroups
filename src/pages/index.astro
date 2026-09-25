@@ -45,7 +45,7 @@ const offer = phase2.sectorP;
  * the separate Sector P price table stays untouched.
  */
 const featuredPriceFact = offer.facts?.find((fact) =>
-  /discounted price/i.test(fact.label),
+  /discounted(?:\s+listed)?\s+price/i.test(fact.label),
 );
 
 const featuredStarting = featuredPriceFact?.value || "";
@@ -131,10 +131,10 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
     <nav id="hp-nav" aria-label="Primary navigation">
       <a href="/faisal-town-phase-2/">Phase 2</a>
       <a href="/faisal-town-phase-1/">Phase 1</a>
-      <a href={c.prices ? "#prices" : "/plots-for-sale-faisal-town-islamabad/"}>
+      <a href={c.prices ? "#prices" : "/faisal-town-phase-2/"}>
         Plots & prices
       </a>
-      <a href="/articles/">Buyer guides</a>
+      <a href="/articles/faisal-town-ii-master-plan/">Master plan</a>
     </nav>
 
     <div class="hp-header-actions">
@@ -272,7 +272,7 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
               {offer.facts
                 .filter(
                   (fact) =>
-                    !/discounted price/i.test(fact.label),
+                    !/discounted(?:\s+listed)?\s+price/i.test(fact.label),
                 )
                 .map((fact) => (
                   <div>
@@ -285,7 +285,7 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
             <div class="hp-actions">
               <Cta
                 label={
-                  offer.secondaryCta ||
+                  offer.primaryCta ||
                   `Check ${featuredSector} Availability`
                 }
                 query={offer.secondaryQuery}
@@ -295,7 +295,7 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
 
               <Cta
                 label={
-                  offer.primaryCta ||
+                  offer.secondaryCta ||
                   `View ${featuredSector} Details`
                 }
                 href={offer.primaryHref}

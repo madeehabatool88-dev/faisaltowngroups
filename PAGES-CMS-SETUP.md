@@ -1,70 +1,13 @@
-# Pages CMS Setup For FaisalTownGroups
+# Pages CMS — current local setup
 
-This project now includes a `.pages.yml` file for Pages CMS.
+Source of truth: `G:\Groupsfaisaltown`, supplied 24 September 2026.
 
-## Repository
+The schema is `.pages.yml`. Current project, article, homepage, legal and site-settings JSON fields are all exposed. Bodies and repeated groups use bulk text boxes, populated from the supplied content. All 16 HTML pages render identically before and after migration.
 
-Use one GitHub repository for this website, for example:
+See [CONTENT-EDITING-GUIDE.md](CONTENT-EDITING-GUIDE.md) for formats and homepage price relationships.
 
-`faisaltowngroups`
+The supplied copy has no Git metadata or `.github/workflows` directory. Publishing requires reconnecting the existing repository and restoring an appropriate workflow without overwriting this folder's updated content. CMS action buttons have been omitted until that workflow exists.
 
-Keep other future websites in their own repositories.
+## Publishing connection restored — 25 September 2026
 
-## What Pages CMS Can Edit
-
-The CMS configuration exposes these areas:
-
-- Homepage: `src/pages/index.astro`
-- Homepage content: `src/content/homepage.json`
-- Individual project, block and sector page files: `src/content/projects/`
-- Website settings and WhatsApp number: `src/data/site.json`
-- Article content files: `src/content/articles/`
-- Legal page content files: `src/content/legal/`
-- Legal pages:
-  - `src/pages/privacy-policy.astro`
-  - `src/pages/disclaimer.astro`
-  - `src/pages/terms-and-conditions.astro`
-- Images and plans:
-  - `public/assets/`
-  - `public/assets/uploads/`
-  - `public/assets/maps/`
-  - `public/assets/projects/`
-  - `public/assets/articles/`
-  - `public/assets/plans/`
-
-## Editing Project, Block And Sector Pages
-
-Each page now has its own file in:
-
-`src/content/projects/`
-
-Examples:
-
-- `src/content/projects/faisal-town-phase-2.json`
-- `src/content/projects/faisal-town-p-block.json`
-- `src/content/projects/faisal-town-overseas-block.json`
-- `src/content/projects/faisal-town-sector-t.json`
-
-Use these files for normal content updates. New page files are discovered automatically. Use each page's `order` field when changing page order in generated lists.
-
-## Editing Articles
-
-Each article has its own content file in:
-
-`src/content/articles/`
-
-New article files are discovered automatically, so future article publishing can start from `src/content/articles/`.
-
-## Recommended Workflow
-
-1. Push this project to a GitHub repository.
-2. Open Pages CMS.
-3. Connect the GitHub repository.
-4. Pages CMS will read `.pages.yml`.
-5. Edit content from the CMS.
-6. Commit changes through Pages CMS.
-7. Rebuild and upload/deploy the `dist` folder.
-
-## Important Notes
-
-The day-to-day editable content now lives in JSON files. Astro files remain as templates and should normally be edited only when changing layout, components or design behavior.
+Git tracking is reconnected to the existing faisaltowngroups repository. The Check saved content and Deploy live website actions are restored in Pages CMS. Every push to main automatically builds, validates the CMS and deploys this local baseline. The workflow checks the current master-plan article, exact version and stylesheet contents. Only generated HTML for the 16 deliberately retired routes is removed; a route recreated later is retained. Earlier notes about missing Git/workflows describe the supplied folder before reconnection.

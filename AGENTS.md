@@ -111,3 +111,11 @@ Before declaring substantial frontend work complete:
 - CTAs have contextual WhatsApp messages
 - SEO fundamentals remain intact
 - Astro production build succeeds
+
+## Current source of truth — 24 September 2026
+
+The user's current `G:\Groupsfaisaltown` folder is authoritative. Preserve its homepage, nine project pages (including Sector Q), single master-plan article and legal pages. Do not restore the earlier 31-page site from remote history without explicit instruction. The cleanup is documented in SITE-CLEANUP-2026-09-24.md.
+
+Keep Pages CMS aligned with the actual local content model. Prefer full-body text fields and bulk text fields for FAQs, related links, highlights, downloads, price rows and repeated homepage content. Bulk text is authoritative, including an intentionally empty field. Do not reintroduce row-by-row-only editors or stale duplicate arrays.
+
+Featured-offer facts supply the current homepage starting price; the Sector P cash-price table is separate. Keep the local data and existing price logic intact when working on the CMS.

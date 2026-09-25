@@ -38,7 +38,7 @@ jobs:
         run: npm ci
 
       - name: Build every page
-        run: npm run build
+        run: npm run check:cms
 
       - name: Check SSH deployment settings
         env:
@@ -110,11 +110,15 @@ jobs:
             *) echo "::error::Unexpected deployment directory. No files uploaded."; exit 1 ;;
           esac
           printf '%s\n' "$GITHUB_SHA" > dist/deployment-version.txt
+          find dist -name index.html -printf '%P\n' > dist/deployment-pages.txt
           # Preserve files managed outside this static site.
           sshpass -e rsync -avz \
             --exclude=".well-known/" --exclude="cgi-bin/" \
             -e "ssh -p $SSH_PORT -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" \
             ./dist/ "$SSH_USERNAME@$SSH_HOST:$target/"
+          sshpass -e ssh -p "$SSH_PORT" \
+            -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+            "$SSH_USERNAME@$SSH_HOST" "bash -s -- '$target'" < .github/scripts/remove-retired-pages.sh
 
       - name: Verify the deployed version and homepage
         run: |
@@ -134,7 +138,7 @@ jobs:
             echo "::error::Live domain is not serving this commit. Check the document root or hosting cache."
             exit 1
           fi
-          for path in / /faisal-town-phase-2/ /articles/faisal-town-complete-guide/ /sitemap.xml; do
+          for path in / /faisal-town-phase-2/ /articles/faisal-town-ii-master-plan/ /sitemap.xml; do
             curl --fail --silent --show-error --location --compressed --max-time 30 \
               -H 'Cache-Control: no-cache' "$base$path?deploy=$GITHUB_SHA" -o /tmp/live-page
             if [ "$path" = / ]; then

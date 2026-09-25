@@ -5,14 +5,7 @@
   "heading": "Terms and Conditions",
   "subheading": "These terms explain how visitors should use FaisalTownGroups.com and how property inquiries are handled.",
   "updated": "2026-08-31",
-  "sections": [
-    { "heading": "Use of This Website", "paragraphs": ["By using FaisalTownGroups.com, you agree to use the website for lawful property information, inquiry, consultation, and comparison purposes only."] },
-    { "heading": "Property Information", "paragraphs": ["Information on this website is provided for general marketing and buyer guidance. It should not be treated as a final booking confirmation, legal document, financial advice, or guarantee of availability."] },
-    { "heading": "Buyer Responsibility", "paragraphs": ["Buyers must verify project approvals, plot availability, payment instructions, recipient details, booking procedure, documentation, and receipt process before making any payment."] },
-    { "heading": "Inquiry and Communication", "paragraphs": ["When you submit a property inquiry or message us through WhatsApp, you allow us to reply about that inquiry. You may request that we stop contacting you at any time."] },
-    { "heading": "No Misuse", "paragraphs": ["You may not copy website content for deceptive marketing, submit false inquiries, misuse contact forms, or use this website in a way that harms the website or other visitors."] },
-    { "heading": "Changes to Terms", "paragraphs": ["We may update these terms when needed. Continued use of the website after updates means you accept the revised terms.", "To continue browsing, use the homepage, all pages directory, or buyer resources."] }
-  ],
   "ctaLabel": "Ask on WhatsApp",
-  "ctaQuery": "I have a terms and conditions question"
+  "ctaQuery": "I have a terms and conditions question",
+  "body": "## Use of This Website\n\nBy using FaisalTownGroups.com, you agree to use the website for lawful property information, inquiry, consultation, and comparison purposes only.\n\n## Property Information\n\nInformation on this website is provided for general marketing and buyer guidance. It should not be treated as a final booking confirmation, legal document, financial advice, or guarantee of availability.\n\n## Buyer Responsibility\n\nBuyers must verify project approvals, plot availability, payment instructions, recipient details, booking procedure, documentation, and receipt process before making any payment.\n\n## Inquiry and Communication\n\nWhen you submit a property inquiry or message us through WhatsApp, you allow us to reply about that inquiry. You may request that we stop contacting you at any time.\n\n## No Misuse\n\nYou may not copy website content for deceptive marketing, submit false inquiries, misuse contact forms, or use this website in a way that harms the website or other visitors.\n\n## Changes to Terms\n\nWe may update these terms when needed. Continued use of the website after updates means you accept the revised terms.\n\nTo continue browsing, use the homepage, all pages directory, or buyer resources."
 }

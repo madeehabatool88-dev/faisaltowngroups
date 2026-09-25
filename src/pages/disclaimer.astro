@@ -1,7 +1,9 @@
 ---
 import ContentLayout from "../layouts/ContentLayout.astro";
 import { whatsappLink } from "../data/site";
-import page from "../content/legal/disclaimer.json";
+import pageData from "../content/legal/disclaimer.json";
+import { parseProjectBody } from "../data/projectBulk";
+const page = { ...pageData, sections: parseProjectBody(pageData.body) };
 ---
 
 <ContentLayout

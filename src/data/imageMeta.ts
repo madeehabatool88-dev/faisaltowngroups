@@ -1,4 +1,10 @@
 export const imageMeta: Record<string, { width: number; height: number }> = {
+  "/assets/plans/previews/sector-p-ft-ii.webp": { width: 1600, height: 1816 },
+  "/assets/plans/previews/sector-o-ft-ii.webp": { width: 1600, height: 1102 },
+  "/assets/plans/previews/sector-q-ft-ii.webp": { width: 1600, height: 1400 },
+  "/assets/plans/previews/sector-r-ft-ii.webp": { width: 1600, height: 2019 },
+  "/assets/plans/previews/sector-s-ft-ii.webp": { width: 1600, height: 1400 },
+  "/assets/plans/previews/sector-t-ft-ii.webp": { width: 1600, height: 3200 },
   "/assets/faisal-town-ii/faisal-town-phase-2-master-plan-preview.webp": { width: 1800, height: 1643 },
   "/assets/faisal-town-ii/hero-masterplan-preview.webp": { width: 1440, height: 810 },
   "/assets/faisal-town-ii/lake-district-view.webp": { width: 1600, height: 900 },

@@ -99,8 +99,8 @@ content:
             path: src/content/homepage/controls.json
             format: json
             description: >-
-              These switches prepare the future homepage. The current layout and visibility stay unchanged until
-              frontend wiring.
+              These switches control the current homepage. Turn a section off to hide it without deleting its
+              saved content.
             fields:
               - name: hero
                 label: SEO & Hero Enabled
@@ -171,8 +171,8 @@ content:
             path: src/content/homepage/hero.json
             format: json
             description: >-
-              Existing fields still edit the current hero. New CTA types, trust points and starting-price display await
-              the redesign. Prices are maintained only in 04.
+              Current homepage hero. The starting price comes from 03 - Featured Offer facts, not the separate
+              Sector P table in 04.
             fields:
               - name: seoTitle
                 label: SEO Title
@@ -227,8 +227,8 @@ content:
                     type: text
                     required: false
                     description: >-
-                      Paste all items here, one per line: Button label | WhatsApp message. Spreadsheet columns also
-                      work. Keep empty optional columns between separators. Reorder by moving lines.
+                      Paste all items here, one per line: Button label | WhatsApp message. Spreadsheet columns
+                      also work. Keep empty optional columns between separators. Reorder by moving lines.
               - name: updated
                 label: Updated Date
                 type: date
@@ -247,7 +247,7 @@ content:
                 label: Trust Points - Bulk Edit
                 type: text
                 required: false
-                description: One trust point per line. Only use confirmed wording. Prepared for the future homepage.
+                description: Edits this section of the current homepage. Visibility follows 00 - Section Controls.
               - name: primaryCtaType
                 label: primary CTA Type
                 type: select
@@ -290,9 +290,7 @@ content:
             type: file
             path: src/content/homepage/trust.json
             format: json
-            description: >-
-              Prepared for the future homepage redesign; this new section is not displayed on the current homepage.
-              Company identity and partner wording are maintained in Site Settings.
+            description: Edits this section of the current homepage. Visibility follows 00 - Section Controls.
             fields:
               - name: eyebrow
                 label: Eyebrow
@@ -326,13 +324,13 @@ content:
               delete: false
               rename: false
           - name: homepage_offer
-            label: 03 - Featured Phase 2 Offer
+            label: 03 - Featured Offer (currently Sector T)
             type: file
             path: src/content/homepage/featured-offer.json
             format: json
             description: >-
-              Existing Sector P feature and plan content. All offer prices are maintained in 04; do not duplicate
-              amounts here.
+              Edits the featured offer and homepage starting price. Current local content features Sector T.
+              Keep its heading, link, facts, WhatsApp message and plan consistent.
             fields:
               - name: image
                 label: Image
@@ -352,12 +350,14 @@ content:
               - name: primaryCta
                 label: Primary CTA
                 type: string
+                description: Label for the primary WhatsApp action. Its message is stored below in secondaryQuery.
               - name: primaryHref
                 label: Primary Link
                 type: string
               - name: secondaryCta
                 label: Secondary CTA
                 type: string
+                description: Label for the secondary details link. Its destination is stored in primaryHref.
               - name: secondaryQuery
                 label: Secondary WhatsApp Query
                 type: text
@@ -377,10 +377,11 @@ content:
                 type: text
                 required: false
                 description: >-
-                  Paste all items here, one per line: Value | Label. Spreadsheet columns also work. Keep empty optional
-                  columns between separators. Reorder by moving lines.
+                  Paste all facts at once: Value | Label, one line each. The value labelled discounted price
+                  or discounted listed price supplies the homepage starting price. Keep the heading and
+                  message consistent.
               - name: sectorPlan
-                label: Sector P Plan
+                label: Featured Sector Plan
                 type: object
                 fields:
                   - name: eyebrow
@@ -408,13 +409,13 @@ content:
               delete: false
               rename: false
           - name: homepage_prices
-            label: 04 - Plot Sizes & Prices
+            label: 04 - Sector P Cash Prices
             type: file
             path: src/content/homepage/prices.json
             format: json
             description: >-
-              One source for offer prices. Availability, enabled and per-offer messages are prepared for the redesigned
-              frontend; the current price table uses the first four columns.
+              Separate Sector P cash-price table. This does not set the homepage Sector T starting price.
+              Paste all price rows in the bulk field.
             fields:
               - name: eyebrow
                 label: Eyebrow
@@ -434,8 +435,8 @@ content:
                 required: false
                 description: >-
                   Paste all items here, one per line: Dimensions | Marla/Kanal | Original PKR | Current PKR |
-                  Availability | Enabled (yes/no) | WhatsApp message. Spreadsheet columns also work. Keep empty optional
-                  columns between separators. Reorder by moving lines.
+                  Availability | Enabled (yes/no) | WhatsApp message. Spreadsheet columns also work. Keep
+                  empty optional columns between separators. Reorder by moving lines.
             operations:
               delete: false
               rename: false
@@ -444,7 +445,7 @@ content:
             type: file
             path: src/content/homepage/budgets.json
             format: json
-            description: Prepared for the future homepage redesign; this new section is not displayed on the current homepage.
+            description: Edits this section of the current homepage. Visibility follows 00 - Section Controls.
             fields:
               - name: eyebrow
                 label: Eyebrow
@@ -463,9 +464,9 @@ content:
                 type: text
                 required: false
                 description: >-
-                  Paste all items here, one per line: Label | Description | WhatsApp message | Enabled (yes/no).
-                  Spreadsheet columns also work. Keep empty optional columns between separators. Reorder by moving
-                  lines.
+                  Paste all items here, one per line: Label | Description | WhatsApp message | Enabled
+                  (yes/no). Spreadsheet columns also work. Keep empty optional columns between separators.
+                  Reorder by moving lines.
             operations:
               delete: false
               rename: false
@@ -474,7 +475,9 @@ content:
             type: file
             path: src/content/homepage/sectors.json
             format: json
-            description: Names, links and descriptions edit the current cards. Extra display fields await the redesign.
+            description: >-
+              Current O, P, Q, R, S and T cards. Paste and reorder all cards in one box. The featured sector
+              is sorted first by its saved details URL.
             fields:
               - name: heading
                 label: Heading
@@ -485,9 +488,9 @@ content:
                 type: text
                 required: false
                 description: >-
-                  Paste all items here, one per line: Name/sub-name | Page URL | Description | Image path | Alt text |
-                  Status | WhatsApp message | Enabled (yes/no). Spreadsheet columns also work. Keep empty optional
-                  columns between separators. Reorder by moving lines.
+                  Paste all items here, one per line: Name/sub-name | Page URL | Description | Image path |
+                  Alt text | Status | WhatsApp message | Enabled (yes/no). Spreadsheet columns also work. Keep
+                  empty optional columns between separators. Reorder by moving lines.
             operations:
               delete: false
               rename: false
@@ -497,8 +500,8 @@ content:
             path: src/content/homepage/development.json
             format: json
             description: >-
-              Current development content remains editable. Additional images, date and video are prepared for the
-              redesign.
+              Current development content remains editable. Additional images, date and video are prepared for
+              the redesign.
             fields:
               - name: eyebrow
                 label: Eyebrow
@@ -533,8 +536,8 @@ content:
                 type: text
                 required: false
                 description: >-
-                  Paste all items here, one per line: Image path | Alt text | Caption. Spreadsheet columns also work.
-                  Keep empty optional columns between separators. Reorder by moving lines.
+                  Paste all items here, one per line: Image path | Alt text | Caption. Spreadsheet columns
+                  also work. Keep empty optional columns between separators. Reorder by moving lines.
               - name: videoUrl
                 label: Video URL
                 type: string
@@ -588,7 +591,7 @@ content:
             type: file
             path: src/content/homepage/buyer-support.json
             format: json
-            description: Prepared for the future homepage redesign; this new section is not displayed on the current homepage.
+            description: Edits this section of the current homepage. Visibility follows 00 - Section Controls.
             fields:
               - name: eyebrow
                 label: Eyebrow
@@ -607,9 +610,9 @@ content:
                 type: text
                 required: false
                 description: >-
-                  Paste all items here, one per line: Title | Description | Icon (check/map/phone/home/globe) | Enabled
-                  (yes/no). Spreadsheet columns also work. Keep empty optional columns between separators. Reorder by
-                  moving lines.
+                  Paste all items here, one per line: Title | Description | Icon (check/map/phone/home/globe)
+                  | Enabled (yes/no). Spreadsheet columns also work. Keep empty optional columns between
+                  separators. Reorder by moving lines.
             operations:
               delete: false
               rename: false
@@ -618,7 +621,7 @@ content:
             type: file
             path: src/content/homepage/buying-process.json
             format: json
-            description: Prepared for the future homepage redesign; this new section is not displayed on the current homepage.
+            description: Edits this section of the current homepage. Visibility follows 00 - Section Controls.
             fields:
               - name: eyebrow
                 label: Eyebrow
@@ -637,8 +640,8 @@ content:
                 type: text
                 required: false
                 description: >-
-                  Paste all items here, one per line: Title | Description | Enabled (yes/no). Spreadsheet columns also
-                  work. Keep empty optional columns between separators. Reorder by moving lines.
+                  Paste all items here, one per line: Title | Description | Enabled (yes/no). Spreadsheet
+                  columns also work. Keep empty optional columns between separators. Reorder by moving lines.
             operations:
               delete: false
               rename: false
@@ -647,7 +650,7 @@ content:
             type: file
             path: src/content/homepage/visit-overseas.json
             format: json
-            description: Prepared for the future homepage redesign; this new section is not displayed on the current homepage.
+            description: Edits this section of the current homepage. Visibility follows 00 - Section Controls.
             fields:
               - name: siteVisit
                 label: Site Visit
@@ -747,7 +750,7 @@ content:
             type: file
             path: src/content/homepage/faqs.json
             format: json
-            description: Prepared for the future homepage redesign; this new section is not displayed on the current homepage.
+            description: Edits this section of the current homepage. Visibility follows 00 - Section Controls.
             fields:
               - name: heading
                 label: Heading
@@ -758,8 +761,8 @@ content:
                 type: text
                 required: false
                 description: >-
-                  Paste all items here, one per line: Question | Answer | Enabled (yes/no). Spreadsheet columns also
-                  work. Keep empty optional columns between separators. Reorder by moving lines.
+                  Paste all items here, one per line: Question | Answer | Enabled (yes/no). Spreadsheet
+                  columns also work. Keep empty optional columns between separators. Reorder by moving lines.
             operations:
               delete: false
               rename: false
@@ -769,8 +772,8 @@ content:
             path: src/content/homepage/buyer-guides.json
             format: json
             description: >-
-              The two selected-guide lists control the current homepage. Section copy and display limit are prepared for
-              the redesign.
+              The two selected-guide lists control the current homepage. Section copy and display limit are
+              prepared for the redesign.
             fields:
               - name: eyebrow
                 label: Eyebrow
@@ -795,7 +798,7 @@ content:
                 required: false
                 description: One article slug per line.
               - name: displayLimit
-                label: Future Display Limit
+                label: Display Limit
                 type: number
                 required: false
             operations:
@@ -806,7 +809,9 @@ content:
             type: file
             path: src/content/homepage/contact.json
             format: json
-            description: Existing contact copy and options remain live. New button labels and background image await the redesign.
+            description: >-
+              Existing contact copy and options remain live. New button labels and background image await the
+              redesign.
             fields:
               - name: eyebrow
                 label: Eyebrow
@@ -831,8 +836,8 @@ content:
                 type: text
                 required: false
                 description: >-
-                  Paste all items here, one per line: Button label | WhatsApp message. Spreadsheet columns also work.
-                  Keep empty optional columns between separators. Reorder by moving lines.
+                  Paste all items here, one per line: Button label | WhatsApp message. Spreadsheet columns
+                  also work. Keep empty optional columns between separators. Reorder by moving lines.
               - name: whatsappButton
                 label: WhatsApp Button
                 type: string
@@ -927,19 +932,19 @@ content:
             type: text
             required: false
           - name: stickyWhatsAppEnabled
-            label: Future Sticky WhatsApp Enabled
+            label: Sticky WhatsApp Enabled
             type: boolean
             required: false
           - name: stickyCallEnabled
-            label: Future Sticky Call Enabled
+            label: Sticky Call Enabled
             type: boolean
             required: false
         operations:
           delete: false
           rename: false
         description: >-
-          Global identity and contacts. New fields and sticky controls are prepared for the future frontend; the
-          existing phone, WhatsApp, company and disclosure fields remain in use.
+          Global identity and contacts. Phone, WhatsApp and sticky-contact switches control the current site.
+          Optional business details remain available for future use.
       - name: homepage_preserved
         label: Preserved Homepage Content
         type: group
@@ -997,13 +1002,13 @@ content:
                 type: text
                 required: false
                 description: >-
-                  Paste all items here, one per line: Title | URL | Description. Spreadsheet columns also work. Keep
-                  empty optional columns between separators. Reorder by moving lines.
+                  Paste all items here, one per line: Title | URL | Description. Spreadsheet columns also
+                  work. Keep empty optional columns between separators. Reorder by moving lines.
             operations:
               delete: false
               rename: false
           - name: homepage_project_choice
-            label: Current Layout - Project Choice
+            label: Preserved - Project Choice
             type: file
             path: src/content/homepage/project-choice.json
             format: json
@@ -1022,14 +1027,14 @@ content:
                 type: text
                 required: false
                 description: >-
-                  Paste all items here, one per line: Label | Heading | Description | Primary label | Primary URL |
-                  WhatsApp label | WhatsApp message. Spreadsheet columns also work. Keep empty optional columns between
-                  separators. Reorder by moving lines.
+                  Paste all items here, one per line: Label | Heading | Description | Primary label | Primary
+                  URL | WhatsApp label | WhatsApp message. Spreadsheet columns also work. Keep empty optional
+                  columns between separators. Reorder by moving lines.
             operations:
               delete: false
               rename: false
           - name: homepage_phase_2
-            label: Current Layout - Phase 2 Introduction
+            label: Preserved - Phase 2 Introduction
             type: file
             path: src/content/homepage/phase-2.json
             format: json
@@ -1158,12 +1163,31 @@ content:
         label: Downloads - Bulk Edit
         type: text
         required: false
-        description: "One download per line: Label | Title | Description | URL or PDF path. Spreadsheet paste is supported."
+        description: >-
+          One download per line: Label | Title | Description | URL or PDF path. Spreadsheet paste is
+          supported.
       - name: highlightsText
         label: Highlights - Bulk Edit
         type: text
         required: false
         description: "One highlight per line: Label | Value. Spreadsheet paste is supported."
+      - name: priceTableHeading
+        label: Price Table Heading
+        type: string
+        required: false
+        description: Heading shown above the structured price table on sector pages.
+      - name: priceTableNote
+        label: Price Table Note
+        type: text
+        required: false
+        description: Short verification note shown below the price table.
+      - name: priceTableRowsText
+        label: Price Table - Bulk Edit
+        type: text
+        required: false
+        description: >-
+          One row per line: Plot Size | Dimensions | Payment | Current Price | Availability. Spreadsheet paste
+          is supported.
       - name: faqsText
         label: FAQs - Bulk Edit
         type: text
@@ -1173,10 +1197,12 @@ content:
         label: Related Links - Bulk Edit
         type: text
         required: false
-        description: "One link per line: Link text | URL. Use /page-path/ or a full https URL. Spreadsheet paste is supported."
+        description: >-
+          One link per line: Link text | URL. Use /page-path/ or a full https URL. Spreadsheet paste is
+          supported.
     operations:
       create: true
-      rename: true
+      rename: false
       delete: false
   - name: articles_guides
     label: Articles & Buyer Guides
@@ -1245,6 +1271,7 @@ content:
             - Lifestyle
             - Prices
             - Investment Guide
+            - Master Plan & Maps
       - name: cluster
         label: Cluster
         type: select
@@ -1276,13 +1303,15 @@ content:
       - name: body
         label: Full Article Body
         type: text
-        description: Edit the full article in one place. Use
+        description: >-
+          Paste the complete article. Use ## for headings, blank lines for paragraphs, - for bullets, > for
+          callouts and [Label](/page/) for internal links.
       - name: relatedSlugsText
         label: Related Articles - Bulk Edit
         type: text
         description: >-
-          Paste all related article slugs here, one per line. Use slugs only, for example faisal-town-complete-guide.
-          Clear the box to remove manually selected related articles.
+          Paste all related article slugs here, one per line. Use slugs only, for example
+          faisal-town-complete-guide. Clear the box to remove manually selected related articles.
         required: false
       - name: cta
         label: Article CTA
@@ -1306,11 +1335,11 @@ content:
         type: text
         required: false
         description: >-
-          Paste all FAQs here, one per line: Question | Answer. You can also paste two spreadsheet columns. Blank lines
-          are ignored. Clear the box to remove all FAQs.
+          Paste all FAQs here, one per line: Question | Answer. You can also paste two spreadsheet columns.
+          Blank lines are ignored. Clear the box to remove all FAQs.
     operations:
       create: true
-      rename: true
+      rename: false
       delete: false
   - name: legal_pages
     label: Legal Pages
@@ -1344,18 +1373,12 @@ content:
       - name: updated
         label: Updated Date
         type: date
-      - name: sections
-        label: Legal Sections
-        type: object
-        list: true
-        fields:
-          - name: heading
-            label: Heading
-            type: string
-          - name: paragraphs
-            label: Paragraphs
-            type: text
-            list: true
+      - name: body
+        label: Full Legal Page - Bulk Edit
+        type: text
+        description: >-
+          Edit the entire page at once. Use ## Heading and blank lines between paragraphs. Clear this field to
+          remove the body.
       - name: ctaLabel
         label: CTA Label
         type: string

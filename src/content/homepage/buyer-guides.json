@@ -1,8 +1,8 @@
 {
-  "eyebrow": "Buyer Guides",
-  "heading": "Useful Faisal Town Phase 2 Guides",
-  "text": "Use these guides to compare sectors, understand the master plan and review important buying considerations before shortlisting a property.",
-  "phase2SlugsText": "faisal-town-ii-sector-p-guide\nfaisal-town-ii-master-plan\nsector-p-prices-explained\nliving-near-rawalpindi-ring-road\nnew-islamabad-living-guide",
-  "phase1SlugsText": "faisal-town-phase-1-and-faisal-hills\nfaisal-town-living",
-  "displayLimit": 3
+  "eyebrow": "Master Plan Guide",
+  "heading": "Understand the Phase 2 Layout",
+  "text": "Use one focused master-plan guide for sector orientation, then move directly to the relevant sector page.",
+  "phase2SlugsText": "faisal-town-ii-master-plan",
+  "phase1SlugsText": "",
+  "displayLimit": 1
 }
