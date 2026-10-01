@@ -18,6 +18,13 @@ export type Article = {
   relatedSlugsText?: string;
   faqsText?: string;
   body?: string;
+  quickAnswer?: string;
+  sectorHeading?: string;
+  sectorsText?: string;
+  sectors?: Array<{ title: string; route: string; text: string; href: string }>;
+  mapCaption?: string;
+  downloadLabel?: string;
+  downloadHref?: string;
   cta?: {
     label: string;
     heading: string;

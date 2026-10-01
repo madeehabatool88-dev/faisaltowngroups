@@ -4,6 +4,7 @@ type BulkArticle = {
   relatedSlugsText?: string;
   faqs?: Array<{ question: string; answer: string }>;
   faqsText?: string;
+  sectorsText?: string;
 };
 
 export function normalizeArticle<T extends BulkArticle>(article: T) {
@@ -20,5 +21,13 @@ export function normalizeArticle<T extends BulkArticle>(article: T) {
         return [{ question: cells[0], answer: cells[1] }];
       })
     : article.faqs;
-  return { ...article, relatedSlugs, faqs };
+  const sectors = (article.sectorsText ?? '').split(/\r?\n/).flatMap((line, index) => {
+    if (!line.trim()) return [];
+    const cells = line.split(line.includes('\t') ? '\t' : '|').map(cell => cell.trim());
+    if (cells.length !== 4 || cells.some(cell => !cell) || !/^\/(?!\/)/.test(cells[3])) {
+      throw new Error(`${article.slug}: sectors line ${index + 1} needs Sector | Buying route | Description | /page/.`);
+    }
+    return [{ title: cells[0], route: cells[1], text: cells[2], href: cells[3] }];
+  });
+  return { ...article, relatedSlugs, faqs, sectors };
 }

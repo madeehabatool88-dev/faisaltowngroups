@@ -14,7 +14,10 @@ const {
   image,
   ogType = "website",
   additionalSchema = [],
-  compactHero = false
+  compactHero = false,
+  primaryLabel = "Check Current Options",
+  primaryMessage = `Inquiry from page: ${heading}`,
+  secondaryLabel = "Ask Price on WhatsApp"
 } = Astro.props;
 ---
 <BaseLayout title={title} description={description} image={image} ogType={ogType} additionalSchema={additionalSchema}>
@@ -30,8 +33,8 @@ const {
         <h1>{heading}</h1>
         <p>{subheading}</p>
         <div class="hero-actions">
-          <a class="btn primary" data-cta-location="content-hero" href={whatsappLink(`Inquiry from page: ${heading}`)}>Check Current Options</a>
-          <a class="btn outline" data-cta-location="content-hero" href={whatsappLink(`I want the latest price and availability for: ${heading}`)}>Ask Price on WhatsApp</a>
+          <a class="btn primary" data-cta-location="content-hero" href={whatsappLink(primaryMessage)}>{primaryLabel}</a>
+          <a class="btn outline" data-cta-location="content-hero" href={whatsappLink(`${secondaryLabel}: ${heading}`)}>{secondaryLabel}</a>
         </div>
       </div>
     </section>
@@ -42,3 +45,8 @@ const {
   <MobileWhatsApp />
   <SiteFooter />
 </BaseLayout>
+
+<style>
+  .content-hero .btn.outline { color: #fff; border-color: rgba(255,255,255,.65); }
+  .content-hero .btn.outline:hover { background: #fff; color: var(--maroon-900); }
+</style>

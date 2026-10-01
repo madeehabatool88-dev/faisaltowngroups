@@ -1272,6 +1272,7 @@ content:
             - Prices
             - Investment Guide
             - Master Plan & Maps
+            - Master Plan & Sector Layout
       - name: cluster
         label: Cluster
         type: select
@@ -1297,6 +1298,31 @@ content:
       - name: image
         label: Featured Image
         type: image
+      - name: quickAnswer
+        label: Quick Answer
+        type: text
+        required: false
+      - name: mapCaption
+        label: Master Plan Caption
+        type: text
+        required: false
+      - name: sectorHeading
+        label: Sector Summary Heading
+        type: string
+        required: false
+      - name: sectorsText
+        label: Sector Cards - Bulk Edit
+        type: text
+        required: false
+        description: "One line per card: Sector | Buying route | Description | /page/. Tabs also work. Clear to remove all cards."
+      - name: downloadLabel
+        label: Plan Download Label
+        type: string
+        required: false
+      - name: downloadHref
+        label: Plan PDF Path
+        type: string
+        required: false
       - name: readTime
         label: Read Time
         type: string
@@ -1305,7 +1331,7 @@ content:
         type: text
         description: >-
           Paste the complete article. Use ## for headings, blank lines for paragraphs, - for bullets, > for
-          callouts and [Label](/page/) for internal links.
+          callouts, [Label](/page/) for internal links and [Label](https://example.com/) for external references.
       - name: relatedSlugsText
         label: Related Articles - Bulk Edit
         type: text

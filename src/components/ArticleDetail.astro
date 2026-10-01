@@ -41,7 +41,7 @@ const escapeHtml = (value: string) =>
     .replace(/'/g, "&#039;");
 
 const renderInline = (value: string) =>
-  escapeHtml(value).replace(/\[([^\]]+)\]\((\/[^)]+)\)/g, '<a href="$2">$1</a>');
+  escapeHtml(value).replace(/\[([^\]]+)\]\(((?:\/(?!\/)|https:\/\/)[^\s)]+)\)/g, '<a href="$2">$1</a>');
 
 const renderArticleBody = (body: string) => {
   const html: string[] = [];
@@ -137,8 +137,12 @@ const breadcrumbSchema = {
   image={article.image}
   ogType="article"
   additionalSchema={[articleSchema, breadcrumbSchema]}
+  compactHero={true}
+  primaryLabel={cta.button}
+  primaryMessage={cta.message}
+  secondaryLabel="Arrange a Site Visit"
 >
-  <article class="content-section article-detail">
+  <article class:list={["content-section", "article-detail", { "plan-guide": Boolean(article.sectorsText) }]}>
     <div class="article-meta">
       <span>Published: {article.date}</span>
       {article.updated && <span>Updated: {article.updated}</span>}
@@ -146,7 +150,19 @@ const breadcrumbSchema = {
       <span>{article.readTime}</span>
       <span>{article.category}</span>
     </div>
-    <img class="article-hero-image" src={article.image} alt={article.title} width={img?.width} height={img?.height} loading="eager" fetchpriority="high" decoding="async" />
+    {article.quickAnswer && <aside class="article-callout"><strong>Quick Answer</strong><p>{article.quickAnswer}</p></aside>}
+    <figure class="plan-map">
+      <img class="article-hero-image" src={article.image} alt={article.title} width={img?.width} height={img?.height} loading="eager" fetchpriority="high" decoding="async" />
+      {article.mapCaption && <figcaption>{article.mapCaption}</figcaption>}
+      {article.downloadHref && <a class="plan-download" href={article.downloadHref}>{article.downloadLabel}</a>}
+    </figure>
+    {article.sectors?.length > 0 && <section>
+      <h2>{article.sectorHeading}</h2>
+      <div class="plan-sectors">{article.sectors.map(sector => <a href={sector.href}>
+        <span>{sector.route}</span><h3>{sector.title}</h3><p>{sector.text}</p><strong>View sector guide →</strong>
+      </a>)}</div>
+    </section>}
+    <div class="plan-copy">
     {article.body ? (
       <div set:html={renderArticleBody(article.body)} />
     ) : (
@@ -168,6 +184,8 @@ const breadcrumbSchema = {
         </section>
       ))
     )}
+    </div>
+    {article.downloadHref && <aside class="article-callout"><a class="plan-download" href={article.downloadHref}>{article.downloadLabel}</a></aside>}
     {article.faqs && article.faqs.length > 0 && (
       <section>
         <h2>Quick Questions</h2>
@@ -187,7 +205,7 @@ const breadcrumbSchema = {
       <p>Property details, prices, development status and booking procedures can change. Compare time-sensitive claims with the official project source and verify regulatory or approval questions directly with the relevant authority before making a payment decision.</p>
       <div class="article-context-links">
         <a href="https://faisaltowngroup.com/" target="_blank" rel="noreferrer">Official Faisal Town Group website</a>
-        <a href="https://rda.gop.pk/private-housing-schemes" target="_blank" rel="noreferrer">RDA private housing schemes</a>
+        <a href="https://rda.gop.pk/ahs/" target="_blank" rel="noreferrer">RDA housing-scheme information</a>
       </div>
     </section>
     <div class="article-cta">
@@ -199,7 +217,7 @@ const breadcrumbSchema = {
     </div>
   </article>
 
-  <section class="content-section related-section">
+  {visibleRelated.length > 0 && <section class="content-section related-section">
     <div class="section-intro">
       <p class="section-label">{article.cluster || "More Guides"}</p>
       <h2>Related Faisal Town guides</h2>
@@ -216,5 +234,24 @@ const breadcrumbSchema = {
         </article>
       ))}
     </div>
-  </section>
+  </section>}
 </ContentLayout>
+
+<style>
+  .plan-guide { width: min(1180px, calc(100% - 32px)); }
+  .plan-map { margin: 28px 0 40px; }
+  .plan-map .article-hero-image { margin-bottom: 16px; }
+  figcaption { color: var(--muted); line-height: 1.6; }
+  .plan-download { display: inline-block; padding: 14px 0; color: var(--maroon-900); font-weight: 750; text-underline-offset: 4px; }
+  .plan-sectors { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid #d9d1c9; }
+  .plan-sectors a { padding: 26px; border-bottom: 1px solid #d9d1c9; text-decoration: none; background: #faf8f4; color: var(--maroon-900); }
+  .plan-sectors a:nth-child(odd) { border-right: 1px solid #d9d1c9; }
+  .plan-sectors a:hover, .plan-sectors a:focus-visible { background: #f0e9df; }
+  .plan-sectors span { font-size: .8rem; letter-spacing: .04em; text-transform: uppercase; }
+  .plan-sectors h3 { font-size: 1.5rem; margin: 12px 0; }
+  .plan-sectors strong { display: block; margin-top: 18px; }
+  .plan-copy { max-width: 820px; margin: 48px auto; }
+  .plan-copy :global(h2) { margin-top: 40px; font-size: clamp(1.5rem, 3vw, 2rem); }
+  .plan-copy :global(li) { margin-bottom: 8px; }
+  @media (max-width: 600px) { .plan-sectors { grid-template-columns: 1fr; } .plan-sectors a:nth-child(odd) { border-right: 0; } .plan-sectors a { padding: 22px 18px; } }
+</style>

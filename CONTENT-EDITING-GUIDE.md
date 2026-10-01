@@ -72,3 +72,9 @@ After publishing the configuration and content together, reload Pages CMS and re
 ## Publishing connection restored — 25 September 2026
 
 Git tracking is reconnected to the existing faisaltowngroups repository. The Check saved content and Deploy live website actions are restored in Pages CMS. Every push to main automatically builds, validates the CMS and deploys this local baseline. The workflow checks the current master-plan article, exact version and stylesheet contents. Only generated HTML for the 16 deliberately retired routes is removed; a route recreated later is retained. Earlier notes about missing Git/workflows describe the supplied folder before reconnection.
+
+## Master plan and location pages (1 October 2026)
+
+In **Articles & Buyer Guides → Faisal Town Phase 2 Master Plan & Sector Layout**, edit Quick Answer, Master Plan Caption, Sector Summary Heading, Plan Download Label and Plan PDF Path directly. Sector Cards - Bulk Edit accepts one line per card: `Sector | Buying route | Description | /page/` (or four pasted spreadsheet columns). Clearing the field removes every card. Full Article Body remains the authoritative text for buyer guidance; FAQs remain bulk-editable. Body links support internal paths and HTTPS references. The category now includes Master Plan & Sector Layout.
+
+In **Project Pages → Faisal Town Islamabad Map & Location**, edit the full body, introduction, checklist, highlights, FAQs and related links as before. The Location template intentionally omits the large plan image and links to the dedicated master-plan guide instead. Its image field remains available for social sharing. Keep Phase 1 and Phase 2 location guidance separate; prices belong on project/sector pages.

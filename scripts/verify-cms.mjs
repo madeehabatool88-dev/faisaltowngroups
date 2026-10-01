@@ -37,3 +37,16 @@ if(controls.featuredOffer){
  assert(anchors.some(a=>a.includes('href="'+escape(offer.primaryHref)+'"')&&a.includes('data-cta-label="'+escape(offer.secondaryCta)+'"')),'Featured details label mismatch');
 }
 console.log('PASS: '+count+' JSON entries exposed; bulk edits, clearing fields, legal bodies and featured price/actions verified.');
+
+assert.equal(normalizeArticle(article).sectors.length,6);
+assert.equal(normalizeArticle({...article,sectorsText:''}).sectors.length,0);
+assert.equal(normalizeArticle({...article,sectorsText:'Sector Q | Cash | Details | /faisal-town-q-block/'}).sectors[0].title,'Sector Q');
+assert.throws(()=>normalizeArticle({...article,sectorsText:'Sector Q | Cash | Missing link'}));
+assert.throws(()=>normalizeArticle({...article,sectorsText:'Sector Q | Cash | Details | javascript:alert(1)'}));
+const planHtml=fs.readFileSync('dist/articles/faisal-town-ii-master-plan/index.html','utf8');
+assert(planHtml.includes('href="https://rda.gop.pk/ahs/"'));
+assert(planHtml.includes('rel="canonical"'));
+const locationHtml=fs.readFileSync('dist/faisal-town-islamabad-map-location/index.html','utf8');
+assert(!locationHtml.includes('<figure class="clean-hero-figure'));
+assert(locationHtml.includes('rel="canonical"'));
+console.log('PASS: sector-card edits, clearing and malformed rows; authority links; canonicals; location layout.');
