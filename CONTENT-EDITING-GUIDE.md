@@ -42,6 +42,7 @@ Paste every row at once. You can paste tab-separated spreadsheet cells instead o
 Open **Main Website → Homepage**. The numbered entries match the current homepage sections. **00 - Section Controls** switches sections on or off immediately on the next build; the switches are not placeholders.
 
 - **01 - SEO & Hero:** title, description, headline, introduction, image, disclaimer, CTA actions and bulk trust points.
+- **01b - About Phase 2:** the saved introduction shown after the hero. Its visibility is controlled by About Phase 2 Enabled. No founder content is supplied.
 - **03 - Featured Offer (currently Sector T):** feature copy, image, buttons, sector plan and bulk facts. The hero starting price comes from the fact labelled `discounted listed price` (the renderer matches `discounted price`). Keep the price fact, heading and WhatsApp message consistent. Sector identity comes from the beginning of the heading, such as `Sector T`.
 - **04 - Sector P Cash Prices:** a separate bulk price table. It does not change the Sector T starting price. Columns: `Dimensions | Marla/Kanal | Original PKR | Current PKR | Availability | Enabled | WhatsApp message`.
 - **05 - Find by Budget:** all budget options and their WhatsApp messages in one box.
@@ -57,7 +58,7 @@ Each bulk field shows its precise column order. Preserve empty optional columns 
 
 The featured offer's primary button uses `primaryCta` with the stored WhatsApp message (`secondaryQuery`). The secondary button uses `secondaryCta` and the internal details link (`primaryHref`). Those historical field names are retained so the current page continues to work.
 
-**Preserved Homepage Content** contains the secondary Phase 1 content and older saved fields. Phase 1 remains controlled by its homepage switch; old Project Choice and Phase 2 introduction entries are retained but are not standalone sections in the current homepage. The old hero WhatsApp-card fields are also retained data, not the current final enquiry section.
+**Preserved Homepage Content** contains the secondary Phase 1 content and older saved fields. Phase 1 remains controlled by its homepage switch. Old Project Choice content is retained but is not a standalone section. The Phase 2 introduction is now under 01b - About Phase 2 and renders between the hero and featured offer. The old hero WhatsApp-card fields are also retained data, not the current final enquiry section.
 
 **Site Settings** controls global contact details and sticky-contact switches. Optional business fields do not automatically create new visible sections. Trust remains hidden while its section switch is off.
 

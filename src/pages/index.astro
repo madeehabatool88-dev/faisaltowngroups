@@ -223,6 +223,22 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
       </section>
     )}
 
+    {c.aboutPhase2 && (
+      <section class="hp-section hp-about" id="about-phase-2" data-home-section="aboutPhase2">
+        <div class="hp-wrap">
+          <div class="hp-heading">
+            <p class="hp-kicker">{phase2.eyebrow}</p>
+            <h2>{phase2.heading}</h2>
+            <p>{phase2.text}</p>
+          </div>
+          <div class="hp-actions">
+            <Cta label={phase2.primaryCta} href={phase2.primaryHref} section="about_phase2" secondary />
+            <Cta label={phase2.secondaryCta} query={phase2.secondaryQuery} section="about_phase2" />
+          </div>
+        </div>
+      </section>
+    )}
+
     {c.trust && (
       <section class="hp-section" data-home-section="trust">
         <div class="hp-wrap">
@@ -250,8 +266,11 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
         id="featured-offer"
         data-home-section="featuredOffer"
       >
-        <div class="hp-wrap hp-split">
-          <div>
+        <div class="hp-wrap hp-split hp-featured-layout">
+          <figure class="hp-offer-photo">
+            <Photo src={offer.image} alt={offer.alt} />
+          </figure>
+          <div class="hp-offer-content">
             <p class="hp-kicker">{offer.eyebrow}</p>
 
             <h2>
@@ -317,9 +336,7 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
             )}
           </div>
 
-          <figure class="hp-offer-photo">
-            <Photo src={offer.image} alt={offer.alt} />
-          </figure>
+
         </div>
       </section>
     )}

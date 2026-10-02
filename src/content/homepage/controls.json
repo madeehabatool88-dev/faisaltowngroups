@@ -1,5 +1,6 @@
 {
   "hero": true,
+  "aboutPhase2": true,
   "trust": false,
   "featuredOffer": true,
   "prices": true,

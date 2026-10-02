@@ -1035,3 +1035,14 @@
     padding: 20px;
   }
 }
+
+/* One featured image, first in reading order and in the mobile layout. */
+.hp-about .hp-heading { margin-bottom: 0; }
+.hp-about .hp-actions { margin-bottom: 0; }
+.hp-featured-layout > .hp-offer-photo { grid-column: 2; grid-row: 1; }
+.hp-featured-layout > .hp-offer-content { grid-column: 1; grid-row: 1; min-width: 0; }
+@media (max-width: 800px) {
+  .hp-featured-layout > .hp-offer-photo,
+  .hp-featured-layout > .hp-offer-content { grid-column: auto; grid-row: auto; }
+  .hp-featured-layout > .hp-offer-photo img { display: block; margin-inline: auto; object-fit: contain; }
+}

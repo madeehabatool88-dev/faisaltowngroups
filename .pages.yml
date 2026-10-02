@@ -106,6 +106,10 @@ content:
                 label: SEO & Hero Enabled
                 type: boolean
                 required: false
+              - name: aboutPhase2
+                label: About Phase 2 Enabled
+                type: boolean
+                required: false
               - name: trust
                 label: Trust / Authorized Partner Enabled
                 type: boolean
@@ -285,6 +289,39 @@ content:
             operations:
               delete: false
               rename: false
+          - name: homepage_phase_2
+            label: 01b - About Phase 2
+            type: file
+            path: src/content/homepage/phase-2.json
+            format: json
+            fields:
+              - name: eyebrow
+                label: Eyebrow
+                type: string
+              - name: heading
+                label: Heading
+                type: string
+              - name: text
+                label: Text
+                type: text
+              - name: primaryCta
+                label: Primary CTA
+                type: string
+              - name: primaryHref
+                label: Primary Link
+                type: string
+              - name: secondaryCta
+                label: Secondary CTA
+                type: string
+              - name: secondaryQuery
+                label: Secondary WhatsApp Query
+                type: text
+            operations:
+              delete: false
+              rename: false
+            description: >-
+              Phase 2 introduction shown between the hero and featured offer. Edit the whole description in
+              the Text box.
           - name: homepage_trust
             label: 02 - Trust / Authorized Partner
             type: file
@@ -1030,36 +1067,6 @@ content:
                   Paste all items here, one per line: Label | Heading | Description | Primary label | Primary
                   URL | WhatsApp label | WhatsApp message. Spreadsheet columns also work. Keep empty optional
                   columns between separators. Reorder by moving lines.
-            operations:
-              delete: false
-              rename: false
-          - name: homepage_phase_2
-            label: Preserved - Phase 2 Introduction
-            type: file
-            path: src/content/homepage/phase-2.json
-            format: json
-            fields:
-              - name: eyebrow
-                label: Eyebrow
-                type: string
-              - name: heading
-                label: Heading
-                type: string
-              - name: text
-                label: Text
-                type: text
-              - name: primaryCta
-                label: Primary CTA
-                type: string
-              - name: primaryHref
-                label: Primary Link
-                type: string
-              - name: secondaryCta
-                label: Secondary CTA
-                type: string
-              - name: secondaryQuery
-                label: Secondary WhatsApp Query
-                type: text
             operations:
               delete: false
               rename: false
