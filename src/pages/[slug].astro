@@ -12,6 +12,7 @@ const { page } = Astro.props;
 const slugify = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 const pageUrl = new URL(`/${page.slug}/`, site.domain).toString();
 const img = imageMeta[page.image];
+const formatDate = (value: string) => new Date(`${value.slice(0,10)}T00:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
 
 const additionalSchema = [
   {
@@ -51,6 +52,7 @@ const additionalSchema = [
   heading={page.h1}
   subheading={page.intro}
   image={page.image}
+  heroBackgroundImage={page.heroBackgroundImage}
   additionalSchema={additionalSchema}
   compactHero={true}
   primaryLabel={page.primaryCta}
@@ -60,9 +62,9 @@ const additionalSchema = [
   <article class="content-section landing-page clean-landing">
     <section class="clean-summary" aria-labelledby="quick-answer-heading">
       <div>
-        <p class="section-label">Quick Answer</p>
-        <h2 id="quick-answer-heading">What matters on this page</h2>
-        <p>{page.quickAnswer || page.intro}</p>
+        <p class="section-label">{page.quickAnswerLabel ?? "Quick Answer"}</p>
+        <h2 id="quick-answer-heading">{page.quickAnswerHeading ?? "What matters on this page"}</h2>
+        <p>{page.quickAnswer ?? page.intro}</p>
       </div>
       <a class="btn primary" data-cta-location="quick-answer" href={whatsappLink(`${page.primaryCta}: ${page.h1}`)}>{page.primaryCta}</a>
     </section>
@@ -72,12 +74,12 @@ const additionalSchema = [
       <div>
         {page.sections.map((section) => <a href={`#${slugify(section.heading)}`}>{section.heading}</a>)}
         {page.downloads && page.downloads.length > 0 && <a href="#plans-downloads">Plans & downloads</a>}
-        <a href="#buyer-checklist">Buyer checklist</a>
-        <a href="#faqs">FAQs</a>
+        {page.bullets.length > 0 && <a href="#buyer-checklist">{page.checklistLabel}</a>}
+        {page.faqs.length > 0 && <a href="#faqs">{page.faqLabel}</a>}
       </div>
     </nav>
 
-    <figure class="clean-hero-figure clean-plan-figure">
+    {page.showMainImage !== false && page.image && <figure class="clean-hero-figure clean-plan-figure">
       <img
         class="article-hero-image landing-image clean-plan-image"
         src={page.image}
@@ -88,8 +90,8 @@ const additionalSchema = [
         fetchpriority="high"
         decoding="async"
       />
-      <figcaption>Use the plan as a layout reference. Ask for the exact currently available plot to be marked before you shortlist.</figcaption>
-    </figure>
+      {page.imageCaption && <figcaption>{page.imageCaption}</figcaption>}
+    </figure>}
 
     {page.priceTableRows && page.priceTableRows.length > 0 && (
       <section class="clean-price-section" aria-labelledby="price-table-heading">
@@ -139,9 +141,9 @@ const additionalSchema = [
     )}
 
     <aside class="clean-verification-note">
-      <strong>Current information:</strong>
-      <span>Prices and availability can change. Confirm the exact property, dues, special-location charges and payment instructions before making a material payment.</span>
-      <time datetime={page.reviewed}>Reviewed {new Date(`${page.reviewed}T00:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" })}</time>
+      <strong>{page.verificationLabel}</strong>
+      <span>{page.verificationText}</span>
+      <div class="page-dates">{page.updated && <time datetime={page.updated}>Updated {formatDate(page.updated)}</time>}{page.reviewed && <time datetime={page.reviewed}>Reviewed {formatDate(page.reviewed)}</time>}</div>
     </aside>
 
     <div class="clean-sections">
@@ -151,6 +153,7 @@ const additionalSchema = [
           <div>
             <h2>{section.heading}</h2>
             {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+            {page.sectionLinks?.filter(link => link.heading === section.heading).map(link => <a class="btn outline" href={link.href}>{link.label}</a>)}
           </div>
         </section>
       ))}
@@ -159,8 +162,8 @@ const additionalSchema = [
     {page.downloads && page.downloads.length > 0 && (
       <section class="clean-panel" id="plans-downloads">
         <div class="clean-panel-heading">
-          <p class="section-label">Plans & Downloads</p>
-          <h2>Open the right plan before you shortlist a plot</h2>
+          <p class="section-label">{page.downloadsLabel}</p>
+          <h2>{page.downloadsHeading}</h2>
         </div>
         <div class="download-card-grid">
           {page.downloads.map((download) => (
@@ -168,17 +171,19 @@ const additionalSchema = [
               <span>{download.label}</span>
               <h3>{download.title}</h3>
               <p>{download.text}</p>
-              <a href={download.href} target="_blank" rel="noreferrer">Open PDF</a>
+              <a href={download.href} target="_blank" rel="noreferrer">{page.downloadButtonLabel}</a>
             </article>
           ))}
         </div>
       </section>
     )}
 
-    <section class="clean-panel" id="buyer-checklist">
+    {page.planCalloutHref && <aside class="clean-panel"><p class="section-label">{page.planCalloutLabel}</p><h2>{page.planCalloutHeading}</h2><a class="btn outline" href={page.planCalloutHref}>{page.planCalloutButton}</a></aside>}
+
+    {page.bullets.length > 0 && <section class="clean-panel" id="buyer-checklist">
       <div class="clean-panel-heading">
-        <p class="section-label">Buyer Checklist</p>
-        <h2>Check these points before you proceed</h2>
+        <p class="section-label">{page.checklistLabel}</p>
+        <h2>{page.checklistHeading}</h2>
       </div>
       <div class="clean-checklist">
         {page.bullets.map((item, index) => (
@@ -189,13 +194,13 @@ const additionalSchema = [
           </article>
         ))}
       </div>
-    </section>
+    </section>}
 
     <section class="clean-contact-card" aria-labelledby="clean-contact-heading">
       <div>
-        <p class="section-label">{page.ctaEyebrow || "Current Availability"}</p>
-        <h2 id="clean-contact-heading">{page.ctaHeading || "Ask about this exact page on WhatsApp"}</h2>
-        <p>{page.ctaText || "Ask for the latest current options and confirm the exact property details before proceeding."}</p>
+        <p class="section-label">{page.ctaEyebrow ?? "Current Availability"}</p>
+        <h2 id="clean-contact-heading">{page.ctaHeading ?? "Ask about this exact page on WhatsApp"}</h2>
+        <p>{page.ctaText ?? "Ask for the latest current options and confirm the exact property details before proceeding."}</p>
       </div>
       <div class="clean-contact-actions">
         <a class="btn primary" data-cta-location="landing-bottom" href={whatsappLink(`${page.primaryCta}: ${page.h1}`)}>{page.primaryCta}</a>
@@ -205,8 +210,8 @@ const additionalSchema = [
 
     {page.faqs?.length > 0 && (
       <section class="clean-faq" id="faqs">
-        <p class="section-label">Quick Questions</p>
-        <h2>Frequently asked questions</h2>
+        <p class="section-label">{page.faqLabel}</p>
+        <h2>{page.faqHeading}</h2>
         <div class="faq-list">
           {page.faqs.map((faq) => (
             <details>
@@ -218,13 +223,18 @@ const additionalSchema = [
       </section>
     )}
 
-    <section class="clean-related">
-      <p class="section-label">Keep Exploring</p>
-      <h2>Related pages</h2>
+    {page.links.length > 0 && <section class="clean-related">
+      <p class="section-label">{page.relatedLabel}</p>
+      <h2>{page.relatedHeading}</h2>
       <div class="related-links">
         {page.links.map((link) => <a href={link.href}>{link.label}</a>)}
-        <a href="/">Faisal Town Islamabad Home</a>
+
       </div>
-    </section>
+    </section>}
   </article>
 </ContentLayout>
+
+<style>
+.page-dates { display: flex; flex-direction: column; gap: 6px; flex-shrink: 0; }
+.page-dates time { white-space: normal; }
+</style>

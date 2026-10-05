@@ -48,6 +48,9 @@ const planHtml=fs.readFileSync('dist/articles/faisal-town-ii-master-plan/index.h
 // Editorial links may be changed or cleared in CMS.
 assert(planHtml.includes('rel="canonical"'));
 const locationHtml=fs.readFileSync('dist/faisal-town-islamabad-map-location/index.html','utf8');
-assert(!locationHtml.includes('<figure class="clean-hero-figure'));
+const locationData=JSON.parse(fs.readFileSync('src/content/projects/faisal-town-islamabad-map-location.json'));
+assert.equal(locationHtml.includes('<figure class="clean-hero-figure'), locationData.showMainImage !== false && Boolean(locationData.image));
+assert.equal(normalizeProject({...locationData,sectionLinksText:''}).sectionLinks.length,0);
+assert.equal(normalizeProject({...locationData,sectionLinksText:'Example | Open guide | /faisal-town-phase-1/'}).sectionLinks[0].label,'Open guide');
 assert(locationHtml.includes('rel="canonical"'));
 console.log('PASS: sector-card edits, clearing and malformed rows; authority links; canonicals; location layout.');

@@ -6,6 +6,7 @@ export const rowFields = {
   priceTableRows: ['size', 'dimensions', 'payment', 'price', 'availability'],
   faqs: ['question', 'answer'],
   links: ['label', 'href'],
+  sectionLinks: ['heading', 'label', 'href'],
 } as const;
 
 export function parseProjectBody(body: string) {

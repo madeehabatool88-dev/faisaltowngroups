@@ -1155,7 +1155,7 @@ content:
         required: true
         description: One concise paragraph under the page title.
       - name: image
-        label: Main Page Image
+        label: Main Page / Social Sharing Image
         type: image
         required: true
       - name: imageAlt
@@ -1163,11 +1163,101 @@ content:
         type: string
         required: true
         description: Natural description of what is visibly important in the image.
+      - name: heroBackgroundImage
+        label: Hero Background Image
+        type: image
+        required: false
+        description: "Decorative background behind the page title. Clear for a plain background."
+      - name: showMainImage
+        label: Show Main Page Image
+        type: boolean
+        required: false
+        description: "Show the main image below the page summary. The image also supplies the social sharing preview."
+      - name: imageCaption
+        label: Main Image Caption
+        type: text
+        required: false
+        description: "Caption below the main page image."
+      - name: quickAnswerLabel
+        label: Quick Answer Label
+        type: string
+        required: false
+      - name: quickAnswerHeading
+        label: Quick Answer Heading
+        type: string
+        required: false
+      - name: verificationLabel
+        label: Verification Notice Label
+        type: string
+        required: false
+      - name: verificationText
+        label: Verification Notice Text
+        type: text
+        required: false
+        description: "Clear to remove the notice copy; dates remain visible."
+      - name: checklistLabel
+        label: Buyer Checklist Label
+        type: string
+        required: false
+      - name: checklistHeading
+        label: Buyer Checklist Heading
+        type: string
+        required: false
+      - name: downloadsLabel
+        label: Downloads Section Label
+        type: string
+        required: false
+      - name: downloadsHeading
+        label: Downloads Section Heading
+        type: string
+        required: false
+      - name: downloadButtonLabel
+        label: Download Button Label
+        type: string
+        required: false
+      - name: faqLabel
+        label: FAQ Section Label
+        type: string
+        required: false
+      - name: faqHeading
+        label: FAQ Section Heading
+        type: string
+        required: false
+      - name: relatedLabel
+        label: Related Pages Label
+        type: string
+        required: false
+      - name: relatedHeading
+        label: Related Pages Heading
+        type: string
+        required: false
+      - name: sectionLinksText
+        label: Body Section Buttons - Bulk Edit
+        type: text
+        required: false
+        description: "One line: Exact body heading | Button label | /page/. The heading must match a ## heading in Page Body. Clear to remove all section buttons."
+      - name: planCalloutLabel
+        label: Plan Link Label
+        type: string
+        required: false
+      - name: planCalloutHeading
+        label: Plan Link Heading
+        type: string
+        required: false
+      - name: planCalloutButton
+        label: Plan Link Button Label
+        type: string
+        required: false
+      - name: planCalloutHref
+        label: Plan Link URL
+        type: string
+        required: false
+        description: "Clear to remove the standalone plan link panel. Use a /path or https URL."
       - name: quickAnswer
         label: Quick Answer
         type: text
         required: false
-        description: A short buyer-focused answer shown near the top of the page. If blank, the introduction is used.
+        description: A short buyer-focused answer shown near the top of the page. Clear to remove the answer text.
       - name: highlightsText
         label: Key Highlights - Bulk Editor
         type: text
@@ -1312,6 +1402,7 @@ content:
           values:
             - Buyer Guide
             - Master Plan & Maps
+            - Master Plan & Sector Layout
             - Location
             - Prices
             - Investment Guide
@@ -1378,6 +1469,27 @@ content:
           - name: button
             label: Button Label
             type: string
+      - name: mapCaption
+        label: Map Caption
+        type: text
+        required: false
+      - name: sectorHeading
+        label: Sector Cards Heading
+        type: string
+        required: false
+      - name: sectorsText
+        label: Sector Cards - Bulk Edit
+        type: text
+        required: false
+        description: "One row: Sector | Buying route | Description | /page/. Clear to remove all cards."
+      - name: downloadLabel
+        label: Download Button Label
+        type: string
+        required: false
+      - name: downloadHref
+        label: Download PDF URL
+        type: string
+        required: false
       - name: readTime
         label: Read Time
         type: string

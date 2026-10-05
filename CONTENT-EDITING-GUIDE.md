@@ -50,3 +50,13 @@ For **Article Body**:
 ## Publishing
 
 Saving in Pages CMS updates the GitHub content source. Use **Check saved content** before deployment when practical, then use **Deploy live website**.
+
+## Editable project-page presentation
+
+Projects & Property Pages now exposes the Quick Answer label/heading, verification notice, checklist heading, download heading/button, FAQ heading, related-page heading, bottom CTA text and optional plan-link panel. Existing body, highlights, FAQs and lists remain bulk editors. Empty text stays empty; clearing Plan Link URL removes that panel. Clearing a checklist or related-link list removes that section.
+
+**Hero Background Image** controls the decorative image behind the title; clear it for a plain maroon background. **Main Page / Social Sharing Image** is the uncropped image below the summary and the social preview. **Show Main Page Image** controls whether it appears in the page body; social preview remains available. The Location page starts with this switch off, keeping the large master plan on its dedicated article. Both Updated and Reviewed dates are visible separately.
+
+**Body Section Buttons - Bulk Edit:** one row per button, `Exact body heading | Button label | /page/`. Use the exact text after `##` in Page Body; update the corresponding row if you rename that heading. Clear the field to remove all section buttons. The Home link is now an ordinary editable row in Related Internal Links.
+
+Run `node scripts/check-project-cms-rendering.mjs` while no one else is editing local content to verify copy edits, image controls, dates, links and clearing. It uses temporary local test values and restores the original content in a finally block. Never deploy while this test is running.
