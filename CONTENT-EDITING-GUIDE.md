@@ -1,91 +1,52 @@
-# FaisalTownGroups editing guide
+# FaisalTownGroups content editing guide
 
-The working site in `G:\Groupsfaisaltown` is the source of truth as of 24 September 2026. Pages CMS reads the content files used by these pages. Do not restore the older homepage or removed page collection when syncing this folder.
+The Pages CMS editors are intentionally kept simple. Edit the page content in the CMS; do not edit generated `dist/` files.
 
-## Edit whole sections at once
+## Property & Project Pages
 
-**Projects & Property Pages:** open a page and edit **Full Project Body** in one box. Use `## Heading`, then a blank line and the paragraph. Separate paragraphs with blank lines. The current nine pages are already populated in this format.
+Each project, sector, map or location page is one record.
 
-```text
-## First section heading
+Use the fields in this order:
 
-First paragraph.
+1. **Page Title** — the visible H1.
+2. **URL Slug** — keep existing slugs stable.
+3. **Status** — published or draft.
+4. **SEO Title / Meta Description** — search-result text.
+5. **Last Updated / Reviewed Date** — change only when appropriate.
+6. **Page Type / Phase** — classification only.
+7. **Eyebrow / Introduction** — the short text at the top of the page.
+8. **Main Page Image / Main Image Description** — the visible featured image and its alt text.
+9. **Quick Answer** — short buyer-focused summary near the top. If blank, the introduction is used.
+10. **Key Highlights** — one line per item: `Label | Value`.
+11. **Price Table** — one row per line: `Plot Size | Dimensions | Payment | Current Price | Availability`.
+12. **Plans & Downloads** — one line per item: `Label | Title | Description | /file.pdf`.
+13. **Buyer Checklist** — one line per item: `Title | Description`.
+14. **Related Internal Links** — one line per item: `Page Label | /page-path/`.
+15. **Frequently Asked Questions** — one line per item: `Question | Answer`.
+16. **Page Body** — the main editorial copy. Use `## Heading`, then blank lines between paragraphs.
+17. **Buttons / Bottom CTA** — edit the labels and final conversion message.
 
-Second paragraph.
+## Articles & Buyer Guides
 
-## Next section heading
+The article editor follows the same clean pattern used on the other content site: title and SEO first, then dates, image, quick answer, body, internal links, FAQs and CTA.
 
-Next paragraph.
-```
+For **Article Body**:
 
-Project and legal bodies support headings and paragraphs. Articles additionally support `- bullet`, `> callout` and `[Link label](/internal-path/)`. Do not paste HTML or JSON into body fields.
+- `## Heading` creates a section heading.
+- A blank line separates paragraphs.
+- `- item` creates a bullet.
+- `> note` creates a callout.
+- `[Label](/page/)` creates an internal link.
+- `[Source](https://example.com/)` creates an external link.
 
-Other project sections are bulk boxes too:
+## Price and availability rules
 
-| Field | One line per item |
-| --- | --- |
-| FAQs | Question \| Answer |
-| Related links | Label \| /page-path/ |
-| Highlights | Label \| Value |
-| Buyer checklist | Title \| Description |
-| Downloads | Label \| Title \| Description \| /assets/plans/file.pdf |
-| Price table | Plot size \| Dimensions \| Payment \| Current price \| Availability |
+- Sector T currently uses the confirmed PKR 27.90 Lac 5.56 Marla entry where stated in the saved content.
+- Sector O, P, Q and R are treated in the saved content as cash-only model blocks.
+- Sector S and T are treated in the saved content as installment sectors.
+- The master plan and sector plans are layout references, not proof of live availability.
+- Keep current prices, availability and payment wording in CMS content rather than hardcoding them in page templates.
 
-Paste every row at once. You can paste tab-separated spreadsheet cells instead of pipes. Do not include a header row. Move lines to reorder entries. Clear a box to remove its content. Keep each repeated item on one line. If content includes a literal pipe, use tab-separated cells.
+## Publishing
 
-**Articles & Buyer Guides:** the full article body, all FAQs and related article slugs are each editable in a single box. Related article slugs use one slug per line, without `/articles/`. Clearing manually selected related articles still allows the existing automatic related-article suggestions where other published articles are available.
-
-**Legal Pages:** the full body is now one text box using the same `## Heading` and paragraph format as projects.
-
-## Homepage
-
-Open **Main Website → Homepage**. The numbered entries match the current homepage sections. **00 - Section Controls** switches sections on or off immediately on the next build; the switches are not placeholders.
-
-- **01 - SEO & Hero:** title, description, headline, introduction, image, disclaimer, CTA actions and bulk trust points.
-- **01b - About Phase 2:** the saved introduction shown after the hero. Its visibility is controlled by About Phase 2 Enabled. No founder content is supplied.
-- **03 - Featured Offer (currently Sector T):** feature copy, image, buttons, sector plan and bulk facts. The hero starting price comes from the fact labelled `discounted listed price` (the renderer matches `discounted price`). Keep the price fact, heading and WhatsApp message consistent. Sector identity comes from the beginning of the heading, such as `Sector T`.
-- **04 - Sector P Cash Prices:** a separate bulk price table. It does not change the Sector T starting price. Columns: `Dimensions | Marla/Kanal | Original PKR | Current PKR | Availability | Enabled | WhatsApp message`.
-- **05 - Find by Budget:** all budget options and their WhatsApp messages in one box.
-- **06 - Phase 2 Sectors:** all current sector cards in one box. The featured offer's matching page link sorts first. Preserve the existing O/P/Q/R/S/T page URLs.
-- **07 / 08 - Development and Master Plan:** current text, images, PDF links and enquiries.
-- **09 / 10 - Buyer Support and Buying Process:** bulk cards and steps.
-- **11 - Site Visit / Overseas Buyers:** each card has its own enabled switch, text and action.
-- **12 - FAQs:** `Question | Answer | yes`, one FAQ per line. Change yes to no to hide an entry.
-- **13 - Buyer Guides:** all selected slugs in one box; the current display limit is one.
-- **14 - Final WhatsApp CTA:** closing copy and bulk quick enquiry options.
-
-Each bulk field shows its precise column order. Preserve empty optional columns between separators. Homepage row switches use `yes` or `no`.
-
-The featured offer's primary button uses `primaryCta` with the stored WhatsApp message (`secondaryQuery`). The secondary button uses `secondaryCta` and the internal details link (`primaryHref`). Those historical field names are retained so the current page continues to work.
-
-**Preserved Homepage Content** contains the secondary Phase 1 content and older saved fields. Phase 1 remains controlled by its homepage switch. Old Project Choice content is retained but is not a standalone section. The Phase 2 introduction is now under 01b - About Phase 2 and renders between the hero and featured offer. The old hero WhatsApp-card fields are also retained data, not the current final enquiry section.
-
-**Site Settings** controls global contact details and sticky-contact switches. Optional business fields do not automatically create new visible sections. Trust remains hidden while its section switch is off.
-
-## Current folder and publishing
-
-This folder has nine project pages, one master-plan article, the homepage, article index, all-pages index and three legal pages: 16 built HTML pages in total. Sector Q is included. The earlier 31-page version is not this baseline.
-
-When this copy was supplied, `.git` and `.github/workflows` were absent. The local CMS configuration therefore does not offer non-working workflow action buttons. GitHub connection and deployment workflows must be restored before publishing. No website content was fetched over these local edits.
-
-After publishing the configuration and content together, reload Pages CMS and reopen the entry. Existing unsaved browser forms may still contain the older data; copy any unsaved edits before reloading.
-
-## Publishing connection restored — 25 September 2026
-
-Git tracking is reconnected to the existing faisaltowngroups repository. The Check saved content and Deploy live website actions are restored in Pages CMS. Every push to main automatically builds, validates the CMS and deploys this local baseline. The workflow checks the current master-plan article, exact version and stylesheet contents. Only generated HTML for the 16 deliberately retired routes is removed; a route recreated later is retained. Earlier notes about missing Git/workflows describe the supplied folder before reconnection.
-
-## Master plan and location pages (1 October 2026)
-
-In **Articles & Buyer Guides → Faisal Town Phase 2 Master Plan & Sector Layout**, edit Quick Answer, Master Plan Caption, Sector Summary Heading, Plan Download Label and Plan PDF Path directly. Sector Cards - Bulk Edit accepts one line per card: `Sector | Buying route | Description | /page/` (or four pasted spreadsheet columns). Clearing the field removes every card. Full Article Body remains the authoritative text for buyer guidance; FAQs remain bulk-editable. Body links support internal paths and HTTPS references. The category now includes Master Plan & Sector Layout.
-
-In **Project Pages → Faisal Town Islamabad Map & Location**, edit the full body, introduction, checklist, highlights, FAQs and related links as before. The Location template intentionally omits the large plan image and links to the dedicated master-plan guide instead. Its image field remains available for social sharing. Keep Phase 1 and Phase 2 location guidance separate; prices belong on project/sector pages.
-
-## CMS-to-website audit — 5 October 2026
-
-All 16 live pages matched the HTML generated from the saved main-branch content. A temporary local edit test verified that 103 text fields render across the homepage, project pages, master-plan article and legal pages; original content was restored before publishing. This tests saved files and rendering, not an authenticated save from your CMS browser.
-
-If an edit is missing, check that Pages CMS is open on `madeehabatool88-dev/faisaltowngroups`, branch `main`, and that Save completed. The resulting commit must appear in GitHub before the deployment can start. The latest successful deployment serves the saved content. The Deploy button rebuilds saved content; it cannot publish unsaved form changes.
-
-Check Homepage → 00 - Section Controls for hidden sections. Trust is currently off. Fields labelled “not displayed” are retained legacy content and do not change the current page. SEO titles/descriptions affect metadata, not visible headings. The homepage starting price comes from Featured Offer facts, separate from the Sector P cash-price table.
-
-Deployment validation no longer requires exactly six sector cards or a nonempty legal body, so intentional clearing remains supported. The fixed editorial authority URL is no longer a build requirement.
+Saving in Pages CMS updates the GitHub content source. Use **Check saved content** before deployment when practical, then use **Deploy live website**.

@@ -13,6 +13,7 @@ export type Article = {
   updated?: string;
   reviewed?: string;
   image: string;
+  imageAlt?: string;
   readTime: string;
   relatedSlugs?: string[];
   relatedSlugsText?: string;

@@ -1071,7 +1071,7 @@ content:
               delete: false
               rename: false
   - name: projects_property
-    label: Projects & Property Pages
+    label: Property & Project Pages
     type: collection
     path: src/content/projects
     format: json
@@ -1083,26 +1083,46 @@ content:
         - h1
         - pageType
         - phase
-        - slug
-        - status
         - updated
-        - order
+        - status
     fields:
-      - name: order
-        label: Display Order
-        type: number
-        description: Lower numbers appear first.
+      - name: h1
+        label: Page Title
+        type: string
+        required: true
+        description: Main on-page heading. Write for the buyer first, not for internal naming.
+      - name: slug
+        label: URL Slug
+        type: string
+        required: true
+        description: Permanent page URL. Do not change an existing slug unless you also create a redirect.
       - name: status
         label: Status
         type: select
+        required: true
         options:
           values:
             - published
             - draft
-      - name: slug
-        label: Slug
+      - name: title
+        label: SEO Title
         type: string
-        description: Do not change unless intentionally changing the page URL.
+        required: true
+        description: Search-result title. Keep it clear, specific and usually under about 60 characters.
+      - name: description
+        label: Meta Description
+        type: text
+        required: true
+        description: Search-result description. Summarize the useful answer and current buyer intent.
+      - name: updated
+        label: Last Updated
+        type: date
+        required: true
+        description: Change only after a meaningful factual or editorial update.
+      - name: reviewed
+        label: Reviewed Date
+        type: date
+        required: true
       - name: pageType
         label: Page Type
         type: select
@@ -1124,93 +1144,106 @@ content:
             - Phase 1 / F-18
             - Phase 2 / FT-II
             - Phase 1 & Phase 2
-      - name: title
-        label: SEO Title
-        type: string
-        description: Title shown in Google search results.
-      - name: description
-        label: Meta Description
-        type: text
-        description: Search result description.
       - name: eyebrow
         label: Eyebrow
         type: string
-      - name: h1
-        label: Page Heading
-        type: string
+        required: false
+        description: Short label above the page title.
       - name: intro
-        label: Intro
+        label: Introduction
         type: text
+        required: true
+        description: One concise paragraph under the page title.
       - name: image
-        label: Featured Image
+        label: Main Page Image
         type: image
-      - name: primaryCta
-        label: Primary CTA
+        required: true
+      - name: imageAlt
+        label: Main Image Description
         type: string
-      - name: secondaryCta
-        label: Secondary CTA
-        type: string
-      - name: updated
-        label: Updated Date
-        type: date
-      - name: reviewed
-        label: Reviewed Date
-        type: date
-      - name: body
-        label: Full Project Body
+        required: true
+        description: Natural description of what is visibly important in the image.
+      - name: quickAnswer
+        label: Quick Answer
         type: text
         required: false
-        description: "Paste the whole page body here. Use ## Heading for each section and blank lines between paragraphs."
-      - name: bulletsText
-        label: Buyer Checklist - Bulk Edit
-        type: text
-        required: false
-        description: "One item per line: Title | Description. You can also paste two columns from a spreadsheet."
-      - name: downloadsText
-        label: Downloads - Bulk Edit
-        type: text
-        required: false
-        description: >-
-          One download per line: Label | Title | Description | URL or PDF path. Spreadsheet paste is
-          supported.
+        description: A short buyer-focused answer shown near the top of the page. If blank, the introduction is used.
       - name: highlightsText
-        label: Highlights - Bulk Edit
+        label: Key Highlights - Bulk Editor
         type: text
         required: false
-        description: "One highlight per line: Label | Value. Spreadsheet paste is supported."
+        description: "One line per item: Label | Value. Keep this to the most decision-useful facts."
       - name: priceTableHeading
         label: Price Table Heading
         type: string
         required: false
-        description: Heading shown above the structured price table on sector pages.
       - name: priceTableNote
         label: Price Table Note
         type: text
         required: false
-        description: Short verification note shown below the price table.
+        description: Short verification note below the price table.
       - name: priceTableRowsText
-        label: Price Table - Bulk Edit
+        label: Price Table - Bulk Editor
         type: text
         required: false
-        description: >-
-          One row per line: Plot Size | Dimensions | Payment | Current Price | Availability. Spreadsheet paste
-          is supported.
-      - name: faqsText
-        label: FAQs - Bulk Edit
+        description: "One row per line: Plot Size | Dimensions | Payment | Current Price | Availability."
+      - name: downloadsText
+        label: Plans & Downloads - Bulk Editor
         type: text
         required: false
-        description: "One FAQ per line: Question | Answer. Spreadsheet paste is supported."
+        description: "One line per item: Label | Title | Description | /path-to-file.pdf"
+      - name: bulletsText
+        label: Buyer Checklist - Bulk Editor
+        type: text
+        required: false
+        description: "One line per item: Title | Description."
       - name: linksText
-        label: Related Links - Bulk Edit
+        label: Related Internal Links - Bulk Editor
+        type: text
+        required: false
+        description: "One link per line: Page Label | /page-path/. Keep only genuinely useful next steps."
+      - name: faqsText
+        label: Frequently Asked Questions - Bulk Editor
+        type: text
+        required: false
+        description: "One FAQ per line: Question | Answer."
+      - name: body
+        label: Page Body
         type: text
         required: false
         description: >-
-          One link per line: Link text | URL. Use /page-path/ or a full https URL. Spreadsheet paste is
-          supported.
+          Write the complete page here. Use ## Heading for each section and blank lines between paragraphs.
+          This field controls the main editorial copy shown on the page.
+      - name: primaryCta
+        label: Primary Button Label
+        type: string
+        required: true
+      - name: secondaryCta
+        label: Secondary Button Label
+        type: string
+        required: true
+      - name: ctaEyebrow
+        label: Bottom CTA Eyebrow
+        type: string
+        required: false
+      - name: ctaHeading
+        label: Bottom CTA Heading
+        type: string
+        required: false
+      - name: ctaText
+        label: Bottom CTA Text
+        type: text
+        required: false
+      - name: order
+        label: Display Order
+        type: number
+        required: false
+        description: Lower numbers appear first in CMS/archive listings.
     operations:
       create: true
       rename: false
       delete: false
+
   - name: articles_guides
     label: Articles & Buyer Guides
     type: collection
@@ -1222,137 +1255,119 @@ content:
       layout: list
       fields:
         - title
-        - cluster
         - category
-        - status
         - updated
-        - order
+        - status
     fields:
-      - name: order
-        label: Display Order
-        type: number
-        description: Lower numbers appear first.
+      - name: title
+        label: Article Title
+        type: string
+        required: true
+      - name: slug
+        label: URL Slug
+        type: string
+        required: true
+        description: Permanent URL identifier. Do not change an existing slug unless intentionally changing the URL.
       - name: status
         label: Status
         type: select
+        required: true
         options:
           values:
             - published
             - draft
-      - name: slug
-        label: Slug
-        type: string
-        description: Do not change unless intentionally changing the page URL.
-      - name: title
-        label: Article Title
-        type: string
       - name: seoTitle
         label: SEO Title
         type: string
         required: false
-        description: Title shown in Google search results.
+        description: Search-result title. Keep the main search phrase near the beginning.
       - name: metaDescription
         label: Meta Description
         type: text
         required: false
-        description: Search result description.
+        description: Search-result description with the most useful answer or buyer angle.
       - name: description
         label: Archive Description
         type: text
-      - name: intro
-        label: Introduction
-        type: text
-        required: false
-      - name: category
-        label: Category
-        type: select
-        options:
-          values:
-            - Projects
-            - Buyer Guide
-            - Master Plan
-            - Sector P
-            - Living
-            - Project References
-            - Location
-            - Lifestyle
-            - Prices
-            - Investment Guide
-            - Master Plan & Maps
-            - Master Plan & Sector Layout
-      - name: cluster
-        label: Cluster
-        type: select
-        required: false
-        options:
-          values:
-            - Comparisons
-            - Investment & Buyer Guides
-            - Location & Maps
-            - Faisal Town Phase 2
-            - Prices & Payment Plans
+        required: true
+        description: Short description used on article cards and related-content sections.
       - name: date
-        label: Publish Date
+        label: Publication Date
         type: date
+        required: true
       - name: updated
-        label: Updated Date
+        label: Last Updated
         type: date
         required: false
+        description: Change only after a meaningful factual or editorial improvement.
       - name: reviewed
         label: Reviewed Date
         type: string
         required: false
+      - name: category
+        label: Category
+        type: select
+        required: true
+        options:
+          values:
+            - Buyer Guide
+            - Master Plan & Maps
+            - Location
+            - Prices
+            - Investment Guide
+            - Project References
+            - Projects
+      - name: cluster
+        label: Content Cluster
+        type: select
+        required: false
+        options:
+          values:
+            - Faisal Town Phase 2
+            - Location & Maps
+            - Prices & Payment Plans
+            - Investment & Buyer Guides
+            - Comparisons
       - name: image
-        label: Featured Image
+        label: Main Article Image
         type: image
+        required: true
+      - name: imageAlt
+        label: Main Image Description
+        type: string
+        required: false
+      - name: intro
+        label: Introduction
+        type: text
+        required: false
       - name: quickAnswer
         label: Quick Answer
         type: text
         required: false
-      - name: mapCaption
-        label: Master Plan Caption
-        type: text
-        required: false
-      - name: sectorHeading
-        label: Sector Summary Heading
-        type: string
-        required: false
-      - name: sectorsText
-        label: Sector Cards - Bulk Edit
-        type: text
-        required: false
-        description: "One line per card: Sector | Buying route | Description | /page/. Tabs also work. Clear to remove all cards."
-      - name: downloadLabel
-        label: Plan Download Label
-        type: string
-        required: false
-      - name: downloadHref
-        label: Plan PDF Path
-        type: string
-        required: false
-      - name: readTime
-        label: Read Time
-        type: string
       - name: body
-        label: Full Article Body
+        label: Article Body
         type: text
+        required: true
         description: >-
-          Paste the complete article. Use ## for headings, blank lines for paragraphs, - for bullets, > for
-          callouts, [Label](/page/) for internal links and [Label](https://example.com/) for external references.
+          Write the complete article here. Use ## for headings, blank lines for paragraphs, - for bullets,
+          > for callouts, [Label](/page/) for internal links and [Label](https://example.com/) for external references.
       - name: relatedSlugsText
-        label: Related Articles - Bulk Edit
+        label: Related Internal Articles - Bulk Editor
         type: text
-        description: >-
-          Paste all related article slugs here, one per line. Use slugs only, for example
-          faisal-town-complete-guide. Clear the box to remove manually selected related articles.
         required: false
+        description: One article slug per line. Leave blank to use automatic related content.
+      - name: faqsText
+        label: Frequently Asked Questions - Bulk Editor
+        type: text
+        required: false
+        description: "One FAQ per line: Question | Answer."
       - name: cta
         label: Article CTA
         type: object
         required: false
         fields:
           - name: label
-            label: Label
+            label: Eyebrow
             type: string
           - name: heading
             label: Heading
@@ -1363,17 +1378,19 @@ content:
           - name: button
             label: Button Label
             type: string
-      - name: faqsText
-        label: FAQs - Bulk Edit
-        type: text
+      - name: readTime
+        label: Read Time
+        type: string
         required: false
-        description: >-
-          Paste all FAQs here, one per line: Question | Answer. You can also paste two spreadsheet columns.
-          Blank lines are ignored. Clear the box to remove all FAQs.
+      - name: order
+        label: Display Order
+        type: number
+        required: false
     operations:
       create: true
       rename: false
       delete: false
+
   - name: legal_pages
     label: Legal Pages
     type: collection

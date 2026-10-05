@@ -28,5 +28,6 @@
   "sectorHeading": "Phase 2 sectors at a glance",
   "sectorsText": "Sector O | Cash-only Model Block | Sector plan and current cash inventory. | /faisal-town-o-block/\nSector P / The Caladan | Cash-only premium plan | Separate premium pricing; confirm the exact plot and dues. | /faisal-town-p-block/\nSector Q | Cash-only Model Block | Sector plan and current inventory. | /faisal-town-q-block/\nSector R | Cash-only Model Block | Sector plan and current inventory. | /faisal-town-r-block/\nSector S | Installments | Check current sizes and payment schedule. | /faisal-town-sector-s/\nSector T | Installments | 5.56 Marla listed from PKR 27.90 Lac; confirm current availability. | /faisal-town-sector-t/",
   "downloadLabel": "Download the Phase 2 master plan PDF",
-  "downloadHref": "/assets/faisal-town-ii/faisal-town-phase-2-master-plan.pdf"
+  "downloadHref": "/assets/faisal-town-ii/faisal-town-phase-2-master-plan.pdf",
+  "imageAlt": "Faisal Town Phase 2 Master Plan & Sector Layout"
 }

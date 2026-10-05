@@ -9,7 +9,6 @@ export function getStaticPaths() {
 }
 
 const { page } = Astro.props;
-const isLocation = page.slug === "faisal-town-islamabad-map-location";
 const slugify = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 const pageUrl = new URL(`/${page.slug}/`, site.domain).toString();
 const img = imageMeta[page.image];
@@ -63,7 +62,7 @@ const additionalSchema = [
       <div>
         <p class="section-label">Quick Answer</p>
         <h2 id="quick-answer-heading">What matters on this page</h2>
-        <p>{page.intro}</p>
+        <p>{page.quickAnswer || page.intro}</p>
       </div>
       <a class="btn primary" data-cta-location="quick-answer" href={whatsappLink(`${page.primaryCta}: ${page.h1}`)}>{page.primaryCta}</a>
     </section>
@@ -78,11 +77,11 @@ const additionalSchema = [
       </div>
     </nav>
 
-    {!isLocation && <figure class="clean-hero-figure clean-plan-figure">
+    <figure class="clean-hero-figure clean-plan-figure">
       <img
         class="article-hero-image landing-image clean-plan-image"
         src={page.image}
-        alt={`${page.h1} plan`}
+        alt={page.imageAlt || page.h1}
         width={img?.width}
         height={img?.height}
         loading="eager"
@@ -90,7 +89,7 @@ const additionalSchema = [
         decoding="async"
       />
       <figcaption>Use the plan as a layout reference. Ask for the exact currently available plot to be marked before you shortlist.</figcaption>
-    </figure>}
+    </figure>
 
     {page.priceTableRows && page.priceTableRows.length > 0 && (
       <section class="clean-price-section" aria-labelledby="price-table-heading">
@@ -152,8 +151,6 @@ const additionalSchema = [
           <div>
             <h2>{section.heading}</h2>
             {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-            {isLocation && index === 1 && <a class="btn outline" href="/faisal-town-phase-1/">View Phase 1 Guide</a>}
-            {isLocation && index === 2 && <a class="btn outline" href="/faisal-town-phase-2/">View Phase 2 Guide</a>}
           </div>
         </section>
       ))}
@@ -178,8 +175,6 @@ const additionalSchema = [
       </section>
     )}
 
-    {isLocation && <aside class="clean-panel"><p class="section-label">Internal project layout</p><h2>Need the internal Phase 2 layout?</h2><a class="btn outline" href="/articles/faisal-town-ii-master-plan/">Open the Phase 2 Master Plan →</a></aside>}
-
     <section class="clean-panel" id="buyer-checklist">
       <div class="clean-panel-heading">
         <p class="section-label">Buyer Checklist</p>
@@ -198,9 +193,9 @@ const additionalSchema = [
 
     <section class="clean-contact-card" aria-labelledby="clean-contact-heading">
       <div>
-        <p class="section-label">{isLocation ? "Location Assistance" : "Current Availability"}</p>
-        <h2 id="clean-contact-heading">{isLocation ? "Get directions to the property you want to visit" : "Ask about this exact page on WhatsApp"}</h2>
-        <p>{isLocation ? "Send the project, block or sector and property number. Request a current location pin, marked plan and a meeting point for your visit." : "Send your preferred size, budget and the sector or block you are considering. Ask for the exact current options rather than a general list."}</p>
+        <p class="section-label">{page.ctaEyebrow || "Current Availability"}</p>
+        <h2 id="clean-contact-heading">{page.ctaHeading || "Ask about this exact page on WhatsApp"}</h2>
+        <p>{page.ctaText || "Ask for the latest current options and confirm the exact property details before proceeding."}</p>
       </div>
       <div class="clean-contact-actions">
         <a class="btn primary" data-cta-location="landing-bottom" href={whatsappLink(`${page.primaryCta}: ${page.h1}`)}>{page.primaryCta}</a>

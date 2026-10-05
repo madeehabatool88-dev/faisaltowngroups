@@ -152,7 +152,7 @@ const breadcrumbSchema = {
     </div>
     {article.quickAnswer && <aside class="article-callout"><strong>Quick Answer</strong><p>{article.quickAnswer}</p></aside>}
     <figure class="plan-map">
-      <img class="article-hero-image" src={article.image} alt={article.title} width={img?.width} height={img?.height} loading="eager" fetchpriority="high" decoding="async" />
+      <img class="article-hero-image" src={article.image} alt={article.imageAlt || article.title} width={img?.width} height={img?.height} loading="eager" fetchpriority="high" decoding="async" />
       {article.mapCaption && <figcaption>{article.mapCaption}</figcaption>}
       {article.downloadHref && <a class="plan-download" href={article.downloadHref}>{article.downloadLabel}</a>}
     </figure>

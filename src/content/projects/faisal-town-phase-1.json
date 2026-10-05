@@ -20,5 +20,10 @@
   "highlightsText": "Project structure | Blocks A, B & C\nTypical market | Resale plots, houses & rentals\nPrice handling | Ask for current block-specific demand\nBest next step | Share block, property type & budget",
   "priceTableRowsText": "",
   "faqsText": "Which blocks are covered in Phase 1? | This guide keeps Blocks A, B and C together in one Phase 1 / F-18 page.\nWhy are there no separate block pages now? | The block information has been consolidated to keep the site cleaner and avoid repetitive thin pages.\nCan I ask for current resale plots? | Yes. Send the preferred block, plot size and budget on WhatsApp.\nCan I ask for houses or rentals too? | Yes. Phase 1 inquiries can be filtered for plots, houses or rental properties.\nIs Phase 1 priced the same as Phase 2? | No. Phase 1 is primarily a resale market and should not use the Phase 2 developer price tables.",
-  "linksText": "Faisal Town Phase 2 | /faisal-town-phase-2/\nMap & location guide | /faisal-town-islamabad-map-location/\nHome – current Phase 2 offers | /\nWhatsApp current availability | /"
+  "linksText": "Faisal Town Phase 2 | /faisal-town-phase-2/\nMap & location guide | /faisal-town-islamabad-map-location/\nHome – current Phase 2 offers | /\nWhatsApp current availability | /",
+  "imageAlt": "Faisal Town Phase 1 F-18 project reference image",
+  "quickAnswer": "Phase 1 is the established F-18 project. Instead of separate thin block pages, this guide keeps Blocks A, B and C together so buyers can compare current resale plots, houses and rentals without mixing them with Phase 2 sectors.",
+  "ctaEyebrow": "Current Availability",
+  "ctaHeading": "Ask about this exact page on WhatsApp",
+  "ctaText": "Send your preferred size, budget and the sector or block you are considering. Ask for the exact current options rather than a general list."
 }

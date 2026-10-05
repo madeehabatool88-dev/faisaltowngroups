@@ -10,6 +10,11 @@ export type LandingPage = {
   h1: string;
   intro: string;
   image: string;
+  imageAlt?: string;
+  quickAnswer?: string;
+  ctaEyebrow?: string;
+  ctaHeading?: string;
+  ctaText?: string;
   primaryCta: string;
   secondaryCta: string;
   updated: string;
