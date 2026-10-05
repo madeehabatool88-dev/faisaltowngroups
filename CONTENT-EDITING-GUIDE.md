@@ -79,3 +79,13 @@ Git tracking is reconnected to the existing faisaltowngroups repository. The Che
 In **Articles & Buyer Guides → Faisal Town Phase 2 Master Plan & Sector Layout**, edit Quick Answer, Master Plan Caption, Sector Summary Heading, Plan Download Label and Plan PDF Path directly. Sector Cards - Bulk Edit accepts one line per card: `Sector | Buying route | Description | /page/` (or four pasted spreadsheet columns). Clearing the field removes every card. Full Article Body remains the authoritative text for buyer guidance; FAQs remain bulk-editable. Body links support internal paths and HTTPS references. The category now includes Master Plan & Sector Layout.
 
 In **Project Pages → Faisal Town Islamabad Map & Location**, edit the full body, introduction, checklist, highlights, FAQs and related links as before. The Location template intentionally omits the large plan image and links to the dedicated master-plan guide instead. Its image field remains available for social sharing. Keep Phase 1 and Phase 2 location guidance separate; prices belong on project/sector pages.
+
+## CMS-to-website audit — 5 October 2026
+
+All 16 live pages matched the HTML generated from the saved main-branch content. A temporary local edit test verified that 103 text fields render across the homepage, project pages, master-plan article and legal pages; original content was restored before publishing. This tests saved files and rendering, not an authenticated save from your CMS browser.
+
+If an edit is missing, check that Pages CMS is open on `madeehabatool88-dev/faisaltowngroups`, branch `main`, and that Save completed. The resulting commit must appear in GitHub before the deployment can start. The latest successful deployment serves the saved content. The Deploy button rebuilds saved content; it cannot publish unsaved form changes.
+
+Check Homepage → 00 - Section Controls for hidden sections. Trust is currently off. Fields labelled “not displayed” are retained legacy content and do not change the current page. SEO titles/descriptions affect metadata, not visible headings. The homepage starting price comes from Featured Offer facts, separate from the Sector P cash-price table.
+
+Deployment validation no longer requires exactly six sector cards or a nonempty legal body, so intentional clearing remains supported. The fixed editorial authority URL is no longer a build requirement.

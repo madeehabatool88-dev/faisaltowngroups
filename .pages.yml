@@ -214,7 +214,7 @@ content:
                 label: Secondary CTA
                 type: string
               - name: whatsappCard
-                label: WhatsApp Card
+                label: Legacy WhatsApp Card (not displayed)
                 type: object
                 fields:
                   - name: label
@@ -537,8 +537,8 @@ content:
             path: src/content/homepage/development.json
             format: json
             description: >-
-              Current development content remains editable. Additional images, date and video are prepared for
-              the redesign.
+              All development fields are live, including additional images, update date and video link.
+              Enable Development under 00 - Section Controls to display this section.
             fields:
               - name: eyebrow
                 label: Eyebrow
@@ -809,8 +809,8 @@ content:
             path: src/content/homepage/buyer-guides.json
             format: json
             description: >-
-              The two selected-guide lists control the current homepage. Section copy and display limit are
-              prepared for the redesign.
+              Section copy, display limit and Phase 2 guide selection control the live buyer-guide section.
+              Phase 1 guide selection appears in the Phase 1 section. Only published articles are shown.
             fields:
               - name: eyebrow
                 label: Eyebrow
@@ -847,8 +847,8 @@ content:
             path: src/content/homepage/contact.json
             format: json
             description: >-
-              Existing contact copy and options remain live. New button labels and background image await the
-              redesign.
+              All contact fields are live, including button labels and the optional image.
+              Enable Final CTA under 00 - Section Controls to display this section.
             fields:
               - name: eyebrow
                 label: Eyebrow
@@ -919,10 +919,10 @@ content:
             label: Disclosure
             type: text
           - name: globalPrimaryCta
-            label: Global Primary CTA
+            label: Global Primary CTA (not displayed)
             type: string
           - name: globalSecondaryCta
-            label: Global Secondary CTA
+            label: Global Secondary CTA (not displayed)
             type: string
           - name: phoneDial
             label: Dialable Phone Number
@@ -983,7 +983,7 @@ content:
           Global identity and contacts. Phone, WhatsApp and sticky-contact switches control the current site.
           Optional business details remain available for future use.
       - name: homepage_preserved
-        label: Preserved Homepage Content
+        label: Legacy & Secondary Content
         type: group
         items:
           - name: homepage_phase_1
@@ -1014,25 +1014,25 @@ content:
                 label: Secondary WhatsApp Query
                 type: text
               - name: featureImage
-                label: Feature Image
+                label: Feature Image (not displayed)
                 type: image
               - name: featureImageAlt
-                label: Feature Image Alt Text
+                label: Feature Image Alt Text (not displayed)
                 type: string
               - name: featureEyebrow
-                label: Feature Eyebrow
+                label: Feature Eyebrow (not displayed)
                 type: string
               - name: featureHeading
-                label: Feature Heading
+                label: Feature Heading (not displayed)
                 type: string
               - name: featureText
-                label: Feature Text
+                label: Feature Text (not displayed)
                 type: text
               - name: featureCta
-                label: Feature CTA
+                label: Feature CTA (not displayed)
                 type: string
               - name: featureQuery
-                label: Feature WhatsApp Query
+                label: Feature WhatsApp Query (not displayed)
                 type: text
               - name: blocksText
                 label: Phase 1 Blocks - Bulk Edit
@@ -1045,7 +1045,7 @@ content:
               delete: false
               rename: false
           - name: homepage_project_choice
-            label: Preserved - Project Choice
+            label: Legacy Project Choice (not displayed)
             type: file
             path: src/content/homepage/project-choice.json
             format: json
