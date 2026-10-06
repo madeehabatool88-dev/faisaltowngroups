@@ -60,3 +60,7 @@ Projects & Property Pages now exposes the Quick Answer label/heading, verificati
 **Body Section Buttons - Bulk Edit:** one row per button, `Exact body heading | Button label | /page/`. Use the exact text after `##` in Page Body; update the corresponding row if you rename that heading. Clear the field to remove all section buttons. The Home link is now an ordinary editable row in Related Internal Links.
 
 Run `node scripts/check-project-cms-rendering.mjs` while no one else is editing local content to verify copy edits, image controls, dates, links and clearing. It uses temporary local test values and restores the original content in a finally block. Never deploy while this test is running.
+
+## Legal-page editors — 6 October 2026
+
+Expand **Legal Pages** in the sidebar, then open **Privacy Policy**, **Terms and Conditions**, or **Disclaimer** directly. These are explicit file editors for the existing legal JSON files, replacing the collection screen that showed “No entries.” All existing legal copy and URLs are preserved. Edit Full Legal Page - Bulk Edit for the body, then Save. Leave the old `/collection/legal_pages` browser URL and reopen the repository sidebar after refreshing CMS.

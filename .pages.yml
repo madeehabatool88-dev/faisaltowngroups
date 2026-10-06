@@ -1505,52 +1505,131 @@ content:
 
   - name: legal_pages
     label: Legal Pages
-    type: collection
-    path: src/content/legal
-    format: json
-    subfolders: false
-    view:
-      layout: list
-      fields:
-        - heading
-        - updated
-    fields:
-      - name: title
-        label: SEO Title
-        type: string
-        description: Title shown in Google search results.
-      - name: description
-        label: Meta Description
-        type: text
-        description: Search result description.
-      - name: eyebrow
-        label: Eyebrow
-        type: string
-      - name: heading
-        label: Page Heading
-        type: string
-      - name: subheading
-        label: Subheading
-        type: text
-      - name: updated
-        label: Updated Date
-        type: date
-      - name: body
-        label: Full Legal Page - Bulk Edit
-        type: text
-        description: >-
-          Edit the entire page at once. Use ## Heading and blank lines between paragraphs. Clear this field to
-          remove the body.
-      - name: ctaLabel
-        label: CTA Label
-        type: string
-      - name: ctaQuery
-        label: CTA WhatsApp Query
-        type: text
-    operations:
-      create: false
-      rename: false
-      delete: false
+    type: group
+    items:
+      - name: legal_privacy_policy
+        label: Privacy Policy
+        type: file
+        path: src/content/legal/privacy-policy.json
+        format: json
+        fields:
+          - name: title
+            label: SEO Title
+            type: string
+            description: Title shown in Google search results.
+          - name: description
+            label: Meta Description
+            type: text
+            description: Search result description.
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: heading
+            label: Page Heading
+            type: string
+          - name: subheading
+            label: Subheading
+            type: text
+          - name: updated
+            label: Updated Date
+            type: date
+          - name: body
+            label: Full Legal Page - Bulk Edit
+            type: text
+            description: >-
+              Edit the entire page at once. Use ## Heading and blank lines between paragraphs. Clear this field to
+              remove the body.
+          - name: ctaLabel
+            label: CTA Label
+            type: string
+          - name: ctaQuery
+            label: CTA WhatsApp Query
+            type: text
+        operations:
+          delete: false
+          rename: false
+      - name: legal_terms_and_conditions
+        label: Terms and Conditions
+        type: file
+        path: src/content/legal/terms-and-conditions.json
+        format: json
+        fields:
+          - name: title
+            label: SEO Title
+            type: string
+            description: Title shown in Google search results.
+          - name: description
+            label: Meta Description
+            type: text
+            description: Search result description.
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: heading
+            label: Page Heading
+            type: string
+          - name: subheading
+            label: Subheading
+            type: text
+          - name: updated
+            label: Updated Date
+            type: date
+          - name: body
+            label: Full Legal Page - Bulk Edit
+            type: text
+            description: >-
+              Edit the entire page at once. Use ## Heading and blank lines between paragraphs. Clear this field to
+              remove the body.
+          - name: ctaLabel
+            label: CTA Label
+            type: string
+          - name: ctaQuery
+            label: CTA WhatsApp Query
+            type: text
+        operations:
+          delete: false
+          rename: false
+      - name: legal_disclaimer
+        label: Disclaimer
+        type: file
+        path: src/content/legal/disclaimer.json
+        format: json
+        fields:
+          - name: title
+            label: SEO Title
+            type: string
+            description: Title shown in Google search results.
+          - name: description
+            label: Meta Description
+            type: text
+            description: Search result description.
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: heading
+            label: Page Heading
+            type: string
+          - name: subheading
+            label: Subheading
+            type: text
+          - name: updated
+            label: Updated Date
+            type: date
+          - name: body
+            label: Full Legal Page - Bulk Edit
+            type: text
+            description: >-
+              Edit the entire page at once. Use ## Heading and blank lines between paragraphs. Clear this field to
+              remove the body.
+          - name: ctaLabel
+            label: CTA Label
+            type: string
+          - name: ctaQuery
+            label: CTA WhatsApp Query
+            type: text
+        operations:
+          delete: false
+          rename: false
   - name: editor_guide
     label: Editing Guide
     type: file
