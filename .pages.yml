@@ -1656,7 +1656,7 @@ content:
   - name: editor_guide
     label: Editing Guide
     type: file
-    path: CONTENT-EDITING-GUIDE.md
+    path: docs/guides/CONTENT-EDITING-GUIDE.md
     format: markdown
     operations:
       delete: false
