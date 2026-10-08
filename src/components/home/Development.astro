@@ -1,0 +1,77 @@
+---
+import Cta from "../HomeCta.astro";
+import Photo from "../HomeImage.astro";
+import { bulkRows } from "../../data/homepageBulk";
+
+const { development: d } = Astro.props;
+---
+
+<section
+  class="hp-section hp-tint"
+  id="development"
+  data-home-section="development"
+>
+  <div class="hp-wrap hp-split">
+    <div>
+      <p class="hp-kicker">
+        {d.eyebrow}
+      </p>
+
+      <h2>{d.heading}</h2>
+
+      {d.updateDate && (
+        <p class="hp-status">
+          Updated{" "}
+          <time datetime={d.updateDate}>
+            {d.updateDate}
+          </time>
+        </p>
+      )}
+
+      <p>{d.text}</p>
+
+      <Cta
+        label={d.cta}
+        query={d.query}
+        section="development"
+      />
+
+      {d.videoUrl && (
+        <a
+          class="hp-text-link"
+          href={d.videoUrl}
+        >
+          View development video ↗
+        </a>
+      )}
+    </div>
+
+    <figure class="hp-development-photo">
+      <Photo
+        src={d.image}
+        alt={d.alt}
+      />
+
+      <figcaption>
+        {d.caption}
+      </figcaption>
+    </figure>
+
+    {bulkRows(
+      d.additionalImagesText,
+      ["image", "alt", "caption"],
+      "Development gallery",
+    ).map((row) => (
+      <figure>
+        <Photo
+          src={row.image}
+          alt={row.alt}
+        />
+
+        <figcaption>
+          {row.caption}
+        </figcaption>
+      </figure>
+    ))}
+  </div>
+</section>
