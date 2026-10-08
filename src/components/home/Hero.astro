@@ -1,0 +1,68 @@
+---
+import Cta from "../HomeCta.astro";
+import Photo from "../HomeImage.astro";
+import { bulkSlugs } from "../../data/homepageBulk";
+
+const { hero, featuredStarting, featuredSector, secondaryHref } = Astro.props;
+---
+
+<section class="hp-hero" style={hero.heroBackgroundImage ? { "--hp-hero-image": `url("${hero.heroBackgroundImage}")` } : undefined} id="phase-2" data-home-section="hero">
+  <div class="hp-wrap hp-hero-grid">
+    <div class="hp-hero-copy">
+      <p class="hp-kicker">{hero.heroEyebrow}</p>
+
+      <h1>{hero.h1}</h1>
+
+      <p class="hp-intro">{hero.intro}</p>
+
+      {featuredStarting && (
+        <div class="hp-start">
+          <span>
+            {hero.startingPriceLabel} · {featuredSector}
+          </span>
+
+          <strong>{featuredStarting}</strong>
+
+          <small>{hero.priceDisclaimer}</small>
+        </div>
+      )}
+
+      <div class="hp-actions">
+        <Cta
+          label={hero.primaryCta}
+          type={hero.primaryCtaType}
+          href={hero.primaryHref}
+          query={hero.primaryWhatsappQuery}
+          section="hero"
+        />
+
+        <Cta
+          label={hero.secondaryCta}
+          type={hero.secondaryCtaType}
+          href={secondaryHref}
+          query={hero.secondaryWhatsappQuery}
+          section="hero"
+          secondary
+        />
+      </div>
+
+      <ul class="hp-points">
+        {bulkSlugs(hero.trustPointsText).map((point) => (
+          <li>
+            <span aria-hidden="true">✓</span>
+            {point}
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <figure class="hp-hero-photo">
+      <Photo src={hero.heroImage} alt={hero.heroImageAlt} eager />
+
+      <figcaption>
+        <span>{hero.topStripLabel}</span>
+        {hero.topStripText}
+      </figcaption>
+    </figure>
+  </div>
+</section>

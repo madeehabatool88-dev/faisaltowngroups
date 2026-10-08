@@ -1,0 +1,25 @@
+---
+import Photo from "../HomeImage.astro";
+import { site } from "../../data/site";
+
+const { trust } = Astro.props;
+---
+
+<section class="hp-section" data-home-section="trust">
+  <div class="hp-wrap">
+    <p class="hp-kicker">{trust.eyebrow}</p>
+    <h2>{trust.heading}</h2>
+    <p>{trust.text}</p>
+
+    {trust.showPartnerStatement && site.partnerStatement && (
+      <p>{site.partnerStatement}</p>
+    )}
+
+    {trust.showAuthorizationImage && (
+      <Photo
+        src={trust.authorizationImage}
+        alt={trust.authorizationImageAlt}
+      />
+    )}
+  </div>
+</section>

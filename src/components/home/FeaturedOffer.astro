@@ -1,0 +1,83 @@
+---
+import Cta from "../HomeCta.astro";
+import Photo from "../HomeImage.astro";
+
+const { offer, featuredSector, featuredStarting, showFeaturedPlan } = Astro.props;
+---
+
+<section
+  class="hp-section hp-tint"
+  id="featured-offer"
+  data-home-section="featuredOffer"
+>
+  <div class="hp-wrap hp-split hp-featured-layout">
+    <figure class="hp-offer-photo">
+      <Photo src={offer.image} alt={offer.alt} />
+    </figure>
+    <div class="hp-offer-content">
+      <p class="hp-kicker">{offer.eyebrow}</p>
+
+      <h2>
+        {offer.heading.replace(/\s+from\s+PKR.*$/i, "")}
+      </h2>
+
+      {featuredStarting && (
+        <p class="hp-feature-price">
+          From {featuredStarting}
+        </p>
+      )}
+
+      <p>{offer.text}</p>
+
+      <p class="hp-status">{offer.status}</p>
+
+      <dl class="hp-facts">
+        {offer.facts
+          .filter(
+            (fact: Record<string, string>) =>
+              !/discounted(?:\s+listed)?\s+price/i.test(fact.label),
+          )
+          .map((fact: Record<string, string>) => (
+            <div>
+              <dt>{fact.label}</dt>
+              <dd>{fact.value}</dd>
+            </div>
+          ))}
+      </dl>
+
+      <div class="hp-actions">
+        <Cta
+          label={
+            offer.primaryCta ||
+            `Check ${featuredSector} Availability`
+          }
+          query={offer.secondaryQuery}
+          sector={featuredSector}
+          section="featured_offer"
+        />
+
+        <Cta
+          label={
+            offer.secondaryCta ||
+            `View ${featuredSector} Details`
+          }
+          href={offer.primaryHref}
+          section="featured_offer"
+          sector={featuredSector}
+          secondary
+        />
+      </div>
+
+      {showFeaturedPlan && (
+        <a
+          class="hp-text-link"
+          href={offer.sectorPlan.pdf}
+          data-event="master_plan_click"
+          data-source-section="featured_sector_plan"
+        >
+          View {featuredSector} plan PDF ↗
+        </a>
+      )}
+    </div>
+  </div>
+</section>

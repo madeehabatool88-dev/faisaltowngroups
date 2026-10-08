@@ -1,0 +1,104 @@
+---
+import Cta from "../HomeCta.astro";
+
+const { navigation, labels, whatsappQuery } = Astro.props;
+---
+
+<header class="hp-header">
+  <a class="hp-brand" href="/" aria-label="FaisalTown Groups home">
+    <img
+      src="/assets/faisal-town-ii/original-logo.png"
+      width="371"
+      height="98"
+      alt="FaisalTown Groups"
+    />
+  </a>
+
+  <nav id="hp-nav" aria-label="Primary navigation">
+    {navigation.map((row: Record<string, string>) => <a href={row.href}>{row.label}</a>)}
+  </nav>
+
+  <div class="hp-header-actions">
+    <Cta label={labels.headerCall} type="call" section="header" secondary />
+    <Cta
+      label={labels.headerWhatsapp}
+      query={whatsappQuery}
+      section="header"
+    />
+    <button
+      class="hp-menu"
+      aria-label="Open navigation"
+      aria-expanded="false"
+      aria-controls="hp-nav"
+    >
+      ☰
+    </button>
+  </div>
+</header>
+
+<script>
+  const toggle =
+    document.querySelector<HTMLButtonElement>(".hp-menu");
+
+  const nav =
+    document.querySelector<HTMLElement>("#hp-nav");
+
+  function closeMenu() {
+    toggle?.setAttribute(
+      "aria-expanded",
+      "false",
+    );
+
+    nav?.classList.remove("hp-open");
+  }
+
+  toggle?.addEventListener("click", () => {
+    const open =
+      toggle.getAttribute("aria-expanded") !== "true";
+
+    toggle.setAttribute(
+      "aria-expanded",
+      String(open),
+    );
+
+    nav?.classList.toggle(
+      "hp-open",
+      open,
+    );
+  });
+
+  nav?.addEventListener("click", (event) => {
+    if (
+      (event.target as Element).closest("a")
+    ) {
+      closeMenu();
+    }
+  });
+
+  document.addEventListener(
+    "keydown",
+    (event) => {
+      if (
+        event.key === "Escape" &&
+        toggle?.getAttribute("aria-expanded") ===
+          "true"
+      ) {
+        closeMenu();
+        toggle.focus();
+      }
+    },
+  );
+
+  document.addEventListener(
+    "click",
+    (event) => {
+      if (
+        !(event.target as Element).closest(
+          ".hp-header",
+        )
+      ) {
+        closeMenu();
+      }
+    },
+  );
+</script>
