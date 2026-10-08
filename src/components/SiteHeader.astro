@@ -2,21 +2,13 @@
 import { whatsappLink } from "../data/site";
 
 const { home = false } = Astro.props;
-const navItems = home
-  ? [
-      ["Phase 1", "#phase-1"],
-      ["Phase 2", "#phase-2"],
-      ["Sector T", "/faisal-town-sector-t/"],
-      ["Location", "/faisal-town-islamabad-map-location/"],
-      ["Phase 2 Plan", "/articles/faisal-town-ii-master-plan/"]
-    ]
-  : [
-      ["Phase 1", "/faisal-town-phase-1/"],
-      ["Phase 2", "/faisal-town-phase-2/"],
-      ["Sector T", "/faisal-town-sector-t/"],
-      ["Location", "/faisal-town-islamabad-map-location/"],
-      ["Phase 2 Plan", "/articles/faisal-town-ii-master-plan/"]
-    ];
+const navItems = [
+  ["Phase 1", home ? "#phase-1" : "/faisal-town-phase-1/"],
+  ["Phase 2", home ? "#phase-2" : "/faisal-town-phase-2/"],
+  ["Sector T", "/faisal-town-sector-t/"],
+  ["Location", "/faisal-town-islamabad-map-location/"],
+  ["Phase 2 Plan", "/articles/faisal-town-ii-master-plan/"]
+];
 ---
 <header class="site-header" id="siteHeader">
   <a class="brand" href={home ? "#top" : "/"} aria-label="FaisalTown Groups home">
@@ -38,12 +30,14 @@ const navItems = home
 
   const closeNav = () => {
     toggle?.setAttribute("aria-expanded", "false");
+    toggle?.setAttribute("aria-label", "Open navigation");
     nav?.classList.remove("is-open");
   };
 
   toggle?.addEventListener("click", () => {
     const open = toggle.getAttribute("aria-expanded") === "true";
     toggle.setAttribute("aria-expanded", String(!open));
+    toggle.setAttribute("aria-label", open ? "Open navigation" : "Close navigation");
     nav?.classList.toggle("is-open", !open);
   });
 
