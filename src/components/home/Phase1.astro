@@ -1,0 +1,56 @@
+---
+import Cta from "../HomeCta.astro";
+import type { Article } from "../../data/articles";
+
+const { phase1, articles } = Astro.props as {
+  phase1: Record<string, any>;
+  articles: Article[];
+};
+---
+
+<aside
+  class="hp-section hp-phase1"
+  id="phase-1"
+  data-home-section="phase1"
+>
+  <div class="hp-wrap">
+    <p class="hp-kicker">
+      {phase1.eyebrow}
+    </p>
+
+    <h2>{phase1.heading}</h2>
+
+    <p>{phase1.text}</p>
+
+    <div class="hp-actions">
+      <Cta
+        label={phase1.primaryCta}
+        href={phase1.primaryHref}
+        secondary
+      />
+
+      <Cta
+        label={phase1.secondaryCta}
+        query={phase1.secondaryQuery}
+        section="phase1"
+        secondary
+      />
+    </div>
+
+    <div class="hp-inline-links">
+      {phase1.blocks.map((block: Record<string, string>) => (
+        <a href={block.href}>
+          {block.title} ↗
+        </a>
+      ))}
+
+      {articles.map((article) => (
+        <a
+          href={`/articles/${article.slug}/`}
+        >
+          {article.title} ↗
+        </a>
+      ))}
+    </div>
+  </div>
+</aside>

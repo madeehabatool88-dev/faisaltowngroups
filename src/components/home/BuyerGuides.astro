@@ -1,0 +1,51 @@
+---
+import Photo from "../HomeImage.astro";
+import type { Article } from "../../data/articles";
+
+const { guides, articles, linkLabel } = Astro.props as {
+  guides: Record<string, any>;
+  articles: Article[];
+  linkLabel: string;
+};
+---
+
+<section
+  class="hp-section hp-tint"
+  data-home-section="buyerGuides"
+>
+  <div class="hp-wrap">
+    <div class="hp-heading">
+      <p class="hp-kicker">
+        {guides.eyebrow}
+      </p>
+
+      <h2>{guides.heading}</h2>
+
+      <p>{guides.text}</p>
+    </div>
+
+    <div class="hp-card-grid">
+      {articles.map((article) => (
+        <article class="hp-guide">
+          <a href={`/articles/${article.slug}/`}>
+            <Photo
+              src={article.image}
+              alt={article.title}
+            />
+
+            <h3>{article.title}</h3>
+          </a>
+
+          <p>{article.description}</p>
+
+          <a
+            class="hp-text-link"
+            href={`/articles/${article.slug}/`}
+          >
+            {linkLabel} ↗
+          </a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,28 @@
+---
+import Cta from "../HomeCta.astro";
+import { site } from "../../data/site";
+
+const { labels, whatsappQuery } = Astro.props;
+---
+
+<nav
+  class="hp-contact-bar"
+  aria-label="Quick contact"
+>
+  {site.stickyCallEnabled && (
+    <Cta
+      label={labels.stickyCall}
+      type="call"
+      section="sticky_bar"
+      secondary
+    />
+  )}
+
+  {site.stickyWhatsAppEnabled && (
+    <Cta
+      label={labels.stickyWhatsapp}
+      query={whatsappQuery}
+      section="sticky_bar"
+    />
+  )}
+</nav>

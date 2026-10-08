@@ -1,0 +1,50 @@
+---
+import Cta from "../HomeCta.astro";
+import Photo from "../HomeImage.astro";
+
+const { assistance, labels } = Astro.props;
+---
+
+<section
+  class="hp-section hp-tint"
+  data-home-section="visitOverseas"
+>
+  <div class="hp-wrap hp-assistance">
+    {Object.entries(assistance)
+      .filter(([, card]) => (card as Record<string, unknown>).enabled)
+      .map(([key, card]) => {
+        const item = card as Record<string, any>;
+        return (
+          <article>
+            <Photo
+              src={item.image}
+              alt={item.alt}
+            />
+
+            <p class="hp-kicker">
+              {key === "siteVisit"
+                ? labels.siteVisitEyebrow
+                : labels.overseasEyebrow}
+            </p>
+
+            <h2>{item.heading}</h2>
+
+            <p>{item.text}</p>
+
+            <Cta
+              label={item.ctaLabel}
+              type={item.ctaType}
+              href={item.href}
+              query={item.whatsappQuery}
+              event={
+                key === "siteVisit"
+                  ? "site_visit_click"
+                  : undefined
+              }
+              section={key}
+            />
+          </article>
+        );
+      })}
+  </div>
+</section>
