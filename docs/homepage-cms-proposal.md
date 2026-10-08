@@ -1,6 +1,6 @@
 # Proposed homepage CMS structure
 
-Status: original schema proposal, followed by the CMS-only restructure. See CONTENT-EDITING-GUIDE.md for the implemented editors. The existing homepage rendering is preserved; new sections and visibility controls await the separate frontend stage.
+Status: original schema proposal, followed by the CMS-only restructure. See guides/CONTENT-EDITING-GUIDE.md for the implemented editors. The existing homepage rendering is preserved; new sections and visibility controls await the separate frontend stage.
 
 ## Scope and staging
 
@@ -58,7 +58,7 @@ Schema additions alone cannot make new sections, sticky toggles or CTA types aff
 - src/data/site.json and src/data/site.ts: extend settings with backward-compatible defaults.
 - src/data/homepage.ts: normalize bulk text and provide the existing hero/projectChoice/phase2/phase1/contact shapes to the current homepage.
 - src/pages/index.astro: import replacement only for migration compatibility; retain existing markup, ordering, styling and text.
-- CONTENT-EDITING-GUIDE.md: document each numbered section, bulk formats, shared pricing and which new controls await frontend wiring.
+- guides/CONTENT-EDITING-GUIDE.md: document each numbered section, bulk formats, shared pricing and which new controls await frontend wiring.
 
 No project/article routes, canonical tags, media files, or saved Phase 1 content are removed. Sector P's project page can consume shared offer data in the later frontend stage; existing prose mentioning prices will need an explicit review because a shared dataset cannot automatically update arbitrary sentences.
 
