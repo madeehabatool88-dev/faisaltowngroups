@@ -99,8 +99,8 @@ content:
             path: src/content/homepage/controls.json
             format: json
             description: >-
-              These switches control the current homepage. Turn a section off to hide it without deleting its
-              saved content.
+              These switches control the current homepage. Turn a section off to hide it without deleting its saved
+              content.
             fields:
               - name: hero
                 label: SEO & Hero Enabled
@@ -169,14 +169,34 @@ content:
             operations:
               delete: false
               rename: false
+          - name: home_presentation
+            label: 00b - Navigation, Labels & Benefits (Bulk)
+            type: file
+            path: src/content/homepage/presentation.json
+            format: json
+            fields:
+              - name: navigationText
+                label: Navigation - Bulk Edit
+                type: text
+                description: "One line: Label | /page/ or #section. Clear to remove navigation links."
+              - name: labelsText
+                label: Button and Section Labels - Bulk Edit
+                type: text
+                description: >-
+                  One line: key | wording. Keep the keys and change all labels together. An empty value removes its
+                  wording.
+              - name: benefitsText
+                label: Buyer Benefits - Bulk Edit
+                type: text
+                description: "One line: Heading | Description | Short icon or number. Clear to remove all cards."
           - name: homepage_hero
             label: 01 - SEO & Hero
             type: file
             path: src/content/homepage/hero.json
             format: json
             description: >-
-              Current homepage hero. The starting price comes from 03 - Featured Offer facts, not the separate
-              Sector P table in 04.
+              Current homepage hero. The starting price comes from 03 - Featured Offer facts, not the separate Sector P
+              table in 04.
             fields:
               - name: seoTitle
                 label: SEO Title
@@ -231,8 +251,8 @@ content:
                     type: text
                     required: false
                     description: >-
-                      Paste all items here, one per line: Button label | WhatsApp message. Spreadsheet columns
-                      also work. Keep empty optional columns between separators. Reorder by moving lines.
+                      Paste all items here, one per line: Button label | WhatsApp message. Spreadsheet columns also
+                      work. Keep empty optional columns between separators. Reorder by moving lines.
               - name: updated
                 label: Updated Date
                 type: date
@@ -286,6 +306,10 @@ content:
                 label: secondary WhatsApp Message
                 type: text
                 required: false
+              - name: heroBackgroundImage
+                label: Hero Background Image
+                type: image
+                description: Your project image behind the green hero overlay. Clear for a plain green background.
             operations:
               delete: false
               rename: false
@@ -320,8 +344,8 @@ content:
               delete: false
               rename: false
             description: >-
-              Phase 2 introduction shown between the hero and featured offer. Edit the whole description in
-              the Text box.
+              Phase 2 introduction shown between the hero and featured offer. Edit the whole description in the Text
+              box.
           - name: homepage_trust
             label: 02 - Trust / Authorized Partner
             type: file
@@ -366,8 +390,8 @@ content:
             path: src/content/homepage/featured-offer.json
             format: json
             description: >-
-              Edits the featured offer and homepage starting price. Current local content features Sector T.
-              Keep its heading, link, facts, WhatsApp message and plan consistent.
+              Edits the featured offer and homepage starting price. Current local content features Sector T. Keep its
+              heading, link, facts, WhatsApp message and plan consistent.
             fields:
               - name: image
                 label: Image
@@ -414,9 +438,8 @@ content:
                 type: text
                 required: false
                 description: >-
-                  Paste all facts at once: Value | Label, one line each. The value labelled discounted price
-                  or discounted listed price supplies the homepage starting price. Keep the heading and
-                  message consistent.
+                  Paste all facts at once: Value | Label, one line each. The value labelled discounted price or
+                  discounted listed price supplies the homepage starting price. Keep the heading and message consistent.
               - name: sectorPlan
                 label: Featured Sector Plan
                 type: object
@@ -451,8 +474,8 @@ content:
             path: src/content/homepage/prices.json
             format: json
             description: >-
-              Separate Sector P cash-price table. This does not set the homepage Sector T starting price.
-              Paste all price rows in the bulk field.
+              Separate Sector P cash-price table. This does not set the homepage Sector T starting price. Paste all
+              price rows in the bulk field.
             fields:
               - name: eyebrow
                 label: Eyebrow
@@ -472,8 +495,8 @@ content:
                 required: false
                 description: >-
                   Paste all items here, one per line: Dimensions | Marla/Kanal | Original PKR | Current PKR |
-                  Availability | Enabled (yes/no) | WhatsApp message. Spreadsheet columns also work. Keep
-                  empty optional columns between separators. Reorder by moving lines.
+                  Availability | Enabled (yes/no) | WhatsApp message. Spreadsheet columns also work. Keep empty optional
+                  columns between separators. Reorder by moving lines.
             operations:
               delete: false
               rename: false
@@ -501,9 +524,9 @@ content:
                 type: text
                 required: false
                 description: >-
-                  Paste all items here, one per line: Label | Description | WhatsApp message | Enabled
-                  (yes/no). Spreadsheet columns also work. Keep empty optional columns between separators.
-                  Reorder by moving lines.
+                  Paste all items here, one per line: Label | Description | WhatsApp message | Enabled (yes/no).
+                  Spreadsheet columns also work. Keep empty optional columns between separators. Reorder by moving
+                  lines.
             operations:
               delete: false
               rename: false
@@ -513,8 +536,8 @@ content:
             path: src/content/homepage/sectors.json
             format: json
             description: >-
-              Current O, P, Q, R, S and T cards. Paste and reorder all cards in one box. The featured sector
-              is sorted first by its saved details URL.
+              Current O, P, Q, R, S and T cards. Paste and reorder all cards in one box. The featured sector is sorted
+              first by its saved details URL.
             fields:
               - name: heading
                 label: Heading
@@ -525,9 +548,9 @@ content:
                 type: text
                 required: false
                 description: >-
-                  Paste all items here, one per line: Name/sub-name | Page URL | Description | Image path |
-                  Alt text | Status | WhatsApp message | Enabled (yes/no). Spreadsheet columns also work. Keep
-                  empty optional columns between separators. Reorder by moving lines.
+                  Paste all items here, one per line: Name/sub-name | Page URL | Description | Image path | Alt text |
+                  Status | WhatsApp message | Enabled (yes/no). Spreadsheet columns also work. Keep empty optional
+                  columns between separators. Reorder by moving lines.
             operations:
               delete: false
               rename: false
@@ -537,8 +560,8 @@ content:
             path: src/content/homepage/development.json
             format: json
             description: >-
-              All development fields are live, including additional images, update date and video link.
-              Enable Development under 00 - Section Controls to display this section.
+              All development fields are live, including additional images, update date and video link. Enable
+              Development under 00 - Section Controls to display this section.
             fields:
               - name: eyebrow
                 label: Eyebrow
@@ -573,8 +596,8 @@ content:
                 type: text
                 required: false
                 description: >-
-                  Paste all items here, one per line: Image path | Alt text | Caption. Spreadsheet columns
-                  also work. Keep empty optional columns between separators. Reorder by moving lines.
+                  Paste all items here, one per line: Image path | Alt text | Caption. Spreadsheet columns also work.
+                  Keep empty optional columns between separators. Reorder by moving lines.
               - name: videoUrl
                 label: Video URL
                 type: string
@@ -647,9 +670,9 @@ content:
                 type: text
                 required: false
                 description: >-
-                  Paste all items here, one per line: Title | Description | Icon (check/map/phone/home/globe)
-                  | Enabled (yes/no). Spreadsheet columns also work. Keep empty optional columns between
-                  separators. Reorder by moving lines.
+                  Paste all items here, one per line: Title | Description | Icon (check/map/phone/home/globe) | Enabled
+                  (yes/no). Spreadsheet columns also work. Keep empty optional columns between separators. Reorder by
+                  moving lines.
             operations:
               delete: false
               rename: false
@@ -677,8 +700,8 @@ content:
                 type: text
                 required: false
                 description: >-
-                  Paste all items here, one per line: Title | Description | Enabled (yes/no). Spreadsheet
-                  columns also work. Keep empty optional columns between separators. Reorder by moving lines.
+                  Paste all items here, one per line: Title | Description | Enabled (yes/no). Spreadsheet columns also
+                  work. Keep empty optional columns between separators. Reorder by moving lines.
             operations:
               delete: false
               rename: false
@@ -798,8 +821,8 @@ content:
                 type: text
                 required: false
                 description: >-
-                  Paste all items here, one per line: Question | Answer | Enabled (yes/no). Spreadsheet
-                  columns also work. Keep empty optional columns between separators. Reorder by moving lines.
+                  Paste all items here, one per line: Question | Answer | Enabled (yes/no). Spreadsheet columns also
+                  work. Keep empty optional columns between separators. Reorder by moving lines.
             operations:
               delete: false
               rename: false
@@ -809,8 +832,8 @@ content:
             path: src/content/homepage/buyer-guides.json
             format: json
             description: >-
-              Section copy, display limit and Phase 2 guide selection control the live buyer-guide section.
-              Phase 1 guide selection appears in the Phase 1 section. Only published articles are shown.
+              Section copy, display limit and Phase 2 guide selection control the live buyer-guide section. Phase 1
+              guide selection appears in the Phase 1 section. Only published articles are shown.
             fields:
               - name: eyebrow
                 label: Eyebrow
@@ -847,8 +870,8 @@ content:
             path: src/content/homepage/contact.json
             format: json
             description: >-
-              All contact fields are live, including button labels and the optional image.
-              Enable Final CTA under 00 - Section Controls to display this section.
+              All contact fields are live, including button labels and the optional image. Enable Final CTA under 00 -
+              Section Controls to display this section.
             fields:
               - name: eyebrow
                 label: Eyebrow
@@ -873,8 +896,8 @@ content:
                 type: text
                 required: false
                 description: >-
-                  Paste all items here, one per line: Button label | WhatsApp message. Spreadsheet columns
-                  also work. Keep empty optional columns between separators. Reorder by moving lines.
+                  Paste all items here, one per line: Button label | WhatsApp message. Spreadsheet columns also work.
+                  Keep empty optional columns between separators. Reorder by moving lines.
               - name: whatsappButton
                 label: WhatsApp Button
                 type: string
@@ -980,8 +1003,8 @@ content:
           delete: false
           rename: false
         description: >-
-          Global identity and contacts. Phone, WhatsApp and sticky-contact switches control the current site.
-          Optional business details remain available for future use.
+          Global identity and contacts. Phone, WhatsApp and sticky-contact switches control the current site. Optional
+          business details remain available for future use.
       - name: homepage_preserved
         label: Legacy & Secondary Content
         type: group
@@ -1039,8 +1062,8 @@ content:
                 type: text
                 required: false
                 description: >-
-                  Paste all items here, one per line: Title | URL | Description. Spreadsheet columns also
-                  work. Keep empty optional columns between separators. Reorder by moving lines.
+                  Paste all items here, one per line: Title | URL | Description. Spreadsheet columns also work. Keep
+                  empty optional columns between separators. Reorder by moving lines.
             operations:
               delete: false
               rename: false
@@ -1064,9 +1087,9 @@ content:
                 type: text
                 required: false
                 description: >-
-                  Paste all items here, one per line: Label | Heading | Description | Primary label | Primary
-                  URL | WhatsApp label | WhatsApp message. Spreadsheet columns also work. Keep empty optional
-                  columns between separators. Reorder by moving lines.
+                  Paste all items here, one per line: Label | Heading | Description | Primary label | Primary URL |
+                  WhatsApp label | WhatsApp message. Spreadsheet columns also work. Keep empty optional columns between
+                  separators. Reorder by moving lines.
             operations:
               delete: false
               rename: false
@@ -1167,17 +1190,17 @@ content:
         label: Hero Background Image
         type: image
         required: false
-        description: "Decorative background behind the page title. Clear for a plain background."
+        description: Decorative background behind the page title. Clear for a plain background.
       - name: showMainImage
         label: Show Main Page Image
         type: boolean
         required: false
-        description: "Show the main image below the page summary. The image also supplies the social sharing preview."
+        description: Show the main image below the page summary. The image also supplies the social sharing preview.
       - name: imageCaption
         label: Main Image Caption
         type: text
         required: false
-        description: "Caption below the main page image."
+        description: Caption below the main page image.
       - name: quickAnswerLabel
         label: Quick Answer Label
         type: string
@@ -1194,7 +1217,7 @@ content:
         label: Verification Notice Text
         type: text
         required: false
-        description: "Clear to remove the notice copy; dates remain visible."
+        description: Clear to remove the notice copy; dates remain visible.
       - name: checklistLabel
         label: Buyer Checklist Label
         type: string
@@ -1235,7 +1258,9 @@ content:
         label: Body Section Buttons - Bulk Edit
         type: text
         required: false
-        description: "One line: Exact body heading | Button label | /page/. The heading must match a ## heading in Page Body. Clear to remove all section buttons."
+        description: >-
+          One line: Exact body heading | Button label | /page/. The heading must match a ## heading in Page Body. Clear
+          to remove all section buttons.
       - name: planCalloutLabel
         label: Plan Link Label
         type: string
@@ -1252,7 +1277,7 @@ content:
         label: Plan Link URL
         type: string
         required: false
-        description: "Clear to remove the standalone plan link panel. Use a /path or https URL."
+        description: Clear to remove the standalone plan link panel. Use a /path or https URL.
       - name: quickAnswer
         label: Quick Answer
         type: text
@@ -1302,8 +1327,8 @@ content:
         type: text
         required: false
         description: >-
-          Write the complete page here. Use ## Heading for each section and blank lines between paragraphs.
-          This field controls the main editorial copy shown on the page.
+          Write the complete page here. Use ## Heading for each section and blank lines between paragraphs. This field
+          controls the main editorial copy shown on the page.
       - name: primaryCta
         label: Primary Button Label
         type: string
@@ -1333,7 +1358,6 @@ content:
       create: true
       rename: false
       delete: false
-
   - name: articles_guides
     label: Articles & Buyer Guides
     type: collection
@@ -1440,8 +1464,8 @@ content:
         type: text
         required: true
         description: >-
-          Write the complete article here. Use ## for headings, blank lines for paragraphs, - for bullets,
-          > for callouts, [Label](/page/) for internal links and [Label](https://example.com/) for external references.
+          Write the complete article here. Use ## for headings, blank lines for paragraphs, - for bullets, > for
+          callouts, [Label](/page/) for internal links and [Label](https://example.com/) for external references.
       - name: relatedSlugsText
         label: Related Internal Articles - Bulk Editor
         type: text
@@ -1502,7 +1526,6 @@ content:
       create: true
       rename: false
       delete: false
-
   - name: legal_pages
     label: Legal Pages
     type: group

@@ -64,3 +64,13 @@ Run `node scripts/check-project-cms-rendering.mjs` while no one else is editing 
 ## Legal-page editors — 6 October 2026
 
 Expand **Legal Pages** in the sidebar, then open **Privacy Policy**, **Terms and Conditions**, or **Disclaimer** directly. These are explicit file editors for the existing legal JSON files, replacing the collection screen that showed “No entries.” All existing legal copy and URLs are preserved. Edit Full Legal Page - Bulk Edit for the body, then Save. Leave the old `/collection/legal_pages` browser URL and reopen the repository sidebar after refreshing CMS.
+
+## Green and gold homepage layout — 7 October 2026
+
+The homepage now uses the supplied layout with this site's project photographs, sector plans and existing price rows. No stock photographs or sample prices are used.
+
+Under **Main Website → Homepage**, use **00b - Navigation, Labels & Benefits (Bulk)** to paste all navigation links, shared button/section labels or buyer-benefit cards at once. Keep label keys on the left of `|` and edit the wording on the right. Other repeated content stays in its existing bulk editor: featured facts, price rows, budgets, sectors, support cards, buying steps, FAQs and final inquiry options. Empty bulk fields remove the corresponding repeated content. Section controls still switch complete sections on/off.
+
+The hero has separate foreground and background image fields. Sector card images use your existing sector-plan previews; change their image paths in the sector bulk text. All existing legal pages remain individual editors under **Legal Pages**.
+
+Saving content commits to the main branch and starts the production build/deployment. Wait for the Deploy live website action to finish before checking the public site. A failed build does not publish the saved changes.

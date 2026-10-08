@@ -26,5 +26,6 @@
   "primaryWhatsappQuery": "Assalamualaikum, I am interested in Faisal Town Phase 2. Please send me current plot availability, prices and suitable options.",
   "secondaryCtaType": "internal",
   "secondaryHref": "#phase-2-sectors",
-  "secondaryWhatsappQuery": "Please send me Faisal Town Phase 2 sector details, maps and current plot guidance."
+  "secondaryWhatsappQuery": "Please send me Faisal Town Phase 2 sector details, maps and current plot guidance.",
+  "heroBackgroundImage": "/assets/faisal-town-ii/hero-masterplan-preview.webp"
 }

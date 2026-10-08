@@ -54,3 +54,18 @@ assert.equal(normalizeProject({...locationData,sectionLinksText:''}).sectionLink
 assert.equal(normalizeProject({...locationData,sectionLinksText:'Example | Open guide | /faisal-town-phase-1/'}).sectionLinks[0].label,'Open guide');
 assert(locationHtml.includes('rel="canonical"'));
 console.log('PASS: sector-card edits, clearing and malformed rows; authority links; canonicals; location layout.');
+
+// The homepage must consume the same bulk content exposed by Pages CMS.
+const presentation=JSON.parse(fs.readFileSync('src/content/homepage/presentation.json'));
+const cells=line=>line.split(line.includes('\t')?'\t':'|').map(value=>value.trim());
+for(const line of presentation.navigationText.split(/\r?\n/).filter(Boolean)) {
+ const [label,href]=cells(line);assert(html.includes('href="'+escape(href)+'"')&&html.includes(escape(label)), 'Homepage navigation missing: '+label);
+}
+if(controls.aboutPhase2)for(const line of presentation.benefitsText.split(/\r?\n/).filter(Boolean)) {
+ const [title,description]=cells(line);assert(html.includes(escape(title))&&html.includes(escape(description)), 'Homepage benefit missing: '+title);
+}
+for(const match of html.matchAll(/<img[^>]+src="([^"]+)"/g)) {
+ assert(!/unsplash|placeholder\.com/.test(match[1]),'Sample image left on homepage');
+ if(match[1].startsWith('/assets/'))assert(fs.existsSync('public'+match[1]),'Missing homepage asset '+match[1]);
+}
+console.log('PASS: homepage bulk navigation/benefits render and all local image assets exist.');

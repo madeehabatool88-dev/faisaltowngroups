@@ -1,4 +1,5 @@
 ---
+import presentation from '../content/homepage/presentation.json';
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import Cta from "../components/HomeCta.astro";
@@ -26,6 +27,9 @@ import { articles } from "../data/articles";
 import { site } from "../data/site";
 import "../styles/homepage.css";
 
+const labels = Object.fromEntries(bulkRows(presentation.labelsText, ['key', 'value'], 'Homepage labels').map(row => [row.key, row.value]));
+const navigation = bulkRows(presentation.navigationText, ['label', 'href'], 'Homepage navigation');
+const benefits = bulkRows(presentation.benefitsText, ['title', 'text', 'icon'], 'Homepage benefits');
 const offers = phase2.priceTable.rows.filter(enabled);
 
 const currentPrices = offers
@@ -129,18 +133,13 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
     </a>
 
     <nav id="hp-nav" aria-label="Primary navigation">
-      <a href="/faisal-town-phase-2/">Phase 2</a>
-      <a href="/faisal-town-phase-1/">Phase 1</a>
-      <a href={c.prices ? "#prices" : "/faisal-town-phase-2/"}>
-        Plots & prices
-      </a>
-      <a href="/articles/faisal-town-ii-master-plan/">Master plan</a>
+      {navigation.map(row => <a href={row.href}>{row.label}</a>)}
     </nav>
 
     <div class="hp-header-actions">
-      <Cta label="Call" type="call" section="header" secondary />
+      <Cta label={labels.headerCall} type="call" section="header" secondary />
       <Cta
-        label="WhatsApp"
+        label={labels.headerWhatsapp}
         query={hero.primaryWhatsappQuery}
         section="header"
       />
@@ -157,7 +156,7 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
 
   <main id="top">
     {c.hero && (
-      <section class="hp-hero" id="phase-2" data-home-section="hero">
+      <section class="hp-hero" style={hero.heroBackgroundImage ? { "--hp-hero-image": `url("${hero.heroBackgroundImage}")` } : undefined} id="phase-2" data-home-section="hero">
         <div class="hp-wrap hp-hero-grid">
           <div class="hp-hero-copy">
             <p class="hp-kicker">{hero.heroEyebrow}</p>
@@ -231,7 +230,8 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
             <h2>{phase2.heading}</h2>
             <p>{phase2.text}</p>
           </div>
-          <div class="hp-actions">
+          <div class="hp-trust-grid">{benefits.map(row => <article class="hp-trust-card"><div class="icon" aria-hidden="true">{row.icon}</div><h3>{row.title}</h3><p>{row.text}</p></article>)}</div>
+          <div class="hp-actions hp-about-actions">
             <Cta label={phase2.primaryCta} href={phase2.primaryHref} section="about_phase2" secondary />
             <Cta label={phase2.secondaryCta} query={phase2.secondaryQuery} section="about_phase2" />
           </div>
@@ -374,13 +374,13 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
 
                 {amount(row.actual) > amount(row.discount) && (
                   <p class="hp-original">
-                    Original price{" "}
+                    {labels.originalPrice}{" "}
                     <s>{price(row.actual)}</s>
                   </p>
                 )}
 
                 <Cta
-                  label="Enquire About This Plot"
+                  label={labels.priceInquiry}
                   query={row.query}
                   event="price_enquiry_click"
                   section="prices"
@@ -439,7 +439,7 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
         <div class="hp-wrap">
           <div class="hp-heading">
             <p class="hp-kicker">
-              Find your location
+              {labels.sectorEyebrow}
             </p>
 
             <h2>{phase2.sectorsHeading}</h2>
@@ -471,14 +471,14 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
                 </p>
 
                 <Cta
-                  label="Check Availability"
+                  label={labels.sectorAvailability}
                   query={row.query}
                   section="sectors"
                   sector={row.title}
                 />
 
                 <Cta
-                  label="Explore Sector"
+                  label={labels.sectorDetails}
                   href={row.href}
                   section="sectors"
                   secondary
@@ -704,8 +704,8 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
 
                 <p class="hp-kicker">
                   {key === "siteVisit"
-                    ? "Visit the project"
-                    : "Overseas assistance"}
+                    ? labels.siteVisitEyebrow
+                    : labels.overseasEyebrow}
                 </p>
 
                 <h2>{card.heading}</h2>
@@ -739,7 +739,7 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
         <div class="hp-wrap hp-faq-layout">
           <div>
             <p class="hp-kicker">
-              Before you decide
+              {labels.faqEyebrow}
             </p>
 
             <h2>{faqs.heading}</h2>
@@ -810,7 +810,7 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
                   class="hp-text-link"
                   href={`/articles/${article!.slug}/`}
                 >
-                  Read buyer guide ↗
+                  {labels.guideLink} ↗
                 </a>
               </article>
             ))}
@@ -945,7 +945,7 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
     >
       {site.stickyCallEnabled && (
         <Cta
-          label="Call"
+          label={labels.stickyCall}
           type="call"
           section="sticky_bar"
           secondary
@@ -954,7 +954,7 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
 
       {site.stickyWhatsAppEnabled && (
         <Cta
-          label="Check Availability on WhatsApp"
+          label={labels.stickyWhatsapp}
           query={hero.primaryWhatsappQuery}
           section="sticky_bar"
         />
