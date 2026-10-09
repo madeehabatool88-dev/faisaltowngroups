@@ -743,4 +743,16 @@ html { scroll-behavior: smooth; }
   .hp-heading { margin-bottom: 34px; }
   .hp-trust-card { padding: 26px 22px; }
   .hp-quick { padding: 26px 22px; }
+  .hp-header-actions .hp-button.hp-secondary { display: none; }
+}
+
+@media (max-width: 640px) {
+  .hp-header { padding: 8px 16px; }
+  .hp-brand img { height: 38px; }
+  .hp-header-actions .hp-button { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hp-page *, .hp-page *::before, .hp-page *::after { transition: none !important; }
 }
