@@ -215,6 +215,7 @@ content:
               - name: heroImage
                 label: Hero Image
                 type: image
+                description: Social sharing image; also used as the hero background if no background image is set.
               - name: heroImageAlt
                 label: Hero Image Alt Text
                 type: string
@@ -272,6 +273,13 @@ content:
                 type: text
                 required: false
                 description: Edits this section of the current homepage. Visibility follows 00 - Section Controls.
+              - name: statsText
+                label: Hero Stats Bar - Bulk Edit
+                type: text
+                required: false
+                description: >-
+                  One line: Value | Label. Shown as the stats strip at the bottom of the hero. Clear to remove the
+                  stats bar.
               - name: primaryCtaType
                 label: primary CTA Type
                 type: select
@@ -309,7 +317,7 @@ content:
               - name: heroBackgroundImage
                 label: Hero Background Image
                 type: image
-                description: Your project image behind the green hero overlay. Clear for a plain green background.
+                description: Full-screen project image behind the maroon hero overlay. Clear for a plain maroon hero.
             operations:
               delete: false
               rename: false
