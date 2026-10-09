@@ -1,0 +1,59 @@
+---
+import Cta from "../HomeCta.astro";
+import Photo from "../HomeImage.astro";
+
+const { masterPlan: m } = Astro.props;
+---
+
+<section
+  class="hp-section"
+  id="master-plan"
+  data-home-section="masterPlan"
+>
+  <div class="hp-wrap hp-split">
+    <figure class="hp-map">
+      <a
+        href={m.image}
+        aria-label="Open full size Phase 2 master plan"
+        data-event="master_plan_click"
+        data-source-section="master_plan"
+      >
+        <Photo
+          src={m.image}
+          alt={m.alt}
+        />
+      </a>
+
+      <figcaption>
+        {m.caption} · Tap to enlarge ↗
+      </figcaption>
+    </figure>
+
+    <div>
+      <p class="hp-kicker">
+        {m.eyebrow}
+      </p>
+
+      <h2>{m.heading}</h2>
+
+      <p>{m.text}</p>
+
+      <div class="hp-actions">
+        <Cta
+          label={m.viewLabel}
+          href={m.pdf}
+          event="master_plan_click"
+          section="master_plan"
+        />
+
+        <Cta
+          label={m.whatsappLabel}
+          query={m.whatsappQuery}
+          event="master_plan_click"
+          section="master_plan"
+          secondary
+        />
+      </div>
+    </div>
+  </div>
+</section>

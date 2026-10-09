@@ -1,0 +1,35 @@
+---
+import Cta from "../HomeCta.astro";
+
+const { budgets, rows } = Astro.props;
+---
+
+<section
+  class="hp-section hp-dark"
+  id="budgets"
+  data-home-section="budgets"
+>
+  <div class="hp-wrap">
+    <div class="hp-heading">
+      <p class="hp-kicker">{budgets.eyebrow}</p>
+      <h2>{budgets.heading}</h2>
+      <p>{budgets.text}</p>
+    </div>
+
+    <div class="hp-budget-grid">
+      {rows.map((row: Record<string, string>) => (
+        <article>
+          <Cta
+            label={row.label}
+            query={row.query}
+            event="budget_click"
+            budget={row.label}
+            section="budgets"
+          />
+
+          <p>{row.text}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

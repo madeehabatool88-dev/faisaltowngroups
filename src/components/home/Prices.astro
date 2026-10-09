@@ -1,0 +1,61 @@
+---
+import Cta from "../HomeCta.astro";
+import { amount, price } from "../../data/homepageView";
+
+const { table, offers, labels } = Astro.props;
+---
+
+<section
+  class="hp-section"
+  id="prices"
+  data-home-section="prices"
+>
+  <div class="hp-wrap">
+    <div class="hp-heading">
+      <p class="hp-kicker">
+        {table.eyebrow}
+      </p>
+
+      <h2>{table.heading}</h2>
+
+      <p>{table.text}</p>
+    </div>
+
+    <div class="hp-price-grid">
+      {offers.map((row: Record<string, string>) => (
+        <article class="hp-price-card">
+          <div class="hp-price-top">
+            <h3>{row.marla}</h3>
+            <span>{row.availability}</span>
+          </div>
+
+          <p class="hp-dimensions">{row.size}</p>
+
+          <strong class="hp-price">
+            {price(row.discount)}
+          </strong>
+
+          {amount(row.actual) > amount(row.discount) && (
+            <p class="hp-original">
+              {labels.originalPrice}{" "}
+              <s>{price(row.actual)}</s>
+            </p>
+          )}
+
+          <Cta
+            label={labels.priceInquiry}
+            query={row.query}
+            event="price_enquiry_click"
+            section="prices"
+            plot={row.marla}
+            sector="Sector P"
+          />
+        </article>
+      ))}
+    </div>
+
+    <p class="hp-note">
+      {table.note}
+    </p>
+  </div>
+</section>

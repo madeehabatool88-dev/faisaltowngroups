@@ -2,8 +2,24 @@
 import presentation from '../content/homepage/presentation.json';
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SiteFooter from "../components/SiteFooter.astro";
-import Cta from "../components/HomeCta.astro";
-import Photo from "../components/HomeImage.astro";
+import Header from "../components/home/Header.astro";
+import Hero from "../components/home/Hero.astro";
+import AboutPhase2 from "../components/home/AboutPhase2.astro";
+import Trust from "../components/home/Trust.astro";
+import FeaturedOffer from "../components/home/FeaturedOffer.astro";
+import Prices from "../components/home/Prices.astro";
+import Budgets from "../components/home/Budgets.astro";
+import Sectors from "../components/home/Sectors.astro";
+import Development from "../components/home/Development.astro";
+import MasterPlan from "../components/home/MasterPlan.astro";
+import BuyerSupport from "../components/home/BuyerSupport.astro";
+import BuyingProcess from "../components/home/BuyingProcess.astro";
+import VisitOverseas from "../components/home/VisitOverseas.astro";
+import Faqs from "../components/home/Faqs.astro";
+import BuyerGuides from "../components/home/BuyerGuides.astro";
+import Phase1 from "../components/home/Phase1.astro";
+import FinalCta from "../components/home/FinalCta.astro";
+import StickyBar from "../components/home/StickyBar.astro";
 import { hero, phase2, phase1, contact } from "../data/homepage";
 import {
   controls as c,
@@ -19,10 +35,8 @@ import {
   supportRows,
   processRows,
   faqRows,
-  amount,
-  price,
 } from "../data/homepageView";
-import { bulkRows, bulkSlugs } from "../data/homepageBulk";
+import { bulkRows } from "../data/homepageBulk";
 import { articles } from "../data/articles";
 import { site } from "../data/site";
 import "../styles/homepage.css";
@@ -31,15 +45,6 @@ const labels = Object.fromEntries(bulkRows(presentation.labelsText, ['key', 'val
 const navigation = bulkRows(presentation.navigationText, ['label', 'href'], 'Homepage navigation');
 const benefits = bulkRows(presentation.benefitsText, ['title', 'text', 'icon'], 'Homepage benefits');
 const offers = phase2.priceTable.rows.filter(enabled);
-
-const currentPrices = offers
-  .filter((row) => !/sold|unavailable/i.test(row.availability))
-  .map((row) => amount(row.discount))
-  .filter((n) => n > 0);
-
-const sectorPStarting = currentPrices.length
-  ? price(Math.min(...currentPrices))
-  : "";
 
 const offer = phase2.sectorP;
 
@@ -86,8 +91,17 @@ const sectors = phase2.sectors
 
 const selectedGuides = phase2.articleSlugs
   .map((slug) => articles.find((a) => a.slug === slug))
-  .filter(Boolean)
+  .filter((article): article is (typeof articles)[number] => Boolean(article))
   .slice(0, Math.max(0, guides.displayLimit));
+
+const phase1Articles = phase1.articleSlugs
+  .map((slug) => articles.find((a) => a.slug === slug))
+  .filter((article): article is (typeof articles)[number] => Boolean(article));
+
+const heroSecondaryHref =
+  !c.sectors && hero.secondaryHref === "#phase-2-sectors"
+    ? "/faisal-town-phase-2/"
+    : hero.secondaryHref;
 
 const schema =
   c.faqs && faqRows.length
@@ -106,8 +120,6 @@ const schema =
       ]
     : [];
 
-const d = phase2.development;
-const m = phase2.masterPlan;
 const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
 ---
 
@@ -122,959 +134,104 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
     Skip to content
   </a>
 
-  <header class="hp-header">
-    <a class="hp-brand" href="/" aria-label="FaisalTown Groups home">
-      <img
-        src="/assets/faisal-town-ii/original-logo.png"
-        width="371"
-        height="98"
-        alt="FaisalTown Groups"
-      />
-    </a>
-
-    <nav id="hp-nav" aria-label="Primary navigation">
-      {navigation.map(row => <a href={row.href}>{row.label}</a>)}
-    </nav>
-
-    <div class="hp-header-actions">
-      <Cta label={labels.headerCall} type="call" section="header" secondary />
-      <Cta
-        label={labels.headerWhatsapp}
-        query={hero.primaryWhatsappQuery}
-        section="header"
-      />
-      <button
-        class="hp-menu"
-        aria-label="Open navigation"
-        aria-expanded="false"
-        aria-controls="hp-nav"
-      >
-        ☰
-      </button>
-    </div>
-  </header>
+  <Header
+    navigation={navigation}
+    labels={labels}
+    whatsappQuery={hero.primaryWhatsappQuery}
+  />
 
   <main id="top">
     {c.hero && (
-      <section class="hp-hero" style={hero.heroBackgroundImage ? { "--hp-hero-image": `url("${hero.heroBackgroundImage}")` } : undefined} id="phase-2" data-home-section="hero">
-        <div class="hp-wrap hp-hero-grid">
-          <div class="hp-hero-copy">
-            <p class="hp-kicker">{hero.heroEyebrow}</p>
-
-            <h1>{hero.h1}</h1>
-
-            <p class="hp-intro">{hero.intro}</p>
-
-            {featuredStarting && (
-              <div class="hp-start">
-                <span>
-                  {hero.startingPriceLabel} · {featuredSector}
-                </span>
-
-                <strong>{featuredStarting}</strong>
-
-                <small>{hero.priceDisclaimer}</small>
-              </div>
-            )}
-
-            <div class="hp-actions">
-              <Cta
-                label={hero.primaryCta}
-                type={hero.primaryCtaType}
-                href={hero.primaryHref}
-                query={hero.primaryWhatsappQuery}
-                section="hero"
-              />
-
-              <Cta
-                label={hero.secondaryCta}
-                type={hero.secondaryCtaType}
-                href={
-                  !c.sectors && hero.secondaryHref === "#phase-2-sectors"
-                    ? "/faisal-town-phase-2/"
-                    : hero.secondaryHref
-                }
-                query={hero.secondaryWhatsappQuery}
-                section="hero"
-                secondary
-              />
-            </div>
-
-            <ul class="hp-points">
-              {bulkSlugs(hero.trustPointsText).map((point) => (
-                <li>
-                  <span aria-hidden="true">✓</span>
-                  {point}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <figure class="hp-hero-photo">
-            <Photo src={hero.heroImage} alt={hero.heroImageAlt} eager />
-
-            <figcaption>
-              <span>{hero.topStripLabel}</span>
-              {hero.topStripText}
-            </figcaption>
-          </figure>
-        </div>
-      </section>
+      <Hero
+        hero={hero}
+        featuredStarting={featuredStarting}
+        featuredSector={featuredSector}
+        secondaryHref={heroSecondaryHref}
+      />
     )}
 
     {c.aboutPhase2 && (
-      <section class="hp-section hp-about" id="about-phase-2" data-home-section="aboutPhase2">
-        <div class="hp-wrap">
-          <div class="hp-heading">
-            <p class="hp-kicker">{phase2.eyebrow}</p>
-            <h2>{phase2.heading}</h2>
-            <p>{phase2.text}</p>
-          </div>
-          <div class="hp-trust-grid">{benefits.map(row => <article class="hp-trust-card"><div class="icon" aria-hidden="true">{row.icon}</div><h3>{row.title}</h3><p>{row.text}</p></article>)}</div>
-          <div class="hp-actions hp-about-actions">
-            <Cta label={phase2.primaryCta} href={phase2.primaryHref} section="about_phase2" secondary />
-            <Cta label={phase2.secondaryCta} query={phase2.secondaryQuery} section="about_phase2" />
-          </div>
-        </div>
-      </section>
+      <AboutPhase2 phase2={phase2} benefits={benefits} />
     )}
 
     {c.trust && (
-      <section class="hp-section" data-home-section="trust">
-        <div class="hp-wrap">
-          <p class="hp-kicker">{trust.eyebrow}</p>
-          <h2>{trust.heading}</h2>
-          <p>{trust.text}</p>
-
-          {trust.showPartnerStatement && site.partnerStatement && (
-            <p>{site.partnerStatement}</p>
-          )}
-
-          {trust.showAuthorizationImage && (
-            <Photo
-              src={trust.authorizationImage}
-              alt={trust.authorizationImageAlt}
-            />
-          )}
-        </div>
-      </section>
+      <Trust trust={trust} />
     )}
 
     {c.featuredOffer && (
-      <section
-        class="hp-section hp-tint"
-        id="featured-offer"
-        data-home-section="featuredOffer"
-      >
-        <div class="hp-wrap hp-split hp-featured-layout">
-          <figure class="hp-offer-photo">
-            <Photo src={offer.image} alt={offer.alt} />
-          </figure>
-          <div class="hp-offer-content">
-            <p class="hp-kicker">{offer.eyebrow}</p>
-
-            <h2>
-              {offer.heading.replace(/\s+from\s+PKR.*$/i, "")}
-            </h2>
-
-            {featuredStarting && (
-              <p class="hp-feature-price">
-                From {featuredStarting}
-              </p>
-            )}
-
-            <p>{offer.text}</p>
-
-            <p class="hp-status">{offer.status}</p>
-
-            <dl class="hp-facts">
-              {offer.facts
-                .filter(
-                  (fact) =>
-                    !/discounted(?:\s+listed)?\s+price/i.test(fact.label),
-                )
-                .map((fact) => (
-                  <div>
-                    <dt>{fact.label}</dt>
-                    <dd>{fact.value}</dd>
-                  </div>
-                ))}
-            </dl>
-
-            <div class="hp-actions">
-              <Cta
-                label={
-                  offer.primaryCta ||
-                  `Check ${featuredSector} Availability`
-                }
-                query={offer.secondaryQuery}
-                sector={featuredSector}
-                section="featured_offer"
-              />
-
-              <Cta
-                label={
-                  offer.secondaryCta ||
-                  `View ${featuredSector} Details`
-                }
-                href={offer.primaryHref}
-                section="featured_offer"
-                sector={featuredSector}
-                secondary
-              />
-            </div>
-
-            {showFeaturedPlan && (
-              <a
-                class="hp-text-link"
-                href={offer.sectorPlan.pdf}
-                data-event="master_plan_click"
-                data-source-section="featured_sector_plan"
-              >
-                View {featuredSector} plan PDF ↗
-              </a>
-            )}
-          </div>
-
-
-        </div>
-      </section>
+      <FeaturedOffer
+        offer={offer}
+        featuredSector={featuredSector}
+        featuredStarting={featuredStarting}
+        showFeaturedPlan={showFeaturedPlan}
+      />
     )}
 
     {c.prices && (
-      <section
-        class="hp-section"
-        id="prices"
-        data-home-section="prices"
-      >
-        <div class="hp-wrap">
-          <div class="hp-heading">
-            <p class="hp-kicker">
-              {phase2.priceTable.eyebrow}
-            </p>
-
-            <h2>{phase2.priceTable.heading}</h2>
-
-            <p>{phase2.priceTable.text}</p>
-          </div>
-
-          <div class="hp-price-grid">
-            {offers.map((row) => (
-              <article class="hp-price-card">
-                <div class="hp-price-top">
-                  <h3>{row.marla}</h3>
-                  <span>{row.availability}</span>
-                </div>
-
-                <p class="hp-dimensions">{row.size}</p>
-
-                <strong class="hp-price">
-                  {price(row.discount)}
-                </strong>
-
-                {amount(row.actual) > amount(row.discount) && (
-                  <p class="hp-original">
-                    {labels.originalPrice}{" "}
-                    <s>{price(row.actual)}</s>
-                  </p>
-                )}
-
-                <Cta
-                  label={labels.priceInquiry}
-                  query={row.query}
-                  event="price_enquiry_click"
-                  section="prices"
-                  plot={row.marla}
-                  sector="Sector P"
-                />
-              </article>
-            ))}
-          </div>
-
-          <p class="hp-note">
-            {phase2.priceTable.note}
-          </p>
-        </div>
-      </section>
+      <Prices
+        table={phase2.priceTable}
+        offers={offers}
+        labels={labels}
+      />
     )}
 
     {c.budgets && (
-      <section
-        class="hp-section hp-dark"
-        id="budgets"
-        data-home-section="budgets"
-      >
-        <div class="hp-wrap">
-          <div class="hp-heading">
-            <p class="hp-kicker">{budgets.eyebrow}</p>
-            <h2>{budgets.heading}</h2>
-            <p>{budgets.text}</p>
-          </div>
-
-          <div class="hp-budget-grid">
-            {budgetRows.map((row) => (
-              <article>
-                <Cta
-                  label={row.label}
-                  query={row.query}
-                  event="budget_click"
-                  budget={row.label}
-                  section="budgets"
-                />
-
-                <p>{row.text}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Budgets budgets={budgets} rows={budgetRows} />
     )}
 
     {c.sectors && (
-      <section
-        class="hp-section"
-        id="phase-2-sectors"
-        data-home-section="sectors"
-      >
-        <div class="hp-wrap">
-          <div class="hp-heading">
-            <p class="hp-kicker">
-              {labels.sectorEyebrow}
-            </p>
-
-            <h2>{phase2.sectorsHeading}</h2>
-          </div>
-
-          <div class="hp-card-grid">
-            {sectors.map((row, i) => (
-              <article
-                class:list={[
-                  "hp-sector",
-                  {
-                    "hp-sector-featured":
-                      row.href === offer.primaryHref,
-                  },
-                ]}
-              >
-                <Photo src={row.image} alt={row.alt} />
-
-                <span class="hp-index">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-
-                <h3>{row.title}</h3>
-
-                <p>{row.text}</p>
-
-                <p class="hp-status">
-                  {row.status}
-                </p>
-
-                <Cta
-                  label={labels.sectorAvailability}
-                  query={row.query}
-                  section="sectors"
-                  sector={row.title}
-                />
-
-                <Cta
-                  label={labels.sectorDetails}
-                  href={row.href}
-                  section="sectors"
-                  secondary
-                />
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Sectors
+        sectors={sectors}
+        heading={phase2.sectorsHeading}
+        labels={labels}
+        featuredHref={offer.primaryHref}
+      />
     )}
 
     {c.development && (
-      <section
-        class="hp-section hp-tint"
-        id="development"
-        data-home-section="development"
-      >
-        <div class="hp-wrap hp-split">
-          <div>
-            <p class="hp-kicker">
-              {d.eyebrow}
-            </p>
-
-            <h2>{d.heading}</h2>
-
-            {d.updateDate && (
-              <p class="hp-status">
-                Updated{" "}
-                <time datetime={d.updateDate}>
-                  {d.updateDate}
-                </time>
-              </p>
-            )}
-
-            <p>{d.text}</p>
-
-            <Cta
-              label={d.cta}
-              query={d.query}
-              section="development"
-            />
-
-            {d.videoUrl && (
-              <a
-                class="hp-text-link"
-                href={d.videoUrl}
-              >
-                View development video ↗
-              </a>
-            )}
-          </div>
-
-          <figure class="hp-development-photo">
-            <Photo
-              src={d.image}
-              alt={d.alt}
-            />
-
-            <figcaption>
-              {d.caption}
-            </figcaption>
-          </figure>
-
-          {bulkRows(
-            d.additionalImagesText,
-            ["image", "alt", "caption"],
-            "Development gallery",
-          ).map((row) => (
-            <figure>
-              <Photo
-                src={row.image}
-                alt={row.alt}
-              />
-
-              <figcaption>
-                {row.caption}
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-      </section>
+      <Development development={phase2.development} />
     )}
 
     {c.masterPlan && (
-      <section
-        class="hp-section"
-        id="master-plan"
-        data-home-section="masterPlan"
-      >
-        <div class="hp-wrap hp-split">
-          <figure class="hp-map">
-            <a
-              href={m.image}
-              aria-label="Open full size Phase 2 master plan"
-              data-event="master_plan_click"
-              data-source-section="master_plan"
-            >
-              <Photo
-                src={m.image}
-                alt={m.alt}
-              />
-            </a>
-
-            <figcaption>
-              {m.caption} · Tap to enlarge ↗
-            </figcaption>
-          </figure>
-
-          <div>
-            <p class="hp-kicker">
-              {m.eyebrow}
-            </p>
-
-            <h2>{m.heading}</h2>
-
-            <p>{m.text}</p>
-
-            <div class="hp-actions">
-              <Cta
-                label={m.viewLabel}
-                href={m.pdf}
-                event="master_plan_click"
-                section="master_plan"
-              />
-
-              <Cta
-                label={m.whatsappLabel}
-                query={m.whatsappQuery}
-                event="master_plan_click"
-                section="master_plan"
-                secondary
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      <MasterPlan masterPlan={phase2.masterPlan} />
     )}
 
     {c.buyerSupport && (
-      <section
-        class="hp-section hp-tint"
-        data-home-section="buyerSupport"
-      >
-        <div class="hp-wrap">
-          <div class="hp-heading">
-            <p class="hp-kicker">
-              {support.eyebrow}
-            </p>
-
-            <h2>{support.heading}</h2>
-
-            <p>{support.text}</p>
-          </div>
-
-          <div class="hp-support-grid">
-            {supportRows.map((row) => (
-              <article>
-                <span
-                  class="hp-symbol"
-                  aria-hidden="true"
-                >
-                  {{
-                    check: "✓",
-                    map: "⌖",
-                    phone: "☎",
-                    home: "⌂",
-                    globe: "◎",
-                  }[row.icon] || "✓"}
-                </span>
-
-                <h3>{row.title}</h3>
-
-                <p>{row.text}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+      <BuyerSupport support={support} rows={supportRows} />
     )}
 
     {c.buyingProcess && (
-      <section
-        class="hp-section"
-        data-home-section="buyingProcess"
-      >
-        <div class="hp-wrap">
-          <div class="hp-heading">
-            <p class="hp-kicker">
-              {process.eyebrow}
-            </p>
-
-            <h2>{process.heading}</h2>
-
-            <p>{process.text}</p>
-          </div>
-
-          <ol class="hp-process">
-            {processRows.map((row) => (
-              <li>
-                <h3>{row.title}</h3>
-                <p>{row.text}</p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
+      <BuyingProcess process={process} rows={processRows} />
     )}
 
     {c.visitOverseas && (
-      <section
-        class="hp-section hp-tint"
-        data-home-section="visitOverseas"
-      >
-        <div class="hp-wrap hp-assistance">
-          {Object.entries(assistance)
-            .filter(([, card]) => card.enabled)
-            .map(([key, card]) => (
-              <article>
-                <Photo
-                  src={card.image}
-                  alt={card.alt}
-                />
-
-                <p class="hp-kicker">
-                  {key === "siteVisit"
-                    ? labels.siteVisitEyebrow
-                    : labels.overseasEyebrow}
-                </p>
-
-                <h2>{card.heading}</h2>
-
-                <p>{card.text}</p>
-
-                <Cta
-                  label={card.ctaLabel}
-                  type={card.ctaType}
-                  href={card.href}
-                  query={card.whatsappQuery}
-                  event={
-                    key === "siteVisit"
-                      ? "site_visit_click"
-                      : undefined
-                  }
-                  section={key}
-                />
-              </article>
-            ))}
-        </div>
-      </section>
+      <VisitOverseas assistance={assistance} labels={labels} />
     )}
 
     {c.faqs && faqRows.length > 0 && (
-      <section
-        class="hp-section"
-        id="faqs"
-        data-home-section="faqs"
-      >
-        <div class="hp-wrap hp-faq-layout">
-          <div>
-            <p class="hp-kicker">
-              {labels.faqEyebrow}
-            </p>
-
-            <h2>{faqs.heading}</h2>
-          </div>
-
-          <div>
-            {faqRows.map((row, i) => (
-              <div class="hp-faq">
-                <h3>
-                  <button
-                    aria-expanded="true"
-                    aria-controls={`hp-answer-${i}`}
-                    id={`hp-question-${i}`}
-                    data-faq
-                  >
-                    {row.question}
-
-                    <span aria-hidden="true">
-                      −
-                    </span>
-                  </button>
-                </h3>
-
-                <div
-                  id={`hp-answer-${i}`}
-                  aria-labelledby={`hp-question-${i}`}
-                >
-                  <p>{row.answer}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Faqs faqs={faqs} rows={faqRows} eyebrow={labels.faqEyebrow} />
     )}
 
     {c.buyerGuides && (
-      <section
-        class="hp-section hp-tint"
-        data-home-section="buyerGuides"
-      >
-        <div class="hp-wrap">
-          <div class="hp-heading">
-            <p class="hp-kicker">
-              {guides.eyebrow}
-            </p>
-
-            <h2>{guides.heading}</h2>
-
-            <p>{guides.text}</p>
-          </div>
-
-          <div class="hp-card-grid">
-            {selectedGuides.map((article) => (
-              <article class="hp-guide">
-                <a href={`/articles/${article!.slug}/`}>
-                  <Photo
-                    src={article!.image}
-                    alt={article!.title}
-                  />
-
-                  <h3>{article!.title}</h3>
-                </a>
-
-                <p>{article!.description}</p>
-
-                <a
-                  class="hp-text-link"
-                  href={`/articles/${article!.slug}/`}
-                >
-                  {labels.guideLink} ↗
-                </a>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+      <BuyerGuides
+        guides={guides}
+        articles={selectedGuides}
+        linkLabel={labels.guideLink}
+      />
     )}
 
     {c.phase1 && (
-      <aside
-        class="hp-section hp-phase1"
-        id="phase-1"
-        data-home-section="phase1"
-      >
-        <div class="hp-wrap">
-          <p class="hp-kicker">
-            {phase1.eyebrow}
-          </p>
-
-          <h2>{phase1.heading}</h2>
-
-          <p>{phase1.text}</p>
-
-          <div class="hp-actions">
-            <Cta
-              label={phase1.primaryCta}
-              href={phase1.primaryHref}
-              secondary
-            />
-
-            <Cta
-              label={phase1.secondaryCta}
-              query={phase1.secondaryQuery}
-              section="phase1"
-              secondary
-            />
-          </div>
-
-          <div class="hp-inline-links">
-            {phase1.blocks.map((block) => (
-              <a href={block.href}>
-                {block.title} ↗
-              </a>
-            ))}
-
-            {phase1.articleSlugs
-              .map((slug) =>
-                articles.find((a) => a.slug === slug),
-              )
-              .filter(Boolean)
-              .map((article) => (
-                <a
-                  href={`/articles/${article!.slug}/`}
-                >
-                  {article!.title} ↗
-                </a>
-              ))}
-          </div>
-        </div>
-      </aside>
+      <Phase1 phase1={phase1} articles={phase1Articles} />
     )}
 
     {c.finalCta && (
-      <section
-        class="hp-section hp-dark hp-final"
-        id="contact"
-        data-home-section="finalCta"
-      >
-        <div class="hp-wrap hp-split">
-          <div>
-            <p class="hp-kicker">
-              {contact.eyebrow}
-            </p>
-
-            <h2>{contact.heading}</h2>
-
-            <p>{contact.text}</p>
-
-            <div class="hp-actions">
-              <Cta
-                label={contact.whatsappButton}
-                query={contact.mainQuery}
-                section="final_cta"
-              />
-
-              <Cta
-                label={contact.callButton}
-                type="call"
-                section="final_cta"
-                secondary
-              />
-            </div>
-
-            <Photo
-              src={contact.backgroundImage}
-              alt={contact.backgroundImageAlt}
-            />
-          </div>
-
-          <div class="hp-quick">
-            <p class="hp-kicker">
-              {contact.leadLabel}
-            </p>
-
-            <h3>{contact.leadHeading}</h3>
-
-            {contact.options.map((row) => (
-              <Cta
-                label={row.label}
-                query={row.query}
-                section="final_options"
-                event={
-                  /site visit/i.test(row.label)
-                    ? "site_visit_click"
-                    : undefined
-                }
-                secondary
-              />
-            ))}
-          </div>
-        </div>
-      </section>
+      <FinalCta contact={contact} />
     )}
   </main>
 
   <SiteFooter />
 
   {sticky && (
-    <nav
-      class="hp-contact-bar"
-      aria-label="Quick contact"
-    >
-      {site.stickyCallEnabled && (
-        <Cta
-          label={labels.stickyCall}
-          type="call"
-          section="sticky_bar"
-          secondary
-        />
-      )}
-
-      {site.stickyWhatsAppEnabled && (
-        <Cta
-          label={labels.stickyWhatsapp}
-          query={hero.primaryWhatsappQuery}
-          section="sticky_bar"
-        />
-      )}
-    </nav>
+    <StickyBar labels={labels} whatsappQuery={hero.primaryWhatsappQuery} />
   )}
-
-  <script>
-    const toggle =
-      document.querySelector<HTMLButtonElement>(".hp-menu");
-
-    const nav =
-      document.querySelector<HTMLElement>("#hp-nav");
-
-    function closeMenu() {
-      toggle?.setAttribute(
-        "aria-expanded",
-        "false",
-      );
-
-      nav?.classList.remove("hp-open");
-    }
-
-    toggle?.addEventListener("click", () => {
-      const open =
-        toggle.getAttribute("aria-expanded") !== "true";
-
-      toggle.setAttribute(
-        "aria-expanded",
-        String(open),
-      );
-
-      nav?.classList.toggle(
-        "hp-open",
-        open,
-      );
-    });
-
-    nav?.addEventListener("click", (event) => {
-      if (
-        (event.target as Element).closest("a")
-      ) {
-        closeMenu();
-      }
-    });
-
-    document.addEventListener(
-      "keydown",
-      (event) => {
-        if (
-          event.key === "Escape" &&
-          toggle?.getAttribute("aria-expanded") ===
-            "true"
-        ) {
-          closeMenu();
-          toggle.focus();
-        }
-      },
-    );
-
-    document.addEventListener(
-      "click",
-      (event) => {
-        if (
-          !(event.target as Element).closest(
-            ".hp-header",
-          )
-        ) {
-          closeMenu();
-        }
-      },
-    );
-
-    document
-      .querySelectorAll<HTMLButtonElement>(
-        "[data-faq]",
-      )
-      .forEach((button) => {
-        const panel =
-          document.getElementById(
-            button.getAttribute(
-              "aria-controls",
-            )!,
-          );
-
-        if (!panel) return;
-
-        panel.hidden = true;
-
-        button.setAttribute(
-          "aria-expanded",
-          "false",
-        );
-
-        button.querySelector(
-          "span",
-        )!.textContent = "+";
-
-        button.addEventListener(
-          "click",
-          () => {
-            const open =
-              button.getAttribute(
-                "aria-expanded",
-              ) !== "true";
-
-            button.setAttribute(
-              "aria-expanded",
-              String(open),
-            );
-
-            panel.hidden = !open;
-
-            button.querySelector(
-              "span",
-            )!.textContent = open
-              ? "−"
-              : "+";
-          },
-        );
-      });
-  </script>
 </BaseLayout>

@@ -1,0 +1,64 @@
+---
+import Cta from "../HomeCta.astro";
+import Photo from "../HomeImage.astro";
+
+const { sectors, heading, labels, featuredHref } = Astro.props;
+---
+
+<section
+  class="hp-section"
+  id="phase-2-sectors"
+  data-home-section="sectors"
+>
+  <div class="hp-wrap">
+    <div class="hp-heading">
+      <p class="hp-kicker">
+        {labels.sectorEyebrow}
+      </p>
+
+      <h2>{heading}</h2>
+    </div>
+
+    <div class="hp-card-grid">
+      {sectors.map((row: Record<string, string>, i: number) => (
+        <article
+          class:list={[
+            "hp-sector",
+            {
+              "hp-sector-featured":
+                row.href === featuredHref,
+            },
+          ]}
+        >
+          <Photo src={row.image} alt={row.alt} />
+
+          <span class="hp-index">
+            {String(i + 1).padStart(2, "0")}
+          </span>
+
+          <h3>{row.title}</h3>
+
+          <p>{row.text}</p>
+
+          <p class="hp-status">
+            {row.status}
+          </p>
+
+          <Cta
+            label={labels.sectorAvailability}
+            query={row.query}
+            section="sectors"
+            sector={row.title}
+          />
+
+          <Cta
+            label={labels.sectorDetails}
+            href={row.href}
+            section="sectors"
+            secondary
+          />
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

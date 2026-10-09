@@ -1,0 +1,43 @@
+---
+const { support, rows } = Astro.props;
+---
+
+<section
+  class="hp-section hp-tint"
+  data-home-section="buyerSupport"
+>
+  <div class="hp-wrap">
+    <div class="hp-heading">
+      <p class="hp-kicker">
+        {support.eyebrow}
+      </p>
+
+      <h2>{support.heading}</h2>
+
+      <p>{support.text}</p>
+    </div>
+
+    <div class="hp-support-grid">
+      {rows.map((row: Record<string, string>) => (
+        <article>
+          <span
+            class="hp-symbol"
+            aria-hidden="true"
+          >
+            {{
+              check: "✓",
+              map: "⌖",
+              phone: "☎",
+              home: "⌂",
+              globe: "◎",
+            }[row.icon] || "✓"}
+          </span>
+
+          <h3>{row.title}</h3>
+
+          <p>{row.text}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

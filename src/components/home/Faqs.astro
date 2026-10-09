@@ -1,0 +1,98 @@
+---
+const { faqs, rows, eyebrow } = Astro.props;
+---
+
+<section
+  class="hp-section"
+  id="faqs"
+  data-home-section="faqs"
+>
+  <div class="hp-wrap hp-faq-layout">
+    <div>
+      <p class="hp-kicker">
+        {eyebrow}
+      </p>
+
+      <h2>{faqs.heading}</h2>
+    </div>
+
+    <div>
+      {rows.map((row: Record<string, string>, i: number) => (
+        <div class="hp-faq">
+          <h3>
+            <button
+              aria-expanded="true"
+              aria-controls={`hp-answer-${i}`}
+              id={`hp-question-${i}`}
+              data-faq
+            >
+              {row.question}
+
+              <span aria-hidden="true">
+                −
+              </span>
+            </button>
+          </h3>
+
+          <div
+            id={`hp-answer-${i}`}
+            aria-labelledby={`hp-question-${i}`}
+          >
+            <p>{row.answer}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  document
+    .querySelectorAll<HTMLButtonElement>(
+      "[data-faq]",
+    )
+    .forEach((button) => {
+      const panel =
+        document.getElementById(
+          button.getAttribute(
+            "aria-controls",
+          )!,
+        );
+
+      if (!panel) return;
+
+      panel.hidden = true;
+
+      button.setAttribute(
+        "aria-expanded",
+        "false",
+      );
+
+      button.querySelector(
+        "span",
+      )!.textContent = "+";
+
+      button.addEventListener(
+        "click",
+        () => {
+          const open =
+            button.getAttribute(
+              "aria-expanded",
+            ) !== "true";
+
+          button.setAttribute(
+            "aria-expanded",
+            String(open),
+          );
+
+          panel.hidden = !open;
+
+          button.querySelector(
+            "span",
+          )!.textContent = open
+            ? "−"
+            : "+";
+        },
+      );
+    });
+</script>

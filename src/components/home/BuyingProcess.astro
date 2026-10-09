@@ -1,0 +1,29 @@
+---
+const { process, rows } = Astro.props;
+---
+
+<section
+  class="hp-section"
+  data-home-section="buyingProcess"
+>
+  <div class="hp-wrap">
+    <div class="hp-heading">
+      <p class="hp-kicker">
+        {process.eyebrow}
+      </p>
+
+      <h2>{process.heading}</h2>
+
+      <p>{process.text}</p>
+    </div>
+
+    <ol class="hp-process">
+      {rows.map((row: Record<string, string>) => (
+        <li>
+          <h3>{row.title}</h3>
+          <p>{row.text}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

@@ -1,0 +1,66 @@
+---
+import Cta from "../HomeCta.astro";
+import Photo from "../HomeImage.astro";
+
+const { contact } = Astro.props;
+---
+
+<section
+  class="hp-section hp-dark hp-final"
+  id="contact"
+  data-home-section="finalCta"
+>
+  <div class="hp-wrap hp-split">
+    <div>
+      <p class="hp-kicker">
+        {contact.eyebrow}
+      </p>
+
+      <h2>{contact.heading}</h2>
+
+      <p>{contact.text}</p>
+
+      <div class="hp-actions">
+        <Cta
+          label={contact.whatsappButton}
+          query={contact.mainQuery}
+          section="final_cta"
+        />
+
+        <Cta
+          label={contact.callButton}
+          type="call"
+          section="final_cta"
+          secondary
+        />
+      </div>
+
+      <Photo
+        src={contact.backgroundImage}
+        alt={contact.backgroundImageAlt}
+      />
+    </div>
+
+    <div class="hp-quick">
+      <p class="hp-kicker">
+        {contact.leadLabel}
+      </p>
+
+      <h3>{contact.leadHeading}</h3>
+
+      {contact.options.map((row: Record<string, string>) => (
+        <Cta
+          label={row.label}
+          query={row.query}
+          section="final_options"
+          event={
+            /site visit/i.test(row.label)
+              ? "site_visit_click"
+              : undefined
+          }
+          secondary
+        />
+      ))}
+    </div>
+  </div>
+</section>

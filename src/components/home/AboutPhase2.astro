@@ -1,0 +1,20 @@
+---
+import Cta from "../HomeCta.astro";
+
+const { phase2, benefits } = Astro.props;
+---
+
+<section class="hp-section hp-about" id="about-phase-2" data-home-section="aboutPhase2">
+  <div class="hp-wrap">
+    <div class="hp-heading">
+      <p class="hp-kicker">{phase2.eyebrow}</p>
+      <h2>{phase2.heading}</h2>
+      <p>{phase2.text}</p>
+    </div>
+    <div class="hp-trust-grid">{benefits.map((row: Record<string, string>) => <article class="hp-trust-card"><div class="icon" aria-hidden="true">{row.icon}</div><h3>{row.title}</h3><p>{row.text}</p></article>)}</div>
+    <div class="hp-actions hp-about-actions">
+      <Cta label={phase2.primaryCta} href={phase2.primaryHref} section="about_phase2" secondary />
+      <Cta label={phase2.secondaryCta} query={phase2.secondaryQuery} section="about_phase2" />
+    </div>
+  </div>
+</section>
