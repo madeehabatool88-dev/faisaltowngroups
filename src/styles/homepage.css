@@ -201,7 +201,7 @@ html { scroll-behavior: smooth; }
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: clamp(400px, 56svh, 620px);
+  min-height: clamp(360px, 46svh, 520px);
   background: var(--hp-maroon-deep);
   color: #fff;
   overflow: hidden;
@@ -223,8 +223,8 @@ html { scroll-behavior: smooth; }
   position: relative;
   z-index: 1;
   text-align: center;
-  padding-top: clamp(44px, 7vh, 76px);
-  padding-bottom: clamp(30px, 5vh, 52px);
+  padding-top: clamp(36px, 6vh, 64px);
+  padding-bottom: clamp(26px, 4.5vh, 44px);
 }
 .hp-hero .hp-kicker { justify-content: center; }
 .hp-hero .hp-kicker::after {
@@ -235,7 +235,7 @@ html { scroll-behavior: smooth; }
   flex-shrink: 0;
 }
 .hp-hero h1 {
-  font-size: clamp(30px, 4.6vw, 54px);
+  font-size: clamp(26px, 4vw, 46px);
   letter-spacing: -0.01em;
   max-width: 16ch;
   margin: 0 auto 22px;
