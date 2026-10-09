@@ -201,7 +201,7 @@ html { scroll-behavior: smooth; }
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 92svh;
+  min-height: clamp(520px, 78svh, 860px);
   background: var(--hp-maroon-deep);
   color: #fff;
   overflow: hidden;
@@ -354,7 +354,14 @@ html { scroll-behavior: smooth; }
 .hp-split h2 { font-size: clamp(28px, 3.4vw, 40px); margin-bottom: 18px; }
 .hp-split p { color: var(--hp-muted); margin-bottom: 16px; }
 .hp-dark .hp-split p { color: rgba(255, 255, 255, 0.78); }
-.hp-split figure img { border-radius: 14px; box-shadow: var(--hp-shadow); }
+.hp-split figure img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow: var(--hp-shadow);
+}
 .hp-split figcaption {
   margin-top: 12px;
   font-size: 12px;
@@ -388,7 +395,9 @@ html { scroll-behavior: smooth; }
 
 /* ============ FEATURED OFFER ============ */
 .hp-featured-layout { align-items: start; }
-.hp-offer-photo img { width: 100%; border-radius: 14px; box-shadow: var(--hp-shadow); }
+/* Tall promo posters keep a portrait crop so headlines/taglines survive */
+.hp-offer-photo img,
+.hp-development-photo img { aspect-ratio: 4 / 5; object-position: center; }
 .hp-offer-content h2 { font-size: clamp(30px, 3.6vw, 44px); margin-bottom: 12px; }
 .hp-feature-price {
   font-family: var(--hp-serif);
@@ -522,13 +531,17 @@ html { scroll-behavior: smooth; }
 .hp-sector .hp-button.hp-secondary { margin-top: 10px; }
 
 /* ============ DEVELOPMENT ============ */
-.hp-development-photo img { width: 100%; }
 .hp-development-photo { grid-row: span 2; }
 
 /* ============ MASTER PLAN ============ */
 .hp-map a { display: block; }
 .hp-map img {
+  display: block;
   width: 100%;
+  max-width: 100%;
+  max-height: min(680px, 78vh);
+  margin: 0 auto;
+  object-fit: contain;
   border-radius: 14px;
   border: 1px solid var(--hp-line);
   box-shadow: var(--hp-shadow);
@@ -730,16 +743,4 @@ html { scroll-behavior: smooth; }
   .hp-heading { margin-bottom: 34px; }
   .hp-trust-card { padding: 26px 22px; }
   .hp-quick { padding: 26px 22px; }
-  .hp-header-actions .hp-button.hp-secondary { display: none; }
-}
-
-@media (max-width: 640px) {
-  .hp-header { padding: 8px 16px; }
-  .hp-brand img { height: 38px; }
-  .hp-header-actions .hp-button { display: none; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .hp-page *, .hp-page *::before, .hp-page *::after { transition: none !important; }
 }
