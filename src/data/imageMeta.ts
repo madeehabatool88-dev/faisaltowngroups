@@ -20,6 +20,6 @@ export const imageMeta: Record<string, { width: number; height: number }> = {
   "/assets/sector-p/fast-development.jpeg": { width: 1080, height: 1350 },
   "/assets/sector-p/rendered/sector-p-masterplan-preview.webp": { width: 1600, height: 1816 },
   "/assets/sector-p/sector-p-prices.jpeg": { width: 1280, height: 904 },
-  "/assets/faisal-town-ii/visit-ft2-site-development.jpeg": { width: 1279, height: 1600 },
-  "/assets/faisal-town-ii/buying-from-overseas-ft2.jpeg": { width: 1279, height: 1600 },
+  "/assets/faisal-town-ii/visit-ft2-site-development.webp": { width: 1279, height: 1600 },
+  "/assets/faisal-town-ii/buying-from-overseas-ft2.webp": { width: 1279, height: 1600 },
 };
