@@ -1,68 +1,100 @@
 ---
 import Cta from "../HomeCta.astro";
-import Photo from "../HomeImage.astro";
-import { bulkSlugs } from "../../data/homepageBulk";
+import { bulkRows, bulkSlugs } from "../../data/homepageBulk";
+import { imageMeta } from "../../data/imageMeta";
 
 const { hero, featuredStarting, featuredSector, secondaryHref } = Astro.props;
+
+const background = hero.heroBackgroundImage || hero.heroImage;
+const backgroundMeta = imageMeta[background] || { width: 1440, height: 810 };
+const stats = bulkRows(hero.statsText || "", ["value", "label"], "Hero stats");
+const points = bulkSlugs(hero.trustPointsText || "");
 ---
 
-<section class="hp-hero" style={hero.heroBackgroundImage ? { "--hp-hero-image": `url("${hero.heroBackgroundImage}")` } : undefined} id="phase-2" data-home-section="hero">
-  <div class="hp-wrap hp-hero-grid">
-    <div class="hp-hero-copy">
-      <p class="hp-kicker">{hero.heroEyebrow}</p>
+<section class="hp-hero" id="phase-2" data-home-section="hero">
+  {background && (
+    <img
+      class="hp-hero-bg"
+      src={background}
+      alt=""
+      width={backgroundMeta.width}
+      height={backgroundMeta.height}
+      loading="eager"
+      fetchpriority="high"
+      decoding="sync"
+      aria-hidden="true"
+    />
+  )}
 
-      <h1>{hero.h1}</h1>
+  <div class="hp-hero-inner hp-wrap">
+    <p class="hp-kicker">{hero.heroEyebrow}</p>
 
-      <p class="hp-intro">{hero.intro}</p>
+    <h1>{hero.h1}</h1>
 
-      {featuredStarting && (
-        <div class="hp-start">
-          <span>
-            {hero.startingPriceLabel} · {featuredSector}
-          </span>
+    <p class="hp-intro">{hero.intro}</p>
 
-          <strong>{featuredStarting}</strong>
+    {featuredStarting && (
+      <p class="hp-start">
+        <span>
+          {hero.startingPriceLabel} · {featuredSector}
+        </span>
 
-          <small>{hero.priceDisclaimer}</small>
-        </div>
-      )}
+        <strong>{featuredStarting}</strong>
+      </p>
+    )}
 
-      <div class="hp-actions">
-        <Cta
-          label={hero.primaryCta}
-          type={hero.primaryCtaType}
-          href={hero.primaryHref}
-          query={hero.primaryWhatsappQuery}
-          section="hero"
-        />
+    <div class="hp-actions">
+      <Cta
+        label={hero.primaryCta}
+        type={hero.primaryCtaType}
+        href={hero.primaryHref}
+        query={hero.primaryWhatsappQuery}
+        section="hero"
+      />
 
-        <Cta
-          label={hero.secondaryCta}
-          type={hero.secondaryCtaType}
-          href={secondaryHref}
-          query={hero.secondaryWhatsappQuery}
-          section="hero"
-          secondary
-        />
-      </div>
+      <Cta
+        label={hero.secondaryCta}
+        type={hero.secondaryCtaType}
+        href={secondaryHref}
+        query={hero.secondaryWhatsappQuery}
+        section="hero"
+        secondary
+      />
+    </div>
 
+    {points.length > 0 && (
       <ul class="hp-points">
-        {bulkSlugs(hero.trustPointsText).map((point) => (
+        {points.map((point) => (
           <li>
             <span aria-hidden="true">✓</span>
             {point}
           </li>
         ))}
       </ul>
-    </div>
+    )}
 
-    <figure class="hp-hero-photo">
-      <Photo src={hero.heroImage} alt={hero.heroImageAlt} eager />
-
-      <figcaption>
-        <span>{hero.topStripLabel}</span>
-        {hero.topStripText}
-      </figcaption>
-    </figure>
+    {featuredStarting && hero.priceDisclaimer && (
+      <p class="hp-hero-disclaimer">{hero.priceDisclaimer}</p>
+    )}
   </div>
+
+  {stats.length > 0 && (
+    <div class="hp-hero-stats">
+      <div class="hp-wrap hp-hero-stats-grid">
+        {stats.map((stat) => (
+          <div class="hp-stat">
+            <strong>{stat.value}</strong>
+            <span>{stat.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  )}
+
+  {(hero.topStripLabel || hero.topStripText) && (
+    <p class="hp-hero-strip">
+      <span>{hero.topStripLabel}</span>
+      {hero.topStripText}
+    </p>
+  )}
 </section>
