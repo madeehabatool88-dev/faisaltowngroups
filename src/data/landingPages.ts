@@ -42,6 +42,12 @@ export type LandingPage = {
   updated: string;
   reviewed: string;
   highlights: Array<{ label: string; value: string }>;
+  rateSheetImage?: string;
+  rateSheetAlt?: string;
+  rateDetailsText?: string;
+  rateConditions?: string;
+  rateInquiryLabel?: string;
+  rateInquiryQuery?: string;
   priceTableHeading?: string;
   priceTableNote?: string;
   priceTableRows?: Array<{

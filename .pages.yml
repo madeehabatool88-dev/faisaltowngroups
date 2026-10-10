@@ -1296,6 +1296,31 @@ content:
         type: text
         required: false
         description: "One line per item: Label | Value. Keep this to the most decision-useful facts."
+      - name: rateSheetImage
+        label: Rate Sheet Image
+        type: image
+        required: false
+      - name: rateSheetAlt
+        label: Rate Sheet Alt Text
+        type: string
+        required: false
+      - name: rateDetailsText
+        label: Full Rate List - Bulk Editor
+        type: text
+        required: false
+        description: "One row per line: Plot Size | Dimensions | Cost of Plot | Registration Fee | Actual Price | Discounted Price. Clear to use the standard price table."
+      - name: rateConditions
+        label: Rate Sheet Conditions
+        type: text
+        required: false
+      - name: rateInquiryLabel
+        label: Rate Inquiry Button
+        type: string
+        required: false
+      - name: rateInquiryQuery
+        label: Rate Inquiry WhatsApp Message
+        type: text
+        required: false
       - name: priceTableHeading
         label: Price Table Heading
         type: string

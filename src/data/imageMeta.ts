@@ -1,4 +1,7 @@
 export const imageMeta: Record<string, { width: number; height: number }> = {
+  "/assets/3dfa7fac-d0cc-4fd5-a33d-ba9ee63f5d32.jpg": { width: 899, height: 1599 },
+  "/assets/faisal-town-ii/sector-t-rate-sheet.webp": { width: 1280, height: 904 },
+  "/assets/faisal-town-ii/sector-p-rate-sheet.webp": { width: 1280, height: 904 },
   "/assets/faisal-town-ii/site-visit-ft2.webp": { width: 1279, height: 1600 },
   "/assets/faisal-town-ii/overseas-buyer-ft2.webp": { width: 1279, height: 1600 },
   "/assets/plans/previews/sector-p-ft-ii.webp": { width: 1600, height: 1816 },

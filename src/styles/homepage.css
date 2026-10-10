@@ -839,3 +839,10 @@ html { scroll-behavior: smooth; }
   .hp-quick { padding: 24px 20px; }
   .hp-menu { min-width: 44px; min-height: 44px; }
 }
+
+/* The original Sector T poster is portrait; preserve every part of it. */
+.hp-page .hp-split .hp-offer-photo img { width: 100%; height: auto; aspect-ratio: auto; object-fit: contain; }
+.hp-hero-inner { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); }
+.hp-hero-visual { max-width: 470px; }
+@media(max-width: 980px) { .hp-hero-inner { grid-template-columns: 1fr; } .hp-hero-visual { max-width: 300px; } }
+@media(max-width: 768px) { .hp-hero-visual { max-width: 240px; } }

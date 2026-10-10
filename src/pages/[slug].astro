@@ -1,4 +1,5 @@
 ---
+import { bulkRows } from "../data/homepageBulk";
 import ContentLayout from "../layouts/ContentLayout.astro";
 import { landingPages } from "../data/landingPages";
 import { whatsappLink, site } from "../data/site";
@@ -9,6 +10,7 @@ export function getStaticPaths() {
 }
 
 const { page } = Astro.props;
+const rateRows = bulkRows(page.rateDetailsText || "", ["size", "dimensions", "cost", "registration", "actual", "discount"], "Sector rate list");
 const slugify = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 const pageUrl = new URL(`/${page.slug}/`, site.domain).toString();
 const img = imageMeta[page.image];
@@ -72,6 +74,7 @@ const additionalSchema = [
     <nav class="clean-toc" aria-label="On this page">
       <strong>On this page</strong>
       <div>
+        {(rateRows.length > 0 || page.priceTableRows?.length > 0) && <a href="#rate-list">Rate list</a>}
         {page.sections.map((section) => <a href={`#${slugify(section.heading)}`}>{section.heading}</a>)}
         {page.downloads && page.downloads.length > 0 && <a href="#plans-downloads">Plans & downloads</a>}
         {page.bullets.length > 0 && <a href="#buyer-checklist">{page.checklistLabel}</a>}
@@ -94,12 +97,29 @@ const additionalSchema = [
     </figure>}
 
     {page.priceTableRows && page.priceTableRows.length > 0 && (
-      <section class="clean-price-section" aria-labelledby="price-table-heading">
+      <section class="clean-price-section" id="rate-list" aria-labelledby="price-table-heading">
         <div class="clean-price-heading">
           <p class="section-label">Current Prices</p>
           <h2 id="price-table-heading">{page.priceTableHeading || `${page.h1} Prices`}</h2>
         </div>
 
+        {page.rateSheetImage && <figure class="sector-rate-sheet">
+          <a href={page.rateSheetImage} aria-label="Open full rate sheet"><img src={page.rateSheetImage} alt={page.rateSheetAlt || "Sector reference rate sheet"} width="1280" height="904" loading="lazy" decoding="async" /></a>
+          <figcaption>Supplied reference rate sheet · Tap to open at full size. Confirm current rates and available plot numbers.</figcaption>
+        </figure>}
+        {rateRows.length > 0 ? <>
+          <p class="clean-price-note">All amounts in PKR. Discounted listed prices are subject to current plot availability.</p>
+          <div class="clean-table-wrap" tabindex="0" role="region" aria-label="Full sector rate list">
+            <table class="clean-price-table sector-full-rates">
+              <caption>Plot cost, registration fee, actual price and discounted listed price</caption>
+              <thead><tr>{["Plot Size", "Dimensions", "Cost of Plot", "Registration Fee", "Actual Price", "Discounted Price"].map(label => <th scope="col">{label}</th>)}</tr></thead>
+              <tbody>{rateRows.map(row => <tr>
+                <th scope="row">{row.size}</th><td>{row.dimensions}</td><td>{row.cost}</td><td>{row.registration}</td><td>{row.actual}</td><td><strong>{row.discount}</strong></td>
+              </tr>)}</tbody>
+            </table>
+          </div>
+          <p class="rate-scroll-hint">On a small screen, swipe the table to see the full breakdown.</p>
+        </> : (
         <div class="clean-table-wrap">
           <table class="clean-price-table">
             <thead>
@@ -124,6 +144,10 @@ const additionalSchema = [
             </tbody>
           </table>
         </div>
+
+        )}
+        {page.rateConditions && <p class="clean-price-note">{page.rateConditions}</p>}
+        {page.rateInquiryLabel && page.rateInquiryQuery && <a class="btn primary rate-inquiry" data-cta-location="rate-list" href={whatsappLink(page.rateInquiryQuery)}>{page.rateInquiryLabel}</a>}
 
         {page.priceTableNote && <p class="clean-price-note">{page.priceTableNote}</p>}
       </section>
@@ -237,4 +261,24 @@ const additionalSchema = [
 <style>
 .page-dates { display: flex; flex-direction: column; gap: 6px; flex-shrink: 0; }
 .page-dates time { white-space: normal; }
+</style>
+
+<style>
+.sector-rate-sheet { margin: 20px 0; }
+.sector-rate-sheet img { display: block; width: 100%; height: auto; aspect-ratio: auto; object-fit: contain; }
+.sector-rate-sheet figcaption, .rate-scroll-hint { font-size: 13px; line-height: 1.6; margin: 12px 0; }
+.rate-inquiry { margin-top: 20px; }
+#rate-list { scroll-margin-top: 100px; }
+.sector-full-rates caption { text-align: left; padding: 12px; font-size: 14px; }
+.sector-full-rates td:last-child { color: #641323; }
+@media(max-width: 768px) {
+  .clean-table-wrap:has(.sector-full-rates) { overflow-x: auto; border: 1px solid #ded6cc; }
+  .clean-price-table.sector-full-rates { display: table; min-width: 850px; }
+  .sector-full-rates thead { display: table-header-group; position: static; width: auto; height: auto; clip: auto; }
+  .sector-full-rates tbody { display: table-row-group; }
+  .sector-full-rates tr { display: table-row; }
+  .sector-full-rates td, .sector-full-rates th { display: table-cell; padding: 14px; font-size: 14px; }
+  .sector-full-rates td::before { display: none; }
+  .rate-inquiry { width: 100%; text-align: center; }
+}
 </style>

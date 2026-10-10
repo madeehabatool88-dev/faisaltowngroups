@@ -12,7 +12,7 @@
   "image": "/assets/plans/previews/sector-t-ft-ii.webp",
   "primaryCta": "Check Sector T Installment Options",
   "secondaryCta": "Ask for a Marked Sector T Plan",
-  "updated": "2026-09-24",
+  "updated": "2026-10-10",
   "reviewed": "2026-09-24",
   "priceTableHeading": "Current Sector T Prices",
   "priceTableNote": "Sector T is currently an installment option. Development charges are included on the current price sheet. Confirm the latest installment schedule, exact plot and any special-location charges before payment.",
@@ -48,5 +48,11 @@
   "planCalloutLabel": "",
   "planCalloutHeading": "",
   "planCalloutButton": "",
-  "planCalloutHref": ""
+  "planCalloutHref": "",
+  "rateDetailsText": "5.56 Marla | 25 × 50 | PKR 3,475,000 | PKR 20,000 | PKR 3,495,000 | PKR 2,790,000\n8 Marla | 30 × 60 | PKR 4,645,000 | PKR 20,000 | PKR 4,665,000 | PKR 3,730,000\n10.89 Marla | 35 × 70 | PKR 6,045,000 | PKR 20,000 | PKR 6,065,000 | PKR 4,850,000\n14.22 Marla | 40 × 80 | PKR 7,565,000 | PKR 20,000 | PKR 7,585,000 | PKR 6,060,000\n1 Kanal | 50 × 90 | PKR 10,135,000 | PKR 20,000 | PKR 10,155,000 | PKR 8,120,000",
+  "rateSheetImage": "/assets/faisal-town-ii/sector-t-rate-sheet.webp",
+  "rateSheetAlt": "Sector T reference rate list",
+  "rateInquiryLabel": "Check Sector T Price & Payment Plan",
+  "rateInquiryQuery": "Please send currently available plots, exact map locations and the full payable amount for Sector T, including the latest installment schedule.",
+  "rateConditions": "The supplied rate sheet states that development charges are included in the cost of plot. Additional location charges listed on the sheet: 15% for a main-road corner plot; 10% for a main-road plot or proper corner; 5% for a short corner or plots with green area, lake, or front and back open positions. Confirm applicability and the final payable amount for the exact plot. The sheet lists pay order, demand draft or cash in favour of Faisal Town (Pvt) Ltd; cheques are not accepted. Verify current payment instructions directly before paying."
 }
