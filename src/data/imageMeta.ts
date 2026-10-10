@@ -1,4 +1,6 @@
 export const imageMeta: Record<string, { width: number; height: number }> = {
+  "/assets/faisal-town-ii/site-visit-ft2.webp": { width: 1279, height: 1600 },
+  "/assets/faisal-town-ii/overseas-buyer-ft2.webp": { width: 1279, height: 1600 },
   "/assets/plans/previews/sector-p-ft-ii.webp": { width: 1600, height: 1816 },
   "/assets/plans/previews/sector-o-ft-ii.webp": { width: 1600, height: 1102 },
   "/assets/plans/previews/sector-q-ft-ii.webp": { width: 1600, height: 1400 },
