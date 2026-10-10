@@ -1,12 +1,12 @@
 {
   "eyebrow": "Faisal Town Phase 2 Enquiry",
-  "heading": "Tell Us Your Budget - We Will Help You Shortlist Current Phase 2 Options",
-  "text": "Send your preferred plot size, budget or sector. We will continue on WhatsApp with current availability, price information, maps and the next practical step.",
-  "mainQuery": "I am interested in Faisal Town Phase 2. Please help me shortlist current plots according to my budget.",
+  "heading": "What budget are you working with?",
+  "text": "Send your budget, preferred plot size and whether you want installments or cash. Ask for available plots, map locations and the full payment breakdown in one WhatsApp conversation.",
+  "mainQuery": "Assalamualaikum, please help me shortlist Faisal Town Phase 2 plots. My budget is ___, plot size is ___, and payment preference is installments / cash. Please send availability, map locations and the full payment breakdown.",
   "leadLabel": "Start With Your Requirement",
-  "leadHeading": "What Would You Like to Check?",
-  "optionsText": "Check Current Prices | Please send me current Faisal Town Phase 2 prices and available plot sizes\nSector P Availability | Please send me current Sector P / The Caladan availability and prices\nFind by My Budget | I want to shortlist a Faisal Town Phase 2 plot according to my budget\nArrange Site Visit | I would like to arrange a Faisal Town Phase 2 site visit",
-  "whatsappButton": "Talk on WhatsApp",
+  "leadHeading": "Start with what matters to you",
+  "optionsText": "Sector T Payment Plan | Please send current Sector T 5.56 Marla availability, map locations, upfront payment, monthly installments and total charges\nCompare Cash Plots | Please help me compare currently available cash-only plots in Model Blocks O, P, Q and R\nFind by My Budget | My budget is ___. Please shortlist suitable Faisal Town Phase 2 plots with full payment breakdowns\nArrange Site Visit | I would like to arrange a Faisal Town Phase 2 site visit. My preferred sector is ___ and plot size is ___.",
+  "whatsappButton": "Find Plots Within My Budget",
   "callButton": "Call Now",
   "backgroundImage": "",
   "backgroundImageAlt": ""
