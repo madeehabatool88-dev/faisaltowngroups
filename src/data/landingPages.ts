@@ -45,6 +45,7 @@ export type LandingPage = {
   rateSheetImage?: string;
   rateSheetAlt?: string;
   rateDetailsText?: string;
+  installmentRowsText?: string;
   rateConditions?: string;
   rateInquiryLabel?: string;
   rateInquiryQuery?: string;

@@ -10,7 +10,8 @@ export function getStaticPaths() {
 }
 
 const { page } = Astro.props;
-const rateRows = bulkRows(page.rateDetailsText || "", ["size", "dimensions", "cost", "registration", "actual", "discount"], "Sector rate list");
+const isInstallmentPlan = Boolean(page.installmentRowsText?.trim());
+const rateRows = bulkRows((isInstallmentPlan ? page.installmentRowsText : page.rateDetailsText) || "", ["size", "dimensions", "cost", "registration", "actual", "discount"], "Sector rate list");
 const slugify = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 const pageUrl = new URL(`/${page.slug}/`, site.domain).toString();
 const img = imageMeta[page.image];
@@ -65,7 +66,7 @@ const additionalSchema = [
     <section class="clean-summary" aria-labelledby="quick-answer-heading">
       <div>
         <p class="section-label">{page.quickAnswerLabel ?? "Quick Answer"}</p>
-        <h2 id="quick-answer-heading">{page.quickAnswerHeading ?? "What matters on this page"}</h2>
+        <h2 id="quick-answer-heading">{page.quickAnswerHeading ?? "Property Options at a Glance"}</h2>
         <p>{page.quickAnswer ?? page.intro}</p>
       </div>
       <a class="btn primary" data-cta-location="quick-answer" href={whatsappLink(`${page.primaryCta}: ${page.h1}`)}>{page.primaryCta}</a>
@@ -104,15 +105,15 @@ const additionalSchema = [
         </div>
 
         {page.rateSheetImage && <figure class="sector-rate-sheet">
-          <a href={page.rateSheetImage} aria-label="Open full rate sheet"><img src={page.rateSheetImage} alt={page.rateSheetAlt || "Sector reference rate sheet"} width="1280" height="904" loading="lazy" decoding="async" /></a>
+          <a href={page.rateSheetImage} aria-label="Open full rate sheet"><img src={page.rateSheetImage} alt={page.rateSheetAlt || "Sector reference rate sheet"} width={imageMeta[page.rateSheetImage]?.width || 1280} height={imageMeta[page.rateSheetImage]?.height || 904} loading="lazy" decoding="async" /></a>
           <figcaption>Supplied reference rate sheet · Tap to open at full size. Confirm current rates and available plot numbers.</figcaption>
         </figure>}
         {rateRows.length > 0 ? <>
-          <p class="clean-price-note">All amounts in PKR. Discounted listed prices are subject to current plot availability.</p>
+          <p class="clean-price-note">All amounts in PKR. Confirm current plot availability and any additional location charges.</p>
           <div class="clean-table-wrap" tabindex="0" role="region" aria-label="Full sector rate list">
             <table class="clean-price-table sector-full-rates">
-              <caption>Plot cost, registration fee, actual price and discounted listed price</caption>
-              <thead><tr>{["Plot Size", "Dimensions", "Cost of Plot", "Registration Fee", "Actual Price", "Discounted Price"].map(label => <th scope="col">{label}</th>)}</tr></thead>
+              <caption>{isInstallmentPlan ? "Down payment + 36 monthly payments = installment total. Lump-sum prices are separate." : "Plot cost, registration fee, actual price and discounted listed price"}</caption>
+              <thead><tr>{(isInstallmentPlan ? ["Plot Size", "Dimensions", "Installment Total", "Down Payment", "Monthly Payment × 36", "Lump-Sum Price"] : ["Plot Size", "Dimensions", "Cost of Plot", "Registration Fee", "Actual Price", "Discounted Price"]).map(label => <th scope="col">{label}</th>)}</tr></thead>
               <tbody>{rateRows.map(row => <tr>
                 <th scope="row">{row.size}</th><td>{row.dimensions}</td><td>{row.cost}</td><td>{row.registration}</td><td>{row.actual}</td><td><strong>{row.discount}</strong></td>
               </tr>)}</tbody>
@@ -223,7 +224,7 @@ const additionalSchema = [
     <section class="clean-contact-card" aria-labelledby="clean-contact-heading">
       <div>
         <p class="section-label">{page.ctaEyebrow ?? "Current Availability"}</p>
-        <h2 id="clean-contact-heading">{page.ctaHeading ?? "Ask about this exact page on WhatsApp"}</h2>
+        <h2 id="clean-contact-heading">{page.ctaHeading ?? "Check Available Properties on WhatsApp"}</h2>
         <p>{page.ctaText ?? "Ask for the latest current options and confirm the exact property details before proceeding."}</p>
       </div>
       <div class="clean-contact-actions">

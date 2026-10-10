@@ -1304,6 +1304,11 @@ content:
         label: Rate Sheet Alt Text
         type: string
         required: false
+      - name: installmentRowsText
+        label: Installment Plan - Bulk Editor
+        type: text
+        required: false
+        description: "One row per line: Plot Size | Dimensions | Installment Total | Down Payment | Monthly Payment (36 Months) | Lump-Sum Price."
       - name: rateDetailsText
         label: Full Rate List - Bulk Editor
         type: text
