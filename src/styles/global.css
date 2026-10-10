@@ -101,7 +101,9 @@ h3 {
 }
 
 .brand img {
-  width: 185px;
+  height: 46px;
+  width: auto;
+  object-fit: contain;
 }
 
 .site-nav {
@@ -1827,6 +1829,7 @@ h3 {
 
 .site-footer img {
   width: 210px;
+  height: auto;
   filter: brightness(0) invert(1);
 }
 
@@ -1981,7 +1984,8 @@ h3 {
   }
 
   .brand img {
-    width: 148px;
+    height: 38px;
+    width: auto;
   }
 
   .hero {
