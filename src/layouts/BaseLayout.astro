@@ -13,11 +13,9 @@ const {
   noindex = false,
 } = Astro.props;
 
-// Set PUBLIC_GTM_ID=GTM-XXXXXXX at build time in the hosting/build environment.
-// No tracking script loads until a valid, owned container ID is configured.
-const gtmId = /^GTM-[A-Z0-9]+$/.test(import.meta.env.PUBLIC_GTM_ID || "")
-  ? import.meta.env.PUBLIC_GTM_ID
-  : "";
+// Site-owned public GTM ID. PUBLIC_GTM_ID may override it at build time.
+const configuredGtmId = import.meta.env.PUBLIC_GTM_ID || "GTM-MRJB3WSF";
+const gtmId = /^GTM-[A-Z0-9]+$/.test(configuredGtmId) ? configuredGtmId : "";
 
 const canonical = new URL(Astro.url.pathname, site.domain).toString();
 const socialImage = new URL(image, site.domain).toString();
