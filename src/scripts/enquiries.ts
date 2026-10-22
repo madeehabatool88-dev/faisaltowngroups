@@ -56,7 +56,6 @@ document.addEventListener("click", (event) => {
   };
   for (const name of events) {
     try { analytics.dataLayer?.push({ event: name, ...parameters }); } catch {}
-    try { if (typeof analytics.gtag === "function") analytics.gtag("event", name, parameters); } catch {}
     window.dispatchEvent(new CustomEvent(`faisaltown:${name}`, { detail: parameters }));
   }
 });
