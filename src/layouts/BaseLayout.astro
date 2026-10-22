@@ -13,6 +13,10 @@ const {
   noindex = false,
 } = Astro.props;
 
+// Site-owned public GTM ID. PUBLIC_GTM_ID may override it at build time.
+const configuredGtmId = import.meta.env.PUBLIC_GTM_ID || "GTM-MRJB3WSF";
+const gtmId = /^GTM-[A-Z0-9]+$/.test(configuredGtmId) ? configuredGtmId : "";
+
 const canonical = new URL(Astro.url.pathname, site.domain).toString();
 const socialImage = new URL(image, site.domain).toString();
 const baseGraph = [
@@ -65,6 +69,9 @@ const baseGraph = [
     <meta name="twitter:image" content={socialImage} />
     <meta name="twitter:card" content="summary_large_image" />
     <title>{title}</title>
+    {gtmId && (
+      <script is:inline set:html={`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer',${JSON.stringify(gtmId)});`}/>
+    )}
     <script
       type="application/ld+json"
       set:html={JSON.stringify({
@@ -74,6 +81,9 @@ const baseGraph = [
     ></script>
   </head>
   <body class={bodyClass}>
+    {gtmId && (
+      <noscript><iframe src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`} height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
+    )}
     <slot />
     <script>
       import "../scripts/enquiries";

@@ -38,6 +38,8 @@ jobs:
         run: npm ci
 
       - name: Build every page
+        env:
+          PUBLIC_GTM_ID: ${{ vars.PUBLIC_GTM_ID }}
         run: npm run check:cms
 
       - name: Check SSH deployment settings

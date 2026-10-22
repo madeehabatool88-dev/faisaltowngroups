@@ -1,15 +1,15 @@
 {
-  "seoTitle": "Faisal Town Phase 2 Plots Islamabad - Prices & Availability",
-  "metaDescription": "Explore Faisal Town Phase 2 plots: installment options in S/T, cash-only Model Blocks O/P/Q/R, master plan and current availability.",
+  "seoTitle": "Faisal Town Phase 2 Plots — Prices, Plans & Availability",
+  "metaDescription": "Explore Faisal Town Phase 2 plots in Islamabad. Compare plot prices, cash and installment options, master plans and request availability on WhatsApp.",
   "topStripLabel": "Faisal Town Islamabad",
   "topStripText": "Phase 2 plot prices, sectors, master plan, development updates and current WhatsApp guidance.",
   "heroImage": "/assets/faisal-town-ii/hero-masterplan-preview.webp",
   "heroImageAlt": "Faisal Town Phase 2 master plan aerial rendering",
   "heroEyebrow": "Faisal Town Phase 2 Islamabad",
-  "h1": "Find Your Plot in Faisal Town Phase 2",
-  "intro": "Looking for installments or a cash purchase? Share your budget on WhatsApp to request available plots, payment plans and map locations.",
-  "primaryCta": "Get Plots & Payment Plan",
-  "secondaryCta": "See Sector T Offer",
+  "h1": "Faisal Town Phase 2 Plots — Prices, Plans & Availability",
+  "intro": "Explore Faisal Town Phase 2 plots in Islamabad, compare cash and installment options, and request current availability, payment details and map locations on WhatsApp.",
+  "primaryCta": "Check Phase 2 Plots on WhatsApp",
+  "secondaryCta": "Explore Prices & Payment Plans",
   "whatsappCard": {
     "label": "WhatsApp Property Inquiry",
     "heading": "Ask for current options",
@@ -24,9 +24,9 @@
   "statsText": "Installments | Explore S and T\nCash purchase | Compare O, P, Q and R\nPlot guidance | Plans, prices and site visits",
   "primaryCtaType": "whatsapp",
   "primaryHref": "#phase-2",
-  "primaryWhatsappQuery": "Assalamualaikum, I am looking for a Faisal Town Phase 2 plot. My budget is ___, preferred plot size is ___, and I prefer installments / cash. Please send me current available plots, the full payment plan and map locations.",
+  "primaryWhatsappQuery": "Assalamualaikum, I am interested in Faisal Town Phase 2 plots. My budget is ___, preferred plot size is ___, and I prefer cash / installments. Please share current plot availability, full prices, payment plans and map locations.",
   "secondaryCtaType": "internal",
-  "secondaryHref": "#featured-offer",
+  "secondaryHref": "/faisal-town-phase-2/",
   "secondaryWhatsappQuery": "Please send me Faisal Town Phase 2 sector details, maps and current plot guidance.",
   "heroBackgroundImage": "/assets/faisal-town-ii/hero-masterplan-preview.webp"
 }
