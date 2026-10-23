@@ -2,14 +2,14 @@
 import { whatsappLink } from "../data/site";
 const phase2Query = "Assalamualaikum, I am interested in Faisal Town Phase 2 plots. My budget is ___, preferred plot size is ___, and I prefer cash / installments. Please share current plot availability, full prices, payment plans and map locations.";
 ---
-<a class="whatsapp-float" data-cta-location="floating" data-cta-label="Phase 2 WhatsApp enquiry" href={whatsappLink(phase2Query)} aria-label="Enquire about Faisal Town Phase 2 plots on WhatsApp">
+<a class="whatsapp-float" data-cta-location="floating" data-project-phase="phase_2" data-cta-label="Phase 2 WhatsApp enquiry" href={whatsappLink(phase2Query)} aria-label="Enquire about Faisal Town Phase 2 plots on WhatsApp">
   <img src="/assets/whatsapp-logo-green.webp" alt="" width="64" height="64" loading="lazy" decoding="async" />
 </a>
 <div class="mobile-sticky-cta" aria-label="Quick property inquiry">
-  <a data-cta-location="mobile-sticky" data-cta-label="Phase 2 plot prices" href={whatsappLink(phase2Query)}>Phase 2 Plots</a>
-  <a data-cta-location="mobile-sticky" data-cta-label="Phase 2 WhatsApp enquiry" href={whatsappLink(phase2Query)}>
+  <a data-cta-location="mobile-sticky" data-project-phase="phase_2" data-cta-label="Phase 2 plot prices" href={whatsappLink(phase2Query)}>Phase 2 Plots</a>
+  <a data-cta-location="mobile-sticky" data-project-phase="phase_2" data-cta-label="Phase 2 WhatsApp enquiry" href={whatsappLink(phase2Query)}>
     <img src="/assets/whatsapp-logo-green.webp" alt="" width="64" height="64" decoding="async" />
     <span>WhatsApp</span>
   </a>
-  <a data-cta-location="mobile-sticky" href={whatsappLink("I want current Faisal Town Phase 1 / F-18 availability")}>Phase 1</a>
+  <a data-cta-location="mobile-sticky" data-project-phase="phase_1" href={whatsappLink("I want current Faisal Town Phase 1 / F-18 availability")}>Phase 1</a>
 </div>
