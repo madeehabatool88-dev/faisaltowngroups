@@ -15,7 +15,8 @@ const {
 
 // Site-owned public GTM ID. PUBLIC_GTM_ID may override it at build time.
 const configuredGtmId = import.meta.env.PUBLIC_GTM_ID || "GTM-MRJB3WSF";
-const gtmId = /^GTM-[A-Z0-9]+$/.test(configuredGtmId) ? configuredGtmId : "";
+const gtmEnabled = import.meta.env.PUBLIC_GTM_ENABLED !== "false";
+const gtmId = gtmEnabled && /^GTM-[A-Z0-9]+$/.test(configuredGtmId) ? configuredGtmId : "";
 
 const canonical = new URL(Astro.url.pathname, site.domain).toString();
 const socialImage = new URL(image, site.domain).toString();
