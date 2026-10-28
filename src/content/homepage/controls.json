@@ -14,5 +14,6 @@
   "faqs": true,
   "buyerGuides": true,
   "finalCta": true,
-  "phase1": true
+  "phase1": true,
+  "ringRoad": true
 }

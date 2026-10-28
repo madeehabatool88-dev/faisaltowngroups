@@ -853,3 +853,17 @@ html { scroll-behavior: smooth; }
 
 /* Homepage heading rules must not darken headings in the dark footer. */
 .hp-page .site-footer h3 { color: #fff; }
+
+/* Ring Road rates reuse the project page's CMS price rows. */
+.hp-ring-road-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+.hp-ring-road h2 { font-size: clamp(28px, 3.5vw, 42px); margin-bottom: 20px; }
+.hp-ring-road .hp-status { margin-top: 18px; }
+.hp-ring-road-table { width: 100%; border-collapse: collapse; background: #fff; font-size: 16px; }
+.hp-ring-road-table caption { text-align: left; padding: 0 0 14px; color: var(--hp-muted); font-size: 14px; }
+.hp-ring-road-table th, .hp-ring-road-table td { padding: 16px 20px; text-align: left; border-bottom: 1px solid var(--hp-line); }
+.hp-ring-road-table thead { color: #fff; background: var(--hp-maroon); }
+.hp-ring-road-table tbody td { font-weight: 700; white-space: nowrap; }
+.hp-ring-road-table small { display: block; font-weight: 400; color: var(--hp-muted); font-size: 13px; }
+.hp-ring-road .hp-ring-road-note { font-size: 13px; color: var(--hp-muted); margin-top: 14px; }
+@media (max-width: 980px) { .hp-ring-road-grid { grid-template-columns: 1fr; gap: 30px; } }
+@media (max-width: 430px) { .hp-ring-road-table th, .hp-ring-road-table td { padding: 14px 12px; } }

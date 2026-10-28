@@ -1,5 +1,7 @@
 # Undeveloped plot illustrations — 28 October 2026
 
+Status: the two generated images below have been superseded on the active homepage by the owner-supplied graded-plots visualization. This document retains their historical provenance.
+
 Generated with the built-in image-generation tool at the owner's request. These are generic illustrations, not photographs of Faisal Town or a named sector, not evidence of current development, and not proof of available inventory. Both images carry an embedded disclosure; visible website captions and alt text also identify them as illustrations.
 
 Project assets:
