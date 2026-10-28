@@ -16,10 +16,14 @@ const { assistance, labels } = Astro.props;
         const item = card as Record<string, any>;
         return (
           <article>
+            <figure>
             <Photo
               src={item.image}
               alt={item.alt}
             />
+
+            {item.image.includes("/illustrations/") && <figcaption>AI illustration · Not an actual site photograph.</figcaption>}
+            </figure>
 
             <p class="hp-kicker">
               {key === "siteVisit"
