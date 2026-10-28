@@ -12,3 +12,6 @@ npm-debug.log*
 
 .playwright-cli/
 output/playwright/
+
+public/assets/generated/
+src/data/generated/

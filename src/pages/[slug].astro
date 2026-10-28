@@ -1,4 +1,6 @@
 ---
+import {pdfHref, pdfSize} from "../data/pdfDownloads";
+import ResponsiveImage from "../components/ResponsiveImage.astro";
 import { bulkRows } from "../data/homepageBulk";
 import ContentLayout from "../layouts/ContentLayout.astro";
 import { landingPages } from "../data/landingPages";
@@ -84,7 +86,7 @@ const additionalSchema = [
     </nav>
 
     {page.showMainImage !== false && page.image && <figure class="clean-hero-figure clean-plan-figure">
-      <img
+      <ResponsiveImage
         class="article-hero-image landing-image clean-plan-image"
         src={page.image}
         alt={page.imageAlt || page.h1}
@@ -105,7 +107,7 @@ const additionalSchema = [
         </div>
 
         {page.rateSheetImage && <figure class="sector-rate-sheet">
-          <a href={page.rateSheetImage} aria-label="Open full rate sheet"><img src={page.rateSheetImage} alt={page.rateSheetAlt || "Sector reference rate sheet"} width={imageMeta[page.rateSheetImage]?.width || 1280} height={imageMeta[page.rateSheetImage]?.height || 904} loading="lazy" decoding="async" /></a>
+          <a href={page.rateSheetImage} aria-label="Open full rate sheet"><ResponsiveImage src={page.rateSheetImage} alt={page.rateSheetAlt || "Sector reference rate sheet"} width={imageMeta[page.rateSheetImage]?.width || 1280} height={imageMeta[page.rateSheetImage]?.height || 904} loading="lazy" decoding="async" /></a>
           <figcaption>Supplied reference rate sheet · Tap to open at full size. Confirm current rates and available plot numbers.</figcaption>
         </figure>}
         {rateRows.length > 0 ? <>
@@ -196,7 +198,7 @@ const additionalSchema = [
               <span>{download.label}</span>
               <h3>{download.title}</h3>
               <p>{download.text}</p>
-              <a href={download.href} target="_blank" rel="noreferrer">{page.downloadButtonLabel}</a>
+              <a href={pdfHref(download.href)} target="_blank" rel="noreferrer">{page.downloadButtonLabel} {pdfSize(download.href) && `(${pdfSize(download.href)})`}</a>
             </article>
           ))}
         </div>

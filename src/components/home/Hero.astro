@@ -1,4 +1,5 @@
 ---
+import ResponsiveImage from "../ResponsiveImage.astro";
 import Cta from "../HomeCta.astro";
 import { bulkRows, bulkSlugs } from "../../data/homepageBulk";
 import { imageMeta } from "../../data/imageMeta";
@@ -66,7 +67,7 @@ const points = bulkSlugs(hero.trustPointsText || "");
     </div>
     {background && (
       <figure class="hp-hero-visual">
-        <img src={background} alt={hero.heroImageAlt} width={backgroundMeta.width} height={backgroundMeta.height} loading="eager" fetchpriority="high" decoding="async" />
+        <ResponsiveImage src={background} alt={hero.heroImageAlt} width={backgroundMeta.width} height={backgroundMeta.height} loading="eager" fetchpriority="high" decoding="async" />
         <figcaption>Project visualization · Explore the master plan for sector locations.</figcaption>
         <a class="hp-hero-map-link" href="#master-plan">Explore the master plan ↗</a>
       </figure>

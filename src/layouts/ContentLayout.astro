@@ -22,9 +22,10 @@ const {
 } = Astro.props;
 ---
 <BaseLayout title={title} description={description} image={image} ogType={ogType} additionalSchema={additionalSchema}>
+  <a class="skip-link" href="#main-content">Skip to content</a>
   <SiteHeader />
 
-  <main>
+  <main id="main-content" tabindex="-1">
     <section class:list={["content-hero", { "content-hero-compact": compactHero }]} style={heroBackgroundImage !== undefined ? { backgroundImage: heroBackgroundImage ? `linear-gradient(90deg, rgba(45,7,16,.95), rgba(67,10,23,.86)), url(${JSON.stringify(heroBackgroundImage)})` : "none", backgroundColor: "#2d0710" } : undefined}>
       <div class="container">
         <nav class="breadcrumbs" aria-label="Breadcrumb">
@@ -43,7 +44,7 @@ const {
     <slot />
   </main>
 
-  <MobileWhatsApp />
+  <MobileWhatsApp heading={heading} phase={Astro.url.pathname === "/faisal-town-phase-1/" ? "phase_1" : /phase-2|block|sector|master-plan/.test(Astro.url.pathname) ? "phase_2" : "general"} />
   <SiteFooter />
 </BaseLayout>
 

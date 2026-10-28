@@ -1,4 +1,6 @@
 ---
+import {pdfHref, pdfSize, overviewHref, overviewSize} from "../data/pdfDownloads";
+import ResponsiveImage from "./ResponsiveImage.astro";
 import ContentLayout from "../layouts/ContentLayout.astro";
 import { articles, type Article } from "../data/articles";
 import { site, whatsappLink } from "../data/site";
@@ -152,9 +154,9 @@ const breadcrumbSchema = {
     </div>
     {article.quickAnswer && <aside class="article-callout"><strong>Quick Answer</strong><p>{article.quickAnswer}</p></aside>}
     <figure class="plan-map">
-      <img class="article-hero-image" src={article.image} alt={article.imageAlt || article.title} width={img?.width} height={img?.height} loading="eager" fetchpriority="high" decoding="async" />
+      <ResponsiveImage class="article-hero-image" src={article.image} alt={article.imageAlt || article.title} width={img?.width} height={img?.height} loading="eager" fetchpriority="high" decoding="async" />
       {article.mapCaption && <figcaption>{article.mapCaption}</figcaption>}
-      {article.downloadHref && <a class="plan-download" href={article.downloadHref}>{article.downloadLabel}</a>}
+      {article.downloadHref && <a class="plan-download" href={pdfHref(article.downloadHref)}>{article.downloadLabel} ({pdfSize(article.downloadHref)})</a>}
     </figure>
     {article.sectors?.length > 0 && <section>
       <h2>{article.sectorHeading}</h2>
@@ -185,7 +187,8 @@ const breadcrumbSchema = {
       ))
     )}
     </div>
-    {article.downloadHref && <aside class="article-callout"><a class="plan-download" href={article.downloadHref}>{article.downloadLabel}</a></aside>}
+    {article.downloadHref && <p><a href={overviewHref}>Open small overview PDF ({overviewSize})</a> — use the detailed PDF for plot numbers.</p>}
+    {article.downloadHref && <aside class="article-callout"><a class="plan-download" href={pdfHref(article.downloadHref)}>{article.downloadLabel} ({pdfSize(article.downloadHref)})</a></aside>}
     {article.faqs && article.faqs.length > 0 && (
       <section>
         <h2>Quick Questions</h2>
@@ -225,7 +228,7 @@ const breadcrumbSchema = {
     <div class="article-grid compact">
       {visibleRelated.map((item) => (
         <article class="article-card">
-          <img src={item.image} alt={item.title} loading="lazy" />
+          <ResponsiveImage src={item.image} alt={item.title} loading="lazy" />
           <div>
             <span>{item.category}</span>
             <h3><a href={`/articles/${item.slug}/`}>{item.title}</a></h3>
