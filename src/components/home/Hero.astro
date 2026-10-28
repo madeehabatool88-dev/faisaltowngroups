@@ -68,7 +68,7 @@ const points = bulkSlugs(hero.trustPointsText || "");
     {background && (
       <figure class="hp-hero-visual">
         <ResponsiveImage src={background} sizes="(max-width: 768px) calc(100vw - 40px), (max-width: 980px) 300px, 470px" alt={hero.heroImageAlt} width={backgroundMeta.width} height={backgroundMeta.height} loading="eager" fetchpriority="high" decoding="async" />
-        <figcaption>{background.includes("/illustrations/") ? "AI illustration · Not an actual site photograph. Confirm the exact location on a visit." : "Project visualization · Explore the master plan for sector locations."}</figcaption>
+        <figcaption>{background.includes("/illustrations/") ? "Plot visualization · Not a verified site photograph. Confirm the exact location on a visit." : "Project visualization · Explore the master plan for sector locations."}</figcaption>
         <a class="hp-hero-map-link" href="#master-plan">Explore the master plan ↗</a>
       </figure>
     )}

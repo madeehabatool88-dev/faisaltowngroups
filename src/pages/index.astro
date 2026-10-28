@@ -7,6 +7,7 @@ import Hero from "../components/home/Hero.astro";
 import AboutPhase2 from "../components/home/AboutPhase2.astro";
 import Trust from "../components/home/Trust.astro";
 import FeaturedOffer from "../components/home/FeaturedOffer.astro";
+import RingRoad from "../components/home/RingRoad.astro";
 import Prices from "../components/home/Prices.astro";
 import Budgets from "../components/home/Budgets.astro";
 import Sectors from "../components/home/Sectors.astro";
@@ -166,6 +167,8 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
         showFeaturedPlan={showFeaturedPlan}
       />
     )}
+
+    {c.ringRoad && <RingRoad />}
 
     {c.sectors && (
       <Sectors

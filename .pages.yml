@@ -114,6 +114,10 @@ content:
                 label: Trust / Authorized Partner Enabled
                 type: boolean
                 required: false
+              - name: ringRoad
+                label: Ring Road Block Rates Enabled
+                type: boolean
+                required: false
               - name: featuredOffer
                 label: Featured Phase 2 Offer Enabled
                 type: boolean
