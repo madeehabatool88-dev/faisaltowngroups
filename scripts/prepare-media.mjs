@@ -30,8 +30,9 @@ for (const file of files.filter(f=>/\.(webp|png|jpe?g)$/i.test(f) && referenced.
   if (!info.width || !info.height) continue;
   const src='/'+file.replace(/^public\//,'');
   const variants=[];
-  if(info.width>=480 && bytes.length>30000) {
-    for (const width of [480,960].filter(w=>w<info.width)) {
+  const isIcon = /whatsapp-logo-green\.webp$/.test(file);
+  if(info.width>=240 && (bytes.length>30000 || isIcon || /original-logo\.png$/.test(file))) {
+    for (const width of (isIcon ? [64,128] : [240,480,720,960]).filter(w=>w<info.width)) {
       const name=crypto.createHash('sha256').update(bytes).update(`webp-${width}-78`).digest('hex').slice(0,16)+'.webp';
       const target=path.join(generated,name);
       try {await fs.access(target);} catch {await sharp(bytes).resize({width,withoutEnlargement:true}).webp({quality:78,effort:4}).toFile(target);}

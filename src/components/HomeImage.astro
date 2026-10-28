@@ -1,7 +1,7 @@
 ---
 import ResponsiveImage from "./ResponsiveImage.astro";
 import { imageMeta } from "../data/imageMeta";
-const { src, alt = "", eager = false } = Astro.props;
+const { src, alt = "", eager = false, sizes } = Astro.props;
 const dimensions = imageMeta[src] || { width: 1440, height: 960 };
 ---
 
@@ -9,6 +9,7 @@ const dimensions = imageMeta[src] || { width: 1440, height: 960 };
   <ResponsiveImage
     src={src}
     alt={alt}
+    sizes={sizes}
     width={dimensions.width}
     height={dimensions.height}
     loading={eager ? "eager" : "lazy"}
