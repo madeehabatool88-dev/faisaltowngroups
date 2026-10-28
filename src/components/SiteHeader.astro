@@ -1,18 +1,15 @@
 ---
+import ResponsiveImage from "./ResponsiveImage.astro";
+import presentation from "../content/homepage/presentation.json";
+import { bulkRows } from "../data/homepageBulk";
 import { whatsappLink } from "../data/site";
 
 const { home = false } = Astro.props;
-const navItems = [
-  ["Phase 1", home ? "#phase-1" : "/faisal-town-phase-1/"],
-  ["Phase 2", home ? "#phase-2" : "/faisal-town-phase-2/"],
-  ["Sector T", "/faisal-town-sector-t/"],
-  ["Location", "/faisal-town-islamabad-map-location/"],
-  ["Phase 2 Plan", "/articles/faisal-town-ii-master-plan/"]
-];
+const navItems = bulkRows(presentation.navigationText, ["label", "href"], "Navigation").map(row => [row.label, row.href.startsWith("#") && !home ? `/${row.href}` : row.href]);
 ---
 <header class="site-header" id="siteHeader">
   <a class="brand" href={home ? "#top" : "/"} aria-label="FaisalTown Groups home">
-    <img src="/assets/faisal-town-ii/original-logo.png" alt="FaisalTown Groups" width="371" height="98" decoding="async" />
+    <ResponsiveImage src="/assets/faisal-town-ii/original-logo.png" alt="FaisalTown Groups" width="371" height="98" decoding="async" />
   </a>
   <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation" data-nav-toggle>
     <span></span><span></span><span></span>

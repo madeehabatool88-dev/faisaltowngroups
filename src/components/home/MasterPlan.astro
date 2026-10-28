@@ -1,4 +1,5 @@
 ---
+import {pdfHref, pdfSize, overviewHref, overviewSize} from "../../data/pdfDownloads";
 import Cta from "../HomeCta.astro";
 import Photo from "../HomeImage.astro";
 
@@ -37,11 +38,12 @@ const { masterPlan: m } = Astro.props;
       <h2>{m.heading}</h2>
 
       <p>{m.text}</p>
+      <p><a href={overviewHref}>Small overview PDF ({overviewSize})</a> · For orientation only; use the detailed plan for plot numbers.</p>
 
       <div class="hp-actions">
         <Cta
-          label={m.viewLabel}
-          href={m.pdf}
+          label={`${m.viewLabel} (${pdfSize(m.pdf)})`}
+          href={pdfHref(m.pdf)}
           event="master_plan_click"
           section="master_plan"
         />

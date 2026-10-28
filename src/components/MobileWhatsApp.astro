@@ -1,14 +1,17 @@
 ---
+import ResponsiveImage from "./ResponsiveImage.astro";
 import { whatsappLink } from "../data/site";
-const phase2Query = "Assalamualaikum, I am interested in Faisal Town Phase 2 full-payment plots. My budget is ___ and preferred plot size is ___. Please share current plot availability, total payable amounts and map locations.";
+const { heading = "Faisal Town property", phase = "general", message } = Astro.props;
+const query = message || `Please help me with ${heading}. My budget is ___ and preferred plot size is ___. Please confirm current availability, total payable amounts and map locations.`;
+const label = phase === "phase_1" ? "Phase 1 Plots" : phase === "phase_2" ? "Phase 2 Plots" : "Property Enquiry";
 ---
-<a class="whatsapp-float" data-cta-location="floating" data-project-phase="phase_2" data-cta-label="Phase 2 WhatsApp enquiry" href={whatsappLink(phase2Query)} aria-label="Enquire about Faisal Town Phase 2 plots on WhatsApp">
-  <img src="/assets/whatsapp-logo-green.webp" alt="" width="64" height="64" loading="lazy" decoding="async" />
+<a class="whatsapp-float" data-cta-location="floating" data-project-phase={phase} data-cta-label={`${heading} WhatsApp enquiry`} href={whatsappLink(query)} aria-label={`Enquire about ${heading} on WhatsApp`}>
+  <ResponsiveImage src="/assets/whatsapp-logo-green.webp" alt="" width="64" height="64" loading="lazy" decoding="async" />
 </a>
 <div class="mobile-sticky-cta" aria-label="Quick property inquiry">
-  <a data-cta-location="mobile-sticky" data-project-phase="phase_2" data-cta-label="Phase 2 plot prices" href={whatsappLink(phase2Query)}>Phase 2 Plots</a>
-  <a data-cta-location="mobile-sticky" data-project-phase="phase_2" data-cta-label="Phase 2 WhatsApp enquiry" href={whatsappLink(phase2Query)}>
-    <img src="/assets/whatsapp-logo-green.webp" alt="" width="64" height="64" decoding="async" />
+  <a data-cta-location="mobile-sticky" data-project-phase={phase} data-cta-label={`${heading} prices`} href={whatsappLink(query)}>{label}</a>
+  <a data-cta-location="mobile-sticky" data-project-phase={phase} data-cta-label={`${heading} WhatsApp enquiry`} href={whatsappLink(query)}>
+    <ResponsiveImage src="/assets/whatsapp-logo-green.webp" alt="" width="64" height="64" decoding="async" />
     <span>WhatsApp</span>
   </a>
   <a data-cta-location="mobile-sticky" data-project-phase="phase_1" href={whatsappLink("I want current Faisal Town Phase 1 / F-18 availability")}>Phase 1</a>

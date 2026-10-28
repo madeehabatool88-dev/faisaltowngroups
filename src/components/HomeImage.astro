@@ -1,11 +1,12 @@
 ---
+import ResponsiveImage from "./ResponsiveImage.astro";
 import { imageMeta } from "../data/imageMeta";
 const { src, alt = "", eager = false } = Astro.props;
 const dimensions = imageMeta[src] || { width: 1440, height: 960 };
 ---
 
 {src && (
-  <img
+  <ResponsiveImage
     src={src}
     alt={alt}
     width={dimensions.width}

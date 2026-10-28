@@ -800,3 +800,12 @@
     font-size: 0.9rem;
   }
 }
+
+/* Shared navigation and readable, uncropped promotional previews. */
+.skip-link { position: absolute; left: 16px; top: -100px; z-index: 9999; background: #fff; color: #641323; padding: 14px 20px; }
+.skip-link:focus { top: 12px; }
+.site-header .header-cta, .content-hero .btn { border-radius: 999px; }
+.hp-page .hp-split .hp-offer-photo img { max-height: 420px; object-fit: contain; }
+.hp-page .hp-assistance img { max-height: 320px; object-fit: contain; }
+#main-content { scroll-margin-top: 90px; }
+@media(max-width: 768px) { .hp-page .hp-split .hp-offer-photo img { max-height: 320px; } .hp-page .hp-assistance img { max-height: 260px; } }

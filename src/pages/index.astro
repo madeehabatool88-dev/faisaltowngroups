@@ -167,6 +167,15 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
       />
     )}
 
+    {c.sectors && (
+      <Sectors
+        sectors={sectors}
+        heading={phase2.sectorsHeading}
+        labels={labels}
+        featuredHref={offer.primaryHref}
+      />
+    )}
+
     {c.prices && (
       <Prices
         table={phase2.priceTable}
@@ -177,15 +186,6 @@ const sticky = site.stickyCallEnabled || site.stickyWhatsAppEnabled;
 
     {c.budgets && (
       <Budgets budgets={budgets} rows={budgetRows} />
-    )}
-
-    {c.sectors && (
-      <Sectors
-        sectors={sectors}
-        heading={phase2.sectorsHeading}
-        labels={labels}
-        featuredHref={offer.primaryHref}
-      />
     )}
 
     {c.development && (

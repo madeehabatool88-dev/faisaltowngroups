@@ -1,0 +1,8 @@
+---
+import media from '../data/generated/media.json';
+const {src, sizes='(max-width: 768px) calc(100vw - 40px), (max-width: 1100px) 50vw, 600px', ...attrs}=Astro.props;
+const entry=(media.images as Record<string, any>)[src];
+const variants=entry?.variants || [];
+const srcset=variants.length ? [...variants.map((v:any)=>`${v.src} ${v.width}w`), `${src} ${entry.width}w`].join(', ') : undefined;
+---
+<img {...attrs} src={src} width={entry?.width || attrs.width} height={entry?.height || attrs.height} srcset={srcset} sizes={srcset ? sizes : undefined} />
