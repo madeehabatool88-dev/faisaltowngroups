@@ -11,7 +11,7 @@ const rows = bulkRows(page?.rateDetailsText || '', ['size', 'dimensions', 'cost'
       <p class="hp-kicker">Phase 2 · Ring Road Block</p>
       <h2>Ring Road Block full-payment plots</h2>
       <p>{page.intro}</p>
-      <p class="hp-status">Development charges are included in plot cost according to the supplied sheet. Confirm registration, location premiums and the final quote.</p>
+      <p class="hp-status">Development charges included in plot cost. Ask for your complete quotation.</p>
       <div class="hp-actions">
         <Cta label="View Ring Road Block & Full Rates" href={`/${page.slug}/`} section="ring_road" />
         <Cta label="Check Ring Road Plots" query={page.rateInquiryQuery} section="ring_road" sector="Ring Road Block" secondary />
@@ -23,7 +23,7 @@ const rows = bulkRows(page?.rateDetailsText || '', ['size', 'dimensions', 'cost'
         <thead><tr><th scope="col">Plot size</th><th scope="col">Price (PKR)</th></tr></thead>
         <tbody>{rows.map(row => <tr><th scope="row">{row.size}<small>{row.dimensions} ft</small></th><td>{row.discount}</td></tr>)}</tbody>
       </table>
-      <p class="hp-ring-road-note">Source: supplied undated Ring Road Block rate sheet. Confirm current available plot numbers and final charges.</p>
+      <p class="hp-ring-road-note">Share your preferred size for available plot numbers and a complete quotation.</p>
     </div>
   </div>
 </section>}

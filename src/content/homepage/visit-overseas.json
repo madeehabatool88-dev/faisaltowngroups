@@ -1,10 +1,10 @@
 {
   "siteVisit": {
     "enabled": true,
-    "heading": "Want to See Faisal Town Phase 2 in Person?",
-    "text": "Tell us which sector or plot size interests you and we can help you shortlist options before arranging a site visit.",
-    "image": "/assets/illustrations/supplied-graded-plots.webp",
-    "alt": "Supplied plot visualization; request dated photographs of the exact plot and its road access",
+    "heading": "Plan your visit with a marked location",
+    "text": "Tell us your preferred sector and plot size. We can help you shortlist options and identify the location before your visit.",
+    "image": "/assets/faisal-town-ii/faisal-town-phase-2-master-plan-high-contrast-preview.webp",
+    "alt": "Faisal Town Phase 2 master plan for planning a site visit",
     "ctaLabel": "Arrange a Site Visit",
     "ctaType": "whatsapp",
     "whatsappQuery": "I would like to arrange a Faisal Town Phase 2 site visit. Please help me shortlist suitable plots first.",
@@ -13,9 +13,9 @@
   "overseas": {
     "enabled": true,
     "heading": "Buying From Outside Pakistan?",
-    "text": "We can share current options, maps, location information and WhatsApp guidance so you can narrow your choices before arranging local representation or a visit.",
-    "image": "/assets/illustrations/supplied-graded-plots.webp",
-    "alt": "Supplied plot visualization; request dated photographs of the exact plot and its road access",
+    "text": "Compare plot maps, prices and location details on WhatsApp. Request a current walkthrough and get help arranging a local visit or representation.",
+    "image": "/assets/plans/previews/sector-p-ft-ii.webp",
+    "alt": "Sector P layout plan for remote plot shortlisting",
     "ctaLabel": "Get Overseas Buyer Assistance",
     "ctaType": "whatsapp",
     "whatsappQuery": "I am an overseas buyer interested in Faisal Town Phase 2. Please send me current options, prices, maps and guidance.",
