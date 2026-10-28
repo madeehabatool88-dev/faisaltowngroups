@@ -12,7 +12,7 @@ html { scroll-behavior: smooth; }
   --hp-maroon-deep: #2d0710;
   --hp-gold: #b8923c;
   --hp-gold-soft: #d6bc7a;
-  --hp-gold-dark: #8f6f2c;
+  --hp-gold-dark: #806125;
   --hp-sand: #f6f1e9;
   --hp-paper: #fbfaf7;
   --hp-ink: #17120f;
@@ -850,3 +850,6 @@ html { scroll-behavior: smooth; }
 @media (max-width: 768px) {
   .hp-hero-visual img { aspect-ratio: auto; object-fit: contain; }
 }
+
+/* Homepage heading rules must not darken headings in the dark footer. */
+.hp-page .site-footer h3 { color: #fff; }

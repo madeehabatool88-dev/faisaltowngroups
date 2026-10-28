@@ -13,7 +13,7 @@ const { offer, featuredSector, featuredStarting, showFeaturedPlan } = Astro.prop
   <div class="hp-wrap hp-split hp-featured-layout">
     <figure class="hp-offer-photo">
       <a href={offer.image} aria-label={`Open full ${featuredSector} image`}>
-      <Photo src={offer.image} alt={offer.alt} />
+      <Photo src={offer.image} alt={offer.alt} sizes="(max-width: 768px) 180px, 236px" />
       </a>
       <figcaption>Promotional artwork · Not current site photography. Open full image ↗</figcaption>
     </figure>

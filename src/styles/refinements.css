@@ -809,3 +809,8 @@
 .hp-page .hp-assistance img { max-height: 320px; object-fit: contain; }
 #main-content { scroll-margin-top: 90px; }
 @media(max-width: 768px) { .hp-page .hp-split .hp-offer-photo img { max-height: 320px; } .hp-page .hp-assistance img { max-height: 260px; } }
+
+/* Readable text on light cards and colored mobile enquiry buttons. */
+.content-section .section-label, .clean-section-number, .clean-checklist span { color: #806125; }
+.content-section .clean-contact-card .section-label { color: #d6bc7a; }
+.mobile-sticky-cta a { color: #2d0710; }
