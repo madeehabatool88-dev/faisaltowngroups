@@ -52,5 +52,7 @@
   "rateDetailsText": "5.56 Marla | 25 × 50 | 3,975,000 | 20,000 | 3,995,000 | 3,380,000\n8 Marla | 30 × 60 | 5,470,000 | 20,000 | 5,490,000 | 4,650,000\n10.89 Marla | 35 × 70 | 7,230,000 | 20,000 | 7,250,000 | 6,150,000\n14.22 Marla | 40 × 80 | 9,070,000 | 20,000 | 9,090,000 | 7,690,000\n1 Kanal | 50 × 90 | 12,270,000 | 20,000 | 12,290,000 | 10,390,000\n2 Kanal | 75 × 120 | 23,560,000 | 20,000 | 23,580,000 | 19,990,000\n2 Kanal | 80 × 120 | 24,960,000 | 20,000 | 24,980,000 | 21,190,000",
   "rateConditions": "The schedule lists PKR 20,000 registration and states development charges are included. Discounted prices are shown with plot number. Ask for current plot availability, special-location charges and the complete payable amount for your chosen plot.",
   "rateInquiryLabel": "Get Sector R Price & Availability",
-  "rateInquiryQuery": "Please share current Sector R plot availability and mark a plot on the plan. Confirm the discounted price with plot number, registration, special-location charges and complete payable amount."
+  "rateInquiryQuery": "Please share current Sector R plot availability and mark a plot on the plan. Confirm the discounted price with plot number, registration, special-location charges and complete payable amount.",
+  "rateSheetImage": "/assets/rates/shared-sectors-rate-sheet-effective-2026-11-02.jpg",
+  "rateSheetAlt": "Official Faisal Town Phase 2 rates for Sectors O, Q, R, S and T effective 2 November 2026"
 }
