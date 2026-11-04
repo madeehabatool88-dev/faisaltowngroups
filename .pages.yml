@@ -1170,6 +1170,7 @@ content:
             - Enclave Guide
             - Property Search
             - Map & Location
+            - Commercial Rates
       - name: phase
         label: Phase / Area
         type: select
