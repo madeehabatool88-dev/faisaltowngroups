@@ -6,7 +6,7 @@
   "prices": true,
   "budgets": true,
   "sectors": true,
-  "development": true,
+  "development": false,
   "masterPlan": true,
   "buyerSupport": false,
   "buyingProcess": false,
