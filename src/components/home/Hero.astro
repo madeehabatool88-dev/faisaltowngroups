@@ -24,7 +24,7 @@ const points = bulkSlugs(hero.trustPointsText || "");
     {featuredStarting && (
       <p class="hp-start">
         <span>
-          {hero.startingPriceLabel} · {featuredSector}
+          {featuredSector} · {hero.startingPriceLabel}
         </span>
 
         <strong>{featuredStarting}</strong>
@@ -69,7 +69,7 @@ const points = bulkSlugs(hero.trustPointsText || "");
       <figure class="hp-hero-visual">
         <ResponsiveImage src={background} sizes="(max-width: 768px) calc(100vw - 40px), (max-width: 980px) 300px, 470px" alt={hero.heroImageAlt} width={backgroundMeta.width} height={backgroundMeta.height} loading="eager" fetchpriority="high" decoding="async" />
         <figcaption>{background.includes("/illustrations/") ? "Plot illustration" : "Project visualization"}</figcaption>
-        <a class="hp-hero-map-link" href="#master-plan">Explore the master plan ↗</a>
+        <a class="hp-hero-map-link" href="#master-plan">Explore the master plan </a>
       </figure>
     )}
   </div>

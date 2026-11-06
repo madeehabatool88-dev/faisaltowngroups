@@ -41,7 +41,7 @@ const { phase1, articles } = Astro.props as {
     <div class="hp-inline-links">
       {phase1.blocks.map((block: Record<string, string>) => (
         <a href={block.href}>
-          {block.title} ↗
+          {block.title} 
         </a>
       ))}
 
@@ -49,7 +49,7 @@ const { phase1, articles } = Astro.props as {
         <a
           href={`/articles/${article.slug}/`}
         >
-          {article.title} ↗
+          {article.title} 
         </a>
       ))}
     </div>
