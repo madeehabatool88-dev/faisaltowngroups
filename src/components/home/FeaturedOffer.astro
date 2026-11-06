@@ -15,7 +15,7 @@ const { offer, featuredSector, featuredStarting, showFeaturedPlan } = Astro.prop
       <a href={offer.image} aria-label={`Open full ${featuredSector} image`}>
       <Photo src={offer.image} alt={offer.alt} sizes={offer.image.includes("/illustrations/") ? "(max-width: 768px) calc(100vw - 52px), 440px" : "(max-width: 768px) 180px, 236px"} />
       </a>
-      <figcaption>{offer.image.includes("/plans/") ? `${featuredSector} layout plan · Open full map ↗` : offer.image.includes("/illustrations/") ? "Plot illustration · Open image ↗" : "Promotional artwork · Open image ↗"}</figcaption>
+      <figcaption>{offer.image.includes("/plans/") ? `${featuredSector} layout plan · Open full map ` : offer.image.includes("/illustrations/") ? "Plot illustration · Open image " : "Promotional artwork · Open image "}</figcaption>
     </figure>
     <div class="hp-offer-content">
       <p class="hp-kicker">{offer.eyebrow}</p>
@@ -78,7 +78,7 @@ const { offer, featuredSector, featuredStarting, showFeaturedPlan } = Astro.prop
           data-event="master_plan_click"
           data-source-section="featured_sector_plan"
         >
-          View {featuredSector} plan PDF ↗
+          View {featuredSector} plan PDF 
         </a>
       )}
     </div>
